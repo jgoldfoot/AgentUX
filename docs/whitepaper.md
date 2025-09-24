@@ -3,6 +3,7 @@
 *A Comprehensive White Paper with Empirical Validation*
 
 **Author:** Joel Goldfoot  
+**LinkedIn:** [linkedin.com/in/joelgoldfoot](https://linkedin.com/in/joelgoldfoot)  
 **Date:** September 23, 2025  
 **Version**: 2.1
 
@@ -1263,8 +1264,18 @@ npx @agentux/validator https://yoursite.com
 - Continuously improve
 
 ---
+---
 
-*This white paper is licensed under Creative Commons Attribution 4.0 International. You are free to share and adapt this work with proper attribution.*
+## **About the Author**
+
+Joel Goldfoot is a UX design leader and researcher specializing in human-AI interaction patterns. He has contributed to accessibility standards, published research on agent-interface design, and consulted with Fortune 500 companies on AI integration strategies.
+
+**Contact:** [joel@agentux.design](mailto:joel@agentux.design)  
+**LinkedIn:** [linkedin.com/in/joelgoldfoot](https://linkedin.com/in/joelgoldfoot)  
+**Website:** [ai-plus.design](https://ai-plus.design)
+
+---
+---
 
 **Version 2.1 - Updated September 23, 2025**  
 **Major Update: Addition of FR-1 (Initial Payload Accessibility) as foundational requirement**
