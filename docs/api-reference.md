@@ -1,4 +1,862 @@
-environment: 'browser',
+# AgentUX API Reference
+
+Technical specifications and reference documentation for implementing AgentUX patterns in web applications.
+
+## Table of Contents
+
+1. [HTML Attributes Reference](#html-attributes-reference)
+2. [Structured Data Schemas](#structured-data-schemas)
+3. [HTTP Headers and Meta Tags](#http-headers-and-meta-tags)
+4. [JavaScript Detection API](#javascript-detection-api)
+5. [CSS Classes and Selectors](#css-classes-and-selectors)
+6. [Server-Side Implementation](#server-side-implementation)
+7. [Testing and Validation APIs](#testing-and-validation-apis)
+8. [Framework-Specific Integrations](#framework-specific-integrations)
+
+## HTML Attributes Reference
+
+### Core Agent Attributes
+
+All AgentUX attributes use the `data-agent-*` namespace to ensure compatibility and avoid conflicts.
+
+#### Page-Level Attributes
+
+```html
+<!-- Document root attributes -->
+<html 
+  data-agent-framework="react|vue|angular|astro|next|nuxt"
+  data-agent-version="major.minor.patch"
+  data-agent-context="detected|unknown"
+  data-agent-mode="ssr|ssg|csr|hybrid"
+>
+```
+
+**Attribute Specifications:**
+
+| Attribute | Required | Values | Description |
+|-----------|----------|--------|-------------|
+| `data-agent-framework` | No | `react`, `vue`, `angular`, `astro`, `next`, `nuxt`, `custom` | Framework used for implementation |
+| `data-agent-version` | No | Semantic version string | AgentUX implementation version |
+| `data-agent-context` | No | `detected`, `unknown` | Whether agent was detected |
+| `data-agent-mode` | No | `ssr`, `ssg`, `csr`, `hybrid` | Rendering strategy used |
+
+#### Page Content Attributes
+
+```html
+<!-- Page identification -->
+<body 
+  data-agent-page="home|products|contact|article|dashboard"
+  data-agent-intent="browse|search|purchase|support|read"
+  data-agent-content-type="product-catalog|article|form|dashboard"
+>
+```
+
+**Page Type Values:**
+- `home` - Landing/homepage
+- `products` - Product catalog or listing
+- `contact` - Contact or support page
+- `article` - Content article or blog post
+- `dashboard` - User dashboard or admin panel
+- `checkout` - Purchase or payment flow
+- `search` - Search results page
+- `profile` - User profile or account page
+
+**Intent Values:**
+- `browse` - Casual browsing behavior
+- `search` - Specific search intent
+- `purchase` - Commercial transaction intent
+- `support` - Help or support seeking
+- `read` - Content consumption
+- `manage` - Account or data management
+
+### Component Attributes
+
+#### Navigation Components
+
+```html
+<!-- Primary navigation -->
+<nav 
+  data-agent-component="navigation"
+  data-agent-nav-type="primary|secondary|breadcrumb|footer"
+  role="navigation"
+  aria-label="Main navigation"
+>
+  <a 
+    href="/products" 
+    data-agent-action="view-products"
+    data-agent-nav-target="products"
+  >
+    Products
+  </a>
+</nav>
+```
+
+**Navigation Component Specification:**
+
+| Attribute | Required | Values | Description |
+|-----------|----------|--------|-------------|
+| `data-agent-component` | Yes | `navigation` | Component type identifier |
+| `data-agent-nav-type` | No | `primary`, `secondary`, `breadcrumb`, `footer` | Navigation hierarchy level |
+| `data-agent-action` | Yes | Action identifier | Semantic action description |
+| `data-agent-nav-target` | No | Target page identifier | Destination page type |
+
+#### Content Components
+
+```html
+<!-- Product catalog -->
+<section 
+  data-agent-component="product-list"
+  data-agent-list-type="featured|category|search-results"
+  data-agent-count="12"
+  role="region"
+  aria-labelledby="products-heading"
+>
+  <h2 id="products-heading" data-agent-content="section-title">
+    Featured Products
+  </h2>
+  
+  <div role="list">
+    <article 
+      data-agent-component="product-card"
+      data-agent-product-id="prod-123"
+      data-agent-category="electronics"
+      role="listitem"
+      itemscope
+      itemtype="https://schema.org/Product"
+    >
+      <h3 data-agent-content="product-name" itemprop="name">
+        Wireless Headphones
+      </h3>
+      
+      <p data-agent-content="product-description" itemprop="description">
+        Premium wireless headphones with noise cancellation
+      </p>
+      
+      <span 
+        data-agent-content="product-price" 
+        itemprop="offers"
+        itemscope
+        itemtype="https://schema.org/Offer"
+      >
+        <span itemprop="price" content="199.99">$199.99</span>
+        <meta itemprop="priceCurrency" content="USD">
+      </span>
+      
+      <button 
+        data-agent-action="view-product-details"
+        data-agent-product-id="prod-123"
+        type="button"
+      >
+        View Details
+      </button>
+    </article>
+  </div>
+</section>
+```
+
+#### Form Components
+
+```html
+<!-- Contact form -->
+<form 
+  data-agent-component="contact-form"
+  data-agent-form-type="contact|newsletter|checkout|login"
+  data-agent-form-steps="1"
+  method="POST"
+  action="/contact"
+>
+  <fieldset data-agent-section="contact-info">
+    <legend data-agent-content="fieldset-label">Contact Information</legend>
+    
+    <div class="form-group">
+      <label 
+        for="name" 
+        data-agent-content="field-label"
+      >
+        Full Name *
+      </label>
+      <input 
+        type="text"
+        id="name"
+        name="name"
+        required
+        data-agent-field="customer-name"
+        data-agent-validation="required|text"
+        aria-describedby="name-help"
+      >
+      <small id="name-help" data-agent-content="field-help">
+        Your full name for our records
+      </small>
+    </div>
+    
+    <div class="form-group">
+      <label 
+        for="email" 
+        data-agent-content="field-label"
+      >
+        Email Address *
+      </label>
+      <input 
+        type="email"
+        id="email"
+        name="email"
+        required
+        data-agent-field="customer-email"
+        data-agent-validation="required|email"
+        aria-describedby="email-help"
+      >
+      <small id="email-help" data-agent-content="field-help">
+        We'll use this to respond to your inquiry
+      </small>
+    </div>
+  </fieldset>
+  
+  <button 
+    type="submit"
+    data-agent-action="submit-contact-form"
+    data-agent-submit-target="/contact"
+  >
+    Send Message
+  </button>
+</form>
+```
+
+### Action Attributes
+
+#### Standard Actions
+
+| Action | Context | Description | Example |
+|--------|---------|-------------|---------|
+| `go-home` | Navigation | Navigate to homepage | `<a data-agent-action="go-home" href="/">` |
+| `view-products` | Navigation | View product catalog | `<a data-agent-action="view-products" href="/products">` |
+| `view-product-details` | Product | View specific product | `<a data-agent-action="view-product-details" data-agent-product-id="123">` |
+| `add-to-cart` | Commerce | Add item to shopping cart | `<button data-agent-action="add-to-cart" data-agent-product-id="123">` |
+| `submit-form` | Form | Submit form data | `<button data-agent-action="submit-form" type="submit">` |
+| `search-products` | Search | Perform product search | `<button data-agent-action="search-products" type="submit">` |
+| `get-support` | Support | Access help or support | `<a data-agent-action="get-support" href="/contact">` |
+| `download-file` | Content | Download file or document | `<a data-agent-action="download-file" href="/brochure.pdf">` |
+
+#### E-commerce Actions
+
+```html
+<!-- Shopping cart actions -->
+<button data-agent-action="add-to-cart" data-agent-product-id="prod-123">
+  Add to Cart
+</button>
+
+<button data-agent-action="remove-from-cart" data-agent-product-id="prod-123">
+  Remove from Cart
+</button>
+
+<button data-agent-action="update-quantity" data-agent-product-id="prod-123">
+  Update Quantity
+</button>
+
+<!-- Checkout actions -->
+<button data-agent-action="proceed-to-checkout" data-agent-cart-total="299.97">
+  Checkout ($299.97)
+</button>
+
+<button data-agent-action="apply-coupon" data-agent-coupon-field="coupon-input">
+  Apply Coupon
+</button>
+
+<!-- Product comparison -->
+<button data-agent-action="compare-products" data-agent-product-ids="123,456,789">
+  Compare Selected
+</button>
+```
+
+#### Content Actions
+
+```html
+<!-- Article interactions -->
+<button data-agent-action="share-article" data-agent-article-id="article-456">
+  Share Article
+</button>
+
+<button data-agent-action="bookmark-article" data-agent-article-id="article-456">
+  Bookmark
+</button>
+
+<button data-agent-action="print-article" data-agent-article-id="article-456">
+  Print Article
+</button>
+
+<!-- Content filtering -->
+<select data-agent-action="filter-content" data-agent-filter-type="category">
+  <option value="all">All Categories</option>
+  <option value="tech">Technology</option>
+  <option value="business">Business</option>
+</select>
+
+<!-- Pagination -->
+<a data-agent-action="next-page" data-agent-page="2" href="/articles?page=2">
+  Next Page
+</a>
+```
+
+### Content Attributes
+
+#### Content Labeling
+
+```html
+<!-- Page structure -->
+<h1 data-agent-content="page-title">Product Catalog</h1>
+<p data-agent-content="page-description">Browse our complete product range</p>
+
+<!-- Section structure -->
+<h2 data-agent-content="section-title">Featured Products</h2>
+<p data-agent-content="section-description">Our most popular items</p>
+
+<!-- Data labeling -->
+<span data-agent-content="product-name">Wireless Headphones</span>
+<span data-agent-content="product-price">$199.99</span>
+<span data-agent-content="product-rating">4.5/5 stars</span>
+
+<!-- Status indicators -->
+<span data-agent-content="availability-status">In Stock</span>
+<span data-agent-content="shipping-info">Free shipping available</span>
+
+<!-- Help text -->
+<small data-agent-content="field-help">Your email will not be shared</small>
+<div data-agent-content="error-message">Please enter a valid email address</div>
+```
+
+#### Content Types
+
+| Content Type | Usage | Example |
+|-------------|-------|---------|
+| `page-title` | Main page heading | `<h1 data-agent-content="page-title">` |
+| `page-description` | Page summary | `<p data-agent-content="page-description">` |
+| `section-title` | Section heading | `<h2 data-agent-content="section-title">` |
+| `section-description` | Section summary | `<p data-agent-content="section-description">` |
+| `product-name` | Product title | `<span data-agent-content="product-name">` |
+| `product-price` | Price information | `<span data-agent-content="product-price">` |
+| `product-rating` | Rating/review data | `<span data-agent-content="product-rating">` |
+| `field-label` | Form field label | `<label data-agent-content="field-label">` |
+| `field-help` | Help text | `<small data-agent-content="field-help">` |
+| `error-message` | Error information | `<div data-agent-content="error-message">` |
+| `success-message` | Success notification | `<div data-agent-content="success-message">` |
+
+### Field Attributes
+
+#### Form Field Types
+
+```html
+<!-- Customer information -->
+<input data-agent-field="customer-name" type="text" name="name">
+<input data-agent-field="customer-email" type="email" name="email">
+<input data-agent-field="customer-phone" type="tel" name="phone">
+
+<!-- Address information -->
+<input data-agent-field="billing-address-street" type="text" name="street">
+<input data-agent-field="billing-address-city" type="text" name="city">
+<select data-agent-field="billing-address-state" name="state">
+<input data-agent-field="billing-address-zip" type="text" name="zip">
+
+<!-- Product selection -->
+<select data-agent-field="product-category" name="category">
+<input data-agent-field="product-quantity" type="number" name="quantity">
+<input data-agent-field="product-search-query" type="search" name="q">
+
+<!-- Payment information -->
+<input data-agent-field="payment-card-number" type="text" name="card_number">
+<select data-agent-field="payment-card-expiry-month" name="exp_month">
+<select data-agent-field="payment-card-expiry-year" name="exp_year">
+<input data-agent-field="payment-card-cvv" type="text" name="cvv">
+
+<!-- Communication preferences -->
+<input data-agent-field="newsletter-subscription" type="checkbox" name="newsletter">
+<textarea data-agent-field="customer-message" name="message"></textarea>
+<select data-agent-field="inquiry-type" name="subject">
+```
+
+#### Field Validation
+
+```html
+<input 
+  data-agent-field="customer-email"
+  data-agent-validation="required|email|max:255"
+  data-agent-error-target="email-error"
+  type="email" 
+  name="email"
+  required
+  aria-describedby="email-error"
+>
+<div id="email-error" data-agent-content="error-message" role="alert"></div>
+```
+
+**Validation Types:**
+- `required` - Field is mandatory
+- `email` - Must be valid email format
+- `phone` - Must be valid phone number
+- `url` - Must be valid URL
+- `min:n` - Minimum length/value
+- `max:n` - Maximum length/value
+- `pattern:regex` - Custom regex pattern
+- `numeric` - Must be numeric
+- `alpha` - Must be alphabetic
+- `alphanumeric` - Must be alphanumeric
+
+## Structured Data Schemas
+
+### Product Schema
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "Product",
+  "name": "Product Name",
+  "description": "Product description",
+  "image": [
+    "https://example.com/image1.jpg",
+    "https://example.com/image2.jpg"
+  ],
+  "sku": "PROD-123",
+  "mpn": "MPN-456",
+  "brand": {
+    "@type": "Brand",
+    "name": "Brand Name"
+  },
+  "category": "Electronics > Audio > Headphones",
+  "offers": {
+    "@type": "Offer",
+    "url": "https://example.com/products/123",
+    "priceCurrency": "USD",
+    "price": "199.99",
+    "priceValidUntil": "2024-12-31",
+    "availability": "https://schema.org/InStock",
+    "itemCondition": "https://schema.org/NewCondition",
+    "seller": {
+      "@type": "Organization",
+      "name": "Your Store Name"
+    },
+    "shippingDetails": {
+      "@type": "OfferShippingDetails",
+      "shippingRate": {
+        "@type": "MonetaryAmount",
+        "value": "0.00",
+        "currency": "USD"
+      },
+      "deliveryTime": {
+        "@type": "ShippingDeliveryTime",
+        "businessDays": {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"]
+        },
+        "cutoffTime": "16:00",
+        "handlingTime": {
+          "@type": "QuantitativeValue",
+          "minValue": 1,
+          "maxValue": 2,
+          "unitCode": "DAY"
+        }
+      }
+    }
+  },
+  "aggregateRating": {
+    "@type": "AggregateRating",
+    "ratingValue": "4.5",
+    "reviewCount": "127",
+    "bestRating": "5",
+    "worstRating": "1"
+  },
+  "review": [
+    {
+      "@type": "Review",
+      "author": {
+        "@type": "Person",
+        "name": "John Doe"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": "5",
+        "bestRating": "5"
+      },
+      "reviewBody": "Excellent product quality and fast shipping."
+    }
+  ]
+}
+```
+
+### Article Schema
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "Article",
+  "headline": "Article Headline",
+  "description": "Article description or excerpt",
+  "image": "https://example.com/article-image.jpg",
+  "datePublished": "2024-01-15T09:00:00Z",
+  "dateModified": "2024-01-16T10:30:00Z",
+  "author": {
+    "@type": "Person",
+    "name": "Author Name",
+    "url": "https://example.com/authors/author-name"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Publisher Name",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://example.com/logo.png",
+      "width": 200,
+      "height": 60
+    }
+  },
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://example.com/articles/article-slug"
+  },
+  "articleSection": "Technology",
+  "keywords": ["keyword1", "keyword2", "keyword3"],
+  "wordCount": 1250,
+  "timeRequired": "PT5M"
+}
+```
+
+### Organization Schema
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "Organization",
+  "name": "Company Name",
+  "description": "Company description",
+  "url": "https://example.com",
+  "logo": "https://example.com/logo.png",
+  "contactPoint": [
+    {
+      "@type": "ContactPoint",
+      "telephone": "+1-555-123-4567",
+      "contactType": "Customer Service",
+      "availableLanguage": ["English", "Spanish"],
+      "hoursAvailable": {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "09:00",
+        "closes": "17:00"
+      }
+    }
+  ],
+  "address": {
+    "@type": "PostalAddress",
+    "streetAddress": "123 Business Street",
+    "addressLocality": "Business City",
+    "addressRegion": "State",
+    "postalCode": "12345",
+    "addressCountry": "US"
+  },
+  "sameAs": [
+    "https://facebook.com/company",
+    "https://twitter.com/company",
+    "https://linkedin.com/company/company"
+  ]
+}
+```
+
+### WebSite Schema
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  "name": "Website Name",
+  "description": "Website description",
+  "url": "https://example.com",
+  "potentialAction": {
+    "@type": "SearchAction",
+    "target": "https://example.com/search?q={search_term_string}",
+    "query-input": "required name=search_term_string"
+  },
+  "publisher": {
+    "@type": "Organization",
+    "name": "Company Name"
+  }
+}
+```
+
+### FAQ Schema
+
+```json
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is your return policy?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "We offer a 30-day return policy for all unused items in original packaging."
+      }
+    },
+    {
+      "@type": "Question",
+      "name": "Do you offer international shipping?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "Yes, we ship to over 50 countries worldwide. Shipping costs vary by destination."
+      }
+    }
+  ]
+}
+```
+
+## HTTP Headers and Meta Tags
+
+### Agent Detection Headers
+
+#### Request Headers (Incoming)
+
+```http
+User-Agent: Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)
+Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8
+Accept-Language: en-US,en;q=0.5
+Accept-Encoding: gzip, deflate
+From: googlebot(at)googlebot.com
+```
+
+#### Response Headers (Outgoing)
+
+```http
+X-Agent-Optimized: true
+X-Agent-Framework: agentux/2.1.0
+X-Agent-Rendering: ssr
+X-Content-Type-Options: nosniff
+X-Frame-Options: SAMEORIGIN
+Cache-Control: public, max-age=3600
+Vary: User-Agent
+```
+
+### Meta Tags
+
+#### Essential Meta Tags
+
+```html
+<head>
+  <!-- Basic meta tags -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Page description for search engines and agents">
+  <meta name="keywords" content="keyword1, keyword2, keyword3">
+  <meta name="robots" content="index, follow">
+  
+  <!-- Agent-specific meta tags -->
+  <meta name="agent-page" content="product-catalog">
+  <meta name="agent-intent" content="browse-products">
+  <meta name="agent-framework" content="next.js">
+  <meta name="agent-version" content="2.1.0">
+  
+  <!-- Open Graph for social media agents -->
+  <meta property="og:title" content="Page Title">
+  <meta property="og:description" content="Page description">
+  <meta property="og:image" content="https://example.com/image.jpg">
+  <meta property="og:url" content="https://example.com/current-page">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Site Name">
+  
+  <!-- Twitter Card for Twitter agents -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Page Title">
+  <meta name="twitter:description" content="Page description">
+  <meta name="twitter:image" content="https://example.com/image.jpg">
+  <meta name="twitter:site" content="@yourusername">
+  
+  <!-- Canonical URL for search engines -->
+  <link rel="canonical" href="https://example.com/current-page">
+  
+  <!-- Preload critical resources for agents -->
+  <link rel="preload" href="/critical.css" as="style">
+  <link rel="preload" href="/api/products" as="fetch" crossorigin="anonymous">
+</head>
+```
+
+#### E-commerce Meta Tags
+
+```html
+<!-- Product-specific meta tags -->
+<meta name="product:price:amount" content="199.99">
+<meta name="product:price:currency" content="USD">
+<meta name="product:availability" content="in stock">
+<meta name="product:condition" content="new">
+<meta name="product:brand" content="Brand Name">
+<meta name="product:category" content="Electronics">
+
+<!-- Shopping-specific Open Graph -->
+<meta property="product:price:amount" content="199.99">
+<meta property="product:price:currency" content="USD">
+<meta property="og:availability" content="instock">
+<meta property="og:condition" content="new">
+```
+
+#### Article Meta Tags
+
+```html
+<!-- Article-specific meta tags -->
+<meta name="article:author" content="Author Name">
+<meta name="article:published_time" content="2024-01-15T09:00:00Z">
+<meta name="article:modified_time" content="2024-01-16T10:30:00Z">
+<meta name="article:section" content="Technology">
+<meta name="article:tag" content="web development">
+<meta name="article:tag" content="accessibility">
+
+<!-- Open Graph for articles -->
+<meta property="og:type" content="article">
+<meta property="article:author" content="https://example.com/authors/author-name">
+<meta property="article:published_time" content="2024-01-15T09:00:00Z">
+<meta property="article:modified_time" content="2024-01-16T10:30:00Z">
+<meta property="article:section" content="Technology">
+<meta property="article:tag" content="web development">
+```
+
+## JavaScript Detection API
+
+### Agent Detection Function
+
+```javascript
+/**
+ * AgentUX Detection Library
+ * Detects and categorizes user agents for optimal experience delivery
+ */
+
+class AgentUXDetector {
+  constructor(config = {}) {
+    this.config = {
+      enableAnalytics: config.enableAnalytics ?? true,
+      customPatterns: config.customPatterns ?? {},
+      strictMode: config.strictMode ?? false,
+      ...config
+    };
+    
+    this.agentInfo = null;
+    this.capabilities = null;
+  }
+  
+  /**
+   * Detect agent type and capabilities
+   * @param {string} userAgent - User agent string (optional, uses navigator.userAgent if not provided)
+   * @returns {AgentInfo} Agent detection results
+   */
+  detect(userAgent = navigator.userAgent) {
+    const detection = this.analyzeUserAgent(userAgent);
+    const capabilities = this.detectCapabilities();
+    
+    this.agentInfo = {
+      ...detection,
+      capabilities,
+      timestamp: new Date().toISOString(),
+      sessionId: this.generateSessionId()
+    };
+    
+    if (this.config.enableAnalytics) {
+      this.trackDetection(this.agentInfo);
+    }
+    
+    return this.agentInfo;
+  }
+  
+  /**
+   * Analyze user agent string for patterns
+   * @private
+   */
+  analyzeUserAgent(userAgent) {
+    const patterns = {
+      // Search engine bots
+      search: [
+        { pattern: /googlebot/i, name: 'GoogleBot', vendor: 'Google' },
+        { pattern: /bingbot/i, name: 'BingBot', vendor: 'Microsoft' },
+        { pattern: /slurp/i, name: 'Yahoo Slurp', vendor: 'Yahoo' },
+        { pattern: /duckduckbot/i, name: 'DuckDuckBot', vendor: 'DuckDuckGo' },
+        { pattern: /baiduspider/i, name: 'Baidu Spider', vendor: 'Baidu' },
+        { pattern: /yandexbot/i, name: 'YandexBot', vendor: 'Yandex' }
+      ],
+      
+      // Social media bots
+      social: [
+        { pattern: /facebookexternalhit/i, name: 'Facebook Bot', vendor: 'Meta' },
+        { pattern: /twitterbot/i, name: 'TwitterBot', vendor: 'Twitter' },
+        { pattern: /linkedinbot/i, name: 'LinkedInBot', vendor: 'LinkedIn' },
+        { pattern: /whatsapp/i, name: 'WhatsApp Bot', vendor: 'Meta' },
+        { pattern: /telegrambot/i, name: 'Telegram Bot', vendor: 'Telegram' }
+      ],
+      
+      // Shopping and comparison bots
+      shopping: [
+        { pattern: /shopping/i, name: 'Shopping Bot', vendor: 'Generic' },
+        { pattern: /price/i, name: 'Price Comparison', vendor: 'Generic' },
+        { pattern: /comparison/i, name: 'Comparison Bot', vendor: 'Generic' },
+        { pattern: /pronto/i, name: 'Pronto', vendor: 'Pronto' }
+      ],
+      
+      // Automation and testing tools
+      automation: [
+        { pattern: /headless/i, name: 'Headless Browser', vendor: 'Generic' },
+        { pattern: /selenium/i, name: 'Selenium', vendor: 'Selenium' },
+        { pattern: /playwright/i, name: 'Playwright', vendor: 'Microsoft' },
+        { pattern: /puppeteer/i, name: 'Puppeteer', vendor: 'Google' },
+        { pattern: /cypress/i, name: 'Cypress', vendor: 'Cypress' }
+      ],
+      
+      // Command line tools
+      cli: [
+        { pattern: /curl/i, name: 'cURL', vendor: 'cURL' },
+        { pattern: /wget/i, name: 'Wget', vendor: 'GNU' },
+        { pattern: /httpie/i, name: 'HTTPie', vendor: 'HTTPie' },
+        { pattern: /postman/i, name: 'Postman', vendor: 'Postman' }
+      ],
+      
+      // Generic bots
+      generic: [
+        { pattern: /bot/i, name: 'Generic Bot', vendor: 'Unknown' },
+        { pattern: /crawler/i, name: 'Generic Crawler', vendor: 'Unknown' },
+        { pattern: /spider/i, name: 'Generic Spider', vendor: 'Unknown' }
+      ],
+      
+      // Custom patterns from config
+      ...this.config.customPatterns
+    };
+    
+    // Find matching pattern
+    for (const [category, categoryPatterns] of Object.entries(patterns)) {
+      for (const { pattern, name, vendor } of categoryPatterns) {
+        if (pattern.test(userAgent)) {
+          return {
+            isAgent: true,
+            category,
+            name,
+            vendor,
+            userAgent,
+            confidence: this.calculateConfidence(userAgent, pattern)
+          };
+        }
+      }
+    }
+    
+    // No agent pattern matched
+    return {
+      isAgent: false,
+      category: 'human',
+      name: 'Human User',
+      vendor: 'Browser',
+      userAgent,
+      confidence: 0.95
+    };
+  }
+  
+  /**
+   * Detect browser/agent capabilities
+   * @private
+   */
+  detectCapabilities() {
+    if (typeof window === 'undefined') {
+      return { environment: 'server' };
+    }
+    
+    return {
+      environment: 'browser',environment: 'browser',
       javascript: true,
       cookies: navigator.cookieEnabled || false,
       localStorage: this.testLocalStorage(),
