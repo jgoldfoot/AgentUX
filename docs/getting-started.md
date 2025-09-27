@@ -1,4 +1,4 @@
-markdown# Getting Started with AgentUX
+# Getting Started with AgentUX
 
 ## Quick Start Checklist
 
@@ -12,6 +12,7 @@ Before implementing AgentUX patterns, ensure your application meets **FR-1: Init
 - **❌ CSR only**: Empty divs in source → Agents can't see content
 
 ### ✅ Step 2: Implement Basic Semantic Structure
+
 ```html
 <!-- Before: Agent-invisible -->
 <div class="header">
@@ -27,8 +28,12 @@ Before implementing AgentUX patterns, ensure your application meets **FR-1: Init
     </ul>
   </nav>
 </header>
-✅ Step 3: Add Agent-Friendly Form Structure
-html<form data-agent-intent="user-registration">
+```
+
+### ✅ Step 3: Add Agent-Friendly Form Structure
+
+```html
+<form data-agent-intent="user-registration">
   <fieldset data-agent-group="personal-info">
     <legend>Personal Information</legend>
     
@@ -43,42 +48,58 @@ html<form data-agent-intent="user-registration">
     Create Account
   </button>
 </form>
-Framework-Specific Implementation
-Next.js (Recommended)
-bash# Ensure SSR/SSG for agent accessibility
+```
+
+## Framework-Specific Implementation
+
+### Next.js (Recommended)
+```bash
+# Ensure SSR/SSG for agent accessibility
 npm create next-app@latest --typescript --app
-Nuxt (Vue)
-bash# Built-in SSR
+```
+
+### Nuxt (Vue)
+```bash
+# Built-in SSR
 npx nuxi@latest init my-agentux-app
-Astro (Best for content sites)
-bash# Static generation by default
+```
+
+### Astro (Best for content sites)
+```bash
+# Static generation by default
 npm create astro@latest
-Testing Agent Accessibility
-Quick Test: cURL Method
-bash# Test if agents can see your content
+```
+
+## Testing Agent Accessibility
+
+### Quick Test: cURL Method
+```bash
+# Test if agents can see your content
 curl -s https://yoursite.com | grep "main content"
 
 # Should return your actual content, not empty divs
-Browser Test
+```
 
-Disable JavaScript in your browser
-Navigate to your site
-Can you still see and use the core functionality?
+### Browser Test
+1. Disable JavaScript in your browser
+2. Navigate to your site
+3. Can you still see and use the core functionality?
 
-Common Mistakes to Avoid
-❌ CSR-only without fallbacks - Most agents can't execute JavaScript
-❌ Dynamic IDs - id="btn-xyz123" breaks agent selectors
-❌ Visual-only cues - Color changes without semantic updates
-❌ Missing labels - Agents need aria-label or explicit labels
-Next Steps
+## Common Mistakes to Avoid
 
-Validate compliance: Use our compliance checklist
-Add structured data: Implement JSON-LD for better agent understanding
-Test with real agents: Set up automated testing
+❌ **CSR-only without fallbacks** - Most agents can't execute JavaScript  
+❌ **Dynamic IDs** - `id="btn-xyz123"` breaks agent selectors  
+❌ **Visual-only cues** - Color changes without semantic updates  
+❌ **Missing labels** - Agents need `aria-label` or explicit labels
 
-Need Help?
+## Next Steps
 
-📖 Full White Paper
-🐛 Report Issues
-💬 Discussions
+1. **Validate compliance**: Use our [compliance checklist](./compliance-checklist.md)
+2. **Add structured data**: Implement JSON-LD for better agent understanding
+3. **Test with real agents**: Set up automated testing
 
+## Need Help?
+
+- 📖 [Full White Paper](./whitepaper.md)
+- 🐛 [Report Issues](https://github.com/jgoldfoot/AgentUX/issues)
+- 💬 [Discussions](https://github.com/jgoldfoot/AgentUX/discussions)
