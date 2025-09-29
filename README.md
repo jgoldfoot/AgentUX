@@ -16,7 +16,7 @@ AgentUX provides:
 
 ## Quick Start
 
-[Link to getting started guide]
+[Getting Started Guide](docs/getting-started.md)
 
 ## Documentation
 
