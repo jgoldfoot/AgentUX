@@ -3,7 +3,11 @@
 > A design framework for building dual-mode interfaces that work optimally for both humans and AI agents.
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
-[![Status: Research Framework](https://img.shields.io/badge/Status-Research%20Framework-yellow.svg)]()
+[![Version](https://img.shields.io/badge/version-0.1.0-blue.svg)](CHANGELOG.md)
+[![CI Status](https://github.com/jgoldfoot/AgentUX/workflows/CI/badge.svg)](https://github.com/jgoldfoot/AgentUX/actions)
+[![Node Version](https://img.shields.io/badge/node-%3E%3D16.0.0-brightgreen.svg)](.nvmrc)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](CONTRIBUTING.md)
+[![Code of Conduct](https://img.shields.io/badge/code%20of%20conduct-active-blue.svg)](CODE_OF_CONDUCT.md)
 
 ## The Problem
 
@@ -120,12 +124,17 @@ We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.
 git clone https://github.com/jgoldfoot/AgentUX.git
 cd AgentUX
 
-# Install dependencies for tools
-cd tools/validators
+# Install dependencies
 npm install
 
 # Run tests
 npm test
+
+# Run validation tools
+npm run validate https://example.com
+
+# Run compliance audit
+npm run audit https://example.com
 ```
 
 ## Research & Citations

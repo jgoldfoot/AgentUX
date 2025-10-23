@@ -1,0 +1,21 @@
+# Dependencies
+node_modules/
+package-lock.json
+yarn.lock
+
+# Build outputs
+dist/
+build/
+coverage/
+.next/
+.nuxt/
+
+# Logs
+*.log
+
+# Files
+LICENSE
+CHANGELOG.md
+
+# Examples (preserve original formatting)
+examples/*.html
