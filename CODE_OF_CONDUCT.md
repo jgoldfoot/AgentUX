@@ -2,10 +2,11 @@
 
 ## Our Commitment
 
-The BiModal Design project is dedicated to building interfaces that work for both
-humans and AI agents. We are committed to creating an inclusive, respectful, and
-collaborative community where everyone can contribute to advancing agent-human
-interface design regardless of experience level, background, or identity.
+The BiModal Design project is dedicated to building interfaces that work for
+both humans and AI agents. We are committed to creating an inclusive,
+respectful, and collaborative community where everyone can contribute to
+advancing agent-human interface design regardless of experience level,
+background, or identity.
 
 We pledge to make participation in our community a harassment-free experience
 for everyone, regardless of age, body size, visible or invisible disability,
@@ -163,8 +164,8 @@ community.
 We recognize valuable community contributions including:
 
 - **High-Quality Bug Reports**: Detailed reports that help improve the framework
-- **Documentation Improvements**: Making BiModal Design more accessible through better
-  docs
+- **Documentation Improvements**: Making BiModal Design more accessible through
+  better docs
 - **Educational Content**: Blog posts, tutorials, and talks that help others
   learn
 - **Code Contributions**: Improvements to tools, examples, and core framework
@@ -182,8 +183,8 @@ as initial reports.
 
 This Code of Conduct is adapted from the
 [Contributor Covenant](https://www.contributor-covenant.org/), version 2.1, and
-includes BiModal Design-specific guidelines to support our unique focus on dual-mode
-interface design.
+includes BiModal Design-specific guidelines to support our unique focus on
+dual-mode interface design.
 
 For answers to common questions about this code of conduct, see the FAQ at
 https://www.contributor-covenant.org/faq. Translations are available at
@@ -195,6 +196,6 @@ https://www.contributor-covenant.org/translations.
 **Last Updated**: October 2025  
 **Next Review**: April 2026
 
-By participating in the BiModal Design community, you agree to abide by this Code of
-Conduct and help create a positive environment for everyone working to improve
-agent-human interface design.
+By participating in the BiModal Design community, you agree to abide by this
+Code of Conduct and help create a positive environment for everyone working to
+improve agent-human interface design.

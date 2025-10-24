@@ -167,7 +167,8 @@ agentux test --suite=basic-navigation
 ### Compliance Levels
 
 - **🥇 BiModal Design Certified (90%+)**: Ready for production agent deployment
-- **🥈 BiModal Design Advanced (75-89%)**: Good foundation, minor improvements needed
+- **🥈 BiModal Design Advanced (75-89%)**: Good foundation, minor improvements
+  needed
 - **🥉 BiModal Design Basic (60-74%)**: Functional but needs optimization
 - **🚨 BiModal Design At Risk (<60%)**: Major issues, requires redesign
 

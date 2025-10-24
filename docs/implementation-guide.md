@@ -1,7 +1,7 @@
 # BiModal Design Implementation Guide
 
-A comprehensive guide for implementing BiModal Design patterns in your web applications
-to optimize for both human users and AI agents.
+A comprehensive guide for implementing BiModal Design patterns in your web
+applications to optimize for both human users and AI agents.
 
 ## Table of Contents
 
@@ -18,7 +18,8 @@ to optimize for both human users and AI agents.
 
 ### Prerequisites
 
-Before implementing BiModal Design, ensure your project meets these requirements:
+Before implementing BiModal Design, ensure your project meets these
+requirements:
 
 - **Development Environment**: Node.js 16+, modern build tools
 - **Framework Knowledge**: Understanding of your chosen framework (React, Vue,
@@ -888,10 +889,11 @@ After completing this implementation guide:
 
 ## Support and Resources
 
-- **Documentation**:
-  [BiModal Design Framework Documentation](https://github.com/jgoldfoot/BiModal Design/docs)
-- **Examples**:
-  [Complete Implementation Examples](https://github.com/jgoldfoot/BiModal Design/examples)
-- **Issues**: [GitHub Issues](https://github.com/jgoldfoot/BiModal Design/issues)
-- **Discussions**:
-  [Community Forum](https://github.com/jgoldfoot/BiModal Design/discussions)
+- **Documentation**: [BiModal Design Framework
+  Documentation](https://github.com/jgoldfoot/BiModal Design/docs)
+- **Examples**: [Complete Implementation
+  Examples](https://github.com/jgoldfoot/BiModal Design/examples)
+- **Issues**: [GitHub Issues](https://github.com/jgoldfoot/BiModal
+  Design/issues)
+- **Discussions**: [Community Forum](https://github.com/jgoldfoot/BiModal
+  Design/discussions)

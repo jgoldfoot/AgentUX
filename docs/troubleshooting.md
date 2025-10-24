@@ -1,6 +1,7 @@
 # BiModal Design Troubleshooting Guide
 
-Common issues, solutions, and debugging techniques for BiModal Design implementations.
+Common issues, solutions, and debugging techniques for BiModal Design
+implementations.
 
 ## Table of Contents
 

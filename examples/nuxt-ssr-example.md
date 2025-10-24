@@ -7,8 +7,8 @@ accessibility and user experience.
 ## Overview
 
 Nuxt.js provides excellent SSR capabilities out of the box, making it an ideal
-framework for BiModal Design implementation. This example shows how to structure a
-Vue.js application with agent-first design principles while maintaining
+framework for BiModal Design implementation. This example shows how to structure
+a Vue.js application with agent-first design principles while maintaining
 excellent human UX.
 
 ## Project Structure
@@ -180,7 +180,10 @@ export default defineNuxtRouteMiddleware((to, from) => {
   <Html lang="en">
     <Head>
       <Title>BiModal Design Nuxt Example</Title>
-      <Meta name="description" content="BiModal Design implementation in Nuxt.js" />
+      <Meta
+        name="description"
+        content="BiModal Design implementation in Nuxt.js"
+      />
     </Head>
     <Body data-agent-framework="nuxt" data-agent-version="3.0">
       <div id="app">
@@ -962,6 +965,6 @@ npm run preview
 npm run generate
 ```
 
-This Nuxt.js implementation provides a comprehensive example of BiModal Design patterns
-while maintaining excellent performance and user experience for both human users
-and AI agents.
+This Nuxt.js implementation provides a comprehensive example of BiModal Design
+patterns while maintaining excellent performance and user experience for both
+human users and AI agents.

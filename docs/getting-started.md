@@ -2,9 +2,9 @@
 
 ## Quick Start Checklist
 
-Before implementing BiModal Design patterns, ensure your application meets **FR-1:
-Initial Payload Accessibility** - the foundational requirement that content
-exists in the server response.
+Before implementing BiModal Design patterns, ensure your application meets
+**FR-1: Initial Payload Accessibility** - the foundational requirement that
+content exists in the server response.
 
 ### ✅ Step 1: Check Your Rendering Strategy
 

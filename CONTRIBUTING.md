@@ -1,8 +1,8 @@
 # Contributing to BiModal Design
 
-Thank you for your interest in contributing to BiModal Design! This framework aims to
-make the web more accessible to both humans and AI agents, and we welcome
-contributions from developers, designers, researchers, and accessibility
+Thank you for your interest in contributing to BiModal Design! This framework
+aims to make the web more accessible to both humans and AI agents, and we
+welcome contributions from developers, designers, researchers, and accessibility
 experts.
 
 ## Table of Contents
