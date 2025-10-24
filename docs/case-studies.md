@@ -1,7 +1,7 @@
 # BiModal Design Case Studies
 
-Real-world examples demonstrating the impact of BiModal Design implementation across
-different industries and use cases.
+Real-world examples demonstrating the impact of BiModal Design implementation
+across different industries and use cases.
 
 ## Table of Contents
 

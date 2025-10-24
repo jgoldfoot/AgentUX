@@ -222,8 +222,8 @@ const Home = ({ navigate, isAgent, agentInfo }) => {
             Welcome to the Future of Agent-Human Interaction
           </h1>
           <p data-agent-content="page-description" className="hero-subtitle">
-            Discover products designed with BiModal Design principles - optimized for
-            both AI agents and human users
+            Discover products designed with BiModal Design principles -
+            optimized for both AI agents and human users
           </p>
           <div className="hero-actions">
             <button
@@ -262,7 +262,8 @@ const Home = ({ navigate, isAgent, agentInfo }) => {
             Featured Products
           </h2>
           <p data-agent-content="section-description">
-            Our top-rated products that showcase BiModal Design design principles
+            Our top-rated products that showcase BiModal Design design
+            principles
           </p>
 
           <div
@@ -2077,7 +2078,9 @@ function App() {
   if (loading) {
     return (
       <div className="app-loading" data-agent-component="loading-state">
-        <p data-agent-content="loading-message">Loading BiModal Design Store...</p>
+        <p data-agent-content="loading-message">
+          Loading BiModal Design Store...
+        </p>
       </div>
     );
   }

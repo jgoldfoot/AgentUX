@@ -2,8 +2,9 @@
 
 ## For AI Coding Agents
 
-This file helps AI agents understand how to contribute to BiModal Design, a framework
-for building dual-mode interfaces that work for both humans and AI agents.
+This file helps AI agents understand how to contribute to BiModal Design, a
+framework for building dual-mode interfaces that work for both humans and AI
+agents.
 
 ---
 

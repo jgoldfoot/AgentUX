@@ -93,7 +93,9 @@ Provide meaningful HTML structure before JavaScript loads:
         data-agent-component="navigation"
       >
         <div class="nav-container">
-          <a href="/" class="logo" data-agent-action="go-home">BiModal Design Store</a>
+          <a href="/" class="logo" data-agent-action="go-home"
+            >BiModal Design Store</a
+          >
           <ul role="list" class="nav-links">
             <li><a href="/" data-agent-action="browse-home">Home</a></li>
             <li>
@@ -114,7 +116,9 @@ Provide meaningful HTML structure before JavaScript loads:
         <!-- Skeleton content for agents/no-JS users -->
         <div class="content-skeleton" data-agent-content="fallback-content">
           <section class="hero-skeleton" data-agent-component="hero-banner">
-            <h1 data-agent-content="page-title">BiModal Design Store - Loading...</h1>
+            <h1 data-agent-content="page-title">
+              BiModal Design Store - Loading...
+            </h1>
             <p data-agent-content="page-description">
               Our products are designed for optimal agent and human experience.
               Please enable JavaScript for the full interactive experience.
@@ -208,7 +212,9 @@ Provide meaningful HTML structure before JavaScript loads:
 
     <!-- Footer with static content -->
     <footer role="contentinfo" data-agent-component="site-footer">
-      <p>&copy; 2025 BiModal Design Store. Designed for humans and AI agents.</p>
+      <p>
+        &copy; 2025 BiModal Design Store. Designed for humans and AI agents.
+      </p>
       <nav aria-label="Footer navigation">
         <ul role="list">
           <li>
@@ -377,7 +383,9 @@ function App() {
 
       <div className="content-container" data-agent-component="main-app">
         <section className="hero" data-agent-component="hero-banner">
-          <h1 data-agent-content="page-title">Welcome to BiModal Design Store</h1>
+          <h1 data-agent-content="page-title">
+            Welcome to BiModal Design Store
+          </h1>
           <p data-agent-content="page-description">
             Discover products designed for both humans and AI agents
           </p>
@@ -1217,10 +1225,10 @@ const csr_metrics = {
 
 ## Conclusion
 
-While server-side rendering remains the optimal approach for BiModal Design, these CSR
-mitigation strategies can significantly improve agent compatibility in scenarios
-where SSR is not feasible. The key is providing meaningful content immediately
-while progressively enhancing the experience.
+While server-side rendering remains the optimal approach for BiModal Design,
+these CSR mitigation strategies can significantly improve agent compatibility in
+scenarios where SSR is not feasible. The key is providing meaningful content
+immediately while progressively enhancing the experience.
 
 Remember: **The goal is not to make CSR as good as SSR for agents, but to make
 CSR applications functional and accessible to agents when SSR is not an

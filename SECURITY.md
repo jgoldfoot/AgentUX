@@ -10,8 +10,8 @@ We release patches for security vulnerabilities in the following versions:
 
 ## Reporting a Vulnerability
 
-The BiModal Design team takes security vulnerabilities seriously. We appreciate your
-efforts to responsibly disclose your findings.
+The BiModal Design team takes security vulnerabilities seriously. We appreciate
+your efforts to responsibly disclose your findings.
 
 ### How to Report a Security Vulnerability
 

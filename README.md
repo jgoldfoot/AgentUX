@@ -1,6 +1,7 @@
 # **BiModal Design**
 
-> **A design framework for building dual-mode interfaces that work optimally for both humans and AI agents.**
+> **A design framework for building dual-mode interfaces that work optimally for
+> both humans and AI agents.**
 
 [![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-blue.svg)](LICENSE)
 [![Status: Research Framework](https://img.shields.io/badge/Status-Research%20Framework-yellow.svg)]()
@@ -29,41 +30,54 @@
 
 ## 🧠 Overview
 
-**BiModal Design** defines best practices and validation tools for creating **dual-mode interfaces** — designs that remain equally functional for **human users** and **AI agents**.
+**BiModal Design** defines best practices and validation tools for creating
+**dual-mode interfaces** — designs that remain equally functional for **human
+users** and **AI agents**.
 
-As agentic technologies proliferate, ensuring mutual interpretability between people and machines becomes essential. BiModal Design bridges that gap through **semantic design standards**, **agent-readable metadata**, and **progressive rendering strategies**.
+As agentic technologies proliferate, ensuring mutual interpretability between
+people and machines becomes essential. BiModal Design bridges that gap through
+**semantic design standards**, **agent-readable metadata**, and **progressive
+rendering strategies**.
 
 ---
 
 ## ❌ The Problem
 
-Most AI agents (~80%) perform **simple HTTP requests** without executing JavaScript.  
-Client-side rendered (CSR) apps appear blank to them, even when perfectly optimized for human experience.
+Most AI agents (~80%) perform **simple HTTP requests** without executing
+JavaScript.  
+Client-side rendered (CSR) apps appear blank to them, even when perfectly
+optimized for human experience.
 
-| Perspective | Experience |
-|-------------|------------|
-| 👩‍💻 **Human** | Sees a rich, interactive, accessible interface |
-| 🤖 **AI Agent** | Receives `<div id="root"></div>` — no content |
+| Perspective     | Experience                                     |
+| --------------- | ---------------------------------------------- |
+| 👩‍💻 **Human**    | Sees a rich, interactive, accessible interface |
+| 🤖 **AI Agent** | Receives `<div id="root"></div>` — no content  |
 
-This invisibility undermines discoverability, automation, and LLM-driven workflows.
+This invisibility undermines discoverability, automation, and LLM-driven
+workflows.
 
 ---
 
 ## ✅ The Solution
 
-BiModal Design establishes **foundational requirements, design principles, and validation tools** to ensure both humans and agents perceive meaningful structure.
+BiModal Design establishes **foundational requirements, design principles, and
+validation tools** to ensure both humans and agents perceive meaningful
+structure.
 
 ### 🏗️ Foundational Requirements
 
-- **FR-1: Initial Payload Accessibility** — content must exist in the first server response  
-- **Rendering Strategy Guidance** — patterns for SSR / SSG / CSR and hybrid models  
-- **Progressive Enhancement** — interactivity should build upon accessible content
+- **FR-1: Initial Payload Accessibility** — content must exist in the first
+  server response
+- **Rendering Strategy Guidance** — patterns for SSR / SSG / CSR and hybrid
+  models
+- **Progressive Enhancement** — interactivity should build upon accessible
+  content
 
 ### 🎨 Design Principles
 
-- Semantic HTML5 landmarks  
-- WCAG 2.2 AA alignment  
-- ARIA roles and agent-specific attributes  
+- Semantic HTML5 landmarks
+- WCAG 2.2 AA alignment
+- ARIA roles and agent-specific attributes
 - JSON-LD structured data for discoverability
 
 ### 🔧 Validation Tools
@@ -77,6 +91,7 @@ BiModal Design establishes **foundational requirements, design principles, and v
 ## ⚡ Quick Start
 
 ### 1. Test Your Current Site
+
 ```bash
 # Check if your site exposes accessible structure to agents
 curl -s https://your-site.com | grep -E '<(nav|main|h1|form)'
@@ -86,12 +101,14 @@ curl -s https://your-site.com | grep -E '<(nav|main|h1|form)'
 ❌ Empty `<div id="root"></div>` means content is invisible to agents.
 
 ### 2. Run BiModal Design Validation
+
 ```bash
 cd tools/validators
 node fr1-checker.js https://your-site.com --verbose
 ```
 
 ### 3. Implement Core Patterns
+
 ```html
 <main role="main" data-agent-context="homepage">
   <h1>Your Content</h1>
@@ -101,12 +118,12 @@ node fr1-checker.js https://your-site.com --verbose
 </main>
 
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "Your Site",
-  "description": "Your description"
-}
+  {
+    "@context": "https://schema.org",
+    "@type": "WebSite",
+    "name": "Your Site",
+    "description": "Your description"
+  }
 </script>
 ```
 
@@ -114,22 +131,22 @@ node fr1-checker.js https://your-site.com --verbose
 
 ## 📊 Key Research Findings
 
-| Metric | Conventional Interfaces | BiModal Design-Optimized | Improvement |
-|--------|------------------------|--------------------------|-------------|
-| Human Task Success | 72% | — | — |
-| Agent Task Success | 12% | 42–70% | +40–75% |
-| Agent Completion Rate | — | +40–75% | Significant |
+| Metric                | Conventional Interfaces | BiModal Design-Optimized | Improvement |
+| --------------------- | ----------------------- | ------------------------ | ----------- |
+| Human Task Success    | 72%                     | —                        | —           |
+| Agent Task Success    | 12%                     | 42–70%                   | +40–75%     |
+| Agent Completion Rate | —                       | +40–75%                  | Significant |
 
 ---
 
 ## 📘 Documentation
 
-| Document | Description |
-|----------|-------------|
-| 📄 White Paper | Framework specification v2.1 |
+| Document                | Description                        |
+| ----------------------- | ---------------------------------- |
+| 📄 White Paper          | Framework specification v2.1       |
 | 🛠️ Implementation Guide | Development & deployment practices |
-| 📊 Case Studies | Real-world validation data |
-| 🔍 Troubleshooting | Common errors and corrections |
+| 📊 Case Studies         | Real-world validation data         |
+| 🔍 Troubleshooting      | Common errors and corrections      |
 
 ---
 
@@ -149,13 +166,13 @@ node fr1-checker.js https://your-site.com --verbose
 
 ## 🧬 Framework Maturity Levels
 
-| Level | Name | Requirements | Typical Agent Success |
-|-------|------|--------------|----------------------|
-| 0 | Infrastructure Ready | FR-1 compliant (content in payload) | Basic |
-| 1 | Basic Accessibility | WCAG 2.2 AA + semantic HTML | ≥ 75% |
-| 2 | Semantic Stability | ARIA + structured data | ≥ 85% |
-| 3 | Agent-Tested | Automated validation | ≥ 90% |
-| 4 | Agent-Native | AI-first design paradigm | ≥ 95% |
+| Level | Name                 | Requirements                        | Typical Agent Success |
+| ----- | -------------------- | ----------------------------------- | --------------------- |
+| 0     | Infrastructure Ready | FR-1 compliant (content in payload) | Basic                 |
+| 1     | Basic Accessibility  | WCAG 2.2 AA + semantic HTML         | ≥ 75%                 |
+| 2     | Semantic Stability   | ARIA + structured data              | ≥ 85%                 |
+| 3     | Agent-Tested         | Automated validation                | ≥ 90%                 |
+| 4     | Agent-Native         | AI-first design paradigm            | ≥ 95%                 |
 
 ---
 
@@ -168,11 +185,13 @@ Contributions are welcome!
 3. Commit with a Conventional Commit message
 4. Submit a Pull Request
 
-Refer to the [Contributing Guidelines](CONTRIBUTING.md) for review standards and code style.
+Refer to the [Contributing Guidelines](CONTRIBUTING.md) for review standards and
+code style.
 
 ---
 
 ## 🧰 Development Setup
+
 ```bash
 # Clone the repository
 git clone https://github.com/jgoldfoot/BiModalDesign.git
@@ -190,9 +209,12 @@ npm test
 
 ## 🔬 Research & Citations
 
-- **WebAgents Survey 2025** — "A Survey of WebAgents: Towards Next-Generation AI Agents for Web Automation" (arXiv:2503.23350v1)
-- **ST-WebAgentBench** — "A Benchmark for Evaluating Safety and Trustworthiness in Web Agents" (arXiv:2410.06703v2)
-- **τ-bench** — "A Benchmark for Tool-Agent-User Interaction in Real-World Domains" (arXiv:2406.12045)
+- **WebAgents Survey 2025** — "A Survey of WebAgents: Towards Next-Generation AI
+  Agents for Web Automation" (arXiv:2503.23350v1)
+- **ST-WebAgentBench** — "A Benchmark for Evaluating Safety and Trustworthiness
+  in Web Agents" (arXiv:2410.06703v2)
+- **τ-bench** — "A Benchmark for Tool-Agent-User Interaction in Real-World
+  Domains" (arXiv:2406.12045)
 
 ---
 
@@ -214,4 +236,5 @@ Senior Director of Product Design | AI + UX Researcher
 
 ---
 
-**BiModal Design** — Designing the future of human-AI collaboration, one interface at a time.
+**BiModal Design** — Designing the future of human-AI collaboration, one
+interface at a time.

@@ -6,10 +6,11 @@ accessibility and blazing-fast performance for both humans and AI agents.
 
 ## Overview
 
-Astro's static-first approach makes it ideal for BiModal Design implementation. By
-generating static HTML at build time, we ensure that all content is immediately
-available to agents without requiring JavaScript execution, while still
-providing interactive features for human users through selective hydration.
+Astro's static-first approach makes it ideal for BiModal Design implementation.
+By generating static HTML at build time, we ensure that all content is
+immediately available to agents without requiring JavaScript execution, while
+still providing interactive features for human users through selective
+hydration.
 
 ## Project Structure
 

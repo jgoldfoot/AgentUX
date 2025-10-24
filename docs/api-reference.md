@@ -1,7 +1,7 @@
 # BiModal Design API Reference
 
-Technical specifications and reference documentation for implementing BiModal Design
-patterns in web applications.
+Technical specifications and reference documentation for implementing BiModal
+Design patterns in web applications.
 
 ## Table of Contents
 
@@ -18,8 +18,8 @@ patterns in web applications.
 
 ### Core Agent Attributes
 
-All BiModal Design attributes use the `data-agent-*` namespace to ensure compatibility
-and avoid conflicts.
+All BiModal Design attributes use the `data-agent-*` namespace to ensure
+compatibility and avoid conflicts.
 
 #### Page-Level Attributes
 
@@ -35,12 +35,12 @@ and avoid conflicts.
 
 **Attribute Specifications:**
 
-| Attribute              | Required | Values                                                       | Description                       |
-| ---------------------- | -------- | ------------------------------------------------------------ | --------------------------------- |
-| `data-agent-framework` | No       | `react`, `vue`, `angular`, `astro`, `next`, `nuxt`, `custom` | Framework used for implementation |
-| `data-agent-version`   | No       | Semantic version string                                      | BiModal Design implementation version    |
-| `data-agent-context`   | No       | `detected`, `unknown`                                        | Whether agent was detected        |
-| `data-agent-mode`      | No       | `ssr`, `ssg`, `csr`, `hybrid`                                | Rendering strategy used           |
+| Attribute              | Required | Values                                                       | Description                           |
+| ---------------------- | -------- | ------------------------------------------------------------ | ------------------------------------- |
+| `data-agent-framework` | No       | `react`, `vue`, `angular`, `astro`, `next`, `nuxt`, `custom` | Framework used for implementation     |
+| `data-agent-version`   | No       | Semantic version string                                      | BiModal Design implementation version |
+| `data-agent-context`   | No       | `detected`, `unknown`                                        | Whether agent was detected            |
+| `data-agent-mode`      | No       | `ssr`, `ssg`, `csr`, `hybrid`                                | Rendering strategy used               |
 
 #### Page Content Attributes
 
@@ -2152,7 +2152,7 @@ async function renderAgentOptimizedHome(agent) {
       <a href="/contact" data-agent-action="get-support">Contact</a>
     </nav>
   </header>
-  
+
   <main role="main" data-agent-component="main-content">
     <h1 data-agent-content="page-title">Welcome to BiModal Design Store</h1>
     <p data-agent-content="page-description">
@@ -2915,12 +2915,12 @@ All BiModal Design attributes use the `data-agent-*` namespace to ensure compati
 
 **Attribute Specifications:**
 
-| Attribute              | Required | Values                                                       | Description                       |
-| ---------------------- | -------- | ------------------------------------------------------------ | --------------------------------- |
-| `data-agent-framework` | No       | `react`, `vue`, `angular`, `astro`, `next`, `nuxt`, `custom` | Framework used for implementation |
-| `data-agent-version`   | No       | Semantic version string                                      | BiModal Design implementation version    |
-| `data-agent-context`   | No       | `detected`, `unknown`                                        | Whether agent was detected        |
-| `data-agent-mode`      | No       | `ssr`, `ssg`, `csr`, `hybrid`                                | Rendering strategy used           |
+| Attribute              | Required | Values                                                       | Description                           |
+| ---------------------- | -------- | ------------------------------------------------------------ | ------------------------------------- |
+| `data-agent-framework` | No       | `react`, `vue`, `angular`, `astro`, `next`, `nuxt`, `custom` | Framework used for implementation     |
+| `data-agent-version`   | No       | Semantic version string                                      | BiModal Design implementation version |
+| `data-agent-context`   | No       | `detected`, `unknown`                                        | Whether agent was detected            |
+| `data-agent-mode`      | No       | `ssr`, `ssg`, `csr`, `hybrid`                                | Rendering strategy used               |
 
 #### Page Content Attributes
 
@@ -5031,7 +5031,7 @@ async function renderAgentOptimizedHome(agent) {
       <a href="/contact" data-agent-action="get-support">Contact</a>
     </nav>
   </header>
-  
+
   <main role="main" data-agent-component="main-content">
     <h1 data-agent-content="page-title">Welcome to BiModal Design Store</h1>
     <p data-agent-content="page-description">
@@ -5794,12 +5794,12 @@ All BiModal Design attributes use the `data-agent-*` namespace to ensure compati
 
 **Attribute Specifications:**
 
-| Attribute              | Required | Values                                                       | Description                       |
-| ---------------------- | -------- | ------------------------------------------------------------ | --------------------------------- |
-| `data-agent-framework` | No       | `react`, `vue`, `angular`, `astro`, `next`, `nuxt`, `custom` | Framework used for implementation |
-| `data-agent-version`   | No       | Semantic version string                                      | BiModal Design implementation version    |
-| `data-agent-context`   | No       | `detected`, `unknown`                                        | Whether agent was detected        |
-| `data-agent-mode`      | No       | `ssr`, `ssg`, `csr`, `hybrid`                                | Rendering strategy used           |
+| Attribute              | Required | Values                                                       | Description                           |
+| ---------------------- | -------- | ------------------------------------------------------------ | ------------------------------------- |
+| `data-agent-framework` | No       | `react`, `vue`, `angular`, `astro`, `next`, `nuxt`, `custom` | Framework used for implementation     |
+| `data-agent-version`   | No       | Semantic version string                                      | BiModal Design implementation version |
+| `data-agent-context`   | No       | `detected`, `unknown`                                        | Whether agent was detected            |
+| `data-agent-mode`      | No       | `ssr`, `ssg`, `csr`, `hybrid`                                | Rendering strategy used               |
 
 #### Page Content Attributes
 

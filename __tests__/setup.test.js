@@ -76,9 +76,11 @@ describe('Package Configuration', () => {
     const packageJson = require('../package.json');
 
     expect(packageJson.bin).toBeDefined();
-    expect(packageJson.bin['agentux']).toBeDefined();
-    expect(packageJson.bin['agentux-validate']).toBeDefined();
-    expect(packageJson.bin['agentux-audit']).toBeDefined();
+    expect(packageJson.bin['bimodal-design']).toBeDefined();
+    expect(packageJson.bin['bmd']).toBeDefined();
+    expect(packageJson.bin['bmd-validate']).toBeDefined();
+    expect(packageJson.bin['bmd-audit']).toBeDefined();
+    expect(packageJson.bin['bmd-simulate']).toBeDefined();
   });
 
   test('package.json should have test script', () => {
