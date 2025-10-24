@@ -2,17 +2,22 @@
 
 ## For AI Coding Agents
 
-This file helps AI agents understand how to contribute to AgentUX, a framework for building dual-mode interfaces that work for both humans and AI agents.
+This file helps AI agents understand how to contribute to AgentUX, a framework
+for building dual-mode interfaces that work for both humans and AI agents.
 
 ---
 
 ## Project Overview
 
-**AgentUX** addresses a critical gap: ~80% of AI agents make simple HTTP requests without JavaScript execution, making client-side rendered applications invisible to them.
+**AgentUX** addresses a critical gap: ~80% of AI agents make simple HTTP
+requests without JavaScript execution, making client-side rendered applications
+invisible to them.
 
-**Core Concept:** FR-1 (Initial Payload Accessibility) - Content must exist in the server's initial HTML response.
+**Core Concept:** FR-1 (Initial Payload Accessibility) - Content must exist in
+the server's initial HTML response.
 
 **Key Metrics:**
+
 - Conventional interfaces: 72% human success vs. 12% agent success
 - AgentUX-optimized interfaces: 42-70% agent success
 - Improvement: 40-75% better agent task completion
@@ -58,6 +63,7 @@ node tools/validators/fr1-validator.js examples/ssr-pass-example.html
 ### 2. Adding New Examples
 
 When adding examples:
+
 - Create both a "fail" and "pass" version
 - Use semantic HTML5 elements (article, section, nav, main)
 - Include Open Graph metadata in passing examples
@@ -65,33 +71,35 @@ When adding examples:
 - Test with the validator before committing
 
 Template for new examples:
+
 ```html
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta name="description" content="...">
-  <meta property="og:title" content="...">
-  <!-- Structured metadata helps agents -->
-</head>
-<body>
-  <!-- All content in initial HTML for FR-1 compliance -->
-  <main>
-    <article>
-      <!-- Use semantic HTML -->
-    </article>
-  </main>
-  
-  <script>
-    // JavaScript is OPTIONAL - progressive enhancement only
-  </script>
-</body>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="description" content="..." />
+    <meta property="og:title" content="..." />
+    <!-- Structured metadata helps agents -->
+  </head>
+  <body>
+    <!-- All content in initial HTML for FR-1 compliance -->
+    <main>
+      <article>
+        <!-- Use semantic HTML -->
+      </article>
+    </main>
+
+    <script>
+      // JavaScript is OPTIONAL - progressive enhancement only
+    </script>
+  </body>
 </html>
 ```
 
 ### 3. Improving the Validator
 
 The FR-1 validator checks:
+
 - Content exists in initial payload (text length > 200 chars)
 - Not a blank SPA shell (no empty `<div id="root">`)
 - Uses semantic HTML5 elements
@@ -100,18 +108,19 @@ The FR-1 validator checks:
 - Contains navigable links
 
 To improve the validator:
+
 ```javascript
 // Add new checks in analyzePayload() function
 function analyzePayload(response) {
   const results = { passed: [], failed: [], warnings: [], score: 0 };
-  
+
   // Add your check here
   const hasNewFeature = checkForNewFeature(response.body);
   if (hasNewFeature) {
     results.passed.push('Description of what passed');
     results.score += 10; // Weight appropriately
   }
-  
+
   return results;
 }
 ```
@@ -119,6 +128,7 @@ function analyzePayload(response) {
 ### 4. Documentation Updates
 
 When updating docs:
+
 - Keep README focused and brief (link to detailed docs)
 - Update whitepaper for research findings
 - Update implementation guide for practical steps
@@ -155,6 +165,7 @@ node tools/validators/fr1-validator.js https://example.com
 ### Task: Generate documentation
 
 When generating docs:
+
 - Focus on actionable guidance
 - Include code examples
 - Show before/after comparisons
@@ -214,7 +225,8 @@ When contributing to this project, remember:
 ## Questions or Issues?
 
 - Check the [White Paper](docs/whitepaper-v2.1.md) for research methodology
-- Review the [Implementation Guide](docs/implementation-guide.md) for practical steps
+- Review the [Implementation Guide](docs/implementation-guide.md) for practical
+  steps
 - Open an issue with the label `question` for clarification
 - Reference existing examples for patterns
 
@@ -222,8 +234,12 @@ When contributing to this project, remember:
 
 ## License
 
-This project is licensed under Apache-2.0. All contributions will be under the same license.
+This project is licensed under Apache-2.0. All contributions will be under the
+same license.
 
 ---
 
-**Note for AI Agents:** This project is meta - it's about making interfaces accessible to agents like you. When contributing, consider: "Would an agent using simple HTTP requests be able to access this content?" If no, it likely violates FR-1.
+**Note for AI Agents:** This project is meta - it's about making interfaces
+accessible to agents like you. When contributing, consider: "Would an agent
+using simple HTTP requests be able to access this content?" If no, it likely
+violates FR-1.

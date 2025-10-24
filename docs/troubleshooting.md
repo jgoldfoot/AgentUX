@@ -53,42 +53,53 @@ function runAgentUXDiagnostic() {
     url: window.location.href,
     issues: [],
     warnings: [],
-    passed: []
+    passed: [],
   };
-  
+
   // Check 1: Semantic structure
-  const semanticElements = ['main', 'nav', 'header', 'footer', 'article', 'section'];
-  const foundElements = semanticElements.filter(tag => document.querySelector(tag));
-  
+  const semanticElements = [
+    'main',
+    'nav',
+    'header',
+    'footer',
+    'article',
+    'section',
+  ];
+  const foundElements = semanticElements.filter((tag) =>
+    document.querySelector(tag)
+  );
+
   if (foundElements.length >= 3) {
     results.passed.push('✅ Semantic HTML structure present');
   } else {
-    results.issues.push('❌ Missing semantic HTML elements. Found: ' + foundElements.join(', '));
+    results.issues.push(
+      '❌ Missing semantic HTML elements. Found: ' + foundElements.join(', ')
+    );
   }
-  
+
   // Check 2: Agent attributes
   const agentComponents = document.querySelectorAll('[data-agent-component]');
   const agentActions = document.querySelectorAll('[data-agent-action]');
-  
+
   if (agentComponents.length > 0 && agentActions.length > 0) {
     results.passed.push('✅ Agent attributes present');
   } else {
     results.issues.push('❌ Missing AgentUX attributes');
   }
-  
+
   // Check 3: Forms accessibility
   const forms = document.querySelectorAll('form');
   if (forms.length > 0) {
     const fieldsets = document.querySelectorAll('fieldset');
     const labels = document.querySelectorAll('label[for]');
-    
+
     if (fieldsets.length > 0 && labels.length > 0) {
       results.passed.push('✅ Forms have proper accessibility structure');
     } else {
       results.warnings.push('⚠️ Forms may lack proper accessibility structure');
     }
   }
-  
+
   // Check 4: Navigation
   const nav = document.querySelector('nav[role="navigation"]');
   if (nav) {
@@ -96,15 +107,17 @@ function runAgentUXDiagnostic() {
   } else {
     results.issues.push('❌ Missing accessible navigation');
   }
-  
+
   // Check 5: Structured data
-  const structuredData = document.querySelectorAll('script[type="application/ld+json"]');
+  const structuredData = document.querySelectorAll(
+    'script[type="application/ld+json"]'
+  );
   if (structuredData.length > 0) {
     results.passed.push('✅ Structured data present');
   } else {
     results.warnings.push('⚠️ No structured data found');
   }
-  
+
   console.log('AgentUX Diagnostic Results:', results);
   return results;
 }
@@ -118,6 +131,7 @@ runAgentUXDiagnostic();
 ### Problem: Agents Not Being Detected
 
 **Symptoms:**
+
 - No agent-specific styling applied
 - All users getting same experience
 - Analytics showing no agent visits
@@ -125,6 +139,7 @@ runAgentUXDiagnostic();
 **Common Causes:**
 
 1. **Missing User-Agent Detection**
+
 ```javascript
 // ❌ Wrong - Not checking user agent
 function detectAgent() {
@@ -139,6 +154,7 @@ function detectAgent() {
 ```
 
 2. **Server-Side Detection Issues**
+
 ```javascript
 // ❌ Wrong - Missing header check
 app.use((req, res, next) => {
@@ -157,27 +173,29 @@ app.use((req, res, next) => {
 **Solutions:**
 
 1. **Verify Detection Logic**
+
 ```javascript
 // Test your detection function
 const testUserAgents = [
   'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)',
   'curl/7.68.0',
-  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36'
+  'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36',
 ];
 
-testUserAgents.forEach(ua => {
+testUserAgents.forEach((ua) => {
   console.log(`${ua}: ${detectAgent(ua) ? 'AGENT' : 'HUMAN'}`);
 });
 ```
 
 2. **Add Debug Logging**
+
 ```javascript
 function detectAgent(userAgent = navigator.userAgent) {
   console.log('Detecting agent for:', userAgent);
-  
+
   const patterns = [/bot/i, /crawler/i, /spider/i];
-  const isAgent = patterns.some(pattern => pattern.test(userAgent));
-  
+  const isAgent = patterns.some((pattern) => pattern.test(userAgent));
+
   console.log('Agent detected:', isAgent);
   return isAgent;
 }
@@ -186,6 +204,7 @@ function detectAgent(userAgent = navigator.userAgent) {
 ### Problem: False Positives/Negatives
 
 **Symptoms:**
+
 - Human users getting agent experience
 - Agents getting human experience
 - Inconsistent detection results
@@ -193,6 +212,7 @@ function detectAgent(userAgent = navigator.userAgent) {
 **Solutions:**
 
 1. **Improve Pattern Specificity**
+
 ```javascript
 // ❌ Too broad - catches human browsers
 const patterns = [/chrome/i, /safari/i];
@@ -202,28 +222,29 @@ const patterns = [
   /googlebot/i,
   /bingbot/i,
   /facebookexternalhit/i,
-  /headless/i
+  /headless/i,
 ];
 ```
 
 2. **Add Confidence Scoring**
+
 ```javascript
 function detectAgentWithConfidence(userAgent) {
   const highConfidence = [/googlebot/i, /bingbot/i];
   const mediumConfidence = [/bot/i, /crawler/i];
-  
+
   for (const pattern of highConfidence) {
     if (pattern.test(userAgent)) {
       return { isAgent: true, confidence: 0.95 };
     }
   }
-  
+
   for (const pattern of mediumConfidence) {
     if (pattern.test(userAgent)) {
       return { isAgent: true, confidence: 0.7 };
     }
   }
-  
+
   return { isAgent: false, confidence: 0.9 };
 }
 ```
@@ -233,6 +254,7 @@ function detectAgentWithConfidence(userAgent) {
 ### Problem: Empty Content for Agents
 
 **Symptoms:**
+
 - Agents receive blank pages
 - Content requires JavaScript to load
 - Search engines not indexing content
@@ -240,44 +262,49 @@ function detectAgentWithConfidence(userAgent) {
 **Common Causes:**
 
 1. **Client-Side Only Rendering**
+
 ```javascript
 // ❌ Wrong - Content only available after JS execution
 function App() {
   const [data, setData] = useState(null);
-  
+
   useEffect(() => {
     fetchData().then(setData);
   }, []);
-  
+
   if (!data) return <div>Loading...</div>;
-  
+
   return <div>{data.content}</div>;
 }
 ```
 
 2. **Missing SSR Implementation**
+
 ```html
 <!-- ❌ Wrong - Empty HTML shell -->
 <!DOCTYPE html>
 <html>
-<head><title>My App</title></head>
-<body>
-  <div id="root"></div>
-  <script src="/app.js"></script>
-</body>
+  <head>
+    <title>My App</title>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script src="/app.js"></script>
+  </body>
 </html>
 ```
 
 **Solutions:**
 
 1. **Implement Server-Side Rendering**
+
 ```javascript
 // ✅ Correct - SSR with data fetching
 export async function getServerSideProps() {
   const data = await fetchData();
-  
+
   return {
-    props: { data }
+    props: { data },
   };
 }
 
@@ -292,32 +319,36 @@ function App({ data }) {
 ```
 
 2. **Add Meaningful Fallback Content**
+
 ```html
 <!-- ✅ Correct - Content available without JS -->
 <!DOCTYPE html>
 <html>
-<head><title>My App</title></head>
-<body>
-  <div id="root">
-    <main role="main" data-agent-component="main-content">
-      <h1 data-agent-content="page-title">Welcome to My App</h1>
-      <p data-agent-content="page-description">
-        Discover our products and services designed for everyone.
-      </p>
-      <nav data-agent-component="navigation">
-        <a href="/products" data-agent-action="view-products">Products</a>
-        <a href="/contact" data-agent-action="get-support">Contact</a>
-      </nav>
-    </main>
-  </div>
-  <script src="/app.js"></script>
-</body>
+  <head>
+    <title>My App</title>
+  </head>
+  <body>
+    <div id="root">
+      <main role="main" data-agent-component="main-content">
+        <h1 data-agent-content="page-title">Welcome to My App</h1>
+        <p data-agent-content="page-description">
+          Discover our products and services designed for everyone.
+        </p>
+        <nav data-agent-component="navigation">
+          <a href="/products" data-agent-action="view-products">Products</a>
+          <a href="/contact" data-agent-action="get-support">Contact</a>
+        </nav>
+      </main>
+    </div>
+    <script src="/app.js"></script>
+  </body>
 </html>
 ```
 
 ### Problem: Missing Agent Attributes
 
 **Symptoms:**
+
 - Agents struggle to understand page structure
 - Low interaction success rates
 - Poor analytics data
@@ -325,25 +356,26 @@ function App({ data }) {
 **Solutions:**
 
 1. **Audit Existing Markup**
+
 ```javascript
 // Audit script - run in browser console
 function auditAgentAttributes() {
   const components = document.querySelectorAll('[data-agent-component]');
   const actions = document.querySelectorAll('[data-agent-action]');
   const content = document.querySelectorAll('[data-agent-content]');
-  
+
   console.log('Agent Components:', components.length);
   console.log('Agent Actions:', actions.length);
   console.log('Agent Content:', content.length);
-  
+
   // Check for missing attributes on interactive elements
   const buttons = document.querySelectorAll('button:not([data-agent-action])');
   const links = document.querySelectorAll('a:not([data-agent-action])');
-  
+
   if (buttons.length > 0) {
     console.warn('Buttons missing agent actions:', buttons.length);
   }
-  
+
   if (links.length > 0) {
     console.warn('Links missing agent actions:', links.length);
   }
@@ -353,36 +385,41 @@ auditAgentAttributes();
 ```
 
 2. **Systematic Attribute Addition**
+
 ```javascript
 // Add missing attributes programmatically
 function enhanceAgentAttributes() {
   // Enhance buttons
-  document.querySelectorAll('button:not([data-agent-action])').forEach(button => {
-    const text = button.textContent.toLowerCase();
-    
-    if (text.includes('submit')) {
-      button.setAttribute('data-agent-action', 'submit-form');
-    } else if (text.includes('search')) {
-      button.setAttribute('data-agent-action', 'perform-search');
-    } else {
-      button.setAttribute('data-agent-action', 'button-click');
-    }
-  });
-  
+  document
+    .querySelectorAll('button:not([data-agent-action])')
+    .forEach((button) => {
+      const text = button.textContent.toLowerCase();
+
+      if (text.includes('submit')) {
+        button.setAttribute('data-agent-action', 'submit-form');
+      } else if (text.includes('search')) {
+        button.setAttribute('data-agent-action', 'perform-search');
+      } else {
+        button.setAttribute('data-agent-action', 'button-click');
+      }
+    });
+
   // Enhance navigation links
-  document.querySelectorAll('nav a:not([data-agent-action])').forEach(link => {
-    const href = link.getAttribute('href');
-    
-    if (href === '/') {
-      link.setAttribute('data-agent-action', 'go-home');
-    } else if (href.includes('product')) {
-      link.setAttribute('data-agent-action', 'view-products');
-    } else if (href.includes('contact')) {
-      link.setAttribute('data-agent-action', 'get-support');
-    } else {
-      link.setAttribute('data-agent-action', 'navigate');
-    }
-  });
+  document
+    .querySelectorAll('nav a:not([data-agent-action])')
+    .forEach((link) => {
+      const href = link.getAttribute('href');
+
+      if (href === '/') {
+        link.setAttribute('data-agent-action', 'go-home');
+      } else if (href.includes('product')) {
+        link.setAttribute('data-agent-action', 'view-products');
+      } else if (href.includes('contact')) {
+        link.setAttribute('data-agent-action', 'get-support');
+      } else {
+        link.setAttribute('data-agent-action', 'navigate');
+      }
+    });
 }
 
 enhanceAgentAttributes();
@@ -393,6 +430,7 @@ enhanceAgentAttributes();
 ### Problem: Slow Loading for Agents
 
 **Symptoms:**
+
 - High Time to First Byte (TTFB)
 - Agents timing out
 - Poor Core Web Vitals scores
@@ -400,6 +438,7 @@ enhanceAgentAttributes();
 **Common Causes:**
 
 1. **Unnecessary JavaScript Execution**
+
 ```javascript
 // ❌ Wrong - Loading heavy JS for agents
 if (isAgent) {
@@ -409,6 +448,7 @@ if (isAgent) {
 ```
 
 2. **Unoptimized Images and Assets**
+
 ```html
 <!-- ❌ Wrong - Large unoptimized images -->
 <img src="/hero-image-4k.jpg" alt="Hero image" />
@@ -417,11 +457,12 @@ if (isAgent) {
 **Solutions:**
 
 1. **Agent-Specific Optimizations**
+
 ```javascript
 // ✅ Correct - Lightweight version for agents
 if (isAgent) {
   return (
-    <StaticContent 
+    <StaticContent
       title={data.title}
       description={data.description}
       structured={true}
@@ -433,10 +474,11 @@ return <FullInteractiveComponent data={data} />;
 ```
 
 2. **Conditional Asset Loading**
+
 ```html
 <!-- ✅ Correct - Optimized images for agents -->
-<img 
-  src="/hero-image-optimized.jpg" 
+<img
+  src="/hero-image-optimized.jpg"
   alt="Hero image"
   width="800"
   height="400"
@@ -447,6 +489,7 @@ return <FullInteractiveComponent data={data} />;
 ### Problem: Cache Issues for Agents
 
 **Symptoms:**
+
 - Agents receiving stale content
 - Inconsistent responses
 - Cache misses
@@ -454,6 +497,7 @@ return <FullInteractiveComponent data={data} />;
 **Solutions:**
 
 1. **Agent-Aware Caching**
+
 ```javascript
 // Express.js cache configuration
 app.use((req, res, next) => {
@@ -469,6 +513,7 @@ app.use((req, res, next) => {
 ```
 
 2. **Vary Header Implementation**
+
 ```javascript
 // Ensure proper cache variation
 app.use((req, res, next) => {
@@ -484,6 +529,7 @@ app.use((req, res, next) => {
 **Problem: Hydration Mismatches**
 
 **Symptoms:**
+
 - Console warnings about hydration
 - Different content on server vs client
 - Flash of incorrect content
@@ -491,37 +537,31 @@ app.use((req, res, next) => {
 **Solutions:**
 
 1. **Consistent Rendering**
+
 ```javascript
 // ❌ Wrong - Different content on server/client
 function Component() {
   const [isClient, setIsClient] = useState(false);
-  
+
   useEffect(() => {
     setIsClient(true);
   }, []);
-  
-  return (
-    <div>
-      {isClient ? 'Client content' : 'Server content'}
-    </div>
-  );
+
+  return <div>{isClient ? 'Client content' : 'Server content'}</div>;
 }
 
 // ✅ Correct - Consistent rendering
 function Component({ isAgent }) {
   return (
     <div data-agent-detected={isAgent}>
-      {isAgent ? (
-        <StaticContent />
-      ) : (
-        <InteractiveContent />
-      )}
+      {isAgent ? <StaticContent /> : <InteractiveContent />}
     </div>
   );
 }
 ```
 
 2. **Proper SSR Setup**
+
 ```javascript
 // pages/_app.js
 function MyApp({ Component, pageProps, agentInfo }) {
@@ -545,6 +585,7 @@ MyApp.getInitialProps = async (appContext) => {
 **Solutions:**
 
 1. **Agent-Aware Router Configuration**
+
 ```javascript
 // nuxt.config.js
 export default {
@@ -557,7 +598,7 @@ export default {
 export default function ({ req, redirect, route }) {
   const userAgent = process.server ? req.headers['user-agent'] : navigator.userAgent;
   const isAgent = /bot|crawler|spider/i.test(userAgent);
-  
+
   if (isAgent && route.path.includes('?')) {
     // Redirect to clean URLs for agents
     return redirect(route.path.split('?')[0]);
@@ -572,6 +613,7 @@ export default function ({ req, redirect, route }) {
 **Solutions:**
 
 1. **Proper Zone Configuration**
+
 ```typescript
 // main.ts
 import { platformBrowserDynamic } from '@angular/platform-browser-dynamic';
@@ -594,6 +636,7 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 ### Problem: Content Not Being Indexed
 
 **Symptoms:**
+
 - Pages missing from search results
 - Low organic traffic
 - Search console errors
@@ -601,12 +644,14 @@ platformBrowserDynamic().bootstrapModule(AppModule);
 **Diagnostic Steps:**
 
 1. **Test with Search Console**
+
 ```bash
 # Use Google Search Console URL Inspection Tool
 # Check "Live Test" to see how Googlebot renders your page
 ```
 
 2. **Manual Googlebot Simulation**
+
 ```bash
 curl -H "User-Agent: Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)" \
      -H "Accept: text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8" \
@@ -616,6 +661,7 @@ curl -H "User-Agent: Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.
 **Solutions:**
 
 1. **Verify Robots.txt**
+
 ```txt
 # robots.txt
 User-agent: *
@@ -626,21 +672,23 @@ Sitemap: https://your-site.com/sitemap.xml
 ```
 
 2. **Add Structured Data**
+
 ```html
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "WebPage",
-  "name": "Page Title",
-  "description": "Page description",
-  "url": "https://your-site.com/page"
-}
+  {
+    "@context": "https://schema.org",
+    "@type": "WebPage",
+    "name": "Page Title",
+    "description": "Page description",
+    "url": "https://your-site.com/page"
+  }
 </script>
 ```
 
 ### Problem: Duplicate Content Issues
 
 **Symptoms:**
+
 - Multiple URLs serving same content
 - Canonical URL warnings
 - Diluted search rankings
@@ -648,11 +696,13 @@ Sitemap: https://your-site.com/sitemap.xml
 **Solutions:**
 
 1. **Implement Canonical URLs**
+
 ```html
 <link rel="canonical" href="https://your-site.com/canonical-url" />
 ```
 
 2. **Redirect Duplicate URLs**
+
 ```javascript
 // Express.js redirect handling
 app.get(['/products/', '/products/index.html'], (req, res) => {
@@ -665,6 +715,7 @@ app.get(['/products/', '/products/index.html'], (req, res) => {
 ### Problem: WCAG Compliance Failures
 
 **Symptoms:**
+
 - Automated accessibility testing failures
 - Screen reader compatibility issues
 - Keyboard navigation problems
@@ -672,6 +723,7 @@ app.get(['/products/', '/products/index.html'], (req, res) => {
 **Common Issues and Solutions:**
 
 1. **Missing Alt Text**
+
 ```html
 <!-- ❌ Wrong -->
 <img src="/product.jpg" />
@@ -681,6 +733,7 @@ app.get(['/products/', '/products/index.html'], (req, res) => {
 ```
 
 2. **Improper Heading Hierarchy**
+
 ```html
 <!-- ❌ Wrong - Skipped heading level -->
 <h1>Main Title</h1>
@@ -693,6 +746,7 @@ app.get(['/products/', '/products/index.html'], (req, res) => {
 ```
 
 3. **Missing Form Labels**
+
 ```html
 <!-- ❌ Wrong - No label association -->
 <input type="email" placeholder="Email" />
@@ -707,13 +761,20 @@ app.get(['/products/', '/products/index.html'], (req, res) => {
 **Solutions:**
 
 1. **Enhanced ARIA for Agents**
+
 ```html
-<nav role="navigation" aria-label="Main navigation" data-agent-component="navigation">
+<nav
+  role="navigation"
+  aria-label="Main navigation"
+  data-agent-component="navigation"
+>
   <ul role="list">
     <li>
-      <a href="/products" 
-         data-agent-action="view-products"
-         aria-describedby="products-desc">
+      <a
+        href="/products"
+        data-agent-action="view-products"
+        aria-describedby="products-desc"
+      >
         Products
       </a>
       <span id="products-desc" class="sr-only">
@@ -725,10 +786,9 @@ app.get(['/products/', '/products/index.html'], (req, res) => {
 ```
 
 2. **Skip Links for Agents**
+
 ```html
-<a href="#main-content" 
-   class="skip-link" 
-   data-agent-action="skip-to-content">
+<a href="#main-content" class="skip-link" data-agent-action="skip-to-content">
   Skip to main content
 </a>
 ```
@@ -738,6 +798,7 @@ app.get(['/products/', '/products/index.html'], (req, res) => {
 ### Browser DevTools Debugging
 
 1. **Network Tab Analysis**
+
 ```javascript
 // Check for agent-specific responses
 // Look for X-Agent-Detected headers
@@ -745,13 +806,14 @@ app.get(['/products/', '/products/index.html'], (req, res) => {
 ```
 
 2. **Console Debugging**
+
 ```javascript
 // Add to your page for debugging
-window.debugAgentUX = function() {
+window.debugAgentUX = function () {
   const agentComponents = document.querySelectorAll('[data-agent-component]');
   const agentActions = document.querySelectorAll('[data-agent-action]');
   const agentContent = document.querySelectorAll('[data-agent-content]');
-  
+
   console.group('AgentUX Debug Info');
   console.log('Components:', agentComponents.length);
   console.log('Actions:', agentActions.length);
@@ -759,11 +821,11 @@ window.debugAgentUX = function() {
   console.log('User Agent:', navigator.userAgent);
   console.log('Detected as agent:', window.isAgent || false);
   console.groupEnd();
-  
+
   return {
     components: agentComponents,
     actions: agentActions,
-    content: agentContent
+    content: agentContent,
   };
 };
 ```
@@ -771,6 +833,7 @@ window.debugAgentUX = function() {
 ### Command Line Testing
 
 1. **Multi-Agent Testing Script**
+
 ```bash
 #!/bin/bash
 # test-agents.sh
@@ -792,6 +855,7 @@ done
 ```
 
 2. **Performance Testing**
+
 ```bash
 # Test loading speed for agents
 curl -w "@curl-format.txt" -o /dev/null -s \
@@ -802,24 +866,25 @@ curl -w "@curl-format.txt" -o /dev/null -s \
 ### Automated Testing Setup
 
 1. **Playwright Agent Testing**
+
 ```javascript
 // tests/agent-compatibility.spec.js
 const { test, expect } = require('@playwright/test');
 
 const agentUserAgents = {
   googlebot: 'Mozilla/5.0 (compatible; Googlebot/2.1)',
-  curl: 'curl/7.68.0'
+  curl: 'curl/7.68.0',
 };
 
 Object.entries(agentUserAgents).forEach(([name, userAgent]) => {
   test(`${name} compatibility`, async ({ page }) => {
     await page.setUserAgent(userAgent);
     await page.goto('/');
-    
+
     // Verify content is accessible
     const mainContent = await page.textContent('main');
     expect(mainContent.length).toBeGreaterThan(100);
-    
+
     // Verify agent attributes
     const agentComponents = await page.$$('[data-agent-component]');
     expect(agentComponents.length).toBeGreaterThan(0);
@@ -832,6 +897,7 @@ Object.entries(agentUserAgents).forEach(([name, userAgent]) => {
 ### Mistake 1: Over-Engineering Agent Detection
 
 **Problem:**
+
 ```javascript
 // ❌ Too complex - Hard to maintain
 function detectAgent(userAgent) {
@@ -843,20 +909,26 @@ function detectAgent(userAgent) {
 ```
 
 **Solution:**
+
 ```javascript
 // ✅ Simple and effective
 function detectAgent(userAgent) {
   const agentPatterns = [
-    /googlebot/i, /bingbot/i, /facebookexternalhit/i,
-    /bot/i, /crawler/i, /spider/i
+    /googlebot/i,
+    /bingbot/i,
+    /facebookexternalhit/i,
+    /bot/i,
+    /crawler/i,
+    /spider/i,
   ];
-  return agentPatterns.some(pattern => pattern.test(userAgent));
+  return agentPatterns.some((pattern) => pattern.test(userAgent));
 }
 ```
 
 ### Mistake 2: Ignoring Human UX Impact
 
 **Problem:**
+
 ```javascript
 // ❌ Breaks experience for humans
 if (isAgent) {
@@ -866,6 +938,7 @@ if (isAgent) {
 ```
 
 **Solution:**
+
 ```javascript
 // ✅ Maintains quality for both
 if (isAgent) {
@@ -877,24 +950,26 @@ return <FullInteractiveVersion />;
 ### Mistake 3: Inconsistent Implementation
 
 **Problem:**
+
 - Some pages have agent optimization
 - Others don't
 - Mixed attribute naming
 
 **Solution:**
+
 ```javascript
 // Create consistent implementation guidelines
 const AGENT_STANDARDS = {
   components: {
     navigation: 'data-agent-component="navigation"',
     productList: 'data-agent-component="product-list"',
-    form: 'data-agent-component="form"'
+    form: 'data-agent-component="form"',
   },
   actions: {
     navigate: 'data-agent-action="navigate"',
     submit: 'data-agent-action="submit-form"',
-    purchase: 'data-agent-action="add-to-cart"'
-  }
+    purchase: 'data-agent-action="add-to-cart"',
+  },
 };
 ```
 
@@ -903,6 +978,7 @@ const AGENT_STANDARDS = {
 ### Problem: Memory Leaks in Agent Detection
 
 **Symptoms:**
+
 - Increasing memory usage over time
 - Browser slowdown
 - Page crashes
@@ -910,6 +986,7 @@ const AGENT_STANDARDS = {
 **Causes and Solutions:**
 
 1. **Event Listener Cleanup**
+
 ```javascript
 // ❌ Wrong - Memory leak
 function setupAgentDetection() {
@@ -922,9 +999,9 @@ function setupAgentDetection() {
   function handleResize() {
     updateAgentLayout();
   }
-  
+
   window.addEventListener('resize', handleResize);
-  
+
   // Cleanup function
   return () => {
     window.removeEventListener('resize', handleResize);
@@ -933,12 +1010,13 @@ function setupAgentDetection() {
 ```
 
 2. **Observer Cleanup**
+
 ```javascript
 // ✅ Proper MutationObserver cleanup
 function startObserving() {
   const observer = new MutationObserver(handleMutations);
   observer.observe(document.body, { childList: true, subtree: true });
-  
+
   // Return cleanup function
   return () => observer.disconnect();
 }
@@ -949,9 +1027,10 @@ function startObserving() {
 **Solutions:**
 
 1. **Batch DOM Updates**
+
 ```javascript
 // ❌ Wrong - Multiple reflows
-elements.forEach(el => {
+elements.forEach((el) => {
   el.setAttribute('data-agent-component', 'item');
   el.style.display = 'block';
   el.classList.add('agent-optimized');
@@ -959,7 +1038,7 @@ elements.forEach(el => {
 
 // ✅ Correct - Batched updates
 const fragment = document.createDocumentFragment();
-elements.forEach(el => {
+elements.forEach((el) => {
   const clone = el.cloneNode(true);
   clone.setAttribute('data-agent-component', 'item');
   clone.style.display = 'block';
@@ -991,22 +1070,22 @@ function detectAgent() {
 ```html
 <!-- Minimal AgentUX implementation -->
 <html>
-<head>
-  <title>Site Title</title>
-  <meta name="description" content="Site description">
-</head>
-<body>
-  <nav role="navigation">
-    <a href="/">Home</a>
-    <a href="/products">Products</a>
-    <a href="/contact">Contact</a>
-  </nav>
-  
-  <main role="main">
-    <h1>Page Title</h1>
-    <p>Page content accessible without JavaScript</p>
-  </main>
-</body>
+  <head>
+    <title>Site Title</title>
+    <meta name="description" content="Site description" />
+  </head>
+  <body>
+    <nav role="navigation">
+      <a href="/">Home</a>
+      <a href="/products">Products</a>
+      <a href="/contact">Contact</a>
+    </nav>
+
+    <main role="main">
+      <h1>Page Title</h1>
+      <p>Page content accessible without JavaScript</p>
+    </main>
+  </body>
 </html>
 ```
 
@@ -1021,6 +1100,7 @@ function detectAgent() {
 ### Professional Support
 
 For enterprise implementations requiring guaranteed uptime and performance:
+
 - Code review services
 - Implementation consulting
 - Performance optimization

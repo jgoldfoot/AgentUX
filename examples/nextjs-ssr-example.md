@@ -1,6 +1,8 @@
 # Next.js SSR AgentUX Example
 
-This example demonstrates how to implement AgentUX patterns in a Next.js application with Server-Side Rendering to ensure **FR-1: Initial Payload Accessibility** compliance.
+This example demonstrates how to implement AgentUX patterns in a Next.js
+application with Server-Side Rendering to ensure **FR-1: Initial Payload
+Accessibility** compliance.
 
 ## Project Setup
 
@@ -16,28 +18,28 @@ npm install
 ### `/src/app/products/page.tsx`
 
 ```tsx
-import { Metadata } from 'next'
+import { Metadata } from 'next';
 
 // This runs on the server - ensures FR-1 compliance
 async function getProducts() {
   const res = await fetch(`${process.env.API_BASE_URL}/api/products`, {
-    cache: 'no-store' // Always fresh for agents
-  })
-  
+    cache: 'no-store', // Always fresh for agents
+  });
+
   if (!res.ok) {
-    throw new Error('Failed to fetch products')
+    throw new Error('Failed to fetch products');
   }
-  
-  return res.json()
+
+  return res.json();
 }
 
 export const metadata: Metadata = {
   title: 'Products - AgentUX Demo',
-  description: 'Agent-accessible product catalog with semantic structure'
-}
+  description: 'Agent-accessible product catalog with semantic structure',
+};
 
 export default async function ProductsPage() {
-  const products = await getProducts()
+  const products = await getProducts();
 
   return (
     <main role="main" data-agent-context="product-catalog">
@@ -45,16 +47,22 @@ export default async function ProductsPage() {
         <h1>Product Catalog</h1>
         <nav role="navigation" aria-label="Product filters">
           <ul>
-            <li><a href="/products?category=electronics">Electronics</a></li>
-            <li><a href="/products?category=clothing">Clothing</a></li>
-            <li><a href="/products?category=books">Books</a></li>
+            <li>
+              <a href="/products?category=electronics">Electronics</a>
+            </li>
+            <li>
+              <a href="/products?category=clothing">Clothing</a>
+            </li>
+            <li>
+              <a href="/products?category=books">Books</a>
+            </li>
           </ul>
         </nav>
       </header>
 
       <section aria-labelledby="products-heading">
         <h2 id="products-heading">Available Products</h2>
-        
+
         <div className="product-grid" data-agent-group="product-list">
           {products.map((product: any) => (
             <ProductCard key={product.id} product={product} />
@@ -62,31 +70,36 @@ export default async function ProductsPage() {
         </div>
       </section>
     </main>
-  )
+  );
 }
 
 function ProductCard({ product }: { product: any }) {
   return (
-    <article 
-      className="product-card" 
+    <article
+      className="product-card"
       data-agent-intent="product-view"
-      itemScope 
+      itemScope
       itemType="https://schema.org/Product"
     >
       <header>
         <h3 itemProp="name">{product.name}</h3>
-        <p className="price" itemProp="price">${product.price}</p>
+        <p className="price" itemProp="price">
+          ${product.price}
+        </p>
       </header>
-      
+
       <div className="product-details">
         <p itemProp="description">{product.description}</p>
-        <span itemProp="availability" content={product.inStock ? 'InStock' : 'OutOfStock'}>
+        <span
+          itemProp="availability"
+          content={product.inStock ? 'InStock' : 'OutOfStock'}
+        >
           {product.inStock ? 'In Stock' : 'Out of Stock'}
         </span>
       </div>
-      
+
       <footer className="product-actions">
-        <button 
+        <button
           type="button"
           data-agent-action="add-to-cart"
           data-agent-product-id={product.id}
@@ -95,8 +108,8 @@ function ProductCard({ product }: { product: any }) {
         >
           Add to Cart
         </button>
-        
-        <div 
+
+        <div
           id={`product-${product.id}-status`}
           aria-live="polite"
           className="status-message"
@@ -104,26 +117,28 @@ function ProductCard({ product }: { product: any }) {
           {product.inStock ? 'Available' : 'Currently unavailable'}
         </div>
       </footer>
-      
+
       {/* Structured data for agents */}
-      <script 
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Product",
-            "name": product.name,
-            "description": product.description,
-            "offers": {
-              "@type": "Offer",
-              "price": product.price,
-              "availability": product.inStock ? "https://schema.org/InStock" : "https://schema.org/OutOfStock"
-            }
-          })
+            '@context': 'https://schema.org',
+            '@type': 'Product',
+            name: product.name,
+            description: product.description,
+            offers: {
+              '@type': 'Offer',
+              price: product.price,
+              availability: product.inStock
+                ? 'https://schema.org/InStock'
+                : 'https://schema.org/OutOfStock',
+            },
+          }),
         }}
       />
     </article>
-  )
+  );
 }
 ```
 
@@ -132,27 +147,27 @@ function ProductCard({ product }: { product: any }) {
 ### `/src/app/checkout/page.tsx`
 
 ```tsx
-'use client'
+'use client';
 
-import { useState } from 'react'
+import { useState } from 'react';
 
 export default function CheckoutPage() {
-  const [formState, setFormState] = useState('ready')
-  
+  const [formState, setFormState] = useState('ready');
+
   const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setFormState('submitting')
-    
+    e.preventDefault();
+    setFormState('submitting');
+
     // Form submission logic here
-    
-    setFormState('success')
-  }
+
+    setFormState('success');
+  };
 
   return (
     <main role="main" data-agent-context="checkout-flow">
       <h1>Checkout</h1>
-      
-      <form 
+
+      <form
         onSubmit={handleSubmit}
         data-agent-intent="order-completion"
         data-agent-state={formState}
@@ -161,7 +176,7 @@ export default function CheckoutPage() {
         {/* Shipping Information */}
         <fieldset data-agent-group="shipping-info">
           <legend>Shipping Information</legend>
-          
+
           <div className="form-group">
             <label htmlFor="shipping-name">Full Name *</label>
             <input
@@ -172,13 +187,13 @@ export default function CheckoutPage() {
               aria-describedby="shipping-name-error"
               autoComplete="shipping name"
             />
-            <div 
-              id="shipping-name-error" 
-              className="error-message" 
+            <div
+              id="shipping-name-error"
+              className="error-message"
               aria-live="polite"
             />
           </div>
-          
+
           <div className="form-group">
             <label htmlFor="shipping-address">Street Address *</label>
             <input
@@ -189,9 +204,9 @@ export default function CheckoutPage() {
               aria-describedby="shipping-address-error"
               autoComplete="shipping street-address"
             />
-            <div 
-              id="shipping-address-error" 
-              className="error-message" 
+            <div
+              id="shipping-address-error"
+              className="error-message"
               aria-live="polite"
             />
           </div>
@@ -200,7 +215,7 @@ export default function CheckoutPage() {
         {/* Payment Information */}
         <fieldset data-agent-group="payment-info">
           <legend>Payment Information</legend>
-          
+
           <div className="form-group">
             <label htmlFor="card-number">Card Number *</label>
             <input
@@ -214,9 +229,9 @@ export default function CheckoutPage() {
             <div id="card-number-help" className="help-text">
               16-digit card number
             </div>
-            <div 
-              id="card-number-error" 
-              className="error-message" 
+            <div
+              id="card-number-error"
+              className="error-message"
               aria-live="polite"
             />
           </div>
@@ -224,7 +239,7 @@ export default function CheckoutPage() {
 
         {/* Submit Actions */}
         <div className="form-actions" data-agent-group="checkout-actions">
-          <button 
+          <button
             type="submit"
             data-agent-action="complete-order"
             data-agent-state={formState}
@@ -233,10 +248,10 @@ export default function CheckoutPage() {
           >
             {formState === 'submitting' ? 'Processing...' : 'Complete Order'}
           </button>
-          
-          <div 
-            id="checkout-status" 
-            className="status-message" 
+
+          <div
+            id="checkout-status"
+            className="status-message"
             aria-live="polite"
           >
             {formState === 'ready' && 'Ready to place order'}
@@ -246,7 +261,7 @@ export default function CheckoutPage() {
         </div>
       </form>
     </main>
-  )
+  );
 }
 ```
 
@@ -255,61 +270,62 @@ export default function CheckoutPage() {
 ### `/src/app/api/products/route.ts`
 
 ```tsx
-import { NextRequest, NextResponse } from 'next/server'
+import { NextRequest, NextResponse } from 'next/server';
 
 export async function GET(request: NextRequest) {
-  const { searchParams } = new URL(request.url)
-  const category = searchParams.get('category')
-  
+  const { searchParams } = new URL(request.url);
+  const category = searchParams.get('category');
+
   // Mock data - replace with real database
   const products = [
     {
       id: 1,
-      name: "Wireless Headphones",
+      name: 'Wireless Headphones',
       price: 99.99,
-      description: "High-quality wireless headphones",
-      category: "electronics",
-      inStock: true
+      description: 'High-quality wireless headphones',
+      category: 'electronics',
+      inStock: true,
     },
     {
       id: 2,
-      name: "Cotton T-Shirt",
+      name: 'Cotton T-Shirt',
       price: 24.99,
-      description: "Comfortable cotton t-shirt",
-      category: "clothing",
-      inStock: false
-    }
-  ]
-  
-  const filteredProducts = category 
-    ? products.filter(p => p.category === category)
-    : products
-  
+      description: 'Comfortable cotton t-shirt',
+      category: 'clothing',
+      inStock: false,
+    },
+  ];
+
+  const filteredProducts = category
+    ? products.filter((p) => p.category === category)
+    : products;
+
   // Agent-friendly response headers
   const response = NextResponse.json({
     products: filteredProducts,
     total: filteredProducts.length,
     agentUX: {
-      version: "2.1",
-      capabilities: ["product-search", "add-to-cart", "checkout"],
+      version: '2.1',
+      capabilities: ['product-search', 'add-to-cart', 'checkout'],
       endpoints: {
-        "add-to-cart": "/api/cart/add",
-        "checkout": "/api/checkout"
-      }
-    }
-  })
-  
+        'add-to-cart': '/api/cart/add',
+        checkout: '/api/checkout',
+      },
+    },
+  });
+
   // CORS for agent access
-  response.headers.set('Access-Control-Allow-Origin', '*')
-  response.headers.set('X-AgentUX-Compatible', 'true')
-  
-  return response
+  response.headers.set('Access-Control-Allow-Origin', '*');
+  response.headers.set('X-AgentUX-Compatible', 'true');
+
+  return response;
 }
 ```
 
 ## Testing FR-1 Compliance
 
 ### Verify Server-Side Rendering
+
 ```bash
 # Test that content is visible to agents
 curl -s http://localhost:3000/products | grep "Wireless Headphones"
@@ -318,16 +334,18 @@ curl -s http://localhost:3000/products | grep "Wireless Headphones"
 ```
 
 ### Disable JavaScript Test
+
 1. Open Chrome DevTools
-2. Settings → Preferences → Debugger → "Disable JavaScript"  
+2. Settings → Preferences → Debugger → "Disable JavaScript"
 3. Navigate to your site
 4. Verify core functionality still works
 
 ## Key AgentUX Features Demonstrated
 
-✅ **FR-1 Compliance**: Server-side rendering ensures content in initial payload  
+✅ **FR-1 Compliance**: Server-side rendering ensures content in initial
+payload  
 ✅ **Semantic HTML**: Proper landmarks, headings, form structure  
-✅ **Agent Attributes**: data-agent-* attributes for automation  
+✅ **Agent Attributes**: data-agent-\* attributes for automation  
 ✅ **Structured Data**: JSON-LD for enhanced agent understanding  
 ✅ **Stable Selectors**: Consistent IDs and classes  
 ✅ **State Management**: aria-live regions and data-agent-state  
@@ -358,4 +376,5 @@ curl -H "User-Agent: AgentUX-Test/1.0" http://localhost:3000/products
 curl http://localhost:3000/api/products?category=electronics
 ```
 
-This example provides a complete foundation for building agent-accessible Next.js applications while maintaining excellent human user experience.
+This example provides a complete foundation for building agent-accessible
+Next.js applications while maintaining excellent human user experience.

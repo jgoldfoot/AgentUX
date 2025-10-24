@@ -1,0 +1,90 @@
+name: PR Checks
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+jobs:
+  pr-title:
+    name: Validate PR Title
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check PR title format
+      uses: amannn/action-semantic-pull-request@v5
+      continue-on-error: true
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      with:
+        types: |
+          feat
+          fix
+          docs
+          style
+          refactor
+          perf
+          test
+          build
+          ci
+          chore
+          revert
+        requireScope: false
+
+  pr-size:
+    name: Check PR Size
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+      with:
+        fetch-depth: 0
+
+    - name: Check PR size
+      run: |
+        changed_files=$(git diff --name-only origin/${{ github.base_ref }}...HEAD | wc -l)
+        echo "Changed files: $changed_files"
+
+        if [ $changed_files -gt 50 ]; then
+          echo "⚠️ This PR changes $changed_files files. Consider breaking it into smaller PRs."
+          echo "Large PRs are harder to review and more likely to introduce bugs."
+        else
+          echo "✅ PR size is reasonable"
+        fi
+
+  checklist:
+    name: Verify PR Checklist
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Check if PR body exists
+      run: |
+        pr_body="${{ github.event.pull_request.body }}"
+        if [ -z "$pr_body" ]; then
+          echo "❌ PR description is empty. Please fill out the PR template."
+          exit 1
+        else
+          echo "✅ PR has a description"
+        fi
+
+  labels:
+    name: Assign Labels
+    runs-on: ubuntu-latest
+    permissions:
+      pull-requests: write
+      contents: read
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v4
+
+    - name: Auto-label PR
+      uses: actions/labeler@v5
+      continue-on-error: true
+      with:
+        repo-token: ${{ secrets.GITHUB_TOKEN }}
+        configuration-path: .github/labeler.yml
+        sync-labels: true

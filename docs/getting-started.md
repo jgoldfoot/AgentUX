@@ -2,11 +2,14 @@
 
 ## Quick Start Checklist
 
-Before implementing AgentUX patterns, ensure your application meets **FR-1: Initial Payload Accessibility** - the foundational requirement that content exists in the server response.
+Before implementing AgentUX patterns, ensure your application meets **FR-1:
+Initial Payload Accessibility** - the foundational requirement that content
+exists in the server response.
 
 ### ✅ Step 1: Check Your Rendering Strategy
 
-**Test this first:** View source (Ctrl+U) on your live site. Can you see your content in the HTML?
+**Test this first:** View source (Ctrl+U) on your live site. Can you see your
+content in the HTML?
 
 - **✅ SSR/SSG**: Content visible in source → Agent accessible
 - **❌ CSR only**: Empty divs in source → Agents can't see content
@@ -36,14 +39,16 @@ Before implementing AgentUX patterns, ensure your application meets **FR-1: Init
 <form data-agent-intent="user-registration">
   <fieldset data-agent-group="personal-info">
     <legend>Personal Information</legend>
-    
+
     <label for="email">Email Address</label>
-    <input id="email" 
-           type="email" 
-           data-agent-field="user.email"
-           aria-required="true">
+    <input
+      id="email"
+      type="email"
+      data-agent-field="user.email"
+      aria-required="true"
+    />
   </fieldset>
-  
+
   <button type="submit" data-agent-action="submit-registration">
     Create Account
   </button>
@@ -53,18 +58,21 @@ Before implementing AgentUX patterns, ensure your application meets **FR-1: Init
 ## Framework-Specific Implementation
 
 ### Next.js (Recommended)
+
 ```bash
 # Ensure SSR/SSG for agent accessibility
 npm create next-app@latest --typescript --app
 ```
 
 ### Nuxt (Vue)
+
 ```bash
 # Built-in SSR
 npx nuxi@latest init my-agentux-app
 ```
 
 ### Astro (Best for content sites)
+
 ```bash
 # Static generation by default
 npm create astro@latest
@@ -73,6 +81,7 @@ npm create astro@latest
 ## Testing Agent Accessibility
 
 ### Quick Test: cURL Method
+
 ```bash
 # Test if agents can see your content
 curl -s https://yoursite.com | grep "main content"
@@ -81,6 +90,7 @@ curl -s https://yoursite.com | grep "main content"
 ```
 
 ### Browser Test
+
 1. Disable JavaScript in your browser
 2. Navigate to your site
 3. Can you still see and use the core functionality?
@@ -94,7 +104,8 @@ curl -s https://yoursite.com | grep "main content"
 
 ## Next Steps
 
-1. **Validate compliance**: Use our [compliance checklist](./compliance-checklist.md)
+1. **Validate compliance**: Use our
+   [compliance checklist](./compliance-checklist.md)
 2. **Add structured data**: Implement JSON-LD for better agent understanding
 3. **Test with real agents**: Set up automated testing
 

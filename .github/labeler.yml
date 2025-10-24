@@ -1,0 +1,35 @@
+# Automatically label PRs based on file changes
+
+documentation:
+  - '**/*.md'
+  - 'docs/**/*'
+
+examples:
+  - 'examples/**/*'
+
+tools:
+  - 'tools/**/*'
+
+validation:
+  - 'tools/validators/**/*'
+  - 'accessibility/**/*'
+
+tests:
+  - '__tests__/**/*'
+  - '**/*.test.js'
+  - '**/*.spec.js'
+  - 'jest.config.js'
+
+ci-cd:
+  - '.github/**/*'
+
+dependencies:
+  - 'package.json'
+  - 'package-lock.json'
+
+config:
+  - '.eslintrc*'
+  - '.prettierrc*'
+  - '.editorconfig'
+  - '.nvmrc'
+  - 'jest.config.js'

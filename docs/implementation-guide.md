@@ -1,6 +1,7 @@
 # AgentUX Implementation Guide
 
-A comprehensive guide for implementing AgentUX patterns in your web applications to optimize for both human users and AI agents.
+A comprehensive guide for implementing AgentUX patterns in your web applications
+to optimize for both human users and AI agents.
 
 ## Table of Contents
 
@@ -20,7 +21,8 @@ A comprehensive guide for implementing AgentUX patterns in your web applications
 Before implementing AgentUX, ensure your project meets these requirements:
 
 - **Development Environment**: Node.js 16+, modern build tools
-- **Framework Knowledge**: Understanding of your chosen framework (React, Vue, etc.)
+- **Framework Knowledge**: Understanding of your chosen framework (React, Vue,
+  etc.)
 - **Accessibility Basics**: Familiarity with semantic HTML and ARIA
 - **Performance Awareness**: Basic understanding of web performance metrics
 
@@ -38,6 +40,7 @@ curl -H "User-Agent: GoogleBot/2.1" https://your-app.com/  # Test agent experien
 ```
 
 **Assessment Questions:**
+
 - [ ] Does your app serve meaningful content without JavaScript?
 - [ ] Are forms accessible with semantic markup?
 - [ ] Do you use proper HTML5 landmarks?
@@ -50,29 +53,30 @@ Choose your implementation strategy based on your current architecture:
 
 ### Option 1: Server-Side Rendering (SSR) ⭐ **Recommended**
 
-**Best for:** New projects, SEO-critical applications, maximum agent compatibility
+**Best for:** New projects, SEO-critical applications, maximum agent
+compatibility
 
 **Frameworks:**
+
 - **Next.js (React)**: Industry standard with excellent SSR support
 - **Nuxt.js (Vue)**: Vue ecosystem with built-in SSR
 - **SvelteKit**: Emerging option with great performance
 - **Remix**: React framework focused on web standards
 
-**Implementation Effort:** Medium
-**Agent Compatibility:** Excellent (95%+)
+**Implementation Effort:** Medium **Agent Compatibility:** Excellent (95%+)
 **Human UX:** Excellent
 
 ```javascript
 // Example: Next.js with AgentUX
 export async function getServerSideProps(context) {
   const isAgent = detectAgent(context.req.headers['user-agent']);
-  
+
   return {
     props: {
       isAgent,
       data: await fetchData(),
-      agentOptimized: isAgent
-    }
+      agentOptimized: isAgent,
+    },
   };
 }
 ```
@@ -82,14 +86,14 @@ export async function getServerSideProps(context) {
 **Best for:** Content sites, blogs, marketing pages, documentation
 
 **Frameworks:**
+
 - **Astro**: Modern static site generator with component islands
 - **Next.js SSG**: Static generation with React
 - **Nuxt Generate**: Vue-based static generation
 - **Gatsby**: React-based with GraphQL layer
 
-**Implementation Effort:** Low
-**Agent Compatibility:** Excellent (98%+)
-**Human UX:** Excellent
+**Implementation Effort:** Low **Agent Compatibility:** Excellent (98%+) **Human
+UX:** Excellent
 
 ```javascript
 // Example: Astro with AgentUX
@@ -106,9 +110,8 @@ const products = await fetchProducts();
 
 **Best for:** Existing SPAs where SSR isn't feasible
 
-**Implementation Effort:** High
-**Agent Compatibility:** Good (75-85%)
-**Human UX:** Excellent
+**Implementation Effort:** High **Agent Compatibility:** Good (75-85%) **Human
+UX:** Excellent
 
 ```javascript
 // Requires comprehensive fallback strategy
@@ -125,8 +128,7 @@ const products = await fetchProducts();
 
 **Best for:** Complex applications needing both SPA and agent support
 
-**Implementation Effort:** High
-**Agent Compatibility:** Excellent (90%+)
+**Implementation Effort:** High **Agent Compatibility:** Excellent (90%+)
 **Human UX:** Excellent
 
 ```javascript
@@ -158,13 +160,18 @@ curl -s https://your-app.com/ | grep -E '<(nav|main|h1|form)'
 #### Step 1.2: Audit Current Rendering Strategy
 
 **Client-Side Rendering Check:**
+
 ```javascript
 // Add to your app temporarily
-console.log('Content available:', document.querySelector('main')?.textContent?.length > 100);
+console.log(
+  'Content available:',
+  document.querySelector('main')?.textContent?.length > 100
+);
 // If false when JS is disabled, you need SSR/SSG
 ```
 
 **Performance Audit:**
+
 ```bash
 npm install -g lighthouse
 lighthouse https://your-app.com/ --only-categories=performance,accessibility
@@ -173,6 +180,7 @@ lighthouse https://your-app.com/ --only-categories=performance,accessibility
 #### Step 1.3: Identify CSR-Only Components
 
 Document components that require JavaScript:
+
 - Interactive widgets
 - Real-time data updates
 - Complex form validations
@@ -213,12 +221,12 @@ Document components that require JavaScript:
 <!-- Form accessibility -->
 <form role="form" aria-labelledby="contact-heading">
   <h2 id="contact-heading">Contact Information</h2>
-  
+
   <fieldset>
     <legend>Personal Details</legend>
-    
+
     <label for="name">Full Name *</label>
-    <input id="name" required aria-describedby="name-help">
+    <input id="name" required aria-describedby="name-help" />
     <small id="name-help">Your legal name for our records</small>
   </fieldset>
 </form>
@@ -233,7 +241,7 @@ Document components that require JavaScript:
     <legend>Contact Information</legend>
     <!-- Contact fields -->
   </fieldset>
-  
+
   <fieldset data-agent-section="inquiry-details">
     <legend>Inquiry Details</legend>
     <!-- Inquiry fields -->
@@ -247,7 +255,7 @@ Document components that require JavaScript:
 
 **Goal:** Add agent-specific enhancements
 
-#### Step 3.1: Add data-agent-* Attributes
+#### Step 3.1: Add data-agent-\* Attributes
 
 ```html
 <!-- Navigation with agent guidance -->
@@ -261,7 +269,7 @@ Document components that require JavaScript:
 <main data-agent-component="product-catalog">
   <h1 data-agent-content="page-title">Product Catalog</h1>
   <p data-agent-content="page-description">Browse our products...</p>
-  
+
   <div data-agent-component="product-list" data-agent-count="12">
     <!-- Product items -->
   </div>
@@ -276,21 +284,19 @@ const AgentContext = createContext();
 
 export const AgentProvider = ({ children }) => {
   const [agentInfo, setAgentInfo] = useState(null);
-  
+
   useEffect(() => {
     const detected = detectAgent();
     setAgentInfo(detected);
-    
+
     if (detected.isAgent) {
       document.documentElement.setAttribute('data-agent-context', 'detected');
       enhanceForAgents(detected);
     }
   }, []);
-  
+
   return (
-    <AgentContext.Provider value={agentInfo}>
-      {children}
-    </AgentContext.Provider>
+    <AgentContext.Provider value={agentInfo}>{children}</AgentContext.Provider>
   );
 };
 ```
@@ -300,18 +306,18 @@ export const AgentProvider = ({ children }) => {
 ```html
 <!-- Product page structured data -->
 <script type="application/ld+json">
-{
-  "@context": "https://schema.org",
-  "@type": "Product",
-  "name": "Product Name",
-  "description": "Product description",
-  "offers": {
-    "@type": "Offer",
-    "price": "29.99",
-    "priceCurrency": "USD",
-    "availability": "https://schema.org/InStock"
+  {
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "name": "Product Name",
+    "description": "Product description",
+    "offers": {
+      "@type": "Offer",
+      "price": "29.99",
+      "priceCurrency": "USD",
+      "availability": "https://schema.org/InStock"
+    }
   }
-}
 </script>
 ```
 
@@ -330,18 +336,18 @@ describe('AgentUX Compatibility', () => {
     'GoogleBot/2.1',
     'curl/7.68.0',
     'Mozilla/5.0 (compatible; bingbot/2.0)',
-    'HeadlessChrome/91.0.4472.124'
+    'HeadlessChrome/91.0.4472.124',
   ];
-  
-  agentUserAgents.forEach(userAgent => {
+
+  agentUserAgents.forEach((userAgent) => {
     test(`Works with ${userAgent}`, async () => {
       await page.setUserAgent(userAgent);
       await page.goto('http://localhost:3000');
-      
+
       // Verify content accessibility
       const content = await page.textContent('main');
       expect(content.length).toBeGreaterThan(100);
-      
+
       // Check agent attributes
       const agentComponents = await page.$$('[data-agent-component]');
       expect(agentComponents.length).toBeGreaterThan(0);
@@ -370,20 +376,20 @@ npx @agentux/validator https://your-app.com/
 // Performance monitoring for agents
 const performanceTest = async (userAgent) => {
   const startTime = Date.now();
-  
+
   const response = await fetch('https://your-app.com/', {
-    headers: { 'User-Agent': userAgent }
+    headers: { 'User-Agent': userAgent },
   });
-  
+
   const contentLoadTime = Date.now() - startTime;
   const html = await response.text();
-  
+
   return {
     userAgent,
     loadTime: contentLoadTime,
     hasContent: html.includes('<main'),
     contentLength: html.length,
-    agentOptimized: html.includes('data-agent-')
+    agentOptimized: html.includes('data-agent-'),
   };
 };
 ```
@@ -400,12 +406,14 @@ Start with accessible HTML, enhance with JavaScript:
 // Base HTML (works for agents)
 <button data-agent-action="add-to-cart" data-product-id="123">
   Add to Cart
-</button>
+</button>;
 
 // Progressive enhancement (for humans)
 useEffect(() => {
-  const buttons = document.querySelectorAll('[data-agent-action="add-to-cart"]');
-  buttons.forEach(button => {
+  const buttons = document.querySelectorAll(
+    '[data-agent-action="add-to-cart"]'
+  );
+  buttons.forEach((button) => {
     button.addEventListener('click', handleAddToCart);
   });
 }, []);
@@ -419,16 +427,12 @@ Render different content based on agent detection:
 const ProductPage = ({ isAgent, product }) => {
   if (isAgent) {
     return (
-      <StaticProductView 
-        product={product}
-        structured={true}
-        enhanced={true}
-      />
+      <StaticProductView product={product} structured={true} enhanced={true} />
     );
   }
-  
+
   return (
-    <InteractiveProductView 
+    <InteractiveProductView
       product={product}
       animations={true}
       dynamic={true}
@@ -443,17 +447,15 @@ Enhance existing components with agent support:
 
 ```javascript
 const Button = ({ children, onClick, agentAction, ...props }) => {
-  const agentProps = agentAction ? {
-    'data-agent-action': agentAction,
-    'data-agent-component': 'button'
-  } : {};
-  
+  const agentProps = agentAction
+    ? {
+        'data-agent-action': agentAction,
+        'data-agent-component': 'button',
+      }
+    : {};
+
   return (
-    <button 
-      onClick={onClick}
-      {...agentProps}
-      {...props}
-    >
+    <button onClick={onClick} {...agentProps} {...props}>
       {children}
     </button>
   );
@@ -462,7 +464,7 @@ const Button = ({ children, onClick, agentAction, ...props }) => {
 // Usage
 <Button agentAction="submit-form" onClick={handleSubmit}>
   Submit
-</Button>
+</Button>;
 ```
 
 ### Pattern 4: Agent-Aware Routing
@@ -476,7 +478,7 @@ const AppRouter = ({ isAgent }) => {
     // Use traditional page-based routing for agents
     return <StaticRouter context={staticContext} />;
   }
-  
+
   // Use client-side routing for humans
   return (
     <BrowserRouter>
@@ -500,16 +502,16 @@ const ContactForm = ({ isAgent }) => {
     <form data-agent-component="contact-form" method="POST" action="/contact">
       <fieldset>
         <legend>Contact Information</legend>
-        
-        <FormField 
+
+        <FormField
           label="Name"
           name="name"
           required
           agentField="customer-name"
           validation={!isAgent ? 'real-time' : 'server-side'}
         />
-        
-        <FormField 
+
+        <FormField
           label="Email"
           name="email"
           type="email"
@@ -517,11 +519,8 @@ const ContactForm = ({ isAgent }) => {
           agentField="customer-email"
         />
       </fieldset>
-      
-      <button 
-        type="submit"
-        data-agent-action="submit-contact-form"
-      >
+
+      <button type="submit" data-agent-action="submit-contact-form">
         Send Message
       </button>
     </form>
@@ -539,33 +538,35 @@ module.exports = {
   projects: [
     {
       name: 'human-users',
-      use: { ...devices['Desktop Chrome'] }
+      use: { ...devices['Desktop Chrome'] },
     },
     {
       name: 'search-bots',
-      use: { 
-        userAgent: 'GoogleBot/2.1 (+http://www.google.com/bot.html)'
-      }
+      use: {
+        userAgent: 'GoogleBot/2.1 (+http://www.google.com/bot.html)',
+      },
     },
     {
       name: 'automation-tools',
-      use: { 
-        userAgent: 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 HeadlessChrome/91.0.4472.124'
-      }
+      use: {
+        userAgent:
+          'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 HeadlessChrome/91.0.4472.124',
+      },
     },
     {
       name: 'cli-agents',
-      use: { 
-        userAgent: 'curl/7.68.0'
-      }
-    }
-  ]
+      use: {
+        userAgent: 'curl/7.68.0',
+      },
+    },
+  ],
 };
 ```
 
 ### Testing Checklist
 
 **Functional Tests:**
+
 - [ ] Content loads without JavaScript
 - [ ] Forms submit successfully
 - [ ] Navigation works with keyboard only
@@ -573,6 +574,7 @@ module.exports = {
 - [ ] Loading states have proper ARIA labels
 
 **Agent-Specific Tests:**
+
 - [ ] Agent attributes are present
 - [ ] Structured data validates
 - [ ] Agent actions are clear and actionable
@@ -580,6 +582,7 @@ module.exports = {
 - [ ] Performance meets agent requirements
 
 **Cross-Browser Tests:**
+
 - [ ] Works in Chrome (most automation tools)
 - [ ] Works with JavaScript disabled
 - [ ] Works with screen readers
@@ -608,16 +611,19 @@ npx @agentux/validator http://localhost:3000
 ### Core Web Vitals for Agents
 
 **First Contentful Paint (FCP):** < 1.0s
+
 - Pre-render critical content
 - Inline critical CSS
 - Minimize initial JavaScript
 
 **Largest Contentful Paint (LCP):** < 1.5s
+
 - Optimize images with proper sizing
 - Use CDN for static assets
 - Implement proper caching strategies
 
 **Cumulative Layout Shift (CLS):** < 0.1
+
 - Reserve space for dynamic content
 - Avoid late-loading fonts
 - Use CSS transforms over layout changes
@@ -649,13 +655,13 @@ location / {
   gzip on;
   gzip_vary on;
   gzip_types text/html text/css application/javascript application/json;
-  
+
   # Cache static content aggressively
   location ~* \.(css|js|png|jpg|jpeg|gif|svg|woff2)$ {
     expires 1y;
     add_header Cache-Control "public, immutable";
   }
-  
+
   # Agent-specific caching
   if ($http_user_agent ~* "bot|crawler|spider") {
     add_header Cache-Control "public, max-age=3600";
@@ -667,26 +673,24 @@ location / {
 
 ### Strategy 1: Single Deployment with Agent Detection
 
-**Pros:** Simple deployment, single codebase
-**Cons:** Server-side complexity
+**Pros:** Simple deployment, single codebase **Cons:** Server-side complexity
 
 ```javascript
 // Express.js with agent routing
 app.get('*', (req, res) => {
   const isAgent = detectAgent(req.headers['user-agent']);
-  
+
   if (isAgent) {
     return res.render('agent-optimized', { data: serverData });
   }
-  
+
   return res.sendFile(path.join(__dirname, 'build/index.html'));
 });
 ```
 
 ### Strategy 2: Separate Builds
 
-**Pros:** Optimal performance for each audience
-**Cons:** Deployment complexity
+**Pros:** Optimal performance for each audience **Cons:** Deployment complexity
 
 ```bash
 # Build for agents (SSR/SSG)
@@ -702,23 +706,23 @@ npm run build:spa
 
 ### Strategy 3: Edge Computing
 
-**Pros:** Lowest latency, global distribution
-**Cons:** Platform-specific implementation
+**Pros:** Lowest latency, global distribution **Cons:** Platform-specific
+implementation
 
 ```javascript
 // Cloudflare Workers example
-addEventListener('fetch', event => {
+addEventListener('fetch', (event) => {
   event.respondWith(handleRequest(event.request));
 });
 
 async function handleRequest(request) {
   const userAgent = request.headers.get('User-Agent');
   const isAgent = /bot|crawler|spider/i.test(userAgent);
-  
+
   if (isAgent) {
     return fetch(`${AGENT_ORIGIN}${url.pathname}`);
   }
-  
+
   return fetch(`${SPA_ORIGIN}${url.pathname}`);
 }
 ```
@@ -765,8 +769,8 @@ const trackAgentInteraction = (action, metadata) => {
         action,
         metadata,
         timestamp: Date.now(),
-        url: window.location.href
-      })
+        url: window.location.href,
+      }),
     });
   }
 };
@@ -775,13 +779,10 @@ const trackAgentInteraction = (action, metadata) => {
 document.addEventListener('click', (event) => {
   const target = event.target.closest('[data-agent-action]');
   if (target) {
-    trackAgentInteraction(
-      target.getAttribute('data-agent-action'),
-      {
-        component: target.getAttribute('data-agent-component'),
-        text: target.textContent.trim()
-      }
-    );
+    trackAgentInteraction(target.getAttribute('data-agent-action'), {
+      component: target.getAttribute('data-agent-component'),
+      text: target.textContent.trim(),
+    });
   }
 });
 ```
@@ -789,6 +790,7 @@ document.addEventListener('click', (event) => {
 ### Key Metrics to Monitor
 
 **Agent Success Metrics:**
+
 - Agent detection accuracy (% correctly identified)
 - Content accessibility rate (% agents seeing content)
 - Interaction success rate (% completing intended actions)
@@ -796,6 +798,7 @@ document.addEventListener('click', (event) => {
 - Performance metrics (load time, content ready time)
 
 **Business Impact Metrics:**
+
 - Conversion rates by user type (human vs agent)
 - SEO performance improvements
 - Accessibility compliance scores
@@ -810,59 +813,65 @@ const agentMetrics = {
   detection: {
     total_visits: 10000,
     agents_detected: 2500,
-    accuracy_rate: 0.95
+    accuracy_rate: 0.95,
   },
   performance: {
     avg_load_time_agents: 850,
     avg_load_time_humans: 1200,
-    content_accessibility: 0.98
+    content_accessibility: 0.98,
   },
   interactions: {
     successful_form_submissions: 0.78,
     navigation_success_rate: 0.92,
-    error_rate: 0.05
+    error_rate: 0.05,
   },
   business_impact: {
     seo_score_improvement: 0.25,
     conversion_rate_agents: 0.15,
-    support_ticket_reduction: 0.30
-  }
+    support_ticket_reduction: 0.3,
+  },
 };
 ```
 
 ## Implementation Checklist
 
 ### Pre-Implementation
+
 - [ ] Framework selection completed
 - [ ] Team training on AgentUX principles
 - [ ] Development environment setup
 - [ ] Testing strategy defined
 
 ### Phase 1: Foundation
+
 - [ ] FR-1 compliance tested
 - [ ] Current rendering strategy audited
 - [ ] CSR-only components identified
 - [ ] Performance baseline established
 
 ### Phase 2: Semantic Structure
+
 - [ ] HTML5 landmarks added
 - [ ] ARIA roles and labels implemented
 - [ ] Forms structured with fieldsets
 - [ ] Accessibility audit completed
 
 ### Phase 3: Agent Optimization
-- [ ] data-agent-* attributes added
+
+- [ ] data-agent-\* attributes added
 - [ ] Agent detection implemented
 - [ ] Structured data integrated
 - [ ] State management updated
 
 ### Phase 4: Testing & Validation
+
 - [ ] Automated tests written
 - [ ] Cross-agent testing completed
 - [ ] Performance optimization done
 - [ ] Compliance audit passed
 
 ### Deployment
+
 - [ ] Production environment configured
 - [ ] Monitoring and analytics setup
 - [ ] Documentation updated
@@ -879,7 +888,10 @@ After completing this implementation guide:
 
 ## Support and Resources
 
-- **Documentation**: [AgentUX Framework Documentation](https://github.com/jgoldfoot/AgentUX/docs)
-- **Examples**: [Complete Implementation Examples](https://github.com/jgoldfoot/AgentUX/examples)
+- **Documentation**:
+  [AgentUX Framework Documentation](https://github.com/jgoldfoot/AgentUX/docs)
+- **Examples**:
+  [Complete Implementation Examples](https://github.com/jgoldfoot/AgentUX/examples)
 - **Issues**: [GitHub Issues](https://github.com/jgoldfoot/AgentUX/issues)
-- **Discussions**: [Community Forum](https://github.com/jgoldfoot/AgentUX/discussions)
+- **Discussions**:
+  [Community Forum](https://github.com/jgoldfoot/AgentUX/discussions)

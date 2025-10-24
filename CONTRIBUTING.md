@@ -1,6 +1,9 @@
 # Contributing to AgentUX
 
-Thank you for your interest in contributing to AgentUX! This framework aims to make the web more accessible to both humans and AI agents, and we welcome contributions from developers, designers, researchers, and accessibility experts.
+Thank you for your interest in contributing to AgentUX! This framework aims to
+make the web more accessible to both humans and AI agents, and we welcome
+contributions from developers, designers, researchers, and accessibility
+experts.
 
 ## Table of Contents
 
@@ -15,7 +18,9 @@ Thank you for your interest in contributing to AgentUX! This framework aims to m
 
 ## Code of Conduct
 
-This project adheres to our [Code of Conduct](CODE_OF_CONDUCT.md). By participating, you are expected to uphold this code. Please report unacceptable behavior to [joel@goldfoot.com](mailto:joel@goldfoot.com).
+This project adheres to our [Code of Conduct](CODE_OF_CONDUCT.md). By
+participating, you are expected to uphold this code. Please report unacceptable
+behavior to [joel@goldfoot.com](mailto:joel@goldfoot.com).
 
 ## Getting Started
 
@@ -53,34 +58,40 @@ This project adheres to our [Code of Conduct](CODE_OF_CONDUCT.md). By participat
 We welcome many types of contributions:
 
 ### 🐛 **Bug Reports**
+
 - Found issues with validation tools
 - Incorrect documentation or examples
 - Broken links or formatting
 
 ### 💡 **Feature Requests**
+
 - New validation checks for FR1 or compliance
 - Additional implementation examples
 - Framework integrations (webpack plugins, etc.)
 
 ### 📝 **Documentation**
+
 - Improve existing documentation
 - Add new implementation guides
 - Create tutorials or blog posts
 - Fix typos and clarity issues
 
 ### 🔧 **Code Contributions**
+
 - Bug fixes for validation tools
 - New features for FR1 checker
 - Additional compliance checks
 - Performance improvements
 
 ### 🧪 **Research & Testing**
+
 - Test AgentUX on real websites
 - Validate framework claims with data
 - Contribute case studies
 - User experience research
 
 ### 🌐 **Examples & Integrations**
+
 - Framework-specific examples (Svelte, Angular, etc.)
 - CMS integrations (WordPress, Drupal)
 - Build tool plugins
@@ -97,6 +108,7 @@ We welcome many types of contributions:
 ### Making Changes
 
 1. **Create a feature branch**:
+
    ```bash
    git checkout -b feature/your-feature-name
    ```
@@ -108,24 +120,26 @@ We welcome many types of contributions:
    - Update documentation as needed
 
 3. **Test your changes**:
+
    ```bash
    # Run validation tool tests
    cd tools/validators
    npm test
-   
+
    # Test on real websites
    node fr1-checker.js https://example.com --verbose
    ```
 
 4. **Commit with clear messages**:
+
    ```bash
    git commit -m "Add: New validation check for ARIA landmarks
-   
+
    - Implement comprehensive ARIA landmark detection
-   - Add scoring based on semantic completeness  
+   - Add scoring based on semantic completeness
    - Include detailed error messages for missing landmarks
    - Update tests to cover edge cases
-   
+
    Fixes #123"
    ```
 
@@ -216,6 +230,7 @@ npm test
 ### Real-world Testing
 
 For significant changes, test on real websites:
+
 - Choose diverse site architectures (SSR, SSG, CSR)
 - Document results and any edge cases found
 - Include testing methodology in PR description
@@ -231,6 +246,7 @@ For significant changes, test on real websites:
 ### Recognition
 
 Contributors will be:
+
 - **Listed** in repository contributors
 - **Mentioned** in release notes for significant contributions
 - **Credited** in research publications (if applicable)
@@ -238,10 +254,13 @@ Contributors will be:
 
 ### License Agreement
 
-By contributing, you agree that your contributions will be licensed under the Apache License 2.0, the same license as the project.
+By contributing, you agree that your contributions will be licensed under the
+Apache License 2.0, the same license as the project.
 
 ## Questions?
 
-Don't hesitate to ask! We're here to help make your contribution successful. Whether you're fixing a typo or proposing a major feature, every contribution makes AgentUX better for everyone.
+Don't hesitate to ask! We're here to help make your contribution successful.
+Whether you're fixing a typo or proposing a major feature, every contribution
+makes AgentUX better for everyone.
 
 **Welcome to the AgentUX community!** 🎉

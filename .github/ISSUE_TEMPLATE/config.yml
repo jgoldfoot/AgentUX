@@ -1,0 +1,11 @@
+blank_issues_enabled: true
+contact_links:
+  - name: GitHub Discussions
+    url: https://github.com/jgoldfoot/AgentUX/discussions
+    about: Ask questions and discuss ideas with the community
+  - name: Security Vulnerability
+    url: https://github.com/jgoldfoot/AgentUX/security/policy
+    about: Report security vulnerabilities privately (do not use public issues)
+  - name: Email Contact
+    url: mailto:joel@goldfoot.com
+    about: Contact the maintainer directly for private matters

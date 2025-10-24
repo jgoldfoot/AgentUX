@@ -1,0 +1,83 @@
+{
+  "name": "@agentux/framework",
+  "version": "0.1.0",
+  "description": "A design framework for building dual-mode interfaces that work optimally for both humans and AI agents",
+  "main": "index.js",
+  "bin": {
+    "agentux": "./tools/agentux-cli.js",
+    "agentux-validate": "./tools/validators/fr1-validator.js",
+    "agentux-audit": "./accessibility/compliance-audit.js",
+    "agentux-simulate": "./tools/agent-simulator.js"
+  },
+  "scripts": {
+    "test": "jest",
+    "test:watch": "jest --watch",
+    "test:coverage": "jest --coverage",
+    "lint": "eslint . --max-warnings=0",
+    "lint:fix": "eslint . --fix",
+    "format": "prettier --write \"**/*.{js,json,md}\"",
+    "format:check": "prettier --check \"**/*.{js,json,md}\"",
+    "validate": "node tools/validators/fr1-validator.js",
+    "audit": "node accessibility/compliance-audit.js",
+    "simulate": "node tools/agent-simulator.js",
+    "cli": "node tools/agentux-cli.js",
+    "postinstall": "node -e \"console.log('AgentUX installed successfully!')\""
+  },
+  "keywords": [
+    "accessibility",
+    "ai-agents",
+    "agentux",
+    "dual-mode",
+    "semantic-html",
+    "ssr",
+    "ssg",
+    "web-agents",
+    "automation",
+    "ux-framework",
+    "agent-accessibility"
+  ],
+  "author": {
+    "name": "Joel Goldfoot",
+    "email": "joel@goldfoot.com",
+    "url": "https://ai-plus.design"
+  },
+  "license": "Apache-2.0",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/jgoldfoot/AgentUX.git"
+  },
+  "bugs": {
+    "url": "https://github.com/jgoldfoot/AgentUX/issues"
+  },
+  "homepage": "https://github.com/jgoldfoot/AgentUX#readme",
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=7.0.0"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "@types/jest": "^29.5.0",
+    "eslint": "^8.50.0",
+    "eslint-config-prettier": "^9.0.0",
+    "eslint-plugin-jest": "^27.4.0",
+    "jest": "^29.7.0",
+    "prettier": "^3.0.0"
+  },
+  "optionalDependencies": {
+    "puppeteer": "^21.0.0"
+  },
+  "files": [
+    "tools/",
+    "accessibility/",
+    "examples/",
+    "docs/",
+    "README.md",
+    "CONTRIBUTING.md",
+    "CODE_OF_CONDUCT.md",
+    "LICENSE",
+    "AGENTS.md"
+  ],
+  "publishConfig": {
+    "access": "public"
+  }
+}

@@ -1,10 +1,15 @@
 # Astro SSG AgentUX Implementation Example
 
-This example demonstrates how to implement AgentUX patterns in an Astro application using Static Site Generation (SSG) to ensure optimal agent accessibility and blazing-fast performance for both humans and AI agents.
+This example demonstrates how to implement AgentUX patterns in an Astro
+application using Static Site Generation (SSG) to ensure optimal agent
+accessibility and blazing-fast performance for both humans and AI agents.
 
 ## Overview
 
-Astro's static-first approach makes it ideal for AgentUX implementation. By generating static HTML at build time, we ensure that all content is immediately available to agents without requiring JavaScript execution, while still providing interactive features for human users through selective hydration.
+Astro's static-first approach makes it ideal for AgentUX implementation. By
+generating static HTML at build time, we ensure that all content is immediately
+available to agents without requiring JavaScript execution, while still
+providing interactive features for human users through selective hydration.
 
 ## Project Structure
 
@@ -40,16 +45,16 @@ astro-agentux-app/
 ### astro.config.mjs
 
 ```javascript
-import { defineConfig } from 'astro/config'
-import tailwind from '@astrojs/tailwind'
-import sitemap from '@astrojs/sitemap'
+import { defineConfig } from 'astro/config';
+import tailwind from '@astrojs/tailwind';
+import sitemap from '@astrojs/sitemap';
 
 export default defineConfig({
   site: 'https://example.com',
-  
+
   // Static site generation (default)
   output: 'static',
-  
+
   // Integrations for enhanced functionality
   integrations: [
     tailwind(),
@@ -57,15 +62,15 @@ export default defineConfig({
       // Generate sitemap for better agent discovery
       customPages: [
         'https://example.com/products',
-        'https://example.com/contact'
-      ]
-    })
+        'https://example.com/contact',
+      ],
+    }),
   ],
 
   // Build optimizations for agents
   build: {
     // Inline small scripts for better agent compatibility
-    inlineStylesheets: 'auto'
+    inlineStylesheets: 'auto',
   },
 
   // Vite configuration for asset handling
@@ -78,12 +83,12 @@ export default defineConfig({
           // Predictable asset naming for agents
           assetFileNames: 'assets/[name].[ext]',
           chunkFileNames: 'chunks/[name].js',
-          entryFileNames: 'scripts/[name].js'
-        }
-      }
-    }
-  }
-})
+          entryFileNames: 'scripts/[name].js',
+        },
+      },
+    },
+  },
+});
 ```
 
 ## Base Layout
@@ -99,11 +104,11 @@ export interface Props {
   agentIntent?: string
 }
 
-const { 
-  title, 
+const {
+  title,
   description = 'AgentUX implementation with Astro SSG',
   agentPage,
-  agentIntent 
+  agentIntent
 } = Astro.props
 ---
 
@@ -115,16 +120,16 @@ const {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta name="robots" content="index, follow" />
     <meta name="generator" content={Astro.generator} />
-    
+
     <!-- Agent-specific meta tags -->
     {agentPage && <meta name="agent-page" content={agentPage} />}
     {agentIntent && <meta name="agent-intent" content={agentIntent} />}
-    
+
     <!-- Preload critical resources for faster agent parsing -->
     <link rel="preload" href="/styles/global.css" as="style" />
-    
+
     <title>{title}</title>
-    
+
     <!-- Structured data for enhanced agent understanding -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
@@ -139,20 +144,20 @@ const {
       }
     })} />
   </head>
-  
+
   <body data-agent-ready="true">
     <a href="#main-content" class="skip-link" data-agent-action="skip-to-content">
       Skip to main content
     </a>
-    
+
     <header role="banner">
       <Navigation />
     </header>
-    
+
     <main role="main" id="main-content" tabindex="-1">
       <slot />
     </main>
-    
+
     <footer role="contentinfo" data-agent-component="site-footer">
       <p>&copy; 2025 AgentUX Astro Example. Built with accessibility in mind.</p>
       <nav aria-label="Footer navigation">
@@ -163,7 +168,7 @@ const {
         </ul>
       </nav>
     </footer>
-    
+
     <!-- Agent detection script (progressive enhancement) -->
     <script src="/scripts/agent-detection.js"></script>
   </body>
@@ -174,14 +179,14 @@ const {
   html {
     scroll-behavior: smooth;
   }
-  
+
   body {
     font-family: system-ui, -apple-system, sans-serif;
     line-height: 1.6;
     color: #333;
     background: #fff;
   }
-  
+
   .skip-link {
     position: absolute;
     top: -40px;
@@ -193,17 +198,17 @@ const {
     border-radius: 4px;
     z-index: 1000;
   }
-  
+
   .skip-link:focus {
     top: 6px;
   }
-  
+
   /* Enhanced focus visibility for agents */
   *:focus-visible {
     outline: 2px solid #0066cc;
     outline-offset: 2px;
   }
-  
+
   /* Agent-specific optimizations */
   [data-agent-context="detected"] {
     font-size: 18px;
@@ -222,24 +227,24 @@ const {
 const currentPath = Astro.url.pathname
 ---
 
-<nav 
-  role="navigation" 
+<nav
+  role="navigation"
   aria-label="Main navigation"
   data-agent-component="primary-navigation"
 >
   <div class="nav-container">
-    <a 
-      href="/" 
+    <a
+      href="/"
       class="logo"
       data-agent-action="go-home"
       aria-label="AgentUX Store - Go to homepage"
     >
       <span data-agent-content="site-name">AgentUX Store</span>
     </a>
-    
+
     <ul role="list" class="nav-links">
       <li>
-        <a 
+        <a
           href="/"
           data-agent-action="browse-home"
           class={currentPath === '/' ? 'active' : ''}
@@ -249,7 +254,7 @@ const currentPath = Astro.url.pathname
         </a>
       </li>
       <li>
-        <a 
+        <a
           href="/products"
           data-agent-action="view-products"
           class={currentPath.startsWith('/products') ? 'active' : ''}
@@ -259,7 +264,7 @@ const currentPath = Astro.url.pathname
         </a>
       </li>
       <li>
-        <a 
+        <a
           href="/contact"
           data-agent-action="get-support"
           class={currentPath === '/contact' ? 'active' : ''}
@@ -269,25 +274,25 @@ const currentPath = Astro.url.pathname
         </a>
       </li>
     </ul>
-    
+
     <!-- Search form for agents -->
-    <form 
-      role="search" 
+    <form
+      role="search"
       class="search-form"
       data-agent-component="site-search"
       action="/products"
       method="GET"
     >
       <label for="search" class="sr-only">Search products</label>
-      <input 
-        type="search" 
+      <input
+        type="search"
         id="search"
         name="q"
         placeholder="Search products..."
         data-agent-field="search-query"
         aria-label="Search products"
       />
-      <button 
+      <button
         type="submit"
         data-agent-action="search-products"
         aria-label="Search"
@@ -307,14 +312,14 @@ const currentPath = Astro.url.pathname
     background: #f8f9fa;
     border-bottom: 1px solid #e9ecef;
   }
-  
+
   .logo {
     font-size: 1.5rem;
     font-weight: bold;
     text-decoration: none;
     color: #333;
   }
-  
+
   .nav-links {
     display: flex;
     gap: 2rem;
@@ -322,7 +327,7 @@ const currentPath = Astro.url.pathname
     margin: 0;
     padding: 0;
   }
-  
+
   .nav-links a {
     text-decoration: none;
     color: #666;
@@ -330,25 +335,25 @@ const currentPath = Astro.url.pathname
     border-radius: 4px;
     transition: all 0.2s ease;
   }
-  
+
   .nav-links a:hover,
   .nav-links a.active {
     background: #007bff;
     color: white;
   }
-  
+
   .search-form {
     display: flex;
     gap: 0.5rem;
   }
-  
+
   .search-form input {
     padding: 0.5rem;
     border: 1px solid #ddd;
     border-radius: 4px;
     width: 200px;
   }
-  
+
   .search-form button {
     padding: 0.5rem 1rem;
     background: #007bff;
@@ -357,7 +362,7 @@ const currentPath = Astro.url.pathname
     border-radius: 4px;
     cursor: pointer;
   }
-  
+
   .sr-only {
     position: absolute;
     width: 1px;
@@ -393,7 +398,7 @@ const featuredProducts = [
     category: 'Electronics'
   },
   {
-    id: '2', 
+    id: '2',
     name: 'Accessible Data Processor',
     description: 'Processes data with both human and agent-readable outputs.',
     price: 49.99,
@@ -417,7 +422,7 @@ const pageTitle = 'AgentUX Store - Products for Humans and AI'
 const pageDescription = 'Discover our collection of products designed for optimal agent and human experience using AgentUX patterns.'
 ---
 
-<Layout 
+<Layout
   title={pageTitle}
   description={pageDescription}
   agentPage="home"
@@ -434,16 +439,16 @@ const pageDescription = 'Discover our collection of products designed for optima
           Discover products designed with AgentUX principles - optimized for both AI agents and human users
         </p>
         <div class="hero-actions">
-          <a 
-            href="/products" 
+          <a
+            href="/products"
             class="cta-button primary"
             data-agent-action="view-all-products"
             role="button"
           >
             Browse All Products
           </a>
-          <a 
-            href="/contact" 
+          <a
+            href="/contact"
             class="cta-button secondary"
             data-agent-action="get-consultation"
             role="button"
@@ -455,8 +460,8 @@ const pageDescription = 'Discover our collection of products designed for optima
     </section>
 
     <!-- Featured Products Section -->
-    <section 
-      role="region" 
+    <section
+      role="region"
       aria-labelledby="featured-heading"
       data-agent-component="featured-products"
     >
@@ -467,8 +472,8 @@ const pageDescription = 'Discover our collection of products designed for optima
         <p data-agent-content="section-description">
           Our top-rated products that showcase AgentUX design principles
         </p>
-        
-        <div 
+
+        <div
           class="products-grid"
           data-agent-component="product-list"
           data-agent-list-type="featured"
@@ -476,8 +481,8 @@ const pageDescription = 'Discover our collection of products designed for optima
           aria-label="Featured products"
         >
           {featuredProducts.map(product => (
-            <ProductCard 
-              product={product} 
+            <ProductCard
+              product={product}
               featured={true}
             />
           ))}
@@ -486,8 +491,8 @@ const pageDescription = 'Discover our collection of products designed for optima
     </section>
 
     <!-- Benefits Section -->
-    <section 
-      role="region" 
+    <section
+      role="region"
       aria-labelledby="benefits-heading"
       data-agent-component="benefits-section"
       class="benefits"
@@ -496,7 +501,7 @@ const pageDescription = 'Discover our collection of products designed for optima
         <h2 id="benefits-heading" data-agent-content="section-title">
           Why Choose AgentUX Products?
         </h2>
-        
+
         <div class="benefits-grid">
           <article class="benefit" data-agent-component="benefit-item">
             <h3 data-agent-content="benefit-title">🤖 Agent-Optimized</h3>
@@ -504,14 +509,14 @@ const pageDescription = 'Discover our collection of products designed for optima
               Every product is designed with AI agents in mind, featuring semantic markup and clear data structures.
             </p>
           </article>
-          
+
           <article class="benefit" data-agent-component="benefit-item">
             <h3 data-agent-content="benefit-title">👥 Human-Friendly</h3>
             <p data-agent-content="benefit-description">
               Beautiful interfaces that delight human users while maintaining full accessibility standards.
             </p>
           </article>
-          
+
           <article class="benefit" data-agent-component="benefit-item">
             <h3 data-agent-content="benefit-title">⚡ Performance First</h3>
             <p data-agent-content="benefit-description">
@@ -554,13 +559,13 @@ const pageDescription = 'Discover our collection of products designed for optima
     padding: 6rem 2rem;
     text-align: center;
   }
-  
+
   .hero-content h1 {
     font-size: clamp(2rem, 5vw, 4rem);
     margin-bottom: 1.5rem;
     font-weight: 700;
   }
-  
+
   .hero-subtitle {
     font-size: 1.25rem;
     margin-bottom: 2.5rem;
@@ -569,14 +574,14 @@ const pageDescription = 'Discover our collection of products designed for optima
     margin-left: auto;
     margin-right: auto;
   }
-  
+
   .hero-actions {
     display: flex;
     gap: 1rem;
     justify-content: center;
     flex-wrap: wrap;
   }
-  
+
   .cta-button {
     display: inline-block;
     padding: 1rem 2rem;
@@ -586,36 +591,36 @@ const pageDescription = 'Discover our collection of products designed for optima
     transition: all 0.3s ease;
     border: 2px solid transparent;
   }
-  
+
   .cta-button.primary {
     background: white;
     color: #667eea;
   }
-  
+
   .cta-button.secondary {
     background: transparent;
     color: white;
     border-color: white;
   }
-  
+
   .cta-button:hover {
     transform: translateY(-2px);
     box-shadow: 0 8px 25px rgba(0,0,0,0.2);
   }
-  
+
   .container {
     max-width: 1200px;
     margin: 0 auto;
     padding: 4rem 2rem;
   }
-  
+
   .container h2 {
     text-align: center;
     font-size: 2.5rem;
     margin-bottom: 1rem;
     color: #333;
   }
-  
+
   .container p {
     text-align: center;
     font-size: 1.125rem;
@@ -625,23 +630,23 @@ const pageDescription = 'Discover our collection of products designed for optima
     margin-left: auto;
     margin-right: auto;
   }
-  
+
   .products-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 2rem;
   }
-  
+
   .benefits {
     background: #f8f9fa;
   }
-  
+
   .benefits-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 2rem;
   }
-  
+
   .benefit {
     background: white;
     padding: 2rem;
@@ -649,13 +654,13 @@ const pageDescription = 'Discover our collection of products designed for optima
     text-align: center;
     box-shadow: 0 2px 10px rgba(0,0,0,0.1);
   }
-  
+
   .benefit h3 {
     font-size: 1.5rem;
     margin-bottom: 1rem;
     color: #333;
   }
-  
+
   .benefit p {
     color: #666;
     line-height: 1.6;
@@ -685,18 +690,18 @@ export interface Props {
 const { product, featured = false } = Astro.props
 ---
 
-<article 
+<article
   class={`product-card ${featured ? 'featured' : ''}`}
   data-agent-component="product-card"
   data-agent-product-id={product.id}
   data-agent-category={product.category}
-  itemscope 
+  itemscope
   itemtype="https://schema.org/Product"
   role="listitem"
 >
   <div class="product-image-container">
-    <img 
-      src={product.image} 
+    <img
+      src={product.image}
       alt={`${product.name} - ${product.description}`}
       class="product-image"
       itemprop="image"
@@ -706,7 +711,7 @@ const { product, featured = false } = Astro.props
       height="200"
     />
     {featured && (
-      <span 
+      <span
         class="featured-badge"
         data-agent-content="product-badge"
         aria-label="Featured product"
@@ -715,18 +720,18 @@ const { product, featured = false } = Astro.props
       </span>
     )}
   </div>
-  
+
   <div class="product-info">
     <header class="product-header">
-      <h3 
+      <h3
         class="product-name"
         itemprop="name"
         data-agent-content="product-name"
       >
         {product.name}
       </h3>
-      
-      <span 
+
+      <span
         class="product-category"
         itemprop="category"
         data-agent-content="product-category"
@@ -734,17 +739,17 @@ const { product, featured = false } = Astro.props
         {product.category}
       </span>
     </header>
-    
-    <p 
+
+    <p
       class="product-description"
       itemprop="description"
       data-agent-content="product-description"
     >
       {product.description}
     </p>
-    
+
     <div class="product-meta">
-      <div 
+      <div
         class="product-price"
         itemprop="offers"
         itemscope
@@ -757,8 +762,8 @@ const { product, featured = false } = Astro.props
           ${product.price}
         </span>
       </div>
-      
-      <div 
+
+      <div
         class="product-rating"
         itemprop="aggregateRating"
         itemscope
@@ -772,9 +777,9 @@ const { product, featured = false } = Astro.props
         </span>
       </div>
     </div>
-    
+
     <div class="product-actions">
-      <a 
+      <a
         href={`/products/${product.id}`}
         class="product-link primary"
         data-agent-action="view-product-details"
@@ -783,8 +788,8 @@ const { product, featured = false } = Astro.props
       >
         View Details
       </a>
-      
-      <button 
+
+      <button
         type="button"
         class="product-link secondary"
         data-agent-action="quick-add-to-cart"
@@ -808,32 +813,32 @@ const { product, featured = false } = Astro.props
     display: flex;
     flex-direction: column;
   }
-  
+
   .product-card:hover {
     transform: translateY(-5px);
     box-shadow: 0 8px 30px rgba(0,0,0,0.15);
   }
-  
+
   .product-card.featured {
     border: 2px solid #ffc107;
   }
-  
+
   .product-image-container {
     position: relative;
     overflow: hidden;
   }
-  
+
   .product-image {
     width: 100%;
     height: 200px;
     object-fit: cover;
     transition: transform 0.3s ease;
   }
-  
+
   .product-card:hover .product-image {
     transform: scale(1.05);
   }
-  
+
   .featured-badge {
     position: absolute;
     top: 10px;
@@ -845,18 +850,18 @@ const { product, featured = false } = Astro.props
     font-size: 0.875rem;
     font-weight: 600;
   }
-  
+
   .product-info {
     padding: 1.5rem;
     flex: 1;
     display: flex;
     flex-direction: column;
   }
-  
+
   .product-header {
     margin-bottom: 1rem;
   }
-  
+
   .product-name {
     font-size: 1.25rem;
     font-weight: 600;
@@ -864,7 +869,7 @@ const { product, featured = false } = Astro.props
     margin: 0 0 0.5rem 0;
     line-height: 1.3;
   }
-  
+
   .product-category {
     background: #e9ecef;
     color: #495057;
@@ -874,14 +879,14 @@ const { product, featured = false } = Astro.props
     text-transform: uppercase;
     font-weight: 500;
   }
-  
+
   .product-description {
     color: #666;
     line-height: 1.5;
     margin-bottom: 1rem;
     flex: 1;
   }
-  
+
   .product-meta {
     display: flex;
     justify-content: space-between;
@@ -890,23 +895,23 @@ const { product, featured = false } = Astro.props
     padding-top: 1rem;
     border-top: 1px solid #eee;
   }
-  
+
   .product-price {
     font-size: 1.5rem;
     font-weight: 700;
     color: #28a745;
   }
-  
+
   .product-rating {
     color: #ffc107;
     font-size: 0.875rem;
   }
-  
+
   .product-actions {
     display: flex;
     gap: 0.75rem;
   }
-  
+
   .product-link {
     flex: 1;
     padding: 0.75rem 1rem;
@@ -919,22 +924,22 @@ const { product, featured = false } = Astro.props
     cursor: pointer;
     font-size: 0.875rem;
   }
-  
+
   .product-link.primary {
     background: #007bff;
     color: white;
   }
-  
+
   .product-link.primary:hover {
     background: #0056b3;
   }
-  
+
   .product-link.secondary {
     background: transparent;
     color: #007bff;
     border: 1px solid #007bff;
   }
-  
+
   .product-link.secondary:hover {
     background: #007bff;
     color: white;
@@ -954,7 +959,7 @@ const pageTitle = 'Contact Us - AgentUX Store'
 const pageDescription = 'Get in touch with our support team for questions about AgentUX products and implementation.'
 ---
 
-<Layout 
+<Layout
   title={pageTitle}
   description={pageDescription}
   agentPage="contact"
@@ -968,17 +973,17 @@ const pageDescription = 'Get in touch with our support team for questions about 
           Have questions about AgentUX implementation or our products? We're here to help both humans and AI agents find the right solutions.
         </p>
       </header>
-      
+
       <div class="contact-layout">
         <!-- Contact Information -->
         <aside class="contact-info" data-agent-component="contact-information">
           <h2 data-agent-content="section-title">Get In Touch</h2>
-          
+
           <div class="contact-methods">
             <div class="contact-method" data-agent-content="contact-email">
               <h3>📧 Email Support</h3>
               <p>
-                <a 
+                <a
                   href="mailto:support@agentux.example.com"
                   data-agent-action="send-email"
                 >
@@ -987,17 +992,17 @@ const pageDescription = 'Get in touch with our support team for questions about 
               </p>
               <p class="response-time">Response time: 24-48 hours</p>
             </div>
-            
+
             <div class="contact-method" data-agent-content="contact-hours">
               <h3>🕒 Business Hours</h3>
               <p>Monday - Friday: 9:00 AM - 6:00 PM PST</p>
               <p>Weekend: Emergency support only</p>
             </div>
-            
+
             <div class="contact-method" data-agent-content="contact-documentation">
               <h3>📚 Documentation</h3>
               <p>
-                <a 
+                <a
                   href="/docs"
                   data-agent-action="view-documentation"
                 >
@@ -1008,10 +1013,10 @@ const pageDescription = 'Get in touch with our support team for questions about 
             </div>
           </div>
         </aside>
-        
+
         <!-- Contact Form -->
         <main class="contact-form-section">
-          <form 
+          <form
             class="contact-form"
             data-agent-component="contact-form"
             role="form"
@@ -1020,10 +1025,10 @@ const pageDescription = 'Get in touch with our support team for questions about 
             action="/api/contact"
           >
             <h2 id="form-heading" data-agent-content="form-title">Send Us a Message</h2>
-            
+
             <fieldset data-agent-component="contact-details">
               <legend data-agent-content="fieldset-label">Contact Information</legend>
-              
+
               <div class="form-group">
                 <label for="name" data-agent-content="field-label">
                   Full Name *
@@ -1041,7 +1046,7 @@ const pageDescription = 'Get in touch with our support team for questions about 
                   Your full name for our records
                 </small>
               </div>
-              
+
               <div class="form-group">
                 <label for="email" data-agent-content="field-label">
                   Email Address *
@@ -1059,7 +1064,7 @@ const pageDescription = 'Get in touch with our support team for questions about 
                   We'll use this email to respond to your inquiry
                 </small>
               </div>
-              
+
               <div class="form-group">
                 <label for="company" data-agent-content="field-label">
                   Company (Optional)
@@ -1073,10 +1078,10 @@ const pageDescription = 'Get in touch with our support team for questions about 
                 />
               </div>
             </fieldset>
-            
+
             <fieldset data-agent-component="inquiry-details">
               <legend data-agent-content="fieldset-label">Inquiry Details</legend>
-              
+
               <div class="form-group">
                 <label for="subject" data-agent-content="field-label">
                   Subject *
@@ -1100,7 +1105,7 @@ const pageDescription = 'Get in touch with our support team for questions about 
                   Choose the category that best describes your inquiry
                 </small>
               </div>
-              
+
               <div class="form-group">
                 <label for="priority" data-agent-content="field-label">
                   Priority Level
@@ -1116,7 +1121,7 @@ const pageDescription = 'Get in touch with our support team for questions about 
                   <option value="critical">Critical - System down</option>
                 </select>
               </div>
-              
+
               <div class="form-group">
                 <label for="message" data-agent-content="field-label">
                   Message *
@@ -1135,10 +1140,10 @@ const pageDescription = 'Get in touch with our support team for questions about 
                 </small>
               </div>
             </fieldset>
-            
+
             <fieldset data-agent-component="preferences">
               <legend data-agent-content="fieldset-label">Communication Preferences</legend>
-              
+
               <div class="checkbox-group">
                 <input
                   type="checkbox"
@@ -1151,7 +1156,7 @@ const pageDescription = 'Get in touch with our support team for questions about 
                   Subscribe to AgentUX updates and implementation tips
                 </label>
               </div>
-              
+
               <div class="checkbox-group">
                 <input
                   type="checkbox"
@@ -1166,17 +1171,17 @@ const pageDescription = 'Get in touch with our support team for questions about 
                 </label>
               </div>
             </fieldset>
-            
+
             <div class="form-actions">
-              <button 
+              <button
                 type="submit"
                 class="submit-button"
                 data-agent-action="submit-contact-form"
               >
                 Send Message
               </button>
-              
-              <button 
+
+              <button
                 type="reset"
                 class="reset-button"
                 data-agent-action="reset-form"
@@ -1188,7 +1193,7 @@ const pageDescription = 'Get in touch with our support team for questions about 
         </main>
       </div>
     </div>
-    
+
     <!-- Structured data for contact page -->
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
@@ -1218,18 +1223,18 @@ const pageDescription = 'Get in touch with our support team for questions about 
     margin: 0 auto;
     padding: 2rem;
   }
-  
+
   .page-header {
     text-align: center;
     margin-bottom: 3rem;
   }
-  
+
   .page-header h1 {
     font-size: 2.5rem;
     color: #333;
     margin-bottom: 1rem;
   }
-  
+
   .page-header p {
     font-size: 1.125rem;
     color: #666;
@@ -1237,101 +1242,101 @@ const pageDescription = 'Get in touch with our support team for questions about 
     margin: 0 auto;
     line-height: 1.6;
   }
-  
+
   .contact-layout {
     display: grid;
     grid-template-columns: 1fr 2fr;
     gap: 3rem;
     align-items: start;
   }
-  
+
   @media (max-width: 768px) {
     .contact-layout {
       grid-template-columns: 1fr;
       gap: 2rem;
     }
   }
-  
+
   .contact-info {
     background: #f8f9fa;
     padding: 2rem;
     border-radius: 8px;
   }
-  
+
   .contact-info h2 {
     color: #333;
     margin-bottom: 1.5rem;
     font-size: 1.5rem;
   }
-  
+
   .contact-methods {
     display: flex;
     flex-direction: column;
     gap: 1.5rem;
   }
-  
+
   .contact-method h3 {
     color: #555;
     margin-bottom: 0.5rem;
     font-size: 1.125rem;
   }
-  
+
   .contact-method p {
     margin: 0.25rem 0;
     color: #666;
   }
-  
+
   .contact-method a {
     color: #007bff;
     text-decoration: none;
   }
-  
+
   .contact-method a:hover {
     text-decoration: underline;
   }
-  
+
   .response-time {
     font-size: 0.875rem;
     font-style: italic;
   }
-  
+
   .contact-form {
     background: white;
     border: 1px solid #e9ecef;
     border-radius: 8px;
     padding: 2rem;
   }
-  
+
   .contact-form h2 {
     color: #333;
     margin-bottom: 1.5rem;
     font-size: 1.5rem;
   }
-  
+
   fieldset {
     border: 1px solid #e9ecef;
     border-radius: 6px;
     padding: 1.5rem;
     margin-bottom: 1.5rem;
   }
-  
+
   legend {
     font-weight: 600;
     color: #495057;
     padding: 0 0.5rem;
   }
-  
+
   .form-group {
     margin-bottom: 1.5rem;
   }
-  
+
   label {
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 500;
     color: #333;
   }
-  
+
   input, select, textarea {
     width: 100%;
     padding: 0.75rem;
@@ -1340,44 +1345,44 @@ const pageDescription = 'Get in touch with our support team for questions about 
     font-size: 1rem;
     transition: border-color 0.2s ease;
   }
-  
+
   input:focus, select:focus, textarea:focus {
     outline: none;
     border-color: #007bff;
     box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
   }
-  
+
   small {
     display: block;
     margin-top: 0.25rem;
     color: #6c757d;
     font-size: 0.875rem;
   }
-  
+
   .checkbox-group {
     display: flex;
     align-items: center;
     margin-bottom: 1rem;
   }
-  
+
   .checkbox-group input[type="checkbox"] {
     width: auto;
     margin-right: 0.5rem;
     margin-bottom: 0;
   }
-  
+
   .checkbox-group label {
     margin-bottom: 0;
     font-weight: normal;
   }
-  
+
   .form-actions {
     display: flex;
     gap: 1rem;
     justify-content: flex-end;
     margin-top: 2rem;
   }
-  
+
   .submit-button, .reset-button {
     padding: 0.75rem 2rem;
     border: none;
@@ -1387,21 +1392,21 @@ const pageDescription = 'Get in touch with our support team for questions about 
     cursor: pointer;
     transition: all 0.2s ease;
   }
-  
+
   .submit-button {
     background: #007bff;
     color: white;
   }
-  
+
   .submit-button:hover {
     background: #0056b3;
   }
-  
+
   .reset-button {
     background: #6c757d;
     color: white;
   }
-  
+
   .reset-button:hover {
     background: #545b62;
   }
@@ -1413,20 +1418,20 @@ const pageDescription = 'Get in touch with our support team for questions about 
   document.addEventListener('DOMContentLoaded', function() {
     const form = document.querySelector('.contact-form');
     const submitButton = form?.querySelector('.submit-button');
-    
+
     if (form && submitButton) {
       form.addEventListener('submit', function(e) {
         // Add loading state
         submitButton.textContent = 'Sending...';
         submitButton.disabled = true;
-        
+
         // Add agent context to form data
         const agentData = document.createElement('input');
         agentData.type = 'hidden';
         agentData.name = 'user_agent';
         agentData.value = navigator.userAgent;
         form.appendChild(agentData);
-        
+
         // Note: In a real implementation, you'd handle the form submission
         // For this static example, we'll just show the loading state
       });
@@ -1441,9 +1446,9 @@ const pageDescription = 'Get in touch with our support team for questions about 
 
 ```javascript
 // AgentUX Agent Detection and Enhancement Script
-(function() {
+(function () {
   'use strict';
-  
+
   // Agent detection patterns
   const AGENT_PATTERNS = [
     /bot/i,
@@ -1455,65 +1460,67 @@ const pageDescription = 'Get in touch with our support team for questions about 
     /playwright/i,
     /puppeteer/i,
     /curl/i,
-    /wget/i
+    /wget/i,
   ];
-  
+
   // Detect if current user is an agent
   function detectAgent() {
     const userAgent = navigator.userAgent;
-    const isAgent = AGENT_PATTERNS.some(pattern => pattern.test(userAgent));
-    
+    const isAgent = AGENT_PATTERNS.some((pattern) => pattern.test(userAgent));
+
     return {
       isAgent,
       userAgent,
       type: isAgent ? userAgent.split(' ')[0] : null,
-      timestamp: new Date().toISOString()
+      timestamp: new Date().toISOString(),
     };
   }
-  
+
   // Apply agent-specific enhancements
   function applyAgentEnhancements(agentInfo) {
     if (!agentInfo.isAgent) return;
-    
+
     // Add agent context to document
     document.documentElement.setAttribute('data-agent-context', 'detected');
     document.documentElement.setAttribute('data-agent-type', agentInfo.type);
-    
+
     // Enhance forms for agents
     enhanceForms();
-    
+
     // Improve navigation clarity
     enhanceNavigation();
-    
+
     // Add agent-friendly timestamps
     addTimestamps();
-    
+
     // Log agent visit (for analytics)
     logAgentVisit(agentInfo);
   }
-  
+
   function enhanceForms() {
     const forms = document.querySelectorAll('form[data-agent-component]');
-    
-    forms.forEach(form => {
+
+    forms.forEach((form) => {
       // Add form metadata
       form.setAttribute('data-agent-enhanced', 'true');
-      
+
       // Enhance form fields
       const fields = form.querySelectorAll('input, select, textarea');
-      fields.forEach(field => {
+      fields.forEach((field) => {
         if (field.hasAttribute('required')) {
           field.setAttribute('data-agent-required', 'true');
         }
       });
     });
   }
-  
+
   function enhanceNavigation() {
-    const nav = document.querySelector('nav[data-agent-component="primary-navigation"]');
+    const nav = document.querySelector(
+      'nav[data-agent-component="primary-navigation"]'
+    );
     if (nav) {
       nav.setAttribute('data-agent-enhanced', 'true');
-      
+
       // Add breadcrumb information if available
       const currentPage = document.querySelector('[data-agent-page]');
       if (currentPage) {
@@ -1522,7 +1529,7 @@ const pageDescription = 'Get in touch with our support team for questions about 
       }
     }
   }
-  
+
   function addTimestamps() {
     // Add page load timestamp for agents
     const timestamp = document.createElement('meta');
@@ -1530,13 +1537,13 @@ const pageDescription = 'Get in touch with our support team for questions about 
     timestamp.content = new Date().toISOString();
     document.head.appendChild(timestamp);
   }
-  
+
   function logAgentVisit(agentInfo) {
     // In a real implementation, you'd send this to your analytics
     if (window.console && window.console.log) {
       console.log('AgentUX: Agent detected', agentInfo);
     }
-    
+
     // Could send to analytics endpoint
     // fetch('/api/analytics/agent-visit', {
     //   method: 'POST',
@@ -1544,20 +1551,20 @@ const pageDescription = 'Get in touch with our support team for questions about 
     //   body: JSON.stringify(agentInfo)
     // });
   }
-  
+
   // Initialize agent detection
   function init() {
     const agentInfo = detectAgent();
     applyAgentEnhancements(agentInfo);
-    
+
     // Make agent info available globally for other scripts
     window.AgentUX = {
       agentInfo,
       isAgent: agentInfo.isAgent,
-      enhance: applyAgentEnhancements
+      enhance: applyAgentEnhancements,
     };
   }
-  
+
   // Run when DOM is ready
   if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', init);
@@ -1599,13 +1606,13 @@ jobs:
       - uses: actions/setup-node@v3
         with:
           node-version: 18
-      
+
       - name: Install dependencies
         run: npm ci
-      
+
       - name: Build site
         run: npm run build
-      
+
       - name: Run Lighthouse CI
         run: |
           npm install -g @lhci/cli@0.12.x
@@ -1616,8 +1623,10 @@ jobs:
 
 ## Key AgentUX Implementation Features
 
-1. **Static Generation**: Pre-rendered HTML ensures immediate content availability
-2. **Progressive Enhancement**: JavaScript enhances the experience without being required
+1. **Static Generation**: Pre-rendered HTML ensures immediate content
+   availability
+2. **Progressive Enhancement**: JavaScript enhances the experience without being
+   required
 3. **Semantic Structure**: Comprehensive use of HTML5 landmarks and ARIA labels
 4. **Agent Detection**: Runtime detection with appropriate UI enhancements
 5. **Structured Data**: Rich JSON-LD markup for enhanced agent understanding
@@ -1653,4 +1662,6 @@ npm run build && deploy dist/
 - **Optimized Assets**: Compressed CSS and images
 - **CDN Ready**: Static files work perfectly with global CDNs
 
-This Astro implementation showcases how static site generation can provide optimal performance for both human users and AI agents while maintaining the full feature set expected from modern web applications.
+This Astro implementation showcases how static site generation can provide
+optimal performance for both human users and AI agents while maintaining the
+full feature set expected from modern web applications.
