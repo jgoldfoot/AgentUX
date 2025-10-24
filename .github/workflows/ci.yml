@@ -15,6 +15,9 @@ jobs:
       matrix:
         node-version: [16.x, 18.x, 20.x]
 
+    env:
+      PUPPETEER_SKIP_DOWNLOAD: 'true'
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -26,7 +29,7 @@ jobs:
         cache: 'npm'
 
     - name: Install dependencies
-      run: npm ci
+      run: npm ci --include=optional
 
     - name: Run tests
       run: npm test
@@ -48,6 +51,9 @@ jobs:
     name: Lint Code
     runs-on: ubuntu-latest
 
+    env:
+      PUPPETEER_SKIP_DOWNLOAD: 'true'
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -59,7 +65,7 @@ jobs:
         cache: 'npm'
 
     - name: Install dependencies
-      run: npm ci
+      run: npm ci --include=optional
 
     - name: Run ESLint
       run: npm run lint
@@ -71,6 +77,9 @@ jobs:
     name: Validate Examples
     runs-on: ubuntu-latest
 
+    env:
+      PUPPETEER_SKIP_DOWNLOAD: 'true'
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -82,7 +91,7 @@ jobs:
         cache: 'npm'
 
     - name: Install dependencies
-      run: npm ci
+      run: npm ci --include=optional
 
     - name: Validate SSR example
       run: |
@@ -98,6 +107,9 @@ jobs:
     name: Security Audit
     runs-on: ubuntu-latest
 
+    env:
+      PUPPETEER_SKIP_DOWNLOAD: 'true'
+
     steps:
     - name: Checkout code
       uses: actions/checkout@v4
@@ -109,7 +121,7 @@ jobs:
         cache: 'npm'
 
     - name: Install dependencies
-      run: npm ci
+      run: npm ci --include=optional
 
     - name: Run npm audit
       run: npm audit --audit-level=moderate

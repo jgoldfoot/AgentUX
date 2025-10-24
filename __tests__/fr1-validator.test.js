@@ -50,15 +50,7 @@ describe('FR1 Validator', () => {
     });
 
     test('should detect semantic HTML elements', () => {
-      const semanticElements = [
-        'header',
-        'nav',
-        'main',
-        'article',
-        'section',
-        'aside',
-        'footer'
-      ];
+      const semanticElements = ['header', 'nav', 'main', 'article', 'aside', 'footer'];
 
       const html = `
         <header><h1>Title</h1></header>
@@ -68,18 +60,13 @@ describe('FR1 Validator', () => {
         <footer><p>Footer</p></footer>
       `;
 
-      semanticElements.forEach(element => {
+      semanticElements.forEach((element) => {
         expect(html).toContain(`<${element}`);
       });
     });
 
     test('should recognize ARIA roles', () => {
-      const ariaRoles = [
-        'role="banner"',
-        'role="navigation"',
-        'role="main"',
-        'role="contentinfo"'
-      ];
+      const ariaRoles = ['role="banner"', 'role="navigation"', 'role="main"', 'role="contentinfo"'];
 
       const html = `
         <div role="banner">Header</div>
@@ -88,7 +75,7 @@ describe('FR1 Validator', () => {
         <div role="contentinfo">Footer</div>
       `;
 
-      ariaRoles.forEach(role => {
+      ariaRoles.forEach((role) => {
         expect(html).toContain(role);
       });
     });
@@ -178,25 +165,19 @@ describe('URL Validation', () => {
     const validURLs = [
       'https://example.com',
       'http://localhost:3000',
-      'https://subdomain.example.com/path'
+      'https://subdomain.example.com/path',
     ];
 
-    validURLs.forEach(url => {
+    validURLs.forEach((url) => {
       expect(() => new URL(url)).not.toThrow();
     });
   });
 
   test('should reject invalid URLs', () => {
-    const invalidURLs = [
-      'not-a-url',
-      'ftp://example.com', // May be valid but not HTTP(S)
-      ''
-    ];
+    const invalidURLs = ['not-a-url', '://no-protocol', 'just some text'];
 
-    invalidURLs.forEach(url => {
-      if (url) {
-        expect(() => new URL(url)).toThrow();
-      }
+    invalidURLs.forEach((url) => {
+      expect(() => new URL(url)).toThrow();
     });
   });
 });

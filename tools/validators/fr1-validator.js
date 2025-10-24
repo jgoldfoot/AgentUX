@@ -3,7 +3,7 @@
 /**
  * AgentUX FR-1 Validator
  * Tests if a URL meets the FR-1: Initial Payload Accessibility requirement
- * 
+ *
  * Usage: node fr1-validator.js <url>
  * Or: npx agentux-validate <url>
  */
@@ -18,44 +18,44 @@ const COLORS = {
   red: '\x1b[31m',
   yellow: '\x1b[33m',
   blue: '\x1b[36m',
-  gray: '\x1b[90m'
+  gray: '\x1b[90m',
 };
 
 function log(color, symbol, message) {
   console.log(`${color}${symbol}${COLORS.reset} ${message}`);
 }
 
-async function fetchInitialPayload(url) {
+function fetchInitialPayload(url) {
   return new Promise((resolve, reject) => {
     const parsedUrl = new URL(url);
     const client = parsedUrl.protocol === 'https:' ? https : http;
-    
+
     const options = {
       headers: {
-        'User-Agent': 'AgentUX-Validator/1.0 (Simple HTTP; No JS)'
-      }
+        'User-Agent': 'AgentUX-Validator/1.0 (Simple HTTP; No JS)',
+      },
     };
 
     const req = client.get(url, options, (res) => {
       let data = '';
-      
+
       res.on('data', (chunk) => {
         data += chunk;
       });
-      
+
       res.on('end', () => {
         resolve({
           statusCode: res.statusCode,
           headers: res.headers,
-          body: data
+          body: data,
         });
       });
     });
-    
+
     req.on('error', (err) => {
       reject(err);
     });
-    
+
     req.setTimeout(10000, () => {
       req.destroy();
       reject(new Error('Request timeout'));
@@ -68,7 +68,7 @@ function analyzePayload(response) {
     passed: [],
     failed: [],
     warnings: [],
-    score: 0
+    score: 0,
   };
 
   const body = response.body;
@@ -134,38 +134,46 @@ function printResults(url, results) {
   console.log('\n' + COLORS.blue + '═'.repeat(60) + COLORS.reset);
   console.log(COLORS.blue + '  AgentUX FR-1 Validator Results' + COLORS.reset);
   console.log(COLORS.blue + '═'.repeat(60) + COLORS.reset + '\n');
-  
+
   console.log(COLORS.gray + 'URL: ' + COLORS.reset + url + '\n');
 
   const fr1Pass = results.score >= 70;
-  const grade = results.score >= 90 ? 'A' :
-                results.score >= 80 ? 'B' :
-                results.score >= 70 ? 'C' :
-                results.score >= 50 ? 'D' : 'F';
-  
+  const grade =
+    results.score >= 90
+      ? 'A'
+      : results.score >= 80
+        ? 'B'
+        : results.score >= 70
+          ? 'C'
+          : results.score >= 50
+            ? 'D'
+            : 'F';
+
   const statusColor = fr1Pass ? COLORS.green : COLORS.red;
   const statusText = fr1Pass ? 'PASS' : 'FAIL';
-  
+
   console.log(`${statusColor}╔════════════════════════════════════╗${COLORS.reset}`);
-  console.log(`${statusColor}║  FR-1 Status: ${statusText}  Score: ${results.score}/100  ║${COLORS.reset}`);
+  console.log(
+    `${statusColor}║  FR-1 Status: ${statusText}  Score: ${results.score}/100  ║${COLORS.reset}`
+  );
   console.log(`${statusColor}║  Grade: ${grade}                            ║${COLORS.reset}`);
   console.log(`${statusColor}╚════════════════════════════════════╝${COLORS.reset}\n`);
 
   if (results.passed.length > 0) {
     console.log(COLORS.green + '✓ Passed Checks:' + COLORS.reset);
-    results.passed.forEach(msg => log(COLORS.green, '  ✓', msg));
+    results.passed.forEach((msg) => log(COLORS.green, '  ✓', msg));
     console.log();
   }
 
   if (results.failed.length > 0) {
     console.log(COLORS.red + '✗ Failed Checks:' + COLORS.reset);
-    results.failed.forEach(msg => log(COLORS.red, '  ✗', msg));
+    results.failed.forEach((msg) => log(COLORS.red, '  ✗', msg));
     console.log();
   }
 
   if (results.warnings.length > 0) {
     console.log(COLORS.yellow + '⚠ Warnings:' + COLORS.reset);
-    results.warnings.forEach(msg => log(COLORS.yellow, '  ⚠', msg));
+    results.warnings.forEach((msg) => log(COLORS.yellow, '  ⚠', msg));
     console.log();
   }
 
@@ -189,19 +197,20 @@ async function main() {
   try {
     console.log(`\n${COLORS.blue}Fetching initial payload...${COLORS.reset}`);
     const response = await fetchInitialPayload(url);
-    
+
     if (response.statusCode !== 200) {
-      console.error(`${COLORS.red}Error: Received status code ${response.statusCode}${COLORS.reset}`);
+      console.error(
+        `${COLORS.red}Error: Received status code ${response.statusCode}${COLORS.reset}`
+      );
       process.exit(1);
     }
 
     console.log(`${COLORS.green}Received ${response.body.length} bytes${COLORS.reset}`);
-    
+
     const results = analyzePayload(response);
     printResults(url, results);
 
     process.exit(results.score >= 70 ? 0 : 1);
-    
   } catch (error) {
     console.error(`${COLORS.red}Error: ${error.message}${COLORS.reset}`);
     process.exit(1);

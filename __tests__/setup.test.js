@@ -31,7 +31,7 @@ describe('AgentUX Framework', () => {
       'FR-4: Agent-Friendly Navigation',
       'FR-5: Form Accessibility',
       'FR-6: Content Discovery',
-      'FR-7: Performance Optimization'
+      'FR-7: Performance Optimization',
     ];
 
     expect(foundationalRequirements.length).toBe(7);
@@ -44,7 +44,7 @@ describe('AgentUX Framework', () => {
       1: 'Basic Accessibility',
       2: 'Semantic Stability',
       3: 'Agent-Tested',
-      4: 'Agent-Native'
+      4: 'Agent-Native',
     };
 
     expect(Object.keys(maturityLevels).length).toBe(5);
@@ -101,24 +101,19 @@ describe('Project Structure', () => {
       'CODE_OF_CONDUCT.md',
       'LICENSE',
       'SECURITY.md',
-      'AGENTS.md'
+      'AGENTS.md',
     ];
 
-    requiredFiles.forEach(file => {
+    requiredFiles.forEach((file) => {
       const filePath = path.join(__dirname, '..', file);
       expect(fs.existsSync(filePath)).toBe(true);
     });
   });
 
   test('should have required directories', () => {
-    const requiredDirs = [
-      'docs',
-      'examples',
-      'tools',
-      'accessibility'
-    ];
+    const requiredDirs = ['docs', 'examples', 'tools', 'accessibility'];
 
-    requiredDirs.forEach(dir => {
+    requiredDirs.forEach((dir) => {
       const dirPath = path.join(__dirname, '..', dir);
       expect(fs.existsSync(dirPath)).toBe(true);
     });
@@ -133,10 +128,10 @@ describe('Project Structure', () => {
     const githubFiles = [
       '.github/ISSUE_TEMPLATE/bug_report.md',
       '.github/ISSUE_TEMPLATE/feature_request.md',
-      '.github/PULL_REQUEST_TEMPLATE.md'
+      '.github/PULL_REQUEST_TEMPLATE.md',
     ];
 
-    githubFiles.forEach(file => {
+    githubFiles.forEach((file) => {
       const filePath = path.join(__dirname, '..', file);
       expect(fs.existsSync(filePath)).toBe(true);
     });

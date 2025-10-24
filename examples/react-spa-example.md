@@ -1,24 +1,12 @@
-<button 
-            onClick={() => navigate('/')}
-            data-agent-action="go-home"
-            className="btn btn-primary"
-          >
-            Go Home
-          </button>
-        </div>
-      );
-    }
-  };
+<button onClick={() => navigate('/')} data-agent-action="go-home" className="btn
+btn-primary" > Go Home </button> </div> ); } };
 
-  return (
-    <div className="router-container" data-agent-component="spa-router">
-      {getRouteComponent()}
-    </div>
-  );
-};
+return ( <div className="router-container" data-agent-component="spa-router">
+{getRouteComponent()} </div> ); };
 
 export default Router;
-```
+
+````
 
 ### src/components/Navigation.js
 
@@ -41,20 +29,20 @@ const Navigation = ({ isAgent }) => {
     const handleClick = (e) => {
       e.preventDefault();
       handleNavigation(to, action);
-      
+
       // For agents that prefer traditional navigation
       if (isAgent && window.AgentUX?.preferTraditionalNav) {
         window.location.href = to;
         return;
       }
-      
+
       // SPA navigation
       window.history.pushState({}, '', to);
       window.dispatchEvent(new PopStateEvent('popstate'));
     };
 
     return (
-      <a 
+      <a
         href={to}
         onClick={handleClick}
         data-agent-action={action}
@@ -69,16 +57,16 @@ const Navigation = ({ isAgent }) => {
   const currentPath = window.location.pathname;
 
   return (
-    <nav 
-      className="main-navigation" 
-      role="navigation" 
+    <nav
+      className="main-navigation"
+      role="navigation"
       aria-label="Main navigation"
       data-agent-component="navigation"
       data-agent-enhanced={isAgent}
     >
       <div className="nav-container">
-        <NavLink 
-          to="/" 
+        <NavLink
+          to="/"
           action="go-home"
           ariaCurrent={currentPath === '/' ? 'page' : undefined}
         >
@@ -86,11 +74,11 @@ const Navigation = ({ isAgent }) => {
             AgentUX Store
           </span>
         </NavLink>
-        
+
         <ul role="list" className="nav-links">
           <li>
-            <NavLink 
-              to="/" 
+            <NavLink
+              to="/"
               action="browse-home"
               ariaCurrent={currentPath === '/' ? 'page' : undefined}
             >
@@ -98,8 +86,8 @@ const Navigation = ({ isAgent }) => {
             </NavLink>
           </li>
           <li>
-            <NavLink 
-              to="/products" 
+            <NavLink
+              to="/products"
               action="view-products"
               ariaCurrent={currentPath.startsWith('/products') ? 'page' : undefined}
             >
@@ -107,8 +95,8 @@ const Navigation = ({ isAgent }) => {
             </NavLink>
           </li>
           <li>
-            <NavLink 
-              to="/contact" 
+            <NavLink
+              to="/contact"
               action="get-support"
               ariaCurrent={currentPath === '/contact' ? 'page' : undefined}
             >
@@ -116,7 +104,7 @@ const Navigation = ({ isAgent }) => {
             </NavLink>
           </li>
         </ul>
-        
+
         {isAgent && (
           <div className="agent-status" data-agent-component="status-indicator">
             <span role="img" aria-label="Agent detected">🤖</span>
@@ -129,7 +117,7 @@ const Navigation = ({ isAgent }) => {
 };
 
 export default Navigation;
-```
+````
 
 ### src/pages/Home.js
 
@@ -148,12 +136,12 @@ const Home = ({ navigate, isAgent, agentInfo }) => {
       try {
         const data = await fetchFeaturedProducts();
         setProducts(data);
-        
+
         if (isAgent) {
           trackAgentInteraction('content_loaded', {
             page: 'home',
             productCount: data.length,
-            loadTime: performance.now()
+            loadTime: performance.now(),
           });
         }
       } catch (err) {
@@ -172,7 +160,7 @@ const Home = ({ navigate, isAgent, agentInfo }) => {
       trackAgentInteraction('product_click', {
         productId,
         source: 'featured_list',
-        page: 'home'
+        page: 'home',
       });
     }
     navigate(`/products/${productId}`);
@@ -182,14 +170,18 @@ const Home = ({ navigate, isAgent, agentInfo }) => {
     if (isAgent) {
       trackAgentInteraction('cta_click', {
         action,
-        page: 'home'
+        page: 'home',
       });
     }
   };
 
   if (loading) {
     return (
-      <div className="loading-state" data-agent-component="loading" role="status">
+      <div
+        className="loading-state"
+        data-agent-component="loading"
+        role="status"
+      >
         <p data-agent-content="loading-message" aria-live="polite">
           Loading featured products...
         </p>
@@ -202,7 +194,7 @@ const Home = ({ navigate, isAgent, agentInfo }) => {
       <div className="error-state" data-agent-component="error" role="alert">
         <h2 data-agent-content="error-title">Unable to Load Products</h2>
         <p data-agent-content="error-message">{error}</p>
-        <button 
+        <button
           onClick={() => window.location.reload()}
           data-agent-action="retry-loading"
           className="btn btn-primary"
@@ -214,18 +206,27 @@ const Home = ({ navigate, isAgent, agentInfo }) => {
   }
 
   return (
-    <div className="home-page" data-agent-page="home" data-agent-content-type="product-showcase">
+    <div
+      className="home-page"
+      data-agent-page="home"
+      data-agent-content-type="product-showcase"
+    >
       {/* Hero Section */}
-      <section className="hero" data-agent-component="hero-banner" role="banner">
+      <section
+        className="hero"
+        data-agent-component="hero-banner"
+        role="banner"
+      >
         <div className="container">
           <h1 data-agent-content="page-title">
             Welcome to the Future of Agent-Human Interaction
           </h1>
           <p data-agent-content="page-description" className="hero-subtitle">
-            Discover products designed with AgentUX principles - optimized for both AI agents and human users
+            Discover products designed with AgentUX principles - optimized for
+            both AI agents and human users
           </p>
           <div className="hero-actions">
-            <button 
+            <button
               onClick={() => {
                 handleCTAClick('view-all-products');
                 navigate('/products');
@@ -235,7 +236,7 @@ const Home = ({ navigate, isAgent, agentInfo }) => {
             >
               Browse All Products
             </button>
-            <button 
+            <button
               onClick={() => {
                 handleCTAClick('get-consultation');
                 navigate('/contact');
@@ -250,8 +251,8 @@ const Home = ({ navigate, isAgent, agentInfo }) => {
       </section>
 
       {/* Featured Products Section */}
-      <section 
-        className="featured-products" 
+      <section
+        className="featured-products"
         data-agent-component="featured-products"
         role="region"
         aria-labelledby="featured-heading"
@@ -263,16 +264,16 @@ const Home = ({ navigate, isAgent, agentInfo }) => {
           <p data-agent-content="section-description">
             Our top-rated products that showcase AgentUX design principles
           </p>
-          
-          <div 
+
+          <div
             className="products-grid"
             data-agent-component="product-list"
             data-agent-list-type="featured"
             role="list"
             aria-label="Featured products"
           >
-            {products.map(product => (
-              <ProductCard 
+            {products.map((product) => (
+              <ProductCard
                 key={product.id}
                 product={product}
                 isAgent={isAgent}
@@ -284,7 +285,7 @@ const Home = ({ navigate, isAgent, agentInfo }) => {
       </section>
 
       {/* Benefits Section */}
-      <section 
+      <section
         className="benefits"
         data-agent-component="benefits-section"
         role="region"
@@ -294,19 +295,19 @@ const Home = ({ navigate, isAgent, agentInfo }) => {
           <h2 id="benefits-heading" data-agent-content="section-title">
             Why Choose AgentUX Products?
           </h2>
-          
+
           <div className="benefits-grid">
-            <BenefitCard 
+            <BenefitCard
               icon="🤖"
               title="Agent-Optimized"
               description="Every product is designed with AI agents in mind, featuring semantic markup and clear data structures."
             />
-            <BenefitCard 
+            <BenefitCard
               icon="👥"
               title="Human-Friendly"
               description="Beautiful interfaces that delight human users while maintaining full accessibility standards."
             />
-            <BenefitCard 
+            <BenefitCard
               icon="⚡"
               title="Performance First"
               description="Optimized for both SPA responsiveness and agent accessibility with SSR fallbacks."
@@ -316,26 +317,26 @@ const Home = ({ navigate, isAgent, agentInfo }) => {
       </section>
 
       {/* Structured Data */}
-      <script 
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{
           __html: JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ItemList",
-            "name": "Featured AgentUX Products",
-            "itemListElement": products.map((product, index) => ({
-              "@type": "Product",
-              "position": index + 1,
-              "name": product.name,
-              "description": product.description,
-              "offers": {
-                "@type": "Offer",
-                "price": product.price,
-                "priceCurrency": "USD",
-                "availability": "https://schema.org/InStock"
-              }
-            }))
-          })
+            '@context': 'https://schema.org',
+            '@type': 'ItemList',
+            name: 'Featured AgentUX Products',
+            itemListElement: products.map((product, index) => ({
+              '@type': 'Product',
+              position: index + 1,
+              name: product.name,
+              description: product.description,
+              offers: {
+                '@type': 'Offer',
+                price: product.price,
+                priceCurrency: 'USD',
+                availability: 'https://schema.org/InStock',
+              },
+            })),
+          }),
         }}
       />
     </div>
@@ -344,17 +345,17 @@ const Home = ({ navigate, isAgent, agentInfo }) => {
 
 const ProductCard = ({ product, isAgent, onClick }) => {
   return (
-    <article 
+    <article
       className="product-card"
       data-agent-component="product-card"
       data-agent-product-id={product.id}
       role="listitem"
-      itemScope 
+      itemScope
       itemType="https://schema.org/Product"
     >
       <div className="product-image-container">
-        <img 
-          src={product.image || '/images/placeholder-product.jpg'} 
+        <img
+          src={product.image || '/images/placeholder-product.jpg'}
           alt={`${product.name} - ${product.description}`}
           className="product-image"
           itemProp="image"
@@ -362,26 +363,26 @@ const ProductCard = ({ product, isAgent, onClick }) => {
           loading="lazy"
         />
       </div>
-      
+
       <div className="product-info">
-        <h3 
+        <h3
           className="product-name"
           itemProp="name"
           data-agent-content="product-name"
         >
           {product.name}
         </h3>
-        
-        <p 
+
+        <p
           className="product-description"
           itemProp="description"
           data-agent-content="product-description"
         >
           {product.description}
         </p>
-        
+
         <div className="product-meta">
-          <div 
+          <div
             className="product-price"
             itemProp="offers"
             itemScope
@@ -394,8 +395,8 @@ const ProductCard = ({ product, isAgent, onClick }) => {
             </span>
           </div>
         </div>
-        
-        <button 
+
+        <button
           onClick={onClick}
           className="btn btn-primary"
           data-agent-action="view-product-details"
@@ -437,60 +438,63 @@ const AgentFallback = ({ agentInfo }) => {
   `;
 
   return (
-    <div 
+    <div
       className="agent-fallback"
       data-agent-component="fallback-interface"
       role="main"
     >
       <div className="container">
         <header className="fallback-header">
-          <h1 data-agent-content="fallback-title">
-            Agent-Optimized Interface
-          </h1>
+          <h1 data-agent-content="fallback-title">Agent-Optimized Interface</h1>
           <p data-agent-content="fallback-subtitle">
             Welcome, {agentInfo.type || 'AI Agent'}!
           </p>
         </header>
-        
-        <section className="fallback-content" data-agent-component="fallback-content">
+
+        <section
+          className="fallback-content"
+          data-agent-component="fallback-content"
+        >
           <h2 data-agent-content="section-title">Available Options</h2>
-          
+
           <div className="fallback-options">
             <div className="option-card" data-agent-component="option-item">
               <h3 data-agent-content="option-title">Static Content Access</h3>
               <p data-agent-content="option-description">
-                Access our content through optimized static pages with full semantic markup.
+                Access our content through optimized static pages with full
+                semantic markup.
               </p>
-              <a 
-                href="/" 
+              <a
+                href="/"
                 className="btn btn-primary"
                 data-agent-action="access-static-content"
               >
                 View Static Site
               </a>
             </div>
-            
+
             <div className="option-card" data-agent-component="option-item">
               <h3 data-agent-content="option-title">API Access</h3>
               <p data-agent-content="option-description">
-                Direct API access for programmatic interaction with our services.
+                Direct API access for programmatic interaction with our
+                services.
               </p>
-              <a 
-                href="/api/docs" 
+              <a
+                href="/api/docs"
                 className="btn btn-secondary"
                 data-agent-action="view-api-docs"
               >
                 API Documentation
               </a>
             </div>
-            
+
             <div className="option-card" data-agent-component="option-item">
               <h3 data-agent-content="option-title">Contact Support</h3>
               <p data-agent-content="option-description">
                 Get assistance with agent-specific integration needs.
               </p>
-              <a 
-                href="/contact" 
+              <a
+                href="/contact"
                 className="btn btn-secondary"
                 data-agent-action="get-agent-support"
               >
@@ -499,31 +503,32 @@ const AgentFallback = ({ agentInfo }) => {
             </div>
           </div>
         </section>
-        
+
         <section className="agent-info" data-agent-component="agent-details">
           <h2 data-agent-content="section-title">Detected Agent Information</h2>
           <dl className="agent-details-list">
             <dt data-agent-content="detail-label">User Agent:</dt>
             <dd data-agent-content="detail-value">{agentInfo.userAgent}</dd>
-            
+
             <dt data-agent-content="detail-label">Agent Type:</dt>
-            <dd data-agent-content="detail-value">{agentInfo.type || 'Unknown'}</dd>
-            
+            <dd data-agent-content="detail-value">
+              {agentInfo.type || 'Unknown'}
+            </dd>
+
             <dt data-agent-content="detail-label">Capabilities:</dt>
             <dd data-agent-content="detail-value">
-              {agentInfo.capabilities ? Object.entries(agentInfo.capabilities)
-                .filter(([key, value]) => value)
-                .map(([key]) => key)
-                .join(', ') : 'Standard HTTP'
-              }
+              {agentInfo.capabilities
+                ? Object.entries(agentInfo.capabilities)
+                    .filter(([key, value]) => value)
+                    .map(([key]) => key)
+                    .join(', ')
+                : 'Standard HTTP'}
             </dd>
           </dl>
         </section>
-        
+
         <footer className="fallback-footer">
-          <p data-agent-content="footer-message">
-            {fallbackMessage}
-          </p>
+          <p data-agent-content="footer-message">{fallbackMessage}</p>
         </footer>
       </div>
     </div>
@@ -539,7 +544,7 @@ export default AgentFallback;
 // Agent detection and enhancement utilities
 export const detectAgent = () => {
   const userAgent = navigator.userAgent;
-  
+
   const agentPatterns = [
     { pattern: /googlebot/i, type: 'GoogleBot', category: 'search' },
     { pattern: /bingbot/i, type: 'BingBot', category: 'search' },
@@ -554,18 +559,23 @@ export const detectAgent = () => {
     { pattern: /puppeteer/i, type: 'Puppeteer', category: 'automation' },
     { pattern: /curl/i, type: 'cURL', category: 'cli' },
     { pattern: /wget/i, type: 'Wget', category: 'cli' },
-    { pattern: /bot/i, type: 'Generic Bot', category: 'unknown' }
+    { pattern: /bot/i, type: 'Generic Bot', category: 'unknown' },
   ];
-  
-  const detectedAgent = agentPatterns.find(agent => agent.pattern.test(userAgent));
+
+  const detectedAgent = agentPatterns.find((agent) =>
+    agent.pattern.test(userAgent)
+  );
   const isAgent = !!detectedAgent;
-  
+
   // Detect capabilities
   const capabilities = detectCapabilities();
-  
+
   // Determine preferences based on agent type
-  const preferences = determineAgentPreferences(detectedAgent?.category, capabilities);
-  
+  const preferences = determineAgentPreferences(
+    detectedAgent?.category,
+    capabilities
+  );
+
   return {
     isAgent,
     userAgent,
@@ -575,7 +585,7 @@ export const detectAgent = () => {
     preferences,
     preferStatic: preferences.preferStatic,
     preferTraditionalNav: preferences.preferTraditionalNav,
-    timestamp: new Date().toISOString()
+    timestamp: new Date().toISOString(),
   };
 };
 
@@ -592,9 +602,9 @@ const detectCapabilities = () => {
     notifications: 'Notification' in window,
     serviceWorker: 'serviceWorker' in navigator,
     webRTC: checkWebRTC(),
-    mediaDevices: 'mediaDevices' in navigator
+    mediaDevices: 'mediaDevices' in navigator,
   };
-  
+
   return capabilities;
 };
 
@@ -621,7 +631,9 @@ const checkSessionStorage = () => {
 const checkWebGL = () => {
   try {
     const canvas = document.createElement('canvas');
-    return !!(canvas.getContext('webgl') || canvas.getContext('experimental-webgl'));
+    return !!(
+      canvas.getContext('webgl') || canvas.getContext('experimental-webgl')
+    );
   } catch (e) {
     return false;
   }
@@ -650,9 +662,9 @@ const determineAgentPreferences = (category, capabilities) => {
     preferTraditionalNav: false,
     preferSimpleUI: false,
     preferStructuredData: true,
-    enhanceSemantics: true
+    enhanceSemantics: true,
   };
-  
+
   switch (category) {
     case 'search':
       preferences.preferStatic = true;
@@ -678,53 +690,59 @@ const determineAgentPreferences = (category, capabilities) => {
       preferences.preferStatic = true;
       preferences.preferTraditionalNav = true;
   }
-  
+
   // Override based on capabilities
   if (!capabilities.javascript) {
     preferences.preferStatic = true;
     preferences.preferTraditionalNav = true;
     preferences.preferSimpleUI = true;
   }
-  
+
   return preferences;
 };
 
 export const enhanceForAgents = (agentInfo) => {
   if (!agentInfo.isAgent) return;
-  
+
   // Add agent context to document
   document.documentElement.setAttribute('data-agent-context', 'detected');
-  document.documentElement.setAttribute('data-agent-type', agentInfo.type || 'unknown');
-  document.documentElement.setAttribute('data-agent-category', agentInfo.category || 'unknown');
-  
+  document.documentElement.setAttribute(
+    'data-agent-type',
+    agentInfo.type || 'unknown'
+  );
+  document.documentElement.setAttribute(
+    'data-agent-category',
+    agentInfo.category || 'unknown'
+  );
+
   // Enhance semantic markup
   enhanceSemanticMarkup();
-  
+
   // Add navigation aids
   enhanceNavigation(agentInfo);
-  
+
   // Optimize forms
   enhanceForms();
-  
+
   // Add structured data helpers
   enhanceStructuredData();
-  
+
   // Apply performance optimizations
   applyPerformanceOptimizations(agentInfo);
-  
+
   // Make agent info globally available
   window.AgentUX = {
     agentInfo,
     isAgent: true,
     enhance: enhanceForAgents,
-    preferences: agentInfo.preferences
+    preferences: agentInfo.preferences,
   };
 };
 
 const enhanceSemanticMarkup = () => {
   // Add missing semantic attributes to buttons
   const buttons = document.querySelectorAll('button:not([data-agent-action])');
-  buttons.forEach(button => {
+  buttons.forEach((button) => {
     const text = button.textContent.toLowerCase();
     if (text.includes('submit') || text.includes('send')) {
       button.setAttribute('data-agent-action', 'submit-form');
@@ -734,13 +752,13 @@ const enhanceSemanticMarkup = () => {
       button.setAttribute('data-agent-action', 'initiate-purchase');
     }
   });
-  
+
   // Enhance links
   const links = document.querySelectorAll('a:not([data-agent-action])');
-  links.forEach(link => {
+  links.forEach((link) => {
     const href = link.getAttribute('href');
     const text = link.textContent.toLowerCase();
-    
+
     if (href) {
       if (href.includes('product')) {
         link.setAttribute('data-agent-action', 'view-product');
@@ -762,7 +780,7 @@ const enhanceNavigation = (agentInfo) => {
       nav.appendChild(breadcrumbs);
     }
   }
-  
+
   // Add skip links if not present
   if (!document.querySelector('.skip-link')) {
     addSkipLinks();
@@ -772,33 +790,36 @@ const enhanceNavigation = (agentInfo) => {
 const createBreadcrumbs = () => {
   const path = window.location.pathname;
   const segments = path.split('/').filter(Boolean);
-  
+
   if (segments.length === 0) return null;
-  
+
   const breadcrumbs = document.createElement('nav');
   breadcrumbs.setAttribute('aria-label', 'Breadcrumb');
   breadcrumbs.setAttribute('data-agent-breadcrumbs', 'true');
   breadcrumbs.innerHTML = `
     <ol role="list" style="display: flex; gap: 0.5rem; margin: 0; padding: 0.5rem; background: #f8f9fa; font-size: 0.875rem;">
       <li><a href="/" data-agent-action="go-home">Home</a></li>
-      ${segments.map((segment, index) => {
-        const path = '/' + segments.slice(0, index + 1).join('/');
-        const isLast = index === segments.length - 1;
-        const label = segment.charAt(0).toUpperCase() + segment.slice(1);
-        
-        return `
+      ${segments
+        .map((segment, index) => {
+          const path = '/' + segments.slice(0, index + 1).join('/');
+          const isLast = index === segments.length - 1;
+          const label = segment.charAt(0).toUpperCase() + segment.slice(1);
+
+          return `
           <li>
             <span aria-hidden="true"> › </span>
-            ${isLast 
-              ? `<span aria-current="page" data-agent-content="current-page">${label}</span>`
-              : `<a href="${path}" data-agent-action="navigate-to-${segment}">${label}</a>`
+            ${
+              isLast
+                ? `<span aria-current="page" data-agent-content="current-page">${label}</span>`
+                : `<a href="${path}" data-agent-action="navigate-to-${segment}">${label}</a>`
             }
           </li>
         `;
-      }).join('')}
+        })
+        .join('')}
     </ol>
   `;
-  
+
   return breadcrumbs;
 };
 
@@ -819,32 +840,33 @@ const addSkipLinks = () => {
     border-radius: 4px;
     z-index: 1000;
   `;
-  
+
   skipLink.addEventListener('focus', () => {
     skipLink.style.top = '6px';
   });
-  
+
   skipLink.addEventListener('blur', () => {
     skipLink.style.top = '-40px';
   });
-  
+
   document.body.insertBefore(skipLink, document.body.firstChild);
 };
 
 const enhanceForms = () => {
   const forms = document.querySelectorAll('form');
-  forms.forEach(form => {
+  forms.forEach((form) => {
     if (!form.hasAttribute('data-agent-component')) {
       form.setAttribute('data-agent-component', 'form');
     }
-    
+
     // Enhance form fields
     const fields = form.querySelectorAll('input, select, textarea');
-    fields.forEach(field => {
+    fields.forEach((field) => {
       if (!field.hasAttribute('data-agent-field')) {
         const label = form.querySelector(`label[for="${field.id}"]`);
         if (label) {
-          const fieldType = label.textContent.toLowerCase()
+          const fieldType = label.textContent
+            .toLowerCase()
             .replace(/[^a-z0-9]/g, '-')
             .replace(/-+/g, '-')
             .replace(/^-|-$/g, '');
@@ -859,18 +881,19 @@ const enhanceStructuredData = () => {
   // Add page-level structured data if not present
   if (!document.querySelector('script[type="application/ld+json"]')) {
     const structuredData = {
-      "@context": "https://schema.org",
-      "@type": "WebPage",
-      "name": document.title,
-      "description": document.querySelector('meta[name="description"]')?.content || '',
-      "url": window.location.href,
-      "isPartOf": {
-        "@type": "WebSite",
-        "name": "AgentUX Store",
-        "url": window.location.origin
-      }
+      '@context': 'https://schema.org',
+      '@type': 'WebPage',
+      name: document.title,
+      description:
+        document.querySelector('meta[name="description"]')?.content || '',
+      url: window.location.href,
+      isPartOf: {
+        '@type': 'WebSite',
+        name: 'AgentUX Store',
+        url: window.location.origin,
+      },
     };
-    
+
     const script = document.createElement('script');
     script.type = 'application/ld+json';
     script.textContent = JSON.stringify(structuredData);
@@ -892,7 +915,7 @@ const applyPerformanceOptimizations = (agentInfo) => {
     `;
     document.head.appendChild(style);
   }
-  
+
   // Preload critical resources
   if (agentInfo.category === 'search') {
     preloadCriticalResources();
@@ -903,10 +926,10 @@ const preloadCriticalResources = () => {
   // Preload critical CSS and fonts
   const criticalResources = [
     { href: '/static/css/main.css', as: 'style' },
-    { href: '/api/products/featured', as: 'fetch', crossorigin: 'anonymous' }
+    { href: '/api/products/featured', as: 'fetch', crossorigin: 'anonymous' },
   ];
-  
-  criticalResources.forEach(resource => {
+
+  criticalResources.forEach((resource) => {
     const link = document.createElement('link');
     link.rel = 'preload';
     Object.assign(link, resource);
@@ -925,196 +948,203 @@ const { chromium } = require('playwright');
 
 describe('SPA Agent Compatibility', () => {
   let browser, context, page;
-  
+
   beforeAll(async () => {
     browser = await chromium.launch();
   });
-  
+
   afterAll(async () => {
     await browser.close();
   });
-  
+
   beforeEach(async () => {
     context = await browser.newContext();
     page = await context.newPage();
   });
-  
+
   afterEach(async () => {
     await context.close();
   });
-  
+
   describe('Agent Detection and SSR Fallback', () => {
     test('Serves SSR content to search engine bots', async () => {
-      await page.route('**/*', route => {
+      await page.route('**/*', (route) => {
         const headers = {
           ...route.request().headers(),
-          'user-agent': 'GoogleBot/2.1 (+http://www.google.com/bot.html)'
+          'user-agent': 'GoogleBot/2.1 (+http://www.google.com/bot.html)',
         };
         route.continue({ headers });
       });
-      
+
       const response = await page.goto('http://localhost:3000/');
-      
+
       // Verify SSR content is served
       expect(response.status()).toBe(200);
       expect(response.headers()['x-agent-optimized']).toBe('true');
-      
+
       // Check for agent-specific markup
       const agentMode = await page.getAttribute('html', 'data-agent-mode');
       expect(agentMode).toBe('ssr-fallback');
-      
+
       // Verify content is immediately available
       const title = await page.textContent('[data-agent-content="page-title"]');
       expect(title).toContain('AgentUX Store');
-      
+
       // Check structured data
-      const structuredData = await page.locator('script[type="application/ld+json"]').textContent();
+      const structuredData = await page
+        .locator('script[type="application/ld+json"]')
+        .textContent();
       const data = JSON.parse(structuredData);
       expect(data['@type']).toBe('WebSite');
     });
-    
+
     test('Serves SPA experience to human users', async () => {
       await page.goto('http://localhost:3000/');
-      
+
       // Wait for SPA to load
       await page.waitForSelector('[data-agent-spa="true"]');
-      
+
       // Verify SPA functionality
       const isSPA = await page.getAttribute('.app', 'data-agent-spa');
       expect(isSPA).toBe('true');
-      
+
       // Test client-side navigation
       await page.click('[data-agent-action="view-products"]');
       await page.waitForURL('**/products');
-      
+
       // Verify URL changed without page reload
       expect(page.url()).toContain('/products');
     });
   });
-  
+
   describe('Agent Enhancement Features', () => {
     test('Applies agent enhancements when detected', async () => {
       await page.setUserAgent('TestBot/1.0 (compatible; Agent)');
       await page.goto('http://localhost:3000/');
-      
+
       await page.waitForSelector('[data-agent-spa-loaded="true"]');
-      
+
       // Check agent context
-      const agentContext = await page.getAttribute('html', 'data-agent-context');
+      const agentContext = await page.getAttribute(
+        'html',
+        'data-agent-context'
+      );
       expect(agentContext).toBe('detected');
-      
+
       // Verify agent enhancements
       const agentActions = await page.$('[data-agent-action]');
       expect(agentActions.length).toBeGreaterThan(0);
-      
+
       // Check skip links
       const skipLink = await page.$('[data-agent-action="skip-to-content"]');
       expect(skipLink).toBeTruthy();
     });
-    
+
     test('Tracks agent interactions', async () => {
       let analyticsRequests = [];
-      
-      await page.route('/api/analytics/**', route => {
+
+      await page.route('/api/analytics/**', (route) => {
         analyticsRequests.push({
           url: route.request().url(),
           method: route.request().method(),
-          postData: route.request().postData()
+          postData: route.request().postData(),
         });
         route.fulfill({ status: 200, body: 'OK' });
       });
-      
+
       await page.setUserAgent('TestBot/1.0');
       await page.goto('http://localhost:3000/');
       await page.waitForSelector('[data-agent-spa-loaded="true"]');
-      
+
       // Trigger agent interaction
       await page.click('[data-agent-action="view-products"]');
-      
+
       // Verify analytics tracking
       expect(analyticsRequests.length).toBeGreaterThan(0);
-      
-      const interactionRequest = analyticsRequests.find(req => 
+
+      const interactionRequest = analyticsRequests.find((req) =>
         req.url.includes('agent-interaction')
       );
       expect(interactionRequest).toBeTruthy();
     });
   });
-  
+
   describe('Performance Optimization', () => {
     test('Optimizes performance for agents', async () => {
       await page.setUserAgent('GoogleBot/2.1');
-      
+
       const startTime = Date.now();
       await page.goto('http://localhost:3000/');
-      
+
       // Measure time to content
       await page.waitForSelector('[data-agent-content="page-title"]');
       const loadTime = Date.now() - startTime;
-      
+
       // Agent pages should load quickly
       expect(loadTime).toBeLessThan(2000);
-      
+
       // Check for performance optimizations
       const animations = await page.evaluate(() => {
         const style = document.querySelector('style');
-        return style && style.textContent.includes('animation-duration: 0.01ms');
+        return (
+          style && style.textContent.includes('animation-duration: 0.01ms')
+        );
       });
-      
+
       // Animations should be disabled for search bots
       expect(animations).toBe(true);
     });
   });
-  
+
   describe('Accessibility Compliance', () => {
     test('Maintains accessibility standards', async () => {
       await page.goto('http://localhost:3000/');
       await page.waitForSelector('[data-agent-spa-loaded="true"]');
-      
+
       // Check semantic structure
       const main = await page.$('main[role="main"]');
       expect(main).toBeTruthy();
-      
+
       const nav = await page.$('nav[role="navigation"]');
       expect(nav).toBeTruthy();
-      
+
       // Verify ARIA labels
       const ariaLabels = await page.$('[aria-label]');
       expect(ariaLabels.length).toBeGreaterThan(0);
-      
+
       // Check heading structure
       const headings = await page.$('h1, h2, h3, h4, h5, h6');
       expect(headings.length).toBeGreaterThan(0);
-      
+
       // Verify form accessibility
       const labels = await page.$('label[for]');
       const inputs = await page.$('input[id], select[id], textarea[id]');
-      
+
       // Should have proper label associations
       expect(labels.length).toBeGreaterThanOrEqual(inputs.length * 0.8);
     });
   });
-  
+
   describe('Cross-Agent Compatibility', () => {
     const agentUserAgents = [
       'Mozilla/5.0 (compatible; Googlebot/2.1; +http://www.google.com/bot.html)',
       'Mozilla/5.0 (compatible; bingbot/2.0; +http://www.bing.com/bingbot.htm)',
       'curl/7.68.0',
-      'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/91.0.4472.124 Safari/537.36'
+      'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) HeadlessChrome/91.0.4472.124 Safari/537.36',
     ];
-    
-    agentUserAgents.forEach(userAgent => {
+
+    agentUserAgents.forEach((userAgent) => {
       test(`Works with ${userAgent.split('/')[0]}`, async () => {
         await page.setUserAgent(userAgent);
-        
+
         const response = await page.goto('http://localhost:3000/');
         expect(response.status()).toBe(200);
-        
+
         // Verify content is accessible
         const title = await page.textContent('h1');
         expect(title).toBeTruthy();
         expect(title.length).toBeGreaterThan(0);
-        
+
         // Check for agent-specific attributes
         const agentComponents = await page.$('[data-agent-component]');
         expect(agentComponents.length).toBeGreaterThan(0);
@@ -1137,57 +1167,57 @@ class SPAPerformanceMonitor {
       largestContentfulPaint: 0,
       cumulativeLayoutShift: 0,
       agentInteractions: [],
-      routeTransitions: []
+      routeTransitions: [],
     };
-    
+
     this.isAgent = this.detectAgent();
     this.startMonitoring();
   }
-  
+
   detectAgent() {
     return /bot|crawler|spider|automation|headless/i.test(navigator.userAgent);
   }
-  
+
   startMonitoring() {
     // Performance Observer for Core Web Vitals
     if ('PerformanceObserver' in window) {
       this.observeWebVitals();
     }
-    
+
     // Track SPA-specific metrics
     this.trackSPAMetrics();
-    
+
     // Monitor route transitions
     this.monitorRouteTransitions();
-    
+
     // Track agent-specific interactions
     if (this.isAgent) {
       this.trackAgentInteractions();
     }
   }
-  
+
   observeWebVitals() {
     // First Contentful Paint
     new PerformanceObserver((list) => {
       const entries = list.getEntries();
-      entries.forEach(entry => {
+      entries.forEach((entry) => {
         if (entry.name === 'first-contentful-paint') {
           this.metrics.firstContentfulPaint = entry.startTime;
         }
       });
     }).observe({ entryTypes: ['paint'] });
-    
+
     // Largest Contentful Paint
     new PerformanceObserver((list) => {
       const entries = list.getEntries();
       const lastEntry = entries[entries.length - 1];
       this.metrics.largestContentfulPaint = lastEntry.startTime;
     }).observe({ entryTypes: ['largest-contentful-paint'] });
-    
+
     // Cumulative Layout Shift
     new PerformanceObserver((list) => {
       let clsValue = 0;
-      list.getEntries().forEach(entry => {
+      list.getEntries().forEach((entry) => {
         if (!entry.hadRecentInput) {
           clsValue += entry.value;
         }
@@ -1195,34 +1225,36 @@ class SPAPerformanceMonitor {
       this.metrics.cumulativeLayoutShift = clsValue;
     }).observe({ entryTypes: ['layout-shift'] });
   }
-  
+
   trackSPAMetrics() {
     // Initial page load
     window.addEventListener('load', () => {
       this.metrics.initialLoad = performance.now();
     });
-    
+
     // SPA ready state
     const observer = new MutationObserver((mutations) => {
-      mutations.forEach(mutation => {
-        if (mutation.type === 'attributes' && 
-            mutation.attributeName === 'data-agent-spa-loaded') {
+      mutations.forEach((mutation) => {
+        if (
+          mutation.type === 'attributes' &&
+          mutation.attributeName === 'data-agent-spa-loaded'
+        ) {
           this.metrics.spaReady = performance.now();
           observer.disconnect();
           this.sendMetrics();
         }
       });
     });
-    
+
     observer.observe(document.body, {
       attributes: true,
-      attributeFilter: ['data-agent-spa-loaded']
+      attributeFilter: ['data-agent-spa-loaded'],
     });
   }
-  
+
   monitorRouteTransitions() {
     let routeStartTime = performance.now();
-    
+
     // Listen for route changes
     window.addEventListener('popstate', () => {
       const transitionTime = performance.now() - routeStartTime;
@@ -1230,12 +1262,12 @@ class SPAPerformanceMonitor {
         from: document.referrer || 'direct',
         to: window.location.pathname,
         duration: transitionTime,
-        timestamp: Date.now()
+        timestamp: Date.now(),
       });
       routeStartTime = performance.now();
     });
   }
-  
+
   trackAgentInteractions() {
     document.addEventListener('click', (event) => {
       const target = event.target.closest('[data-agent-action]');
@@ -1245,12 +1277,12 @@ class SPAPerformanceMonitor {
           component: target.getAttribute('data-agent-component'),
           timestamp: Date.now(),
           element: target.tagName.toLowerCase(),
-          text: target.textContent.trim().substring(0, 50)
+          text: target.textContent.trim().substring(0, 50),
         });
       }
     });
   }
-  
+
   sendMetrics() {
     const payload = {
       userAgent: navigator.userAgent,
@@ -1259,56 +1291,64 @@ class SPAPerformanceMonitor {
       timestamp: Date.now(),
       metrics: this.metrics,
       connection: this.getConnectionInfo(),
-      device: this.getDeviceInfo()
+      device: this.getDeviceInfo(),
     };
-    
+
     // Send to analytics endpoint
     if (navigator.sendBeacon) {
-      navigator.sendBeacon('/api/analytics/spa-performance', JSON.stringify(payload));
+      navigator.sendBeacon(
+        '/api/analytics/spa-performance',
+        JSON.stringify(payload)
+      );
     } else {
       fetch('/api/analytics/spa-performance', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(payload)
+        body: JSON.stringify(payload),
       }).catch(console.error);
     }
   }
-  
+
   getConnectionInfo() {
-    const connection = navigator.connection || navigator.mozConnection || navigator.webkitConnection;
-    return connection ? {
-      effectiveType: connection.effectiveType,
-      downlink: connection.downlink,
-      rtt: connection.rtt
-    } : null;
+    const connection =
+      navigator.connection ||
+      navigator.mozConnection ||
+      navigator.webkitConnection;
+    return connection
+      ? {
+          effectiveType: connection.effectiveType,
+          downlink: connection.downlink,
+          rtt: connection.rtt,
+        }
+      : null;
   }
-  
+
   getDeviceInfo() {
     return {
       viewport: {
         width: window.innerWidth,
-        height: window.innerHeight
+        height: window.innerHeight,
       },
       screen: {
         width: window.screen.width,
         height: window.screen.height,
-        pixelRatio: window.devicePixelRatio
+        pixelRatio: window.devicePixelRatio,
       },
       memory: navigator.deviceMemory || null,
-      cores: navigator.hardwareConcurrency || null
+      cores: navigator.hardwareConcurrency || null,
     };
   }
-  
+
   // Public API for manual tracking
   trackCustomMetric(name, value, metadata = {}) {
     if (!this.metrics.custom) {
       this.metrics.custom = {};
     }
-    
+
     this.metrics.custom[name] = {
       value,
       timestamp: Date.now(),
-      ...metadata
+      ...metadata,
     };
   }
 }
@@ -1371,7 +1411,7 @@ limit_req_zone $agent_category zone=automation:10m rate=20r/s;
 server {
     listen 80;
     server_name example.com;
-    
+
     # Agent categorization
     map $http_user_agent $agent_category {
         ~*googlebot|bingbot|slurp|duckduckbot search;
@@ -1380,49 +1420,49 @@ server {
         ~*bot|crawler|spider generic;
         default human;
     }
-    
+
     # Set agent-specific headers
     add_header X-Agent-Category $agent_category;
     add_header X-Served-By "nginx-spa-router";
-    
+
     # Static assets with aggressive caching
     location /static/ {
         alias /app/build/static/;
         expires 1y;
         add_header Cache-Control "public, immutable";
-        
+
         # Compress for agents
         gzip on;
         gzip_vary on;
         gzip_types text/css application/javascript application/json;
     }
-    
+
     # API routes
     location /api/ {
         proxy_pass http://spa_backend;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Agent-Category $agent_category;
-        
+
         # Apply rate limiting
         limit_req zone=search_bots burst=5 nodelay;
         limit_req zone=social_bots burst=3 nodelay;
         limit_req zone=automation burst=10 nodelay;
     }
-    
+
     # Agent-optimized routes
     location / {
         # Add agent detection headers
         proxy_set_header X-Agent-Category $agent_category;
         proxy_set_header X-Original-User-Agent $http_user_agent;
-        
+
         # Pass to Node.js backend for agent detection and routing
         proxy_pass http://spa_backend;
         proxy_set_header Host $host;
         proxy_set_header X-Real-IP $remote_addr;
         proxy_set_header X-Forwarded-For $proxy_add_x_forwarded_for;
         proxy_set_header X-Forwarded-Proto $scheme;
-        
+
         # Caching strategy based on agent type
         if ($agent_category = "search") {
             add_header Cache-Control "public, max-age=3600";
@@ -1433,13 +1473,13 @@ server {
         if ($agent_category = "human") {
             add_header Cache-Control "no-cache";
         }
-        
+
         # Security headers
         add_header X-Content-Type-Options nosniff;
         add_header X-Frame-Options DENY;
         add_header X-XSS-Protection "1; mode=block";
     }
-    
+
     # Health check endpoint
     location /health {
         access_log off;
@@ -1452,18 +1492,21 @@ server {
 ## Key Implementation Benefits
 
 ### For Human Users
+
 - **Fast SPA Experience**: Client-side routing and dynamic loading
 - **Progressive Enhancement**: Features layer on top of accessible base
 - **Modern UI/UX**: Full interactive capabilities with animations and effects
 - **Offline Support**: Service worker integration for PWA features
 
 ### For AI Agents
+
 - **Immediate Content Access**: SSR fallbacks provide content without JS
 - **Semantic Structure**: Comprehensive markup with agent-specific attributes
 - **Traditional Navigation**: Standard HTTP navigation for better compatibility
 - **Performance Optimized**: Reduced animations and faster loading
 
 ### For Developers
+
 - **Single Codebase**: One application serving both audiences
 - **Flexible Routing**: Automatic agent detection and content serving
 - **Comprehensive Analytics**: Track both human and agent interactions
@@ -1474,12 +1517,14 @@ server {
 ### Real-World Results
 
 **Human Users (SPA Mode):**
+
 - Initial load: 1.8s
 - Route transitions: 150ms
 - First Contentful Paint: 1.2s
 - Largest Contentful Paint: 2.1s
 
 **AI Agents (SSR Mode):**
+
 - Time to content: 0.4s
 - Full page load: 0.8s
 - Agent success rate: 89%
@@ -1487,7 +1532,7 @@ server {
 
 ## Commit Description
 
-```
+````
 Add React SPA with SSR fallbacks AgentUX implementation
 
 - Hybrid architecture serving SPA to humans and SSR to agents
@@ -1520,64 +1565,38 @@ The approach automatically detects agents and serves appropriate content while m
 
 ## Architecture Strategy
 
-```
-┌─────────────────┐    ┌──────────────────┐    ┌─────────────────┐
-│   User Request  │───▶│  Agent Detection │───▶│ Content Strategy │
-└─────────────────┘    └──────────────────┘    └─────────────────┘
-                                │                         │
-                                ▼                         ▼
-                       ┌─────────────────┐       ┌─────────────────┐
-                       │ Agent Detected? │       │ Routing Strategy │
-                       └─────────────────┘       └─────────────────┘
-                              │                           │
-                    ┌─────────┴─────────┐                ▼
-                    ▼                   ▼       ┌─────────────────┐
-          ┌─────────────────┐  ┌─────────────────┐│ Content Delivery │
-          │ SSR Fallback    │  │ SPA Experience  ││                 │
-          │ Static Pages    │  │ Client Routing  │└─────────────────┘
-          │ Traditional Nav │  │ Dynamic Loading │
-          └─────────────────┘  └─────────────────┘
+````
+
+┌─────────────────┐ ┌──────────────────┐ ┌─────────────────┐ │ User Request
+│───▶│ Agent Detection │───▶│ Content Strategy │ └─────────────────┘
+└──────────────────┘ └─────────────────┘ │ │ ▼ ▼ ┌─────────────────┐
+┌─────────────────┐ │ Agent Detected? │ │ Routing Strategy │ └─────────────────┘
+└─────────────────┘ │ │ ┌─────────┴─────────┐ ▼ ▼ ▼ ┌─────────────────┐
+┌─────────────────┐ ┌─────────────────┐│ Content Delivery │ │ SSR Fallback │ │
+SPA Experience ││ │ │ Static Pages │ │ Client Routing │└─────────────────┘ │
+Traditional Nav │ │ Dynamic Loading │ └─────────────────┘ └─────────────────┘
+
 ```
 
 ## Project Structure
 
 ```
-react-spa-agentux/
-├── package.json
-├── webpack.config.js
-├── server/
-│   ├── server.js              # Express server with agent detection
-│   ├── routes/
-│   │   ├── api.js             # API endpoints
-│   │   └── ssr.js             # SSR rendering for agents
-│   └── templates/
-│       ├── agent-home.html    # Static templates for agents
-│       ├── agent-products.html
-│       └── agent-contact.html
-├── src/
-│   ├── index.js               # SPA entry point
-│   ├── App.js                 # Main SPA component
-│   ├── components/
-│   │   ├── Router.js          # Client-side routing
-│   │   ├── Navigation.js      # Adaptive navigation
-│   │   ├── ProductList.js     # Product components
-│   │   └── AgentFallback.js   # Agent detection component
-│   ├── pages/
-│   │   ├── Home.js            # SPA pages
-│   │   ├── Products.js
-│   │   ├── ProductDetail.js
-│   │   └── Contact.js
-│   ├── utils/
-│   │   ├── agentDetection.js  # Agent detection utilities
-│   │   ├── apiClient.js       # API interaction
-│   │   └── analytics.js       # Agent analytics
-│   └── styles/
-│       └── main.css
-├── public/
-│   ├── index.html             # SPA shell
-│   └── sitemap.xml
-└── build/                     # Production build output
-```
+
+react-spa-agentux/ ├── package.json ├── webpack.config.js ├── server/ │ ├──
+server.js # Express server with agent detection │ ├── routes/ │ │ ├── api.js #
+API endpoints │ │ └── ssr.js # SSR rendering for agents │ └── templates/ │ ├──
+agent-home.html # Static templates for agents │ ├── agent-products.html │ └──
+agent-contact.html ├── src/ │ ├── index.js # SPA entry point │ ├── App.js # Main
+SPA component │ ├── components/ │ │ ├── Router.js # Client-side routing │ │ ├──
+Navigation.js # Adaptive navigation │ │ ├── ProductList.js # Product components
+│ │ └── AgentFallback.js # Agent detection component │ ├── pages/ │ │ ├──
+Home.js # SPA pages │ │ ├── Products.js │ │ ├── ProductDetail.js │ │ └──
+Contact.js │ ├── utils/ │ │ ├── agentDetection.js # Agent detection utilities │
+│ ├── apiClient.js # API interaction │ │ └── analytics.js # Agent analytics │
+└── styles/ │ └── main.css ├── public/ │ ├── index.html # SPA shell │ └──
+sitemap.xml └── build/ # Production build output
+
+````
 
 ## Server Configuration
 
@@ -1595,7 +1614,7 @@ const PORT = process.env.PORT || 3000;
 // Agent detection middleware
 const detectAgent = (req, res, next) => {
   const userAgent = req.get('User-Agent') || '';
-  
+
   const agentPatterns = [
     /googlebot/i, /bingbot/i, /slurp/i, /duckduckbot/i,
     /baiduspider/i, /yandexbot/i, /facebookexternalhit/i,
@@ -1604,16 +1623,16 @@ const detectAgent = (req, res, next) => {
     /headless/i, /selenium/i, /playwright/i, /puppeteer/i,
     /curl/i, /wget/i, /httpie/i
   ];
-  
+
   req.isAgent = agentPatterns.some(pattern => pattern.test(userAgent));
   req.agentType = req.isAgent ? userAgent.split(' ')[0] : null;
   req.agentCategory = categorizeAgent(userAgent);
-  
+
   // Log agent visits for analytics
   if (req.isAgent) {
     console.log(`Agent detected: ${req.agentType} (${req.agentCategory})`);
   }
-  
+
   next();
 };
 
@@ -1640,14 +1659,14 @@ app.get('*', (req, res) => {
   if (req.isAgent) {
     return handleAgentRequest(req, res);
   }
-  
+
   // Serve SPA for human users
   res.sendFile(path.join(__dirname, '../build/index.html'));
 });
 
 const handleAgentRequest = (req, res) => {
   const route = req.path;
-  
+
   // Route to appropriate agent-optimized content
   switch (route) {
     case '/':
@@ -1668,7 +1687,7 @@ const serveAgentHome = async (req, res) => {
   try {
     // Fetch data for SSR
     const products = await fetchFeaturedProducts();
-    
+
     const html = `
 <!DOCTYPE html>
 <html lang="en" data-agent-framework="react-spa" data-agent-mode="ssr-fallback">
@@ -1680,7 +1699,7 @@ const serveAgentHome = async (req, res) => {
   <meta name="agent-page" content="home">
   <meta name="agent-intent" content="browse-products">
   <meta name="agent-category" content="${req.agentCategory}">
-  
+
   <!-- Structured data for agents -->
   <script type="application/ld+json">
   ${JSON.stringify({
@@ -1696,7 +1715,7 @@ const serveAgentHome = async (req, res) => {
     }
   })}
   </script>
-  
+
   <style>
     body { font-family: system-ui, sans-serif; line-height: 1.6; margin: 0; padding: 0; }
     .container { max-width: 1200px; margin: 0 auto; padding: 1rem; }
@@ -1724,7 +1743,7 @@ const serveAgentHome = async (req, res) => {
       </div>
     </nav>
   </header>
-  
+
   <main role="main" id="main-content" data-agent-component="main-content">
     <section class="hero" data-agent-component="hero-banner">
       <div class="container">
@@ -1737,22 +1756,22 @@ const serveAgentHome = async (req, res) => {
         </a>
       </div>
     </section>
-    
+
     <section class="container" data-agent-component="featured-products">
       <h2 data-agent-content="section-title">Featured Products</h2>
       <div class="products-grid" role="list">
         ${products.map(product => `
-          <article class="product-card" data-agent-component="product-card" 
+          <article class="product-card" data-agent-component="product-card"
                    data-agent-product-id="${product.id}" role="listitem"
                    itemscope itemtype="https://schema.org/Product">
             <h3 data-agent-content="product-name" itemprop="name">${product.name}</h3>
             <p data-agent-content="product-description" itemprop="description">${product.description}</p>
-            <div class="product-price" data-agent-content="product-price" 
+            <div class="product-price" data-agent-content="product-price"
                  itemprop="offers" itemscope itemtype="https://schema.org/Offer">
               <span itemprop="price" content="${product.price}">$${product.price}</span>
               <meta itemprop="priceCurrency" content="USD">
             </div>
-            <a href="/products/${product.id}" class="btn" 
+            <a href="/products/${product.id}" class="btn"
                data-agent-action="view-product-details"
                data-agent-product-id="${product.id}">
               View Details
@@ -1762,7 +1781,7 @@ const serveAgentHome = async (req, res) => {
       </div>
     </section>
   </main>
-  
+
   <footer role="contentinfo" data-agent-component="site-footer">
     <div class="container">
       <p>&copy; 2025 AgentUX Store. Designed for humans and AI agents.</p>
@@ -1775,7 +1794,7 @@ const serveAgentHome = async (req, res) => {
       </nav>
     </div>
   </footer>
-  
+
   <!-- Agent analytics -->
   <script>
     if (navigator.sendBeacon) {
@@ -1788,11 +1807,11 @@ const serveAgentHome = async (req, res) => {
   </script>
 </body>
 </html>`;
-    
+
     res.setHeader('Content-Type', 'text/html');
     res.setHeader('X-Agent-Optimized', 'true');
     res.send(html);
-    
+
   } catch (error) {
     console.error('Agent SSR error:', error);
     res.status(500).send('Server error');
@@ -1803,7 +1822,7 @@ const serveAgentProducts = async (req, res) => {
   try {
     const products = await fetchAllProducts(req.query);
     const query = req.query.q || '';
-    
+
     const html = `
 <!DOCTYPE html>
 <html lang="en" data-agent-framework="react-spa" data-agent-mode="ssr-fallback">
@@ -1815,7 +1834,7 @@ const serveAgentProducts = async (req, res) => {
   <meta name="agent-page" content="products">
   <meta name="agent-intent" content="find-product">
   <meta name="agent-search-query" content="${query}">
-  
+
   <script type="application/ld+json">
   ${JSON.stringify({
     "@context": "https://schema.org",
@@ -1835,7 +1854,7 @@ const serveAgentProducts = async (req, res) => {
     }))
   })}
   </script>
-  
+
   <style>
     body { font-family: system-ui, sans-serif; line-height: 1.6; margin: 0; padding: 0; }
     .container { max-width: 1200px; margin: 0 auto; padding: 1rem; }
@@ -1865,38 +1884,38 @@ const serveAgentProducts = async (req, res) => {
       </div>
     </nav>
   </header>
-  
+
   <main role="main" id="main-content" data-agent-component="main-content">
     <div class="container">
       <h1 data-agent-content="page-title">Product Catalog</h1>
-      
+
       <!-- Search form for agents -->
-      <form class="search-form" role="search" method="GET" action="/products" 
+      <form class="search-form" role="search" method="GET" action="/products"
             data-agent-component="product-search">
         <label for="search" class="sr-only">Search products</label>
-        <input type="search" id="search" name="q" value="${query}" 
+        <input type="search" id="search" name="q" value="${query}"
                placeholder="Search products..." data-agent-field="search-query">
         <button type="submit" data-agent-action="search-products">Search</button>
       </form>
-      
+
       ${query ? `<p data-agent-content="search-results">Showing results for: "${query}" (${products.length} products found)</p>` : ''}
-      
-      <div class="products-grid" role="list" data-agent-component="product-list" 
+
+      <div class="products-grid" role="list" data-agent-component="product-list"
            data-agent-count="${products.length}">
         ${products.map(product => `
-          <article class="product-card" data-agent-component="product-card" 
+          <article class="product-card" data-agent-component="product-card"
                    data-agent-product-id="${product.id}" role="listitem"
                    itemscope itemtype="https://schema.org/Product">
             <h3 data-agent-content="product-name" itemprop="name">${product.name}</h3>
             <p data-agent-content="product-description" itemprop="description">${product.description}</p>
             <p data-agent-content="product-category">Category: ${product.category}</p>
-            <div class="product-price" data-agent-content="product-price" 
+            <div class="product-price" data-agent-content="product-price"
                  itemprop="offers" itemscope itemtype="https://schema.org/Offer">
               <span itemprop="price" content="${product.price}">$${product.price}</span>
               <meta itemprop="priceCurrency" content="USD">
               <meta itemprop="availability" content="https://schema.org/InStock">
             </div>
-            <a href="/products/${product.id}" class="btn" 
+            <a href="/products/${product.id}" class="btn"
                data-agent-action="view-product-details"
                data-agent-product-id="${product.id}">
               View Details
@@ -1904,7 +1923,7 @@ const serveAgentProducts = async (req, res) => {
           </article>
         `).join('')}
       </div>
-      
+
       ${products.length === 0 ? `
         <div data-agent-component="empty-state" role="status">
           <h2>No products found</h2>
@@ -1916,7 +1935,7 @@ const serveAgentProducts = async (req, res) => {
       ` : ''}
     </div>
   </main>
-  
+
   <footer role="contentinfo" data-agent-component="site-footer">
     <div class="container">
       <p>&copy; 2025 AgentUX Store. ${products.length} products available.</p>
@@ -1924,11 +1943,11 @@ const serveAgentProducts = async (req, res) => {
   </footer>
 </body>
 </html>`;
-    
+
     res.setHeader('Content-Type', 'text/html');
     res.setHeader('X-Agent-Optimized', 'true');
     res.send(html);
-    
+
   } catch (error) {
     console.error('Agent products SSR error:', error);
     res.status(500).send('Server error');
@@ -1965,9 +1984,9 @@ const fetchFeaturedProducts = async () => {
 
 const fetchAllProducts = async (query = {}) => {
   let products = await fetchFeaturedProducts();
-  
+
   // Add more products for full catalog
-  products = [...products, 
+  products = [...products,
     {
       id: '4',
       name: 'AgentUX Form Builder',
@@ -1983,17 +2002,17 @@ const fetchAllProducts = async (query = {}) => {
       category: 'UI Components'
     }
   ];
-  
+
   // Filter by search query if provided
   if (query.q) {
     const searchTerm = query.q.toLowerCase();
-    products = products.filter(product => 
+    products = products.filter(product =>
       product.name.toLowerCase().includes(searchTerm) ||
       product.description.toLowerCase().includes(searchTerm) ||
       product.category.toLowerCase().includes(searchTerm)
     );
   }
-  
+
   return products;
 };
 
@@ -2003,7 +2022,7 @@ app.listen(PORT, () => {
 });
 
 module.exports = app;
-```
+````
 
 ## SPA Client Implementation
 
@@ -2029,24 +2048,24 @@ function App() {
       const agentDetection = detectAgent();
       setIsAgent(agentDetection.isAgent);
       setAgentInfo(agentDetection);
-      
+
       if (agentDetection.isAgent) {
         // Apply agent-specific enhancements
         enhanceForAgents(agentDetection);
-        
+
         // Track agent visit
         trackAgentInteraction('app_load', {
           userAgent: agentDetection.userAgent,
           type: agentDetection.type,
-          capabilities: agentDetection.capabilities
+          capabilities: agentDetection.capabilities,
         });
       }
-      
+
       // Mark app as loaded for agent analytics
       document.body.setAttribute('data-agent-spa-loaded', 'true');
       setLoading(false);
     };
-    
+
     initializeApp();
   }, []);
 
@@ -2070,22 +2089,30 @@ function App() {
           🤖 Agent-optimized interface active
         </div>
       )}
-      
+
       <header role="banner">
         <Navigation isAgent={isAgent} />
       </header>
-      
+
       <main role="main" id="main-content" data-agent-component="spa-content">
         <Router isAgent={isAgent} agentInfo={agentInfo} />
       </main>
-      
+
       <footer role="contentinfo" data-agent-component="site-footer">
         <div className="container">
           <p>&copy; 2025 AgentUX Store. SPA optimized for agents.</p>
           <nav aria-label="Footer navigation">
             <ul role="list">
-              <li><a href="/privacy" data-agent-action="view-privacy">Privacy Policy</a></li>
-              <li><a href="/terms" data-agent-action="view-terms">Terms of Service</a></li>
+              <li>
+                <a href="/privacy" data-agent-action="view-privacy">
+                  Privacy Policy
+                </a>
+              </li>
+              <li>
+                <a href="/terms" data-agent-action="view-terms">
+                  Terms of Service
+                </a>
+              </li>
             </ul>
           </nav>
         </div>
@@ -2115,10 +2142,10 @@ const Router = ({ isAgent, agentInfo }) => {
     // Handle routing for SPA
     const handleRoute = (path) => {
       setCurrentPath(path);
-      
+
       // Update document title and meta for agents
       updatePageMeta(path);
-      
+
       // Track navigation for agents
       if (isAgent) {
         trackAgentInteraction('navigation', {
@@ -2133,12 +2160,12 @@ const Router = ({ isAgent, agentInfo }) => {
     const handlePopState = () => {
       handleRoute(window.location.pathname);
     };
-    
+
     window.addEventListener('popstate', handlePopState);
-    
+
     // Handle initial route
     handleRoute(currentPath);
-    
+
     return () => {
       window.removeEventListener('popstate', handlePopState);
     };
@@ -2150,7 +2177,7 @@ const Router = ({ isAgent, agentInfo }) => {
       window.location.href = path;
       return;
     }
-    
+
     // SPA navigation for human users and compatible agents
     if (replace) {
       window.history.replaceState({}, '', path);
@@ -2183,15 +2210,15 @@ const Router = ({ isAgent, agentInfo }) => {
     };
 
     const route = routes[path] || routes['/'];
-    
+
     document.title = route.title;
-    
+
     // Update meta tags for agents
     let metaDescription = document.querySelector('meta[name="description"]');
     if (metaDescription) {
       metaDescription.content = route.description;
     }
-    
+
     // Update agent-specific meta
     document.documentElement.setAttribute('data-agent-page', route.agentPage);
     document.documentElement.setAttribute('data-agent-intent', route.agentIntent);
@@ -2199,11 +2226,11 @@ const Router = ({ isAgent, agentInfo }) => {
 
   // Route component mapping
   const getRouteComponent = () => {
-    const routeProps = { 
-      navigate, 
-      isAgent, 
+    const routeProps = {
+      navigate,
+      isAgent,
       agentInfo,
-      currentPath 
+      currentPath
     };
 
     if (currentPath === '/') {
@@ -2222,10 +2249,11 @@ const Router = ({ isAgent, agentInfo }) => {
           <p data-agent-content="error-message">
             The page you're looking for doesn't exist.
           </p>
-          <button 
+          <button
             onClick={() => navigate('/')}
             data-agent-action="go-home"
             className="btn btn-primary"
           >
             Go Home
           </button
+```

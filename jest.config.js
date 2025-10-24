@@ -6,10 +6,10 @@ module.exports = {
     'accessibility/**/*.js',
     '!**/node_modules/**',
     '!**/__tests__/**',
-    '!**/coverage/**'
+    '!**/coverage/**',
   ],
   coverageDirectory: 'coverage',
   coverageReporters: ['text', 'lcov', 'html'],
   verbose: true,
-  testTimeout: 10000
+  testTimeout: 10000,
 };

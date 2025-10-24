@@ -1,16 +1,21 @@
 # Client-Side Rendering (CSR) Mitigation for AgentUX
 
-This guide demonstrates strategies for implementing AgentUX patterns in client-side rendered applications where server-side rendering is not possible. While SSR/SSG is preferred for agent accessibility, these techniques ensure agents can still interact effectively with CSR applications.
+This guide demonstrates strategies for implementing AgentUX patterns in
+client-side rendered applications where server-side rendering is not possible.
+While SSR/SSG is preferred for agent accessibility, these techniques ensure
+agents can still interact effectively with CSR applications.
 
 ## Overview
 
 Client-side rendering presents unique challenges for AI agents because:
+
 - Content is not available until JavaScript executes
 - Agents may not execute JavaScript or may do so differently than browsers
 - Dynamic loading can create unpredictable content states
 - SEO and accessibility can be compromised
 
-This guide provides practical mitigation strategies to make CSR applications agent-friendly while maintaining modern development practices.
+This guide provides practical mitigation strategies to make CSR applications
+agent-friendly while maintaining modern development practices.
 
 ## Challenge Analysis
 
@@ -19,7 +24,8 @@ This guide provides practical mitigation strategies to make CSR applications age
 1. **Empty Initial Payload**: HTML contains minimal content before JS execution
 2. **Loading States**: Content appears progressively, creating timing issues
 3. **Dynamic Routing**: Client-side routing may not be accessible to agents
-4. **API Dependencies**: Content requires API calls that agents might not trigger
+4. **API Dependencies**: Content requires API calls that agents might not
+   trigger
 5. **Interactive Dependencies**: Functionality tied to user interaction events
 
 ### AgentUX Mitigation Strategy Hierarchy
@@ -38,141 +44,205 @@ Provide meaningful HTML structure before JavaScript loads:
 
 ```html
 <!DOCTYPE html>
-<html lang="en" data-agent-framework="react-csr" data-agent-mitigation="skeleton">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AgentUX Store - Products for Humans and AI</title>
-  
-  <!-- Agent-specific meta tags -->
-  <meta name="agent-page" content="product-catalog">
-  <meta name="agent-intent" content="browse-products">
-  <meta name="agent-csr-fallback" content="available">
-  
-  <!-- Structured data for agents (static) -->
-  <script type="application/ld+json">
-  {
-    "@context": "https://schema.org",
-    "@type": "WebSite",
-    "name": "AgentUX Store",
-    "description": "Products designed for optimal agent and human experience",
-    "url": "https://example.com",
-    "potentialAction": {
-      "@type": "SearchAction",
-      "target": "https://example.com/products?q={search_term_string}",
-      "query-input": "required name=search_term_string"
-    }
-  }
-  </script>
-</head>
-<body>
-  <!-- Skip link for agents -->
-  <a href="#main-content" class="skip-link" data-agent-action="skip-to-content">
-    Skip to main content
-  </a>
-  
-  <!-- Static navigation structure -->
-  <header role="banner">
-    <nav role="navigation" aria-label="Main navigation" data-agent-component="navigation">
-      <div class="nav-container">
-        <a href="/" class="logo" data-agent-action="go-home">AgentUX Store</a>
-        <ul role="list" class="nav-links">
-          <li><a href="/" data-agent-action="browse-home">Home</a></li>
-          <li><a href="/products" data-agent-action="view-products">Products</a></li>
-          <li><a href="/contact" data-agent-action="get-support">Contact</a></li>
+<html
+  lang="en"
+  data-agent-framework="react-csr"
+  data-agent-mitigation="skeleton"
+>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AgentUX Store - Products for Humans and AI</title>
+
+    <!-- Agent-specific meta tags -->
+    <meta name="agent-page" content="product-catalog" />
+    <meta name="agent-intent" content="browse-products" />
+    <meta name="agent-csr-fallback" content="available" />
+
+    <!-- Structured data for agents (static) -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "AgentUX Store",
+        "description": "Products designed for optimal agent and human experience",
+        "url": "https://example.com",
+        "potentialAction": {
+          "@type": "SearchAction",
+          "target": "https://example.com/products?q={search_term_string}",
+          "query-input": "required name=search_term_string"
+        }
+      }
+    </script>
+  </head>
+  <body>
+    <!-- Skip link for agents -->
+    <a
+      href="#main-content"
+      class="skip-link"
+      data-agent-action="skip-to-content"
+    >
+      Skip to main content
+    </a>
+
+    <!-- Static navigation structure -->
+    <header role="banner">
+      <nav
+        role="navigation"
+        aria-label="Main navigation"
+        data-agent-component="navigation"
+      >
+        <div class="nav-container">
+          <a href="/" class="logo" data-agent-action="go-home">AgentUX Store</a>
+          <ul role="list" class="nav-links">
+            <li><a href="/" data-agent-action="browse-home">Home</a></li>
+            <li>
+              <a href="/products" data-agent-action="view-products">Products</a>
+            </li>
+            <li>
+              <a href="/contact" data-agent-action="get-support">Contact</a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+    </header>
+
+    <!-- Main content with meaningful fallbacks -->
+    <main role="main" id="main-content" data-agent-component="main-content">
+      <!-- React app will mount here, but provide fallback content -->
+      <div id="react-root">
+        <!-- Skeleton content for agents/no-JS users -->
+        <div class="content-skeleton" data-agent-content="fallback-content">
+          <section class="hero-skeleton" data-agent-component="hero-banner">
+            <h1 data-agent-content="page-title">AgentUX Store - Loading...</h1>
+            <p data-agent-content="page-description">
+              Our products are designed for optimal agent and human experience.
+              Please enable JavaScript for the full interactive experience.
+            </p>
+          </section>
+
+          <section
+            class="products-skeleton"
+            data-agent-component="product-list"
+          >
+            <h2 data-agent-content="section-title">Featured Products</h2>
+
+            <!-- Static product cards for agents -->
+            <div class="products-grid" role="list">
+              <article
+                class="product-card-skeleton"
+                data-agent-component="product-card"
+                role="listitem"
+              >
+                <h3 data-agent-content="product-name">
+                  Smart Agent-Friendly Widget
+                </h3>
+                <p data-agent-content="product-description">
+                  Designed for optimal agent interaction with clear semantic
+                  structure.
+                </p>
+                <p data-agent-content="product-price">$29.99</p>
+                <a href="/products/1" data-agent-action="view-product-details"
+                  >View Details</a
+                >
+              </article>
+
+              <article
+                class="product-card-skeleton"
+                data-agent-component="product-card"
+                role="listitem"
+              >
+                <h3 data-agent-content="product-name">
+                  Accessible Data Processor
+                </h3>
+                <p data-agent-content="product-description">
+                  Processes data with both human and agent-readable outputs.
+                </p>
+                <p data-agent-content="product-price">$49.99</p>
+                <a href="/products/2" data-agent-action="view-product-details"
+                  >View Details</a
+                >
+              </article>
+
+              <article
+                class="product-card-skeleton"
+                data-agent-component="product-card"
+                role="listitem"
+              >
+                <h3 data-agent-content="product-name">
+                  Universal Interface Kit
+                </h3>
+                <p data-agent-content="product-description">
+                  Interface components that work seamlessly with AI agents.
+                </p>
+                <p data-agent-content="product-price">$39.99</p>
+                <a href="/products/3" data-agent-action="view-product-details"
+                  >View Details</a
+                >
+              </article>
+            </div>
+          </section>
+
+          <!-- Contact information for agents -->
+          <section class="contact-skeleton" data-agent-component="contact-info">
+            <h2 data-agent-content="section-title">Contact Information</h2>
+            <p data-agent-content="contact-email">
+              Email:
+              <a
+                href="mailto:support@agentux.example.com"
+                data-agent-action="send-email"
+              >
+                support@agentux.example.com
+              </a>
+            </p>
+            <p data-agent-content="contact-phone">
+              Phone:
+              <a href="tel:+15550123" data-agent-action="call-support"
+                >+1 (555) 012-3456</a
+              >
+            </p>
+          </section>
+        </div>
+      </div>
+    </main>
+
+    <!-- Footer with static content -->
+    <footer role="contentinfo" data-agent-component="site-footer">
+      <p>&copy; 2025 AgentUX Store. Designed for humans and AI agents.</p>
+      <nav aria-label="Footer navigation">
+        <ul role="list">
+          <li>
+            <a href="/privacy" data-agent-action="view-privacy"
+              >Privacy Policy</a
+            >
+          </li>
+          <li>
+            <a href="/terms" data-agent-action="view-terms">Terms of Service</a>
+          </li>
+          <li>
+            <a href="/sitemap.xml" data-agent-action="view-sitemap">Sitemap</a>
+          </li>
         </ul>
+      </nav>
+    </footer>
+
+    <!-- NoScript fallback -->
+    <noscript>
+      <div class="noscript-notice" data-agent-content="javascript-disabled">
+        <h2>JavaScript Required</h2>
+        <p>
+          This application requires JavaScript for full functionality. However,
+          basic content and navigation remain available.
+        </p>
+        <p>
+          For the best experience, please enable JavaScript in your browser.
+        </p>
       </div>
-    </nav>
-  </header>
-  
-  <!-- Main content with meaningful fallbacks -->
-  <main role="main" id="main-content" data-agent-component="main-content">
-    <!-- React app will mount here, but provide fallback content -->
-    <div id="react-root">
-      <!-- Skeleton content for agents/no-JS users -->
-      <div class="content-skeleton" data-agent-content="fallback-content">
-        <section class="hero-skeleton" data-agent-component="hero-banner">
-          <h1 data-agent-content="page-title">AgentUX Store - Loading...</h1>
-          <p data-agent-content="page-description">
-            Our products are designed for optimal agent and human experience. 
-            Please enable JavaScript for the full interactive experience.
-          </p>
-        </section>
-        
-        <section class="products-skeleton" data-agent-component="product-list">
-          <h2 data-agent-content="section-title">Featured Products</h2>
-          
-          <!-- Static product cards for agents -->
-          <div class="products-grid" role="list">
-            <article class="product-card-skeleton" data-agent-component="product-card" role="listitem">
-              <h3 data-agent-content="product-name">Smart Agent-Friendly Widget</h3>
-              <p data-agent-content="product-description">
-                Designed for optimal agent interaction with clear semantic structure.
-              </p>
-              <p data-agent-content="product-price">$29.99</p>
-              <a href="/products/1" data-agent-action="view-product-details">View Details</a>
-            </article>
-            
-            <article class="product-card-skeleton" data-agent-component="product-card" role="listitem">
-              <h3 data-agent-content="product-name">Accessible Data Processor</h3>
-              <p data-agent-content="product-description">
-                Processes data with both human and agent-readable outputs.
-              </p>
-              <p data-agent-content="product-price">$49.99</p>
-              <a href="/products/2" data-agent-action="view-product-details">View Details</a>
-            </article>
-            
-            <article class="product-card-skeleton" data-agent-component="product-card" role="listitem">
-              <h3 data-agent-content="product-name">Universal Interface Kit</h3>
-              <p data-agent-content="product-description">
-                Interface components that work seamlessly with AI agents.
-              </p>
-              <p data-agent-content="product-price">$39.99</p>
-              <a href="/products/3" data-agent-action="view-product-details">View Details</a>
-            </article>
-          </div>
-        </section>
-        
-        <!-- Contact information for agents -->
-        <section class="contact-skeleton" data-agent-component="contact-info">
-          <h2 data-agent-content="section-title">Contact Information</h2>
-          <p data-agent-content="contact-email">
-            Email: <a href="mailto:support@agentux.example.com" data-agent-action="send-email">
-              support@agentux.example.com
-            </a>
-          </p>
-          <p data-agent-content="contact-phone">
-            Phone: <a href="tel:+15550123" data-agent-action="call-support">+1 (555) 012-3456</a>
-          </p>
-        </section>
-      </div>
-    </div>
-  </main>
-  
-  <!-- Footer with static content -->
-  <footer role="contentinfo" data-agent-component="site-footer">
-    <p>&copy; 2025 AgentUX Store. Designed for humans and AI agents.</p>
-    <nav aria-label="Footer navigation">
-      <ul role="list">
-        <li><a href="/privacy" data-agent-action="view-privacy">Privacy Policy</a></li>
-        <li><a href="/terms" data-agent-action="view-terms">Terms of Service</a></li>
-        <li><a href="/sitemap.xml" data-agent-action="view-sitemap">Sitemap</a></li>
-      </ul>
-    </nav>
-  </footer>
-  
-  <!-- NoScript fallback -->
-  <noscript>
-    <div class="noscript-notice" data-agent-content="javascript-disabled">
-      <h2>JavaScript Required</h2>
-      <p>This application requires JavaScript for full functionality. However, basic content and navigation remain available.</p>
-      <p>For the best experience, please enable JavaScript in your browser.</p>
-    </div>
-  </noscript>
-  
-  <!-- Load React application -->
-  <script src="/static/js/bundle.js" defer></script>
-</body>
+    </noscript>
+
+    <!-- Load React application -->
+    <script src="/static/js/bundle.js" defer></script>
+  </body>
 </html>
 ```
 
@@ -189,15 +259,21 @@ const app = express();
 // Agent detection middleware
 function detectAgent(req, res, next) {
   const userAgent = req.get('User-Agent') || '';
-  
+
   const agentPatterns = [
-    /bot/i, /crawler/i, /spider/i, /automation/i,
-    /headless/i, /selenium/i, /playwright/i, /puppeteer/i
+    /bot/i,
+    /crawler/i,
+    /spider/i,
+    /automation/i,
+    /headless/i,
+    /selenium/i,
+    /playwright/i,
+    /puppeteer/i,
   ];
-  
-  req.isAgent = agentPatterns.some(pattern => pattern.test(userAgent));
+
+  req.isAgent = agentPatterns.some((pattern) => pattern.test(userAgent));
   req.agentType = req.isAgent ? userAgent.split(' ')[0] : null;
-  
+
   next();
 }
 
@@ -209,7 +285,7 @@ app.get('*', (req, res) => {
     // Serve pre-rendered or static content for agents
     return res.sendFile(path.join(__dirname, 'build/agent-optimized.html'));
   }
-  
+
   // Serve regular SPA for human users
   res.sendFile(path.join(__dirname, 'build/index.html'));
 });
@@ -243,10 +319,10 @@ function App() {
     if (skeleton) {
       skeleton.style.display = 'none';
     }
-    
+
     // Add agent-ready indicator
     document.body.setAttribute('data-agent-react-loaded', 'true');
-    
+
     // Load products
     loadProducts();
   }, []);
@@ -275,13 +351,14 @@ function App() {
 
   if (error) {
     return (
-      <div className="error-state" data-agent-component="error-message" role="alert">
+      <div
+        className="error-state"
+        data-agent-component="error-message"
+        role="alert"
+      >
         <h2 data-agent-content="error-title">Unable to Load Content</h2>
         <p data-agent-content="error-description">{error}</p>
-        <button 
-          onClick={loadProducts}
-          data-agent-action="retry-loading"
-        >
+        <button onClick={loadProducts} data-agent-action="retry-loading">
           Try Again
         </button>
       </div>
@@ -291,27 +368,25 @@ function App() {
   return (
     <div className="app" data-agent-app="loaded">
       <AgentDetector onAgentDetected={setIsAgent} />
-      
+
       {isAgent && (
         <div className="agent-notice" data-agent-content="agent-detected">
           🤖 Agent interface optimized
         </div>
       )}
-      
+
       <div className="content-container" data-agent-component="main-app">
         <section className="hero" data-agent-component="hero-banner">
-          <h1 data-agent-content="page-title">
-            Welcome to AgentUX Store
-          </h1>
+          <h1 data-agent-content="page-title">Welcome to AgentUX Store</h1>
           <p data-agent-content="page-description">
             Discover products designed for both humans and AI agents
           </p>
         </section>
-        
-        <ProductList 
-          products={products} 
+
+        <ProductList
+          products={products}
           isAgent={isAgent}
-          data-agent-component="product-list" 
+          data-agent-component="product-list"
         />
       </div>
     </div>
@@ -331,50 +406,61 @@ const AgentDetector = ({ onAgentDetected }) => {
   useEffect(() => {
     const detectAgent = () => {
       const userAgent = navigator.userAgent;
-      
+
       const agentPatterns = [
-        /bot/i, /crawler/i, /spider/i, /automation/i,
-        /headless/i, /selenium/i, /playwright/i, /puppeteer/i
+        /bot/i,
+        /crawler/i,
+        /spider/i,
+        /automation/i,
+        /headless/i,
+        /selenium/i,
+        /playwright/i,
+        /puppeteer/i,
       ];
-      
-      const isAgent = agentPatterns.some(pattern => pattern.test(userAgent));
-      
+
+      const isAgent = agentPatterns.some((pattern) => pattern.test(userAgent));
+
       if (isAgent) {
         // Apply agent-specific enhancements
         document.documentElement.setAttribute('data-agent-context', 'detected');
-        document.documentElement.setAttribute('data-agent-type', userAgent.split(' ')[0]);
-        
+        document.documentElement.setAttribute(
+          'data-agent-type',
+          userAgent.split(' ')[0]
+        );
+
         // Enhance forms and navigation
         enhanceForAgents();
-        
+
         onAgentDetected(true);
       }
     };
-    
+
     const enhanceForAgents = () => {
       // Add more semantic information
-      const buttons = document.querySelectorAll('button:not([data-agent-action])');
-      buttons.forEach(button => {
+      const buttons = document.querySelectorAll(
+        'button:not([data-agent-action])'
+      );
+      buttons.forEach((button) => {
         if (button.textContent.toLowerCase().includes('buy')) {
           button.setAttribute('data-agent-action', 'purchase-product');
         } else if (button.textContent.toLowerCase().includes('add')) {
           button.setAttribute('data-agent-action', 'add-to-cart');
         }
       });
-      
+
       // Enhance navigation
       const links = document.querySelectorAll('a:not([data-agent-action])');
-      links.forEach(link => {
+      links.forEach((link) => {
         const href = link.getAttribute('href');
         if (href && href.includes('product')) {
           link.setAttribute('data-agent-action', 'view-product-details');
         }
       });
     };
-    
+
     detectAgent();
   }, [onAgentDetected]);
-  
+
   return null; // This component doesn't render anything
 };
 
@@ -391,23 +477,23 @@ import ProductCard from './ProductCard';
 const ProductList = ({ products, isAgent }) => {
   // Add structured data for agents
   const structuredData = {
-    "@context": "https://schema.org",
-    "@type": "ItemList",
-    "itemListElement": products.map((product, index) => ({
-      "@type": "Product",
-      "position": index + 1,
-      "name": product.name,
-      "description": product.description,
-      "offers": {
-        "@type": "Offer",
-        "price": product.price,
-        "priceCurrency": "USD"
-      }
-    }))
+    '@context': 'https://schema.org',
+    '@type': 'ItemList',
+    itemListElement: products.map((product, index) => ({
+      '@type': 'Product',
+      position: index + 1,
+      name: product.name,
+      description: product.description,
+      offers: {
+        '@type': 'Offer',
+        price: product.price,
+        priceCurrency: 'USD',
+      },
+    })),
   };
 
   return (
-    <section 
+    <section
       className="product-list"
       data-agent-component="product-list"
       data-agent-count={products.length}
@@ -417,29 +503,21 @@ const ProductList = ({ products, isAgent }) => {
       <h2 id="products-heading" data-agent-content="section-title">
         Featured Products ({products.length} items)
       </h2>
-      
+
       {/* Structured data for agents */}
-      <script 
+      <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(structuredData) }}
       />
-      
-      <div 
-        className="products-grid"
-        role="list"
-        aria-label="Product list"
-      >
-        {products.map(product => (
-          <ProductCard 
-            key={product.id} 
-            product={product}
-            isAgent={isAgent}
-          />
+
+      <div className="products-grid" role="list" aria-label="Product list">
+        {products.map((product) => (
+          <ProductCard key={product.id} product={product} isAgent={isAgent} />
         ))}
       </div>
-      
+
       {products.length === 0 && (
-        <div 
+        <div
           className="empty-state"
           data-agent-component="empty-state"
           role="status"
@@ -467,7 +545,7 @@ const ContactForm = () => {
     name: '',
     email: '',
     subject: '',
-    message: ''
+    message: '',
   });
   const [submitting, setSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
@@ -475,24 +553,24 @@ const ContactForm = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     setSubmitting(true);
-    
+
     try {
       // Add agent context to submission
       const submission = {
         ...formData,
         userAgent: navigator.userAgent,
         timestamp: new Date().toISOString(),
-        source: 'csr-form'
+        source: 'csr-form',
       };
-      
+
       const response = await fetch('/api/contact', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
         },
-        body: JSON.stringify(submission)
+        body: JSON.stringify(submission),
       });
-      
+
       if (response.ok) {
         setSubmitted(true);
         setFormData({ name: '', email: '', subject: '', message: '' });
@@ -506,7 +584,7 @@ const ContactForm = () => {
 
   if (submitted) {
     return (
-      <div 
+      <div
         className="form-success"
         data-agent-component="success-message"
         role="status"
@@ -516,7 +594,7 @@ const ContactForm = () => {
         <p data-agent-content="success-description">
           Thank you for your inquiry. We'll respond within 24-48 hours.
         </p>
-        <button 
+        <button
           onClick={() => setSubmitted(false)}
           data-agent-action="send-another-message"
         >
@@ -527,7 +605,7 @@ const ContactForm = () => {
   }
 
   return (
-    <form 
+    <form
       onSubmit={handleSubmit}
       className="contact-form"
       data-agent-component="contact-form"
@@ -537,10 +615,10 @@ const ContactForm = () => {
       <h2 id="form-heading" data-agent-content="form-title">
         Contact Us
       </h2>
-      
+
       <fieldset>
         <legend data-agent-content="fieldset-label">Contact Information</legend>
-        
+
         <div className="form-group">
           <label htmlFor="name" data-agent-content="field-label">
             Name *
@@ -549,7 +627,7 @@ const ContactForm = () => {
             type="text"
             id="name"
             value={formData.name}
-            onChange={(e) => setFormData({...formData, name: e.target.value})}
+            onChange={(e) => setFormData({ ...formData, name: e.target.value })}
             required
             data-agent-field="customer-name"
             aria-describedby="name-help"
@@ -558,7 +636,7 @@ const ContactForm = () => {
             Your full name for our records
           </small>
         </div>
-        
+
         <div className="form-group">
           <label htmlFor="email" data-agent-content="field-label">
             Email *
@@ -567,7 +645,9 @@ const ContactForm = () => {
             type="email"
             id="email"
             value={formData.email}
-            onChange={(e) => setFormData({...formData, email: e.target.value})}
+            onChange={(e) =>
+              setFormData({ ...formData, email: e.target.value })
+            }
             required
             data-agent-field="customer-email"
             aria-describedby="email-help"
@@ -576,7 +656,7 @@ const ContactForm = () => {
             We'll use this to respond to your inquiry
           </small>
         </div>
-        
+
         <div className="form-group">
           <label htmlFor="subject" data-agent-content="field-label">
             Subject *
@@ -584,7 +664,9 @@ const ContactForm = () => {
           <select
             id="subject"
             value={formData.subject}
-            onChange={(e) => setFormData({...formData, subject: e.target.value})}
+            onChange={(e) =>
+              setFormData({ ...formData, subject: e.target.value })
+            }
             required
             data-agent-field="inquiry-type"
           >
@@ -595,7 +677,7 @@ const ContactForm = () => {
             <option value="other">Other</option>
           </select>
         </div>
-        
+
         <div className="form-group">
           <label htmlFor="message" data-agent-content="field-label">
             Message *
@@ -603,7 +685,9 @@ const ContactForm = () => {
           <textarea
             id="message"
             value={formData.message}
-            onChange={(e) => setFormData({...formData, message: e.target.value})}
+            onChange={(e) =>
+              setFormData({ ...formData, message: e.target.value })
+            }
             required
             rows="5"
             data-agent-field="customer-message"
@@ -613,8 +697,8 @@ const ContactForm = () => {
             Please provide details about your inquiry
           </small>
         </div>
-        
-        <button 
+
+        <button
           type="submit"
           disabled={submitting}
           data-agent-action="submit-contact-form"
@@ -643,51 +727,50 @@ const path = require('path');
 const pages = [
   { url: '/', filename: 'index.html' },
   { url: '/products', filename: 'products.html' },
-  { url: '/contact', filename: 'contact.html' }
+  { url: '/contact', filename: 'contact.html' },
 ];
 
 async function prerenderPages() {
   const browser = await puppeteer.launch();
-  
+
   for (const page of pages) {
     const browserPage = await browser.newPage();
-    
+
     try {
       console.log(`Pre-rendering ${page.url}...`);
-      
+
       // Navigate to page and wait for content
       await browserPage.goto(`http://localhost:3000${page.url}`, {
         waitUntil: 'networkidle0',
-        timeout: 30000
+        timeout: 30000,
       });
-      
+
       // Wait for React to load and render
       await browserPage.waitForSelector('[data-agent-app="loaded"]', {
-        timeout: 10000
+        timeout: 10000,
       });
-      
+
       // Get the fully rendered HTML
       const html = await browserPage.content();
-      
+
       // Clean up React-specific attributes for static version
       const cleanHtml = html
         .replace(/data-reactroot/g, '')
         .replace(/<!-- react-text[\s\S]*?-->/g, '')
         .replace(/<!-- \/react-text -->/g, '');
-      
+
       // Save to static directory
       const outputPath = path.join(__dirname, '../build/static', page.filename);
       await fs.writeFile(outputPath, cleanHtml);
-      
+
       console.log(`✅ Pre-rendered ${page.filename}`);
-      
     } catch (error) {
       console.error(`❌ Failed to pre-render ${page.url}:`, error);
     }
-    
+
     await browserPage.close();
   }
-  
+
   await browser.close();
 }
 
@@ -708,9 +791,9 @@ module.exports = {
     path: path.resolve(__dirname, 'build'),
     filename: 'static/js/[name].[contenthash:8].js',
     chunkFilename: 'static/js/[name].[contenthash:8].chunk.js',
-    publicPath: '/'
+    publicPath: '/',
   },
-  
+
   optimization: {
     splitChunks: {
       chunks: 'all',
@@ -726,11 +809,11 @@ module.exports = {
           test: /[\\/]src[\\/]utils[\\/]agent/,
           name: 'agent-utils',
           chunks: 'all',
-        }
-      }
-    }
+        },
+      },
+    },
   },
-  
+
   plugins: [
     new HtmlWebpackPlugin({
       template: './public/index.html',
@@ -742,11 +825,11 @@ module.exports = {
       templateParameters: {
         agentOptimized: true,
         agentFramework: 'react-csr',
-        agentMitigation: 'skeleton'
-      }
-    })
+        agentMitigation: 'skeleton',
+      },
+    }),
   ],
-  
+
   module: {
     rules: [
       {
@@ -758,13 +841,16 @@ module.exports = {
             presets: ['@babel/preset-react'],
             plugins: [
               // Transform agent-specific attributes
-              ['@babel/plugin-transform-react-jsx', {
-                pragma: 'React.createElement',
-                pragmaFrag: 'React.Fragment'
-              }]
-            ]
-          }
-        }
+              [
+                '@babel/plugin-transform-react-jsx',
+                {
+                  pragma: 'React.createElement',
+                  pragmaFrag: 'React.Fragment',
+                },
+              ],
+            ],
+          },
+        },
       },
       {
         test: /\.css$/,
@@ -775,14 +861,14 @@ module.exports = {
             options: {
               // Generate descriptive class names for agent parsing
               modules: {
-                localIdentName: '[name]__[local]--[hash:base64:5]'
-              }
-            }
-          }
-        ]
-      }
-    ]
-  }
+                localIdentName: '[name]__[local]--[hash:base64:5]',
+              },
+            },
+          },
+        ],
+      },
+    ],
+  },
 };
 ```
 
@@ -794,72 +880,75 @@ const puppeteer = require('puppeteer');
 
 describe('CSR Agent Compatibility', () => {
   let browser, page;
-  
+
   beforeAll(async () => {
     browser = await puppeteer.launch();
     page = await browser.newPage();
   });
-  
+
   afterAll(async () => {
     await browser.close();
   });
-  
+
   test('Skeleton content is available before JS loads', async () => {
     // Disable JavaScript to simulate agent behavior
     await page.setJavaScriptEnabled(false);
     await page.goto('http://localhost:3000');
-    
+
     // Check for skeleton content
     const skeletonContent = await page.$('.content-skeleton');
     expect(skeletonContent).toBeTruthy();
-    
+
     // Verify essential information is present
-    const title = await page.$eval('[data-agent-content="page-title"]', el => el.textContent);
+    const title = await page.$eval(
+      '[data-agent-content="page-title"]',
+      (el) => el.textContent
+    );
     expect(title).toContain('AgentUX Store');
-    
+
     const productCards = await page.$$('[data-agent-component="product-card"]');
     expect(productCards.length).toBeGreaterThan(0);
   });
-  
+
   test('Agent detection works correctly', async () => {
     await page.setJavaScriptEnabled(true);
     await page.setUserAgent('TestBot/1.0 (compatible; Agent)');
     await page.goto('http://localhost:3000');
-    
+
     // Wait for React to load
     await page.waitForSelector('[data-agent-app="loaded"]');
-    
+
     // Check if agent context is detected
-    const agentContext = await page.$eval('html', el => 
+    const agentContext = await page.$eval('html', (el) =>
       el.getAttribute('data-agent-context')
     );
     expect(agentContext).toBe('detected');
   });
-  
+
   test('Structured data is present', async () => {
     await page.goto('http://localhost:3000');
     await page.waitForSelector('[data-agent-app="loaded"]');
-    
+
     const structuredData = await page.$eval(
       'script[type="application/ld+json"]',
-      el => JSON.parse(el.textContent)
+      (el) => JSON.parse(el.textContent)
     );
-    
+
     expect(structuredData['@type']).toBe('WebSite');
     expect(structuredData.name).toBe('AgentUX Store');
   });
-  
+
   test('Form accessibility with agents', async () => {
     await page.goto('http://localhost:3000/contact');
     await page.waitForSelector('[data-agent-component="contact-form"]');
-    
+
     // Test form structure
     const fieldsets = await page.$$('fieldset');
     expect(fieldsets.length).toBeGreaterThan(0);
-    
+
     const labels = await page.$$('label[data-agent-content="field-label"]');
     expect(labels.length).toBeGreaterThan(0);
-    
+
     const agentFields = await page.$$('[data-agent-field]');
     expect(agentFields.length).toBeGreaterThan(0);
   });
@@ -877,73 +966,81 @@ class AgentAnalytics {
       pageLoadTime: 0,
       contentReadyTime: 0,
       interactionTime: 0,
-      errors: []
+      errors: [],
     };
-    
+
     if (this.isAgent) {
       this.startMonitoring();
     }
   }
-  
+
   detectAgent() {
     const userAgent = navigator.userAgent;
     const agentPatterns = [
-      /bot/i, /crawler/i, /spider/i, /automation/i,
-      /headless/i, /selenium/i, /playwright/i, /puppeteer/i
+      /bot/i,
+      /crawler/i,
+      /spider/i,
+      /automation/i,
+      /headless/i,
+      /selenium/i,
+      /playwright/i,
+      /puppeteer/i,
     ];
-    return agentPatterns.some(pattern => pattern.test(userAgent));
+    return agentPatterns.some((pattern) => pattern.test(userAgent));
   }
-  
+
   startMonitoring() {
     // Track page load time
     window.addEventListener('load', () => {
       this.metrics.pageLoadTime = performance.now();
       this.trackContentReady();
     });
-    
+
     // Track errors
     window.addEventListener('error', (event) => {
       this.metrics.errors.push({
         message: event.message,
         filename: event.filename,
         lineno: event.lineno,
-        timestamp: Date.now()
+        timestamp: Date.now(),
       });
     });
   }
-  
+
   trackContentReady() {
     const observer = new MutationObserver((mutations) => {
       mutations.forEach((mutation) => {
-        if (mutation.type === 'attributes' && 
-            mutation.attributeName === 'data-agent-app' &&
-            mutation.target.getAttribute('data-agent-app') === 'loaded') {
+        if (
+          mutation.type === 'attributes' &&
+          mutation.attributeName === 'data-agent-app' &&
+          mutation.target.getAttribute('data-agent-app') === 'loaded'
+        ) {
           this.metrics.contentReadyTime = performance.now();
           observer.disconnect();
           this.sendMetrics();
         }
       });
     });
-    
+
     observer.observe(document.body, {
       attributes: true,
-      attributeFilter: ['data-agent-app']
+      attributeFilter: ['data-agent-app'],
     });
   }
-  
+
   trackInteraction(action, element) {
     if (!this.isAgent) return;
-    
+
     this.metrics.interactionTime = performance.now();
     this.sendInteractionMetric({
       action,
       element: element.tagName,
       agentComponent: element.getAttribute('data-agent-component'),
       agentAction: element.getAttribute('data-agent-action'),
-      timestamp: Date.now()
+      timestamp: Date.now(),
     });
   }
-  
+
   sendMetrics() {
     if (this.isAgent) {
       fetch('/api/analytics/agent-metrics', {
@@ -953,17 +1050,17 @@ class AgentAnalytics {
           userAgent: navigator.userAgent,
           url: window.location.href,
           metrics: this.metrics,
-          timestamp: Date.now()
-        })
+          timestamp: Date.now(),
+        }),
       }).catch(console.error);
     }
   }
-  
+
   sendInteractionMetric(interaction) {
     fetch('/api/analytics/agent-interaction', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify(interaction)
+      body: JSON.stringify(interaction),
     }).catch(console.error);
   }
 }
@@ -977,6 +1074,7 @@ export const agentAnalytics = new AgentAnalytics();
 ### 1. Content Strategy
 
 **✅ Do:**
+
 - Provide meaningful skeleton content
 - Include static navigation and contact information
 - Add structured data in the initial HTML
@@ -984,6 +1082,7 @@ export const agentAnalytics = new AgentAnalytics();
 - Include NoScript fallbacks
 
 **❌ Don't:**
+
 - Show only loading spinners without content
 - Rely entirely on JavaScript for basic functionality
 - Hide critical information behind interactions
@@ -992,6 +1091,7 @@ export const agentAnalytics = new AgentAnalytics();
 ### 2. Performance Optimization
 
 **✅ Do:**
+
 - Inline critical CSS for faster rendering
 - Minimize initial JavaScript bundle size
 - Use code splitting for non-critical features
@@ -999,6 +1099,7 @@ export const agentAnalytics = new AgentAnalytics();
 - Cache static assets aggressively
 
 **❌ Don't:**
+
 - Load large JavaScript bundles upfront
 - Block rendering with unnecessary scripts
 - Ignore bundle size impact on agents
@@ -1007,6 +1108,7 @@ export const agentAnalytics = new AgentAnalytics();
 ### 3. Agent Enhancement
 
 **✅ Do:**
+
 - Detect agents and enhance accordingly
 - Add semantic attributes dynamically
 - Provide alternative content paths
@@ -1014,6 +1116,7 @@ export const agentAnalytics = new AgentAnalytics();
 - Test with real agent tools
 
 **❌ Don't:**
+
 - Assume all agents execute JavaScript
 - Rely on JavaScript-only features
 - Ignore agent-specific needs
@@ -1022,6 +1125,7 @@ export const agentAnalytics = new AgentAnalytics();
 ### 4. Fallback Strategies
 
 **Priority Order:**
+
 1. **Static content** - Always available
 2. **Progressive enhancement** - Add interactivity
 3. **Agent detection** - Optimize for detected agents
@@ -1061,31 +1165,35 @@ const csr_metrics = {
   fallback_usage_rate: 15, // % of users seeing fallback content
   agent_interaction_success: 78, // % of successful agent interactions
   time_to_content_ready: 2.3, // seconds until content is accessible
-  javascript_dependency_ratio: 0.3 // ratio of JS-dependent features
+  javascript_dependency_ratio: 0.3, // ratio of JS-dependent features
 };
 ```
 
 ## Implementation Timeline
 
 ### Phase 1: Foundation (Week 1)
+
 - [ ] Add skeleton content to existing pages
 - [ ] Implement basic agent detection
 - [ ] Add structured data markup
 - [ ] Create NoScript fallbacks
 
 ### Phase 2: Enhancement (Week 2)
+
 - [ ] Progressive enhancement implementation
 - [ ] Dynamic semantic attribute addition
 - [ ] Performance optimization
 - [ ] Error handling improvements
 
 ### Phase 3: Testing & Monitoring (Week 3)
+
 - [ ] Comprehensive agent testing
 - [ ] Performance monitoring setup
 - [ ] Analytics implementation
 - [ ] Documentation and training
 
 ### Phase 4: Optimization (Week 4)
+
 - [ ] Pre-rendering critical pages
 - [ ] Advanced agent detection
 - [ ] Performance tuning
@@ -1094,12 +1202,14 @@ const csr_metrics = {
 ## Real-World Results
 
 **Before CSR Mitigation:**
+
 - Agent success rate: 23%
 - Content accessibility: JavaScript required
 - Time to meaningful content: 3.2s
 - SEO score: 45/100
 
 **After CSR Mitigation:**
+
 - Agent success rate: 78% (+55pp)
 - Content accessibility: Immediate skeleton + progressive enhancement
 - Time to meaningful content: 0.8s
@@ -1107,6 +1217,11 @@ const csr_metrics = {
 
 ## Conclusion
 
-While server-side rendering remains the optimal approach for AgentUX, these CSR mitigation strategies can significantly improve agent compatibility in scenarios where SSR is not feasible. The key is providing meaningful content immediately while progressively enhancing the experience.
+While server-side rendering remains the optimal approach for AgentUX, these CSR
+mitigation strategies can significantly improve agent compatibility in scenarios
+where SSR is not feasible. The key is providing meaningful content immediately
+while progressively enhancing the experience.
 
-Remember: **The goal is not to make CSR as good as SSR for agents, but to make CSR applications functional and accessible to agents when SSR is not an option.**
+Remember: **The goal is not to make CSR as good as SSR for agents, but to make
+CSR applications functional and accessible to agents when SSR is not an
+option.**

@@ -10,7 +10,8 @@ We release patches for security vulnerabilities in the following versions:
 
 ## Reporting a Vulnerability
 
-The AgentUX team takes security vulnerabilities seriously. We appreciate your efforts to responsibly disclose your findings.
+The AgentUX team takes security vulnerabilities seriously. We appreciate your
+efforts to responsibly disclose your findings.
 
 ### How to Report a Security Vulnerability
 
@@ -59,18 +60,24 @@ When using AgentUX tools:
 
 1. **Keep dependencies updated** - Run `npm audit` regularly
 2. **Validate user input** - Even when using validation tools
-3. **Run tools in controlled environments** - Especially when testing untrusted URLs
+3. **Run tools in controlled environments** - Especially when testing untrusted
+   URLs
 4. **Review generated code** - Don't blindly trust automated suggestions
 5. **Use HTTPS** - Always validate sites over secure connections
 
 ### Known Security Considerations
 
 #### Validation Tools
-- **FR1 Validator** makes HTTP requests to URLs you provide - only test URLs you trust
-- **Agent Simulator** uses Puppeteer to load pages - be cautious with untrusted sites
-- **Compliance Auditor** can take screenshots - ensure compliance with privacy policies
+
+- **FR1 Validator** makes HTTP requests to URLs you provide - only test URLs you
+  trust
+- **Agent Simulator** uses Puppeteer to load pages - be cautious with untrusted
+  sites
+- **Compliance Auditor** can take screenshots - ensure compliance with privacy
+  policies
 
 #### Safe Usage
+
 ```bash
 # ✅ Good: Testing your own site
 agentux-validate https://your-own-site.com
@@ -84,12 +91,14 @@ agentux-validate https://third-party-site.com
 
 - **Vulnerabilities** are disclosed publicly after a fix is available
 - **Timeline**: We aim to release fixes within 90 days of initial report
-- **Advance notice**: Reporters receive 48-hour advance notice before public disclosure
+- **Advance notice**: Reporters receive 48-hour advance notice before public
+  disclosure
 - **CVE assignment**: We will request CVEs for qualifying vulnerabilities
 
 ### Security Updates
 
 Security updates will be:
+
 - Released as patch versions (e.g., 0.1.1)
 - Announced in CHANGELOG.md
 - Tagged as security releases in GitHub
@@ -99,8 +108,8 @@ Security updates will be:
 
 For security concerns or questions about this policy:
 
-**Email:** [joel@goldfoot.com](mailto:joel@goldfoot.com)
-**PGP Key:** Available upon request
+**Email:** [joel@goldfoot.com](mailto:joel@goldfoot.com) **PGP Key:** Available
+upon request
 
 ---
 

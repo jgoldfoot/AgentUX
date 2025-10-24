@@ -1,10 +1,15 @@
 # Nuxt SSR AgentUX Implementation Example
 
-This example demonstrates how to implement AgentUX patterns in a Nuxt.js application with server-side rendering (SSR) to ensure optimal agent accessibility and user experience.
+This example demonstrates how to implement AgentUX patterns in a Nuxt.js
+application with server-side rendering (SSR) to ensure optimal agent
+accessibility and user experience.
 
 ## Overview
 
-Nuxt.js provides excellent SSR capabilities out of the box, making it an ideal framework for AgentUX implementation. This example shows how to structure a Vue.js application with agent-first design principles while maintaining excellent human UX.
+Nuxt.js provides excellent SSR capabilities out of the box, making it an ideal
+framework for AgentUX implementation. This example shows how to structure a
+Vue.js application with agent-first design principles while maintaining
+excellent human UX.
 
 ## Project Structure
 
@@ -39,42 +44,39 @@ nuxt-agentux-app/
 export default defineNuxtConfig({
   // Enable SSR (default in Nuxt 3)
   ssr: true,
-  
+
   // SEO and meta configuration
   app: {
     head: {
       htmlAttrs: {
-        lang: 'en'
+        lang: 'en',
       },
       meta: [
         { charset: 'utf-8' },
         { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-        { name: 'robots', content: 'index, follow' }
-      ]
-    }
+        { name: 'robots', content: 'index, follow' },
+      ],
+    },
   },
 
   // CSS framework (optional)
   css: ['@/assets/css/main.css'],
 
   // Modules for enhanced functionality
-  modules: [
-    '@nuxtjs/tailwindcss',
-    '@pinia/nuxt'
-  ],
+  modules: ['@nuxtjs/tailwindcss', '@pinia/nuxt'],
 
   // Runtime config for agent detection
   runtimeConfig: {
     public: {
-      agentDetectionEnabled: true
-    }
+      agentDetectionEnabled: true,
+    },
   },
 
   // Experimental features for better SSR
   experimental: {
-    payloadExtraction: false // Ensures clean HTML for agents
-  }
-})
+    payloadExtraction: false, // Ensures clean HTML for agents
+  },
+});
 ```
 
 ## Agent Detection Composable
@@ -83,14 +85,14 @@ export default defineNuxtConfig({
 
 ```typescript
 export const useAgentDetection = () => {
-  const isAgent = ref(false)
-  const agentType = ref<string | null>(null)
-  const userAgent = ref('')
+  const isAgent = ref(false);
+  const agentType = ref<string | null>(null);
+  const userAgent = ref('');
 
   const detectAgent = () => {
     if (process.client) {
-      userAgent.value = navigator.userAgent
-      
+      userAgent.value = navigator.userAgent;
+
       // Common agent patterns
       const agentPatterns = [
         /bot/i,
@@ -100,39 +102,39 @@ export const useAgentDetection = () => {
         /headless/i,
         /selenium/i,
         /playwright/i,
-        /puppeteer/i
-      ]
+        /puppeteer/i,
+      ];
 
-      isAgent.value = agentPatterns.some(pattern => 
+      isAgent.value = agentPatterns.some((pattern) =>
         pattern.test(userAgent.value)
-      )
+      );
 
       if (isAgent.value) {
-        agentType.value = userAgent.value.split(' ')[0]
+        agentType.value = userAgent.value.split(' ')[0];
       }
     }
-  }
+  };
 
   const getAgentContext = () => ({
     isAgent: isAgent.value,
     type: agentType.value,
     userAgent: userAgent.value,
-    timestamp: new Date().toISOString()
-  })
+    timestamp: new Date().toISOString(),
+  });
 
   // Auto-detect on mount
   onMounted(() => {
-    detectAgent()
-  })
+    detectAgent();
+  });
 
   return {
     isAgent: readonly(isAgent),
     agentType: readonly(agentType),
     userAgent: readonly(userAgent),
     detectAgent,
-    getAgentContext
-  }
-}
+    getAgentContext,
+  };
+};
 ```
 
 ## Middleware for Agent Context
@@ -145,28 +147,28 @@ export default defineNuxtRouteMiddleware((to, from) => {
   const agentMeta = {
     '/': {
       'data-agent-page': 'home',
-      'data-agent-intent': 'browse-products'
+      'data-agent-intent': 'browse-products',
     },
     '/products': {
       'data-agent-page': 'product-list',
-      'data-agent-intent': 'find-product'
+      'data-agent-intent': 'find-product',
     },
     '/contact': {
       'data-agent-page': 'contact',
-      'data-agent-intent': 'get-support'
-    }
-  }
+      'data-agent-intent': 'get-support',
+    },
+  };
 
   // Add route-specific agent attributes
   if (process.client) {
-    const meta = agentMeta[to.path as keyof typeof agentMeta]
+    const meta = agentMeta[to.path as keyof typeof agentMeta];
     if (meta) {
       Object.entries(meta).forEach(([key, value]) => {
-        document.documentElement.setAttribute(key, value)
-      })
+        document.documentElement.setAttribute(key, value);
+      });
     }
   }
-})
+});
 ```
 
 ## Main App Structure
@@ -185,11 +187,11 @@ export default defineNuxtRouteMiddleware((to, from) => {
         <header role="banner">
           <AgentNav />
         </header>
-        
+
         <main role="main" id="main-content">
           <NuxtPage />
         </main>
-        
+
         <footer role="contentinfo">
           <p>&copy; 2025 AgentUX Nuxt Example</p>
         </footer>
@@ -200,12 +202,12 @@ export default defineNuxtRouteMiddleware((to, from) => {
 
 <script setup>
 // Global agent detection
-const { detectAgent } = useAgentDetection()
+const { detectAgent } = useAgentDetection();
 
 // Detect agents on app mount
 onMounted(() => {
-  detectAgent()
-})
+  detectAgent();
+});
 </script>
 
 <style>
@@ -223,7 +225,7 @@ body {
 }
 
 /* Agent-specific optimizations */
-[data-agent-context="true"] {
+[data-agent-context='true'] {
   font-size: 16px;
   line-height: 1.6;
 }
@@ -236,24 +238,24 @@ body {
 
 ```vue
 <template>
-  <nav 
-    role="navigation" 
+  <nav
+    role="navigation"
     aria-label="Main navigation"
     data-agent-component="navigation"
   >
     <div class="nav-container">
-      <NuxtLink 
-        to="/" 
+      <NuxtLink
+        to="/"
         class="logo"
         data-agent-action="go-home"
         aria-label="Go to homepage"
       >
         AgentUX Store
       </NuxtLink>
-      
+
       <ul role="list" class="nav-links">
         <li>
-          <NuxtLink 
+          <NuxtLink
             to="/"
             data-agent-action="browse-products"
             :class="{ active: $route.path === '/' }"
@@ -262,7 +264,7 @@ body {
           </NuxtLink>
         </li>
         <li>
-          <NuxtLink 
+          <NuxtLink
             to="/products"
             data-agent-action="view-products"
             :class="{ active: $route.path.startsWith('/products') }"
@@ -271,7 +273,7 @@ body {
           </NuxtLink>
         </li>
         <li>
-          <NuxtLink 
+          <NuxtLink
             to="/contact"
             data-agent-action="get-support"
             :class="{ active: $route.path === '/contact' }"
@@ -282,8 +284,8 @@ body {
       </ul>
 
       <!-- Agent status indicator (development only) -->
-      <div 
-        v-if="isAgent && process.dev" 
+      <div
+        v-if="isAgent && process.dev"
         class="agent-indicator"
         data-agent-status="detected"
       >
@@ -294,7 +296,7 @@ body {
 </template>
 
 <script setup>
-const { isAgent, agentType } = useAgentDetection()
+const { isAgent, agentType } = useAgentDetection();
 </script>
 
 <style scoped>
@@ -354,14 +356,12 @@ const { isAgent, agentType } = useAgentDetection()
 <template>
   <div data-agent-page="home" data-agent-intent="browse-products">
     <section role="banner" class="hero">
-      <h1 data-agent-content="page-title">
-        Welcome to AgentUX Store
-      </h1>
+      <h1 data-agent-content="page-title">Welcome to AgentUX Store</h1>
       <p data-agent-content="page-description">
         Discover products designed for both humans and AI agents
       </p>
-      <NuxtLink 
-        to="/products" 
+      <NuxtLink
+        to="/products"
         class="cta-button"
         data-agent-action="view-all-products"
         role="button"
@@ -374,8 +374,8 @@ const { isAgent, agentType } = useAgentDetection()
       <h2 id="featured-heading" data-agent-content="section-title">
         Featured Products
       </h2>
-      
-      <div 
+
+      <div
         class="products-grid"
         data-agent-component="product-list"
         role="list"
@@ -401,26 +401,32 @@ const { isAgent, agentType } = useAgentDetection()
 useHead({
   title: 'AgentUX Store - Products for Humans and AI',
   meta: [
-    { name: 'description', content: 'Browse our collection of products designed for optimal agent and human experience' }
-  ]
-})
+    {
+      name: 'description',
+      content:
+        'Browse our collection of products designed for optimal agent and human experience',
+    },
+  ],
+});
 
 // Fetch featured products (SSR)
-const { data: featuredProducts } = await $fetch('/api/products/featured')
+const { data: featuredProducts } = await $fetch('/api/products/featured');
 
 // Structured data for agents
-const structuredData = computed(() => JSON.stringify({
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "name": "AgentUX Store",
-  "description": "Products designed for both humans and AI agents",
-  "url": "https://example.com",
-  "potentialAction": {
-    "@type": "SearchAction",
-    "target": "https://example.com/products?q={search_term_string}",
-    "query-input": "required name=search_term_string"
-  }
-}))
+const structuredData = computed(() =>
+  JSON.stringify({
+    '@context': 'https://schema.org',
+    '@type': 'WebSite',
+    name: 'AgentUX Store',
+    description: 'Products designed for both humans and AI agents',
+    url: 'https://example.com',
+    potentialAction: {
+      '@type': 'SearchAction',
+      target: 'https://example.com/products?q={search_term_string}',
+      'query-input': 'required name=search_term_string',
+    },
+  })
+);
 </script>
 
 <style scoped>
@@ -472,53 +478,53 @@ const structuredData = computed(() => JSON.stringify({
 
 ```vue
 <template>
-  <article 
+  <article
     class="product-card"
     data-agent-component="product-card"
     :data-agent-product-id="product.id"
-    itemscope 
+    itemscope
     itemtype="https://schema.org/Product"
   >
-    <img 
-      :src="product.image" 
+    <img
+      :src="product.image"
       :alt="product.name"
       class="product-image"
       itemprop="image"
       data-agent-content="product-image"
-    >
-    
+    />
+
     <div class="product-info">
-      <h3 
+      <h3
         class="product-name"
         itemprop="name"
         data-agent-content="product-name"
       >
         {{ product.name }}
       </h3>
-      
-      <p 
+
+      <p
         class="product-description"
         itemprop="description"
         data-agent-content="product-description"
       >
         {{ product.description }}
       </p>
-      
+
       <div class="product-meta">
-        <span 
+        <span
           class="product-price"
           itemprop="offers"
           itemscope
           itemtype="https://schema.org/Offer"
           data-agent-content="product-price"
         >
-          <meta itemprop="currency" content="USD">
+          <meta itemprop="currency" content="USD" />
           <span itemprop="price" :content="product.price">
             ${{ product.price }}
           </span>
         </span>
-        
-        <span 
+
+        <span
           class="product-rating"
           data-agent-content="product-rating"
           :aria-label="`Rating: ${product.rating} out of 5 stars`"
@@ -526,8 +532,8 @@ const structuredData = computed(() => JSON.stringify({
           ⭐ {{ product.rating }}/5
         </span>
       </div>
-      
-      <NuxtLink 
+
+      <NuxtLink
         :to="`/products/${product.id}`"
         class="product-link"
         data-agent-action="view-product-details"
@@ -560,12 +566,14 @@ defineProps<{
   border-radius: 8px;
   overflow: hidden;
   background: white;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition:
+    transform 0.2s,
+    box-shadow 0.2s;
 }
 
 .product-card:hover {
   transform: translateY(-4px);
-  box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
 }
 
 .product-image {
@@ -631,8 +639,8 @@ defineProps<{
 <template>
   <div data-agent-page="contact" data-agent-intent="get-support">
     <h1 data-agent-content="page-title">Contact Us</h1>
-    
-    <form 
+
+    <form
       @submit.prevent="submitForm"
       class="contact-form"
       data-agent-component="contact-form"
@@ -641,11 +649,9 @@ defineProps<{
     >
       <fieldset>
         <legend data-agent-content="form-section">Contact Information</legend>
-        
+
         <div class="form-group">
-          <label for="name" data-agent-content="field-label">
-            Name *
-          </label>
+          <label for="name" data-agent-content="field-label"> Name * </label>
           <input
             id="name"
             v-model="form.name"
@@ -653,16 +659,14 @@ defineProps<{
             required
             data-agent-field="customer-name"
             aria-describedby="name-help"
-          >
+          />
           <small id="name-help" data-agent-content="field-help">
             Your full name for our records
           </small>
         </div>
-        
+
         <div class="form-group">
-          <label for="email" data-agent-content="field-label">
-            Email *
-          </label>
+          <label for="email" data-agent-content="field-label"> Email * </label>
           <input
             id="email"
             v-model="form.email"
@@ -670,12 +674,12 @@ defineProps<{
             required
             data-agent-field="customer-email"
             aria-describedby="email-help"
-          >
+          />
           <small id="email-help" data-agent-content="field-help">
             We'll use this to respond to your inquiry
           </small>
         </div>
-        
+
         <div class="form-group">
           <label for="subject" data-agent-content="field-label">
             Subject *
@@ -693,7 +697,7 @@ defineProps<{
             <option value="other">Other</option>
           </select>
         </div>
-        
+
         <div class="form-group">
           <label for="message" data-agent-content="field-label">
             Message *
@@ -710,8 +714,8 @@ defineProps<{
             Please provide details about your inquiry
           </small>
         </div>
-        
-        <button 
+
+        <button
           type="submit"
           :disabled="submitting"
           data-agent-action="submit-contact-form"
@@ -721,8 +725,8 @@ defineProps<{
         </button>
       </fieldset>
     </form>
-    
-    <div 
+
+    <div
       v-if="submitted"
       role="alert"
       data-agent-content="success-message"
@@ -737,41 +741,41 @@ defineProps<{
 useHead({
   title: 'Contact Us - AgentUX Store',
   meta: [
-    { name: 'description', content: 'Get in touch with our support team' }
-  ]
-})
+    { name: 'description', content: 'Get in touch with our support team' },
+  ],
+});
 
 const form = reactive({
   name: '',
   email: '',
   subject: '',
-  message: ''
-})
+  message: '',
+});
 
-const submitting = ref(false)
-const submitted = ref(false)
+const submitting = ref(false);
+const submitted = ref(false);
 
 const submitForm = async () => {
-  submitting.value = true
-  
+  submitting.value = true;
+
   try {
     await $fetch('/api/contact', {
       method: 'POST',
-      body: form
-    })
-    
-    submitted.value = true
-    
+      body: form,
+    });
+
+    submitted.value = true;
+
     // Reset form
-    Object.keys(form).forEach(key => {
-      form[key] = ''
-    })
+    Object.keys(form).forEach((key) => {
+      form[key] = '';
+    });
   } catch (error) {
-    console.error('Form submission error:', error)
+    console.error('Form submission error:', error);
   } finally {
-    submitting.value = false
+    submitting.value = false;
   }
-}
+};
 </script>
 
 <style scoped>
@@ -781,7 +785,7 @@ const submitForm = async () => {
   padding: 2rem;
   background: white;
   border-radius: 8px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .form-group {
@@ -795,7 +799,9 @@ label {
   color: #333;
 }
 
-input, select, textarea {
+input,
+select,
+textarea {
   width: 100%;
   padding: 0.75rem;
   border: 1px solid #ddd;
@@ -803,10 +809,12 @@ input, select, textarea {
   font-size: 1rem;
 }
 
-input:focus, select:focus, textarea:focus {
+input:focus,
+select:focus,
+textarea:focus {
   outline: none;
   border-color: #007bff;
-  box-shadow: 0 0 0 2px rgba(0,123,255,0.25);
+  box-shadow: 0 0 0 2px rgba(0, 123, 255, 0.25);
 }
 
 .submit-button {
@@ -846,11 +854,11 @@ input:focus, select:focus, textarea:focus {
 
 ```typescript
 export default defineEventHandler(async (event) => {
-  const userAgent = getHeader(event, 'user-agent') || ''
-  
+  const userAgent = getHeader(event, 'user-agent') || '';
+
   // Analyze user agent for agent detection
-  const isBot = /bot|crawler|spider|automation|headless/i.test(userAgent)
-  
+  const isBot = /bot|crawler|spider|automation|headless/i.test(userAgent);
+
   return {
     userAgent,
     isBot,
@@ -860,15 +868,15 @@ export default defineEventHandler(async (event) => {
       cookies: true,
       localStorage: !isBot,
       forms: true,
-      navigation: true
+      navigation: true,
     },
     recommendations: {
       preferSSR: isBot,
       simplifyUI: isBot,
-      enhanceSemantics: isBot
-    }
-  }
-})
+      enhanceSemantics: isBot,
+    },
+  };
+});
 ```
 
 ## Testing Agent Compatibility
@@ -876,56 +884,61 @@ export default defineEventHandler(async (event) => {
 To test this implementation with different agents:
 
 ### 1. cURL Test (Basic Agent)
+
 ```bash
 curl -H "User-Agent: TestBot/1.0" http://localhost:3000/
 ```
 
 ### 2. Puppeteer Test
-```javascript
-const puppeteer = require('puppeteer')
 
-const browser = await puppeteer.launch()
-const page = await browser.newPage()
-await page.goto('http://localhost:3000/')
+```javascript
+const puppeteer = require('puppeteer');
+
+const browser = await puppeteer.launch();
+const page = await browser.newPage();
+await page.goto('http://localhost:3000/');
 
 // Test agent detection
 const isAgentDetected = await page.evaluate(() => {
-  return document.documentElement.hasAttribute('data-agent-context')
-})
+  return document.documentElement.hasAttribute('data-agent-context');
+});
 
-console.log('Agent detected:', isAgentDetected)
+console.log('Agent detected:', isAgentDetected);
 ```
 
 ### 3. Playwright Test
+
 ```javascript
-const { chromium } = require('playwright')
+const { chromium } = require('playwright');
 
-const browser = await chromium.launch()
+const browser = await chromium.launch();
 const page = await browser.newPage({
-  userAgent: 'AgentTest/1.0 (compatible; TestingBot)'
-})
+  userAgent: 'AgentTest/1.0 (compatible; TestingBot)',
+});
 
-await page.goto('http://localhost:3000/')
+await page.goto('http://localhost:3000/');
 
 // Verify agent-specific attributes
 const agentAttributes = await page.evaluate(() => {
-  const elements = document.querySelectorAll('[data-agent-component]')
-  return Array.from(elements).map(el => ({
+  const elements = document.querySelectorAll('[data-agent-component]');
+  return Array.from(elements).map((el) => ({
     tag: el.tagName,
-    component: el.getAttribute('data-agent-component')
-  }))
-})
+    component: el.getAttribute('data-agent-component'),
+  }));
+});
 
-console.log('Agent components found:', agentAttributes)
+console.log('Agent components found:', agentAttributes);
 ```
 
 ## Key AgentUX Implementation Features
 
 1. **Server-Side Rendering**: All content is available immediately on page load
-2. **Semantic HTML Structure**: Proper use of landmarks, headings, and ARIA labels
+2. **Semantic HTML Structure**: Proper use of landmarks, headings, and ARIA
+   labels
 3. **Agent Detection**: Runtime detection with appropriate UI adaptations
 4. **Structured Data**: JSON-LD for enhanced agent understanding
-5. **Data Attributes**: Comprehensive `data-agent-*` attributes for agent guidance
+5. **Data Attributes**: Comprehensive `data-agent-*` attributes for agent
+   guidance
 6. **Form Accessibility**: Proper labeling, fieldsets, and validation
 7. **Navigation Clarity**: Clear site structure with semantic navigation
 8. **Performance Optimization**: SSR ensures fast initial content delivery
@@ -949,4 +962,6 @@ npm run preview
 npm run generate
 ```
 
-This Nuxt.js implementation provides a comprehensive example of AgentUX patterns while maintaining excellent performance and user experience for both human users and AI agents.
+This Nuxt.js implementation provides a comprehensive example of AgentUX patterns
+while maintaining excellent performance and user experience for both human users
+and AI agents.
