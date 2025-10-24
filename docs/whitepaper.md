@@ -1,4 +1,4 @@
-# **AgentUX: Designing the Next Generation of Dual-Mode Interfaces**
+# **BiModal Design: Designing the Next Generation of Dual-Mode Interfaces**
 
 _A Comprehensive White Paper with Empirical Validation_
 
@@ -14,24 +14,24 @@ September 23, 2025
 
 The emergence of autonomous AI agents as active interface participants
 represents a fundamental shift in user experience design. This white paper
-introduces AgentUX—a validated design discipline for creating dual-mode
+introduces BiModal Design—a validated design discipline for creating dual-mode
 interfaces that serve both human users and AI agents with equal effectiveness.
 Building on extensive empirical research from 2024-2025 and real-world
 implementation validation, we present proven principles, implementation
 patterns, and quantified performance metrics.
 
 **Critical Framework Discovery**: Through practical implementation, we
-identified a foundational requirement that determines whether any AgentUX
+identified a foundational requirement that determines whether any BiModal Design
 optimization can succeed: **Initial Payload Accessibility (FR-1)**. Most AI
 agents (approximately 80%) make simple HTTP requests without JavaScript
 execution—they only see the initial HTML response from the server. Without
 content in that initial payload, even perfectly structured semantic markup, ARIA
 attributes, and structured data remain completely invisible to agents.
 
-Our analysis of recent studies shows that well-designed AgentUX interfaces can
+Our analysis of recent studies shows that well-designed BiModal Design interfaces can
 improve agent task completion rates by 40-75% while maintaining or enhancing
 human usability—but only when the foundational requirement of initial payload
-accessibility is met first. This paper establishes AgentUX as a critical
+accessibility is met first. This paper establishes BiModal Design as a critical
 capability for organizations deploying AI agents at scale.
 
 ---
@@ -43,7 +43,7 @@ capability for organizations deploying AI agents at scale.
 3. [Introduction & Current State](#introduction--current-state)
 4. [Research Foundation & Validation Framework](#research-foundation--validation-framework)
 5. [Rendering Strategy for Agent Accessibility](#rendering-strategy)
-6. [AgentUX Principles & Validated Patterns](#agentux-principles--validated-patterns)
+6. [BiModal Design Principles & Validated Patterns](#agentux-principles--validated-patterns)
 7. [Implementation Framework](#implementation-framework)
 8. [Security, Ethics & Governance](#security-ethics--governance)
 9. [Real-World Implementation & Future Validation](#real-world-implementation--future-validation)
@@ -57,12 +57,12 @@ capability for organizations deploying AI agents at scale.
 
 ## **1. Executive Summary**
 
-AgentUX represents a transformative approach to interface design by recognizing
+BiModal Design represents a transformative approach to interface design by recognizing
 intelligent AI agents as active collaborators alongside human users. Recent
 research demonstrates that AI agents achieve significantly higher success rates
 on well-structured interfaces: **72% human success vs. 12% agent success** on
 conventional interfaces, improving to **42-70% agent success** on
-AgentUX-optimized interfaces.
+BiModal Design-optimized interfaces.
 
 However, this optimization is only possible if agents can access the content in
 the first place. The most critical—and often overlooked—requirement is **Initial
@@ -71,7 +71,7 @@ HTML response from the server, not just in the client-rendered DOM.
 
 ### **Foundational Discovery**
 
-Through real-world implementation, we identified that the AgentUX framework had
+Through real-world implementation, we identified that the BiModal Design framework had
 a critical blind spot: it extensively covered **WHAT** to put in the DOM
 (semantic structure, ARIA roles, structured data) but never addressed **HOW** to
 ensure that DOM exists for agents. Most AI agents make simple HTTP requests
@@ -92,7 +92,7 @@ regardless of how well it's structured.
 
 ### **Strategic Impact**
 
-Organizations implementing updated AgentUX principles report:
+Organizations implementing updated BiModal Design principles report:
 
 - **15-25% increase** in automated transaction completion rates
 - **30-50% reduction** in support ticket volumes through better agent-assisted
@@ -102,7 +102,7 @@ Organizations implementing updated AgentUX principles report:
 - **Improved GEO** (Generative Engine Optimization) through agent-accessible
   content
 
-This white paper articulates the complete AgentUX framework including this
+This white paper articulates the complete BiModal Design framework including this
 critical foundational requirement, differentiates it from adjacent disciplines,
 and outlines a proven methodology with quantified metrics and validation
 protocols.
@@ -111,9 +111,9 @@ protocols.
 
 ## **2. Foundational Requirements (Infrastructure Layer)**
 
-Before implementing any AgentUX principles, interfaces must meet foundational
+Before implementing any BiModal Design principles, interfaces must meet foundational
 requirements that ensure agents can access content in the first place. These
-requirements form the infrastructure layer upon which all other AgentUX
+requirements form the infrastructure layer upon which all other BiModal Design
 optimizations depend.
 
 ### **FR-1: Initial Payload Accessibility** ⭐ CRITICAL
@@ -144,9 +144,9 @@ curl -s https://yoursite.com | grep "expected content"
 The most sophisticated semantic structure, perfect ARIA implementation, and
 comprehensive structured data are **meaningless if agents cannot access the DOM
 containing them**. This requirement is the foundation upon which all other
-AgentUX principles depend.
+BiModal Design principles depend.
 
-**Real-World Impact**: A website can follow every other AgentUX principle
+**Real-World Impact**: A website can follow every other BiModal Design principle
 perfectly—semantic HTML, ARIA roles, structured data, agent-specific
 attributes—but if it uses client-side rendering without mitigation, it remains
 completely invisible to approximately 80% of AI agents.
@@ -189,7 +189,7 @@ Research from 2024-2025 demonstrates explosive growth in agent deployment:
 - **Benchmark Evolution**: From static datasets to dynamic online evaluation
   environments
 
-### **3.3 Performance Gaps Driving AgentUX Need**
+### **3.3 Performance Gaps Driving BiModal Design Need**
 
 Recent benchmarks reveal critical performance gaps:
 
@@ -201,7 +201,7 @@ Recent benchmarks reveal critical performance gaps:
 
 _Sources: WebArena, VisualWebArena, ST-WebAgentBench studies_
 
-### **3.4 Why AgentUX Matters Now**
+### **3.4 Why BiModal Design Matters Now**
 
 #### **1. Proliferation of AI Agents**
 
@@ -251,16 +251,16 @@ the entire AI-assisted discovery channel—a rapidly growing portion of web
 traffic and a critical source of qualified leads.
 
 **Framework Implications**: This infrastructure reality necessitates that
-Initial Payload Accessibility (FR-1) be the foundational requirement of AgentUX.
+Initial Payload Accessibility (FR-1) be the foundational requirement of BiModal Design.
 Without content in the initial HTTP response, all other optimizations—semantic
-structure, ARIA roles, structured data—are meaningless. AgentUX must therefore
+structure, ARIA roles, structured data—are meaningless. BiModal Design must therefore
 provide clear guidance on rendering strategies, framework selection, and CSR
 mitigation patterns to ensure interfaces are truly accessible to AI agents.
 
 ---
 
 4. Research Foundation & Validation Framework 4.1 Current State of Evidence
-   AgentUX represents a theoretical framework developed through analysis of
+   BiModal Design represents a theoretical framework developed through analysis of
    existing accessibility standards, emerging AI agent capabilities, and
    observed patterns in human-computer interaction. No empirical studies have
    been conducted to validate these principles at this time. The framework
@@ -270,17 +270,17 @@ Web accessibility research (WCAG guidelines, semantic web principles)
 Human-computer interaction studies on information architecture Emerging
 observations about AI agent behavior in web environments
 
-4.2 Proposed Validation Methodology To establish empirical evidence for AgentUX
+4.2 Proposed Validation Methodology To establish empirical evidence for BiModal Design
 effectiveness, we propose a structured research approach: Phase 1: Baseline
 Studies
 
-Comparative analysis of AI agent performance on standard vs. AgentUX-compliant
+Comparative analysis of AI agent performance on standard vs. BiModal Design-compliant
 pages Task completion rate measurements across different agent architectures
 Error pattern analysis in agent-web interactions
 
 Phase 2: Implementation Studies
 
-Case studies from early adopters implementing AgentUX principles Before/after
+Case studies from early adopters implementing BiModal Design principles Before/after
 analysis of sites that adopt the framework User experience impact assessment
 (both human and agent users)
 
@@ -297,20 +297,20 @@ implementations Open source contributions to testing methodologies
 Community-driven validation efforts
 
 4.4 Hypothetical Case Studies The following examples illustrate potential
-scenarios where AgentUX principles might provide value. These are speculative
+scenarios where BiModal Design principles might provide value. These are speculative
 examples, not documented implementations: Example A: E-commerce Platform
-Hypothetical scenario: An online retailer implements AgentUX FR-1 (Initial
+Hypothetical scenario: An online retailer implements BiModal Design FR-1 (Initial
 Payload Accessibility), ensuring product information is accessible without
 JavaScript execution. This could potentially improve AI shopping agent
 performance by 40% in product discovery tasks. Example B: Documentation Site
-Theoretical application: A technical documentation site adopts AgentUX semantic
+Theoretical application: A technical documentation site adopts BiModal Design semantic
 structure requirements, potentially enabling AI agents to better understand
 hierarchical information and provide more accurate responses to developer
 queries. Example C: Government Portal Proposed implementation: A municipal
-services website follows AgentUX navigation principles, hypothetically improving
+services website follows BiModal Design navigation principles, hypothetically improving
 citizen service accessibility for both human users and AI assistants helping
 with form completion. 4.5 Measurement Framework When empirical studies become
-available, we propose evaluating AgentUX effectiveness using: Quantitative
+available, we propose evaluating BiModal Design effectiveness using: Quantitative
 Metrics:
 
 Agent task completion rates Time to information discovery Error frequency and
@@ -338,13 +338,13 @@ on empirical evidence Integration with existing web standards processes
 
 Note: This section will be updated as empirical evidence becomes available. We
 encourage the community to contribute validation studies and real-world
-implementation data to strengthen the evidence base for AgentUX principles.
+implementation data to strengthen the evidence base for BiModal Design principles.
 
 ---
 
 ## **5. Rendering Strategy for Agent Accessibility** 🆕
 
-AgentUX compliance requires that content be accessible in the initial server
+BiModal Design compliance requires that content be accessible in the initial server
 response. This section defines rendering requirements and implementation
 patterns.
 
@@ -352,7 +352,7 @@ patterns.
 
 Before agents can parse DOM structure, analyze semantic cues, or extract
 structured data, they must first acquire the HTML content. Understanding how
-agents obtain content is critical to AgentUX design, as acquisition method
+agents obtain content is critical to BiModal Design design, as acquisition method
 determines what agents can access.
 
 #### **Method 1: Basic HTTP Request (No JavaScript Execution)**
@@ -389,7 +389,7 @@ determines what agents can access.
   direct API call
 - **Advantages**: Fast, reliable, explicitly designed for agent consumption
 
-#### **Design Implication for AgentUX**
+#### **Design Implication for BiModal Design**
 
 **Design for Method 1 (Basic HTTP) as the baseline requirement.** This ensures
 maximum agent compatibility. **Optimize for Method 3 (API-Direct) where
@@ -414,12 +414,12 @@ access client-rendered content.
 
 ### **5.2 Rendering Method Classification**
 
-| **Rendering Method**                 | **Agent Accessibility**                          | **When to Use**                                             | **AgentUX Compliance**              |
+| **Rendering Method**                 | **Agent Accessibility**                          | **When to Use**                                             | **BiModal Design Compliance**              |
 | ------------------------------------ | ------------------------------------------------ | ----------------------------------------------------------- | ----------------------------------- |
 | **Server-Side Rendering (SSR)**      | ✅ Excellent - Full content in initial HTML      | Dynamic content, personalization, real-time data            | ✅ Fully Compliant                  |
 | **Static Site Generation (SSG)**     | ✅ Excellent - Pre-rendered HTML at build time   | Content that changes infrequently, documentation, marketing | ✅ Fully Compliant                  |
 | **Hybrid (SSR + CSR)**               | ✅ Good - If critical content is server-rendered | Complex applications needing rich interactivity             | ✅ Compliant (with conditions)      |
-| **Client-Side Rendering (CSR) Only** | ❌ Poor - Requires JavaScript execution          | NOT recommended for AgentUX applications                    | ❌ Non-Compliant (unless mitigated) |
+| **Client-Side Rendering (CSR) Only** | ❌ Poor - Requires JavaScript execution          | NOT recommended for BiModal Design applications                    | ❌ Non-Compliant (unless mitigated) |
 
 ### **5.3 CSR Mitigation Strategies**
 
@@ -561,7 +561,7 @@ If using these tools, you **MUST** implement the mitigation strategies above.
 
 ---
 
-## **6. AgentUX Principles & Validated Patterns**
+## **6. BiModal Design Principles & Validated Patterns**
 
 _Note: These principles build upon FR-1 (Initial Payload Accessibility). Without
 FR-1 compliance, these optimizations remain invisible to agents._
@@ -573,7 +573,7 @@ FR-1 compliance, these optimizations remain invisible to agents._
 _Validation: 35% improvement in agent content extraction accuracy_
 
 ```html
-<!-- AgentUX Pattern -->
+<!-- BiModal Design Pattern -->
 <main role="main" aria-label="Product catalog">
   <section aria-labelledby="search-heading">
     <h2 id="search-heading">Search Products</h2>
@@ -731,14 +731,14 @@ grep -q "<main" output.html
 - **C0 Weight**: 10 (double the weight of other critical items)
 - **Total possible points**: 43 (previously 33)
 - **Compliance thresholds**:
-  - ≥ 90%: AgentUX Certified
-  - 75-89%: AgentUX Advanced
-  - 60-74%: AgentUX Foundational
-  - < 60%: AgentUX At Risk (requires redesign)
+  - ≥ 90%: BiModal Design Certified
+  - 75-89%: BiModal Design Advanced
+  - 60-74%: BiModal Design Foundational
+  - < 60%: BiModal Design At Risk (requires redesign)
 
 #### **C0 as Blocking Requirement**
 
-**If C0 fails (score = 0), the interface is automatically rated "AgentUX At
+**If C0 fails (score = 0), the interface is automatically rated "BiModal Design At
 Risk" regardless of other scores**, as content inaccessibility makes all other
 optimizations irrelevant.
 
@@ -791,7 +791,7 @@ agentux_validation:
 **Critical Note**: **Level 0 (Infrastructure Ready) is now a prerequisite**.
 Organizations cannot progress to Level 1 without first ensuring FR-1 compliance.
 An interface with perfect ARIA implementation (Level 2) but client-side
-rendering (Level 0 failure) regresses to "Not AgentUX Compliant."
+rendering (Level 0 failure) regresses to "Not BiModal Design Compliant."
 
 ### **8.2 Implementation Roadmap**
 
@@ -833,10 +833,10 @@ rendering (Level 0 failure) regresses to "Not AgentUX Compliant."
 ---
 
 9. Real-World Implementation & Future Validation 9.1 Documented Implementation:
-   AI-Plus.Design The first documented AgentUX implementation is the framework
+   AI-Plus.Design The first documented BiModal Design implementation is the framework
    creator's own website: ai-plus.design Implementation Timeline:
 
-Development Approach: AgentUX principles implemented from the start of the
+Development Approach: BiModal Design principles implemented from the start of the
 design process Status: Live production implementation serving as ongoing
 proof-of-concept Evolution: Principles continue to be applied and refined based
 on real-world observations
@@ -862,9 +862,9 @@ Security Policy Compliance: Basic headers present, requires full audit
 Performance Optimization: Appears fast, lacks quantified agent-specific metrics
 Cross-Platform Compatibility: Requires multi-agent testing validation
 
-Estimated Compliance Score: 34/43 (79%) - "AgentUX Advanced" 9.2 Key Discovery:
+Estimated Compliance Score: 34/43 (79%) - "BiModal Design Advanced" 9.2 Key Discovery:
 The DOM Accessibility Blind Spot Critical Learning: Real-world implementation
-revealed that AgentUX framework had a fundamental gap: it extensively covered
+revealed that BiModal Design framework had a fundamental gap: it extensively covered
 WHAT to put in the DOM (semantic structure, ARIA roles, structured data) but
 never addressed HOW to ensure that DOM exists for agents. The Problem: Most AI
 agents make simple HTTP requests without JavaScript execution—they only see the
@@ -883,7 +883,7 @@ html<!-- Content exists BEFORE JavaScript runs -->
 This discovery led to major framework updates including FR-1 as a foundational requirement.
 9.3 Practical Benefits Observed
 Enhanced Content Control:
-AgentUX implementation provides granular control over content access:
+BiModal Design implementation provides granular control over content access:
 
 Basic agents (80% of LLMs): See curated fallback content in initial HTML
 Advanced agents: Can access structured API endpoint Humans: Get full interactive
@@ -896,16 +896,16 @@ Different content versions for different user types Controlled discoverability
 through initial payload management
 
 9.4 Implementation Guidance Detailed implementation guidance, common pitfalls,
-and step-by-step methodology are covered comprehensively in the AgentUX white
+and step-by-step methodology are covered comprehensively in the BiModal Design white
 paper framework sections. 9.5 Call for Additional Real-World Implementations We
 seek other organizations willing to:
 
-Document their AgentUX implementations in production environments Share measured
+Document their BiModal Design implementations in production environments Share measured
 outcomes (not projected benefits) Contribute lessons learned from implementation
 experiences Participate in empirical validation studies
 
 9.6 Future Validation Framework Projected Benefits (Hypothetical): Based on
-theoretical analysis, organizations implementing AgentUX principles may
+theoretical analysis, organizations implementing BiModal Design principles may
 experience:
 
 15-25% increase in automated transaction completion rates 30-50% reduction in
@@ -919,7 +919,7 @@ controlled studies and additional real-world implementations.
 
 ## **10. Tooling & Technical Implementation**
 
-### **10.1 AgentUX Development Tools**
+### **10.1 BiModal Design Development Tools**
 
 #### **10.1.1 Initial Payload Validator (New)**
 
@@ -929,7 +929,7 @@ class InitialPayloadValidator {
   async validate(url) {
     // Simulate agent access (no JavaScript)
     const response = await fetch(url, {
-      headers: { 'User-Agent': 'AgentUX-Validator/2.1' },
+      headers: { 'User-Agent': 'BiModal Design-Validator/2.1' },
     });
 
     const html = await response.text();
@@ -978,8 +978,8 @@ class InitialPayloadValidator {
 #### **10.1.2 Browser Extension**
 
 ```javascript
-// AgentUX Chrome Extension
-class AgentUXDevTools {
+// BiModal Design Chrome Extension
+class BiModal DesignDevTools {
   analyzePageStructure() {
     const analysis = {
       initialPayloadScore: this.testInitialPayload(),
@@ -997,7 +997,7 @@ class AgentUXDevTools {
     // Fetch current page without JavaScript
     const url = window.location.href;
     const response = await fetch(url, {
-      headers: { 'User-Agent': 'AgentUX-Test/2.1' },
+      headers: { 'User-Agent': 'BiModal Design-Test/2.1' },
     });
 
     const html = await response.text();
@@ -1047,9 +1047,9 @@ module.exports = {
 
 ```javascript
 // next.config.js
-const withAgentUX = require('@agentux/next-plugin');
+const withBiModal Design = require('@agentux/next-plugin');
 
-module.exports = withAgentUX({
+module.exports = withBiModal Design({
   agentux: {
     enableStructuredData: true,
     enforceSSG: true, // Ensure static generation
@@ -1088,7 +1088,7 @@ async function handler(req, res) {
 }
 ```
 
-**AgentUX Benefit**: Agents receive content immediately without waiting for full
+**BiModal Design Benefit**: Agents receive content immediately without waiting for full
 page render.
 
 #### **11.1.2 Islands Architecture Evolution**
@@ -1096,7 +1096,7 @@ page render.
 **Trend**: Frameworks like Astro pioneer "islands" of interactivity in static
 HTML
 
-**AgentUX Implication**: Perfect alignment with FR-1—static content by default,
+**BiModal Design Implication**: Perfect alignment with FR-1—static content by default,
 interactive where needed
 
 ```astro
@@ -1135,7 +1135,7 @@ const data = await fetchData();
 - Initial payload validation protocols
 - Progressive enhancement best practices
 
-#### **11.2.2 AgentUX Certification Program**
+#### **11.2.2 BiModal Design Certification Program**
 
 **Objective**: Create industry-recognized certification for agent-accessible
 interfaces
@@ -1143,7 +1143,7 @@ interfaces
 **Levels**:
 
 - **Silver**: FR-1 + Basic compliance (C0-C3)
-- **Gold**: Full AgentUX compliance (C0-C8, 85%+ score)
+- **Gold**: Full BiModal Design compliance (C0-C8, 85%+ score)
 - **Platinum**: Agent-Native design (Level 4 maturity)
 
 ### **11.3 Research Priorities**
@@ -1175,7 +1175,7 @@ Research needed on:
 
 ## **12. Conclusion**
 
-AgentUX has evolved from a conceptual framework into a validated, battle-tested
+BiModal Design has evolved from a conceptual framework into a validated, battle-tested
 design discipline with proven business impact. The critical discovery of Initial
 Payload Accessibility (FR-1) as a foundational requirement demonstrates the
 framework's maturity through real-world validation and honest self-assessment.
@@ -1183,13 +1183,13 @@ framework's maturity through real-world validation and honest self-assessment.
 ### **Key Takeaways**
 
 1. **Initial Payload Accessibility is Non-Negotiable**: Without content in the
-   server response, all other AgentUX optimizations are invisible to ~80% of
+   server response, all other BiModal Design optimizations are invisible to ~80% of
    agents
 
 2. **Rendering Method is a Foundational Decision**: SSR/SSG should be default;
    CSR requires explicit mitigation and comes with agent accessibility costs
 
-3. **Proven Impact**: AgentUX improvements show 40-75% gains in agent task
+3. **Proven Impact**: BiModal Design improvements show 40-75% gains in agent task
    completion when built on proper infrastructure
 
 4. **Framework Credibility Through Honesty**: Discovering and fixing the FR-1
@@ -1200,7 +1200,7 @@ framework's maturity through real-world validation and honest self-assessment.
 
 ### **Critical Success Factors**
 
-**For Organizations Implementing AgentUX:**
+**For Organizations Implementing BiModal Design:**
 
 1. **Validate FR-1 First**: Test initial payload before any other optimization
 2. **Choose Rendering Method Carefully**: Framework selection impacts agent
@@ -1220,7 +1220,7 @@ framework's maturity through real-world validation and honest self-assessment.
 
 ### **The Path Forward**
 
-The evidence is clear: AgentUX is not a future consideration but a present
+The evidence is clear: BiModal Design is not a future consideration but a present
 necessity for organizations deploying AI agents at scale. However, it must be
 built on the correct foundation:
 
@@ -1237,14 +1237,14 @@ the full potential of human-agent collaboration.
 
 ### **Final Recommendation**
 
-Begin every AgentUX implementation with this test:
+Begin every BiModal Design implementation with this test:
 
 ```bash
 curl -s https://yoursite.com | grep "your main content"
 ```
 
 If this returns empty or just `<div id="root"></div>`, **stop**. Fix your
-rendering strategy before proceeding with any other AgentUX optimizations.
+rendering strategy before proceeding with any other BiModal Design optimizations.
 
 The most beautiful, semantic, ARIA-compliant interface in the world is useless
 if agents cannot see it.
@@ -1278,7 +1278,7 @@ if agents cannot see it.
 10. **Progressive Enhancement Best Practices**:
     https://www.gov.uk/service-manual/technology/using-progressive-enhancement
 
-### **AgentUX Resources**
+### **BiModal Design Resources**
 
 - **Official Website**: [agentux.design](https://agentux.design)
 - **GitHub Repository**:
@@ -1310,7 +1310,7 @@ mitigation, CSR makes content invisible to agents that don't execute JavaScript.
 
 **Progressive Enhancement** 🆕: A design philosophy where a baseline experience
 is provided to all users/agents, then enhanced with additional features for
-those that support them. In AgentUX context: content accessible in initial HTML,
+those that support them. In BiModal Design context: content accessible in initial HTML,
 enhanced with JavaScript interactivity.
 
 **Pre-rendering** 🆕: A technique where CSR applications are rendered to static
@@ -1321,7 +1321,7 @@ content while maintaining SPA benefits for human users.
 requirement that all critical content exists in the initial HTTP response from
 the server.
 
-**AgentUX**: Agent User Experience, designing for both human users and AI
+**BiModal Design**: Agent User Experience, designing for both human users and AI
 agents.
 
 **DOM**: Document Object Model, the tree representation of HTML elements.
@@ -1340,7 +1340,7 @@ Playwright.
 and presentation by AI-powered search and discovery tools (ChatGPT, Claude,
 Perplexity, etc.).
 
-**Agent-Centric Design (ACD)**: A sub-discipline of AgentUX focused on surfaces
+**Agent-Centric Design (ACD)**: A sub-discipline of BiModal Design focused on surfaces
 optimized first for agent workflows.
 
 **Dual Experience Interfaces (DXI)**: Interfaces designed to deliver parallel,
@@ -1367,7 +1367,7 @@ curl -s https://yoursite.com
 - ✅ Using Next.js/Nuxt/Astro with SSG/SSR → Continue
 - ❌ Using CRA/Vue CLI/Bolt → Implement mitigation or migrate
 
-### **Step 3: Implement Core AgentUX**
+### **Step 3: Implement Core BiModal Design**
 
 1. Add semantic HTML5 landmarks
 2. Implement ARIA roles and properties

@@ -1,6 +1,6 @@
-# Next.js SSR AgentUX Example
+# Next.js SSR BiModal Design Example
 
-This example demonstrates how to implement AgentUX patterns in a Next.js
+This example demonstrates how to implement BiModal Design patterns in a Next.js
 application with Server-Side Rendering to ensure **FR-1: Initial Payload
 Accessibility** compliance.
 
@@ -34,7 +34,7 @@ async function getProducts() {
 }
 
 export const metadata: Metadata = {
-  title: 'Products - AgentUX Demo',
+  title: 'Products - BiModal Design Demo',
   description: 'Agent-accessible product catalog with semantic structure',
 };
 
@@ -142,7 +142,7 @@ function ProductCard({ product }: { product: any }) {
 }
 ```
 
-## AgentUX-Optimized Checkout Form
+## BiModal Design-Optimized Checkout Form
 
 ### `/src/app/checkout/page.tsx`
 
@@ -316,7 +316,7 @@ export async function GET(request: NextRequest) {
 
   // CORS for agent access
   response.headers.set('Access-Control-Allow-Origin', '*');
-  response.headers.set('X-AgentUX-Compatible', 'true');
+  response.headers.set('X-BiModal Design-Compatible', 'true');
 
   return response;
 }
@@ -340,7 +340,7 @@ curl -s http://localhost:3000/products | grep "Wireless Headphones"
 3. Navigate to your site
 4. Verify core functionality still works
 
-## Key AgentUX Features Demonstrated
+## Key BiModal Design Features Demonstrated
 
 ✅ **FR-1 Compliance**: Server-side rendering ensures content in initial
 payload  
@@ -370,7 +370,7 @@ npm run dev
 
 ```bash
 # Test with cURL (simulates basic agent)
-curl -H "User-Agent: AgentUX-Test/1.0" http://localhost:3000/products
+curl -H "User-Agent: BiModal Design-Test/1.0" http://localhost:3000/products
 
 # Test API endpoint
 curl http://localhost:3000/api/products?category=electronics

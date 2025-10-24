@@ -10,7 +10,7 @@ We release patches for security vulnerabilities in the following versions:
 
 ## Reporting a Vulnerability
 
-The AgentUX team takes security vulnerabilities seriously. We appreciate your
+The BiModal Design team takes security vulnerabilities seriously. We appreciate your
 efforts to responsibly disclose your findings.
 
 ### How to Report a Security Vulnerability
@@ -56,7 +56,7 @@ When you report a vulnerability, you can expect:
 
 ### Security Best Practices for Users
 
-When using AgentUX tools:
+When using BiModal Design tools:
 
 1. **Keep dependencies updated** - Run `npm audit` regularly
 2. **Validate user input** - Even when using validation tools
@@ -113,4 +113,4 @@ upon request
 
 ---
 
-Thank you for helping keep AgentUX and its users safe!
+Thank you for helping keep BiModal Design and its users safe!

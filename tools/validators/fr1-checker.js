@@ -324,11 +324,11 @@ Add FR-1 Checker tool for testing Initial Payload Accessibility
 - Support for custom user agents, timeouts, and verbose debugging output
 
 Enables developers to systematically validate FR-1 compliance across entire sites
-Provides foundation for AgentUX tooling ecosystem with production-ready CLI tool
+Provides foundation for BiModal Design tooling ecosystem with production-ready CLI tool
 Includes comprehensive documentation and integration examples
 ```
 
-Perfect! I've created the FR-1 Checker tool - the foundational validator for AgentUX compliance. This tool tests whether pages provide meaningful content without JavaScript execution.
+Perfect! I've created the FR-1 Checker tool - the foundational validator for BiModal Design compliance. This tool tests whether pages provide meaningful content without JavaScript execution.
 
 **Key Features:**
 - **Comprehensive testing** of 6 compliance areas (structure, semantics, navigation, forms, content, agent features)
@@ -337,7 +337,7 @@ Perfect! I've created the FR-1 Checker tool - the foundational validator for Age
 - **CI/CD integration** with exit codes and JSON reports
 - **Detailed recommendations** for fixing common issues
 
-Ready to create the next tool: **compliance-audit.js** for full AgentUX compliance checking?# FR-1 Checker Tool
+Ready to create the next tool: **compliance-audit.js** for full BiModal Design compliance checking?# FR-1 Checker Tool
 
 A tool to test Initial Payload Accessibility (FR-1) compliance - the foundational requirement that content must be accessible without JavaScript execution.
 
@@ -405,14 +405,14 @@ const { JSDOM } = require('jsdom');
  * FR-1 Checker - Test Initial Payload Accessibility
  * 
  * Tests whether a page provides meaningful content without JavaScript execution.
- * This is the foundational requirement (FR-1) for AgentUX compliance.
+ * This is the foundational requirement (FR-1) for BiModal Design compliance.
  */
 
 class FR1Checker {
   constructor(options = {}) {
     this.options = {
       timeout: options.timeout || 10000,
-      userAgent: options.userAgent || 'AgentUX-FR1-Checker/1.0 (+https://github.com/jgoldfoot/AgentUX)',
+      userAgent: options.userAgent || 'BiModal Design-FR1-Checker/1.0 (+https://github.com/jgoldfoot/BiModal Design)',
       verbose: options.verbose || false,
       ...options
     };
@@ -800,7 +800,7 @@ class FR1Checker {
     const hasAgentFeatures = agentComponents.length > 0 || agentActions.length > 0 || agentContent.length > 0;
     
     if (!hasAgentFeatures) {
-      analysis.recommendations.push('Consider adding AgentUX attributes for better agent understanding');
+      analysis.recommendations.push('Consider adding BiModal Design attributes for better agent understanding');
     }
     
     // Check for structured data
@@ -1005,7 +1005,7 @@ if (require.main === module) {
   
   if (args.length === 0 || args.includes('--help') || args.includes('-h')) {
     console.log(`
-AgentUX FR-1 Checker - Test Initial Payload Accessibility
+BiModal Design FR-1 Checker - Test Initial Payload Accessibility
 
 Usage:
   fr1-checker <url> [options]
@@ -1138,7 +1138,7 @@ module.exports = { FR1Checker, checkFR1Compliance: (url, options) => new FR1Chec
 {
   "name": "@agentux/fr1-checker",
   "version": "1.0.0",
-  "description": "Test Initial Payload Accessibility (FR-1) compliance for AgentUX",
+  "description": "Test Initial Payload Accessibility (FR-1) compliance for BiModal Design",
   "main": "fr1-checker.js",
   "bin": {
     "fr1-checker": "./fr1-checker.js"
@@ -1157,7 +1157,7 @@ module.exports = { FR1Checker, checkFR1Compliance: (url, options) => new FR1Chec
     "agent",
     "ux"
   ],
-  "author": "AgentUX Framework",
+  "author": "BiModal Design Framework",
   "license": "MIT",
   "dependencies": {
     "jsdom": "^22.1.0"
@@ -1170,7 +1170,7 @@ module.exports = { FR1Checker, checkFR1Compliance: (url, options) => new FR1Chec
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/jgoldfoot/AgentUX.git",
+    "url": "https://github.com/jgoldfoot/BiModal Design.git",
     "directory": "tools/validators"
   }
 }

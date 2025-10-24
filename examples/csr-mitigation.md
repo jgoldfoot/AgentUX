@@ -1,6 +1,6 @@
-# Client-Side Rendering (CSR) Mitigation for AgentUX
+# Client-Side Rendering (CSR) Mitigation for BiModal Design
 
-This guide demonstrates strategies for implementing AgentUX patterns in
+This guide demonstrates strategies for implementing BiModal Design patterns in
 client-side rendered applications where server-side rendering is not possible.
 While SSR/SSG is preferred for agent accessibility, these techniques ensure
 agents can still interact effectively with CSR applications.
@@ -28,7 +28,7 @@ agent-friendly while maintaining modern development practices.
    trigger
 5. **Interactive Dependencies**: Functionality tied to user interaction events
 
-### AgentUX Mitigation Strategy Hierarchy
+### BiModal Design Mitigation Strategy Hierarchy
 
 1. **Prevention**: Avoid CSR where possible (use SSR/SSG)
 2. **Fallback Content**: Provide meaningful content before JS loads
@@ -52,7 +52,7 @@ Provide meaningful HTML structure before JavaScript loads:
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>AgentUX Store - Products for Humans and AI</title>
+    <title>BiModal Design Store - Products for Humans and AI</title>
 
     <!-- Agent-specific meta tags -->
     <meta name="agent-page" content="product-catalog" />
@@ -64,7 +64,7 @@ Provide meaningful HTML structure before JavaScript loads:
       {
         "@context": "https://schema.org",
         "@type": "WebSite",
-        "name": "AgentUX Store",
+        "name": "BiModal Design Store",
         "description": "Products designed for optimal agent and human experience",
         "url": "https://example.com",
         "potentialAction": {
@@ -93,7 +93,7 @@ Provide meaningful HTML structure before JavaScript loads:
         data-agent-component="navigation"
       >
         <div class="nav-container">
-          <a href="/" class="logo" data-agent-action="go-home">AgentUX Store</a>
+          <a href="/" class="logo" data-agent-action="go-home">BiModal Design Store</a>
           <ul role="list" class="nav-links">
             <li><a href="/" data-agent-action="browse-home">Home</a></li>
             <li>
@@ -114,7 +114,7 @@ Provide meaningful HTML structure before JavaScript loads:
         <!-- Skeleton content for agents/no-JS users -->
         <div class="content-skeleton" data-agent-content="fallback-content">
           <section class="hero-skeleton" data-agent-component="hero-banner">
-            <h1 data-agent-content="page-title">AgentUX Store - Loading...</h1>
+            <h1 data-agent-content="page-title">BiModal Design Store - Loading...</h1>
             <p data-agent-content="page-description">
               Our products are designed for optimal agent and human experience.
               Please enable JavaScript for the full interactive experience.
@@ -208,7 +208,7 @@ Provide meaningful HTML structure before JavaScript loads:
 
     <!-- Footer with static content -->
     <footer role="contentinfo" data-agent-component="site-footer">
-      <p>&copy; 2025 AgentUX Store. Designed for humans and AI agents.</p>
+      <p>&copy; 2025 BiModal Design Store. Designed for humans and AI agents.</p>
       <nav aria-label="Footer navigation">
         <ul role="list">
           <li>
@@ -295,7 +295,7 @@ app.listen(3000, () => {
 });
 ```
 
-### 3. React CSR with AgentUX Patterns
+### 3. React CSR with BiModal Design Patterns
 
 Enhance React components with agent-friendly patterns:
 
@@ -377,7 +377,7 @@ function App() {
 
       <div className="content-container" data-agent-component="main-app">
         <section className="hero" data-agent-component="hero-banner">
-          <h1 data-agent-content="page-title">Welcome to AgentUX Store</h1>
+          <h1 data-agent-content="page-title">Welcome to BiModal Design Store</h1>
           <p data-agent-content="page-description">
             Discover products designed for both humans and AI agents
           </p>
@@ -904,7 +904,7 @@ describe('CSR Agent Compatibility', () => {
       '[data-agent-content="page-title"]',
       (el) => el.textContent
     );
-    expect(title).toContain('AgentUX Store');
+    expect(title).toContain('BiModal Design Store');
 
     const productCards = await page.$$('[data-agent-component="product-card"]');
     expect(productCards.length).toBeGreaterThan(0);
@@ -935,7 +935,7 @@ describe('CSR Agent Compatibility', () => {
     );
 
     expect(structuredData['@type']).toBe('WebSite');
-    expect(structuredData.name).toBe('AgentUX Store');
+    expect(structuredData.name).toBe('BiModal Design Store');
   });
 
   test('Form accessibility with agents', async () => {
@@ -1217,7 +1217,7 @@ const csr_metrics = {
 
 ## Conclusion
 
-While server-side rendering remains the optimal approach for AgentUX, these CSR
+While server-side rendering remains the optimal approach for BiModal Design, these CSR
 mitigation strategies can significantly improve agent compatibility in scenarios
 where SSR is not feasible. The key is providing meaningful content immediately
 while progressively enhancing the experience.

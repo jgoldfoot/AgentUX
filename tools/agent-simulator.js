@@ -1,12 +1,12 @@
 #!/usr/bin/env node
 
 /**
- * AgentUX Agent Simulator Tool
+ * BiModal Design Agent Simulator Tool
  * Simulates how different AI agents interact with web pages
- * Tests real-world usability of AgentUX implementations
+ * Tests real-world usability of BiModal Design implementations
  * 
  * Usage:
- *   npx @agentux/agent-simulator https://example.com
+ *   npx @bimodal-design/agent-simulator https://example.com
  *   agent-simulator --agent-type basic --task find-contact --output report.json
  */
 
@@ -203,7 +203,7 @@ class AgentSimulator {
                 result.tasks[taskName] = await this.executeTask(page, taskName, profile);
             }
 
-            // Test AgentUX compliance
+            // Test BiModal Design compliance
             result.accessibility = await this.testAgentAccessibility(page, profile);
 
             // Performance metrics
@@ -714,7 +714,7 @@ async function main() {
     
     if (args.length === 0 || args.includes('--help') || args.includes('-h')) {
         console.log(`
-AgentUX Agent Simulator Tool
+BiModal Design Agent Simulator Tool
 
 Usage:
   agent-simulator <url> [options]

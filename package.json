@@ -1,13 +1,14 @@
 {
-  "name": "@agentux/framework",
+  "name": "@bimodal-design/framework",
   "version": "0.1.0",
   "description": "A design framework for building dual-mode interfaces that work optimally for both humans and AI agents",
   "main": "index.js",
   "bin": {
-    "agentux": "./tools/agentux-cli.js",
-    "agentux-validate": "./tools/validators/fr1-validator.js",
-    "agentux-audit": "./accessibility/compliance-audit.js",
-    "agentux-simulate": "./tools/agent-simulator.js"
+    "bimodal-design": "./tools/bimodal-design-cli.js",
+    "bmd": "./tools/bimodal-design-cli.js",
+    "bmd-validate": "./tools/validators/fr1-validator.js",
+    "bmd-audit": "./accessibility/compliance-audit.js",
+    "bmd-simulate": "./tools/agent-simulator.js"
   },
   "scripts": {
     "test": "jest",
@@ -20,13 +21,13 @@
     "validate": "node tools/validators/fr1-validator.js",
     "audit": "node accessibility/compliance-audit.js",
     "simulate": "node tools/agent-simulator.js",
-    "cli": "node tools/agentux-cli.js",
-    "postinstall": "node -e \"console.log('AgentUX installed successfully!')\""
+    "cli": "node tools/bimodal-design-cli.js",
+    "postinstall": "node -e \"console.log('BiModal Design installed successfully!')\""
   },
   "keywords": [
     "accessibility",
     "ai-agents",
-    "agentux",
+    "bimodal-design",
     "dual-mode",
     "semantic-html",
     "ssr",
@@ -44,12 +45,12 @@
   "license": "Apache-2.0",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/jgoldfoot/AgentUX.git"
+    "url": "git+https://github.com/jgoldfoot/BiModalDesign.git"
   },
   "bugs": {
-    "url": "https://github.com/jgoldfoot/AgentUX/issues"
+    "url": "https://github.com/jgoldfoot/BiModalDesign/issues"
   },
-  "homepage": "https://github.com/jgoldfoot/AgentUX#readme",
+  "homepage": "https://github.com/jgoldfoot/BiModalDesign#readme",
   "engines": {
     "node": ">=16.0.0",
     "npm": ">=7.0.0"

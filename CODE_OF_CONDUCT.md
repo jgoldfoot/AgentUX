@@ -1,8 +1,8 @@
-# AgentUX Community Code of Conduct
+# BiModal Design Community Code of Conduct
 
 ## Our Commitment
 
-The AgentUX project is dedicated to building interfaces that work for both
+The BiModal Design project is dedicated to building interfaces that work for both
 humans and AI agents. We are committed to creating an inclusive, respectful, and
 collaborative community where everyone can contribute to advancing agent-human
 interface design regardless of experience level, background, or identity.
@@ -21,7 +21,7 @@ Examples of behavior that contributes to a positive environment include:
 
 - **Constructive Collaboration**: Providing thoughtful feedback on designs,
   code, and documentation
-- **Knowledge Sharing**: Helping others understand AgentUX principles and
+- **Knowledge Sharing**: Helping others understand BiModal Design principles and
   implementation techniques
 - **Inclusive Communication**: Using welcoming and inclusive language that helps
   newcomers feel welcome
@@ -58,7 +58,7 @@ This Code of Conduct applies within all community spaces, including:
 - GitHub repositories, issues, and pull requests
 - Documentation and example code
 - Community forums and discussions
-- Social media interactions related to AgentUX
+- Social media interactions related to BiModal Design
 - Events, conferences, and meetups (virtual or in-person)
 - Private communications when they relate to community activities
 
@@ -125,7 +125,7 @@ individual, or aggression toward or disparagement of classes of individuals.
 **Consequence**: A permanent ban from any sort of public interaction within the
 community.
 
-## AgentUX-Specific Guidelines
+## BiModal Design-Specific Guidelines
 
 ### Technical Discussions
 
@@ -163,7 +163,7 @@ community.
 We recognize valuable community contributions including:
 
 - **High-Quality Bug Reports**: Detailed reports that help improve the framework
-- **Documentation Improvements**: Making AgentUX more accessible through better
+- **Documentation Improvements**: Making BiModal Design more accessible through better
   docs
 - **Educational Content**: Blog posts, tutorials, and talks that help others
   learn
@@ -182,7 +182,7 @@ as initial reports.
 
 This Code of Conduct is adapted from the
 [Contributor Covenant](https://www.contributor-covenant.org/), version 2.1, and
-includes AgentUX-specific guidelines to support our unique focus on dual-mode
+includes BiModal Design-specific guidelines to support our unique focus on dual-mode
 interface design.
 
 For answers to common questions about this code of conduct, see the FAQ at
@@ -195,6 +195,6 @@ https://www.contributor-covenant.org/translations.
 **Last Updated**: October 2025  
 **Next Review**: April 2026
 
-By participating in the AgentUX community, you agree to abide by this Code of
+By participating in the BiModal Design community, you agree to abide by this Code of
 Conduct and help create a positive environment for everyone working to improve
 agent-human interface design.

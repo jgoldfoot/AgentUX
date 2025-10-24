@@ -31,7 +31,7 @@ const Navigation = ({ isAgent }) => {
       handleNavigation(to, action);
 
       // For agents that prefer traditional navigation
-      if (isAgent && window.AgentUX?.preferTraditionalNav) {
+      if (isAgent && window.BiModal Design?.preferTraditionalNav) {
         window.location.href = to;
         return;
       }
@@ -71,7 +71,7 @@ const Navigation = ({ isAgent }) => {
           ariaCurrent={currentPath === '/' ? 'page' : undefined}
         >
           <span className="logo" data-agent-content="site-name">
-            AgentUX Store
+            BiModal Design Store
           </span>
         </NavLink>
 
@@ -222,7 +222,7 @@ const Home = ({ navigate, isAgent, agentInfo }) => {
             Welcome to the Future of Agent-Human Interaction
           </h1>
           <p data-agent-content="page-description" className="hero-subtitle">
-            Discover products designed with AgentUX principles - optimized for
+            Discover products designed with BiModal Design principles - optimized for
             both AI agents and human users
           </p>
           <div className="hero-actions">
@@ -262,7 +262,7 @@ const Home = ({ navigate, isAgent, agentInfo }) => {
             Featured Products
           </h2>
           <p data-agent-content="section-description">
-            Our top-rated products that showcase AgentUX design principles
+            Our top-rated products that showcase BiModal Design design principles
           </p>
 
           <div
@@ -293,7 +293,7 @@ const Home = ({ navigate, isAgent, agentInfo }) => {
       >
         <div className="container">
           <h2 id="benefits-heading" data-agent-content="section-title">
-            Why Choose AgentUX Products?
+            Why Choose BiModal Design Products?
           </h2>
 
           <div className="benefits-grid">
@@ -323,7 +323,7 @@ const Home = ({ navigate, isAgent, agentInfo }) => {
           __html: JSON.stringify({
             '@context': 'https://schema.org',
             '@type': 'ItemList',
-            name: 'Featured AgentUX Products',
+            name: 'Featured BiModal Design Products',
             itemListElement: products.map((product, index) => ({
               '@type': 'Product',
               position: index + 1,
@@ -731,7 +731,7 @@ export const enhanceForAgents = (agentInfo) => {
   applyPerformanceOptimizations(agentInfo);
 
   // Make agent info globally available
-  window.AgentUX = {
+  window.BiModal Design = {
     agentInfo,
     isAgent: true,
     enhance: enhanceForAgents,
@@ -889,7 +889,7 @@ const enhanceStructuredData = () => {
       url: window.location.href,
       isPartOf: {
         '@type': 'WebSite',
-        name: 'AgentUX Store',
+        name: 'BiModal Design Store',
         url: window.location.origin,
       },
     };
@@ -988,7 +988,7 @@ describe('SPA Agent Compatibility', () => {
 
       // Verify content is immediately available
       const title = await page.textContent('[data-agent-content="page-title"]');
-      expect(title).toContain('AgentUX Store');
+      expect(title).toContain('BiModal Design Store');
 
       // Check structured data
       const structuredData = await page
@@ -1533,7 +1533,7 @@ server {
 ## Commit Description
 
 ````
-Add React SPA with SSR fallbacks AgentUX implementation
+Add React SPA with SSR fallbacks BiModal Design implementation
 
 - Hybrid architecture serving SPA to humans and SSR to agents
 - Server-side agent detection with automatic content routing
@@ -1550,9 +1550,9 @@ Add React SPA with SSR fallbacks AgentUX implementation
 
 Demonstrates optimal balance between modern SPA experience and agent compatibility
 Achieves 89% agent success rate while maintaining full SPA functionality for humans
-```# React SPA with SSR Fallbacks for AgentUX
+```# React SPA with SSR Fallbacks for BiModal Design
 
-This example demonstrates how to implement AgentUX patterns in a React Single Page Application (SPA) that includes server-side rendering fallbacks for optimal agent compatibility. This hybrid approach provides the best of both worlds: dynamic SPA experience for humans and reliable SSR content for agents.
+This example demonstrates how to implement BiModal Design patterns in a React Single Page Application (SPA) that includes server-side rendering fallbacks for optimal agent compatibility. This hybrid approach provides the best of both worlds: dynamic SPA experience for humans and reliable SSR content for agents.
 
 ## Overview
 
@@ -1694,7 +1694,7 @@ const serveAgentHome = async (req, res) => {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AgentUX Store - Products for Humans and AI</title>
+  <title>BiModal Design Store - Products for Humans and AI</title>
   <meta name="description" content="Discover products designed for optimal agent and human experience">
   <meta name="agent-page" content="home">
   <meta name="agent-intent" content="browse-products">
@@ -1705,7 +1705,7 @@ const serveAgentHome = async (req, res) => {
   ${JSON.stringify({
     "@context": "https://schema.org",
     "@type": "WebSite",
-    "name": "AgentUX Store",
+    "name": "BiModal Design Store",
     "description": "Products designed for optimal agent and human experience",
     "url": "https://example.com",
     "potentialAction": {
@@ -1747,7 +1747,7 @@ const serveAgentHome = async (req, res) => {
   <main role="main" id="main-content" data-agent-component="main-content">
     <section class="hero" data-agent-component="hero-banner">
       <div class="container">
-        <h1 data-agent-content="page-title">Welcome to AgentUX Store</h1>
+        <h1 data-agent-content="page-title">Welcome to BiModal Design Store</h1>
         <p data-agent-content="page-description">
           Discover products designed for both humans and AI agents
         </p>
@@ -1784,7 +1784,7 @@ const serveAgentHome = async (req, res) => {
 
   <footer role="contentinfo" data-agent-component="site-footer">
     <div class="container">
-      <p>&copy; 2025 AgentUX Store. Designed for humans and AI agents.</p>
+      <p>&copy; 2025 BiModal Design Store. Designed for humans and AI agents.</p>
       <nav aria-label="Footer navigation">
         <ul role="list" style="display: flex; gap: 1rem; list-style: none; padding: 0;">
           <li><a href="/privacy" data-agent-action="view-privacy">Privacy</a></li>
@@ -1829,7 +1829,7 @@ const serveAgentProducts = async (req, res) => {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Products - AgentUX Store</title>
+  <title>Products - BiModal Design Store</title>
   <meta name="description" content="Browse our complete product catalog designed for agent and human interaction">
   <meta name="agent-page" content="products">
   <meta name="agent-intent" content="find-product">
@@ -1839,7 +1839,7 @@ const serveAgentProducts = async (req, res) => {
   ${JSON.stringify({
     "@context": "https://schema.org",
     "@type": "ItemList",
-    "name": "AgentUX Products",
+    "name": "BiModal Design Products",
     "numberOfItems": products.length,
     "itemListElement": products.map((product, index) => ({
       "@type": "Product",
@@ -1938,7 +1938,7 @@ const serveAgentProducts = async (req, res) => {
 
   <footer role="contentinfo" data-agent-component="site-footer">
     <div class="container">
-      <p>&copy; 2025 AgentUX Store. ${products.length} products available.</p>
+      <p>&copy; 2025 BiModal Design Store. ${products.length} products available.</p>
     </div>
   </footer>
 </body>
@@ -1989,7 +1989,7 @@ const fetchAllProducts = async (query = {}) => {
   products = [...products,
     {
       id: '4',
-      name: 'AgentUX Form Builder',
+      name: 'BiModal Design Form Builder',
       description: 'Create forms that work perfectly with AI automation tools.',
       price: 79.99,
       category: 'Software'
@@ -2077,7 +2077,7 @@ function App() {
   if (loading) {
     return (
       <div className="app-loading" data-agent-component="loading-state">
-        <p data-agent-content="loading-message">Loading AgentUX Store...</p>
+        <p data-agent-content="loading-message">Loading BiModal Design Store...</p>
       </div>
     );
   }
@@ -2100,7 +2100,7 @@ function App() {
 
       <footer role="contentinfo" data-agent-component="site-footer">
         <div className="container">
-          <p>&copy; 2025 AgentUX Store. SPA optimized for agents.</p>
+          <p>&copy; 2025 BiModal Design Store. SPA optimized for agents.</p>
           <nav aria-label="Footer navigation">
             <ul role="list">
               <li>
@@ -2190,19 +2190,19 @@ const Router = ({ isAgent, agentInfo }) => {
   const updatePageMeta = (path) => {
     const routes = {
       '/': {
-        title: 'AgentUX Store - Home',
+        title: 'BiModal Design Store - Home',
         description: 'Products designed for humans and AI agents',
         agentPage: 'home',
         agentIntent: 'browse-products'
       },
       '/products': {
-        title: 'Products - AgentUX Store',
+        title: 'Products - BiModal Design Store',
         description: 'Browse our complete product catalog',
         agentPage: 'products',
         agentIntent: 'find-product'
       },
       '/contact': {
-        title: 'Contact - AgentUX Store',
+        title: 'Contact - BiModal Design Store',
         description: 'Get in touch with our support team',
         agentPage: 'contact',
         agentIntent: 'get-support'

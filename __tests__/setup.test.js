@@ -1,5 +1,5 @@
 /**
- * Setup and sanity tests for AgentUX
+ * Setup and sanity tests for BiModal Design
  * Ensures the test environment is configured correctly
  */
 
@@ -22,7 +22,7 @@ describe('Test Environment', () => {
   });
 });
 
-describe('AgentUX Framework', () => {
+describe('BiModal Design Framework', () => {
   test('should have core requirements defined', () => {
     const foundationalRequirements = [
       'FR-1: Initial Payload Accessibility',

@@ -1,6 +1,6 @@
 ---
 name: Feature request
-about: Suggest a new feature or enhancement for AgentUX
+about: Suggest a new feature or enhancement for BiModal Design
 title: '[FEATURE] '
 labels: enhancement
 assignees: ''
@@ -32,7 +32,7 @@ assignees: ''
 
 ## Benefits
 
-## <!-- Who would benefit from this feature? How would it improve AgentUX? -->
+## <!-- Who would benefit from this feature? How would it improve BiModal Design? -->
 
 -
 

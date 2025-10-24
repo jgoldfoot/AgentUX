@@ -1,11 +1,11 @@
 #!/usr/bin/env node
 
 /**
- * AgentUX FR-1 Validator
+ * BiModal Design FR-1 Validator
  * Tests if a URL meets the FR-1: Initial Payload Accessibility requirement
  *
  * Usage: node fr1-validator.js <url>
- * Or: npx agentux-validate <url>
+ * Or: npx bmd-validate <url>
  */
 
 const https = require('https');
@@ -32,7 +32,7 @@ function fetchInitialPayload(url) {
 
     const options = {
       headers: {
-        'User-Agent': 'AgentUX-Validator/1.0 (Simple HTTP; No JS)',
+        'User-Agent': 'BiModal Design-Validator/1.0 (Simple HTTP; No JS)',
       },
     };
 
@@ -132,7 +132,7 @@ function analyzePayload(response) {
 
 function printResults(url, results) {
   console.log('\n' + COLORS.blue + '═'.repeat(60) + COLORS.reset);
-  console.log(COLORS.blue + '  AgentUX FR-1 Validator Results' + COLORS.reset);
+  console.log(COLORS.blue + '  BiModal Design FR-1 Validator Results' + COLORS.reset);
   console.log(COLORS.blue + '═'.repeat(60) + COLORS.reset + '\n');
 
   console.log(COLORS.gray + 'URL: ' + COLORS.reset + url + '\n');
@@ -181,7 +181,7 @@ function printResults(url, results) {
   console.log(COLORS.gray + 'What is FR-1?' + COLORS.reset);
   console.log('FR-1 (Initial Payload Accessibility) ensures that ~80% of AI');
   console.log('agents can access your content via simple HTTP requests.');
-  console.log('\nLearn more: https://github.com/jgoldfoot/AgentUX');
+  console.log('\nLearn more: https://github.com/jgoldfoot/BiModal Design');
   console.log(COLORS.gray + '─'.repeat(60) + COLORS.reset + '\n');
 }
 

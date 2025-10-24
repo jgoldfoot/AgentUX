@@ -2,14 +2,14 @@
 
 ## For AI Coding Agents
 
-This file helps AI agents understand how to contribute to AgentUX, a framework
+This file helps AI agents understand how to contribute to BiModal Design, a framework
 for building dual-mode interfaces that work for both humans and AI agents.
 
 ---
 
 ## Project Overview
 
-**AgentUX** addresses a critical gap: ~80% of AI agents make simple HTTP
+**BiModal Design** addresses a critical gap: ~80% of AI agents make simple HTTP
 requests without JavaScript execution, making client-side rendered applications
 invisible to them.
 
@@ -19,7 +19,7 @@ the server's initial HTML response.
 **Key Metrics:**
 
 - Conventional interfaces: 72% human success vs. 12% agent success
-- AgentUX-optimized interfaces: 42-70% agent success
+- BiModal Design-optimized interfaces: 42-70% agent success
 - Improvement: 40-75% better agent task completion
 
 ---
@@ -27,7 +27,7 @@ the server's initial HTML response.
 ## Repository Structure
 
 ```
-AgentUX/
+BiModal Design/
 ├── README.md                          # Main documentation
 ├── AGENTS.md                          # This file
 ├── docs/                              # White papers and guides

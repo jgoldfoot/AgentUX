@@ -1,8 +1,8 @@
-# AgentUX Compliance Checklist
+# BiModal Design Compliance Checklist
 
 ## FR-1: Initial Payload Accessibility (BLOCKING)
 
-**🚨 Must pass before implementing other AgentUX patterns**
+**🚨 Must pass before implementing other BiModal Design patterns**
 
 ### Test Method
 
@@ -144,7 +144,7 @@ curl -s https://yoursite.com | grep "your-main-content"
 ### Agent Testing Tools
 
 ```bash
-# Install AgentUX CLI (when available)
+# Install BiModal Design CLI (when available)
 npm install -g @agentux/cli
 
 # Run compliance check
@@ -166,10 +166,10 @@ agentux test --suite=basic-navigation
 
 ### Compliance Levels
 
-- **🥇 AgentUX Certified (90%+)**: Ready for production agent deployment
-- **🥈 AgentUX Advanced (75-89%)**: Good foundation, minor improvements needed
-- **🥉 AgentUX Basic (60-74%)**: Functional but needs optimization
-- **🚨 AgentUX At Risk (<60%)**: Major issues, requires redesign
+- **🥇 BiModal Design Certified (90%+)**: Ready for production agent deployment
+- **🥈 BiModal Design Advanced (75-89%)**: Good foundation, minor improvements needed
+- **🥉 BiModal Design Basic (60-74%)**: Functional but needs optimization
+- **🚨 BiModal Design At Risk (<60%)**: Major issues, requires redesign
 
 ### Minimum Requirements by Level
 
@@ -205,4 +205,4 @@ agentux test --suite=basic-navigation
 - [Getting Started Guide](./getting-started.md)
 - [Full White Paper](./whitepaper.md)
 - [Example Implementations](../examples/)
-- [Report Issues](https://github.com/jgoldfoot/AgentUX/issues)
+- [Report Issues](https://github.com/jgoldfoot/BiModal Design/issues)

@@ -1,6 +1,6 @@
-# AgentUX Case Studies
+# BiModal Design Case Studies
 
-Real-world examples demonstrating the impact of AgentUX implementation across
+Real-world examples demonstrating the impact of BiModal Design implementation across
 different industries and use cases.
 
 ## Table of Contents

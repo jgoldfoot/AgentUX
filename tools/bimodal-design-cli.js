@@ -1,14 +1,14 @@
 #!/usr/bin/env node
 
 /**
- * AgentUX Unified CLI Tool
- * Central command-line interface for all AgentUX tools and utilities
+ * BiModal Design Unified CLI Tool
+ * Central command-line interface for all BiModal Design tools and utilities
  * 
  * Usage:
- *   agentux <command> [options]
- *   agentux audit https://example.com
- *   agentux simulate --multi-agent https://example.com
- *   agentux init --framework react
+ *   bimodal-design <command> [options]
+ *   bimodal-design audit https://example.com
+ *   bimodal-design simulate --multi-agent https://example.com
+ *   bimodal-design init --framework react
  */
 
 const { spawn } = require('child_process');
@@ -21,57 +21,57 @@ const FR1Checker = require('./validators/fr1-checker');
 const ComplianceAuditor = require('./validators/compliance-audit');
 const AgentSimulator = require('./testing/agent-simulator');
 
-class AgentUXCLI {
+class BiModal DesignCLI {
     constructor() {
         this.version = '1.0.0';
         this.commands = {
             audit: {
-                description: 'Run comprehensive AgentUX compliance audit',
+                description: 'Run comprehensive BiModal Design compliance audit',
                 examples: [
-                    'agentux audit https://example.com',
-                    'agentux audit --batch urls.txt --format html'
+                    'bimodal-design audit https://example.com',
+                    'bimodal-design audit --batch urls.txt --format html'
                 ]
             },
             check: {
                 description: 'Quick FR-1 accessibility check',
                 examples: [
-                    'agentux check https://example.com',
-                    'agentux check --output report.json'
+                    'bimodal-design check https://example.com',
+                    'bimodal-design check --output report.json'
                 ]
             },
             simulate: {
                 description: 'Simulate agent interactions',
                 examples: [
-                    'agentux simulate https://example.com',
-                    'agentux simulate --multi-agent --tasks extract-content,find-contact'
+                    'bimodal-design simulate https://example.com',
+                    'bimodal-design simulate --multi-agent --tasks extract-content,find-contact'
                 ]
             },
             init: {
-                description: 'Initialize AgentUX in a project',
+                description: 'Initialize BiModal Design in a project',
                 examples: [
-                    'agentux init',
-                    'agentux init --framework react --template ecommerce'
+                    'bimodal-design init',
+                    'bimodal-design init --framework react --template ecommerce'
                 ]
             },
             validate: {
-                description: 'Validate AgentUX implementation',
+                description: 'Validate BiModal Design implementation',
                 examples: [
-                    'agentux validate',
-                    'agentux validate --config agentux.config.js'
+                    'bimodal-design validate',
+                    'bimodal-design validate --config bimodal-design.config.js'
                 ]
             },
             score: {
-                description: 'Generate AgentUX compliance score',
+                description: 'Generate BiModal Design compliance score',
                 examples: [
-                    'agentux score https://example.com',
-                    'agentux score --detailed --benchmark'
+                    'bimodal-design score https://example.com',
+                    'bimodal-design score --detailed --benchmark'
                 ]
             },
             doctor: {
-                description: 'Diagnose common AgentUX issues',
+                description: 'Diagnose common BiModal Design issues',
                 examples: [
-                    'agentux doctor https://example.com',
-                    'agentux doctor --fix-suggestions'
+                    'bimodal-design doctor https://example.com',
+                    'bimodal-design doctor --fix-suggestions'
                 ]
             }
         };
@@ -80,22 +80,22 @@ class AgentUXCLI {
             react: {
                 name: 'React',
                 templates: ['basic', 'ecommerce', 'documentation', 'portfolio'],
-                dependencies: ['@agentux/react-components', '@agentux/hooks']
+                dependencies: ['@bimodal-design/react-components', '@bimodal-design/hooks']
             },
             vue: {
                 name: 'Vue.js',
                 templates: ['basic', 'ecommerce', 'documentation'],
-                dependencies: ['@agentux/vue-components']
+                dependencies: ['@bimodal-design/vue-components']
             },
             angular: {
                 name: 'Angular',
                 templates: ['basic', 'ecommerce'],
-                dependencies: ['@agentux/angular-components']
+                dependencies: ['@bimodal-design/angular-components']
             },
             vanilla: {
                 name: 'Vanilla HTML/JS',
                 templates: ['basic', 'ecommerce', 'documentation', 'portfolio'],
-                dependencies: ['@agentux/core']
+                dependencies: ['@bimodal-design/core']
             }
         };
     }
@@ -109,7 +109,7 @@ class AgentUXCLI {
         }
 
         if (args.includes('--version') || args.includes('-v')) {
-            console.log(`AgentUX CLI v${this.version}`);
+            console.log(`BiModal Design CLI v${this.version}`);
             return;
         }
 
@@ -141,7 +141,7 @@ class AgentUXCLI {
                     break;
                 default:
                     console.error(`Unknown command: ${command}`);
-                    console.log('Run "agentux --help" for available commands');
+                    console.log('Run "bimodal-design --help" for available commands');
                     process.exit(1);
             }
         } catch (error) {
@@ -153,21 +153,21 @@ class AgentUXCLI {
     showHelp() {
         console.log(`
 ╭─────────────────────────────────────────────────────────────╮
-│                       AgentUX CLI v${this.version}                      │
+│                       BiModal Design CLI v${this.version}                      │
 │              AI-First Web Development Toolkit              │
 ╰─────────────────────────────────────────────────────────────╯
 
 USAGE
-  agentux <command> [options]
+  bimodal-design <command> [options]
 
 COMMANDS
-  audit       Run comprehensive AgentUX compliance audit
+  audit       Run comprehensive BiModal Design compliance audit
   check       Quick FR-1 (Initial Payload) accessibility check  
   simulate    Simulate different AI agent interactions
-  init        Initialize AgentUX in a new or existing project
-  validate    Validate current AgentUX implementation
+  init        Initialize BiModal Design in a new or existing project
+  validate    Validate current BiModal Design implementation
   score       Generate detailed compliance score and benchmarks
-  doctor      Diagnose and suggest fixes for AgentUX issues
+  doctor      Diagnose and suggest fixes for BiModal Design issues
 
 GLOBAL OPTIONS
   --help, -h     Show help for command
@@ -176,25 +176,25 @@ GLOBAL OPTIONS
   --quiet        Suppress non-essential output
 
 EXAMPLES
-  agentux audit https://example.com --format html --output report.html
-  agentux simulate --multi-agent https://example.com
-  agentux init --framework react --template ecommerce
-  agentux score https://example.com --benchmark --detailed
+  bimodal-design audit https://example.com --format html --output report.html
+  bimodal-design simulate --multi-agent https://example.com
+  bimodal-design init --framework react --template ecommerce
+  bimodal-design score https://example.com --benchmark --detailed
 
 Get started:
-  agentux init                    # Initialize AgentUX in current directory
-  agentux doctor https://ai-plus.design  # Test with reference implementation
+  bimodal-design init                    # Initialize BiModal Design in current directory
+  bimodal-design doctor https://ai-plus.design  # Test with reference implementation
 
 For detailed help on a specific command:
-  agentux <command> --help
+  bimodal-design <command> --help
 
-Documentation: https://agentux.design/docs
-Repository: https://github.com/jgoldfoot/AgentUX
+Documentation: https://bimodal-design.design/docs
+Repository: https://github.com/jgoldfoot/BiModal Design
         `);
     }
 
     async runAudit(args) {
-        console.log('🔍 Running AgentUX Compliance Audit...\n');
+        console.log('🔍 Running BiModal Design Compliance Audit...\n');
         
         const auditor = new ComplianceAuditor();
         const options = this.parseAuditOptions(args);
@@ -282,7 +282,7 @@ Repository: https://github.com/jgoldfoot/AgentUX
     }
 
     async runInit(args) {
-        console.log('🚀 Initializing AgentUX Project...\n');
+        console.log('🚀 Initializing BiModal Design Project...\n');
         
         const options = this.parseInitOptions(args);
         
@@ -299,15 +299,15 @@ Repository: https://github.com/jgoldfoot/AgentUX
     }
 
     async runValidate(args) {
-        console.log('✅ Validating AgentUX Implementation...\n');
+        console.log('✅ Validating BiModal Design Implementation...\n');
         
         const options = this.parseValidateOptions(args);
         
-        // Look for AgentUX config
+        // Look for BiModal Design config
         const configPath = options.config || await this.findConfig();
         
         if (!configPath) {
-            console.log('No AgentUX configuration found. Run "agentux init" first.');
+            console.log('No BiModal Design configuration found. Run "bimodal-design init" first.');
             return;
         }
         
@@ -326,7 +326,7 @@ Repository: https://github.com/jgoldfoot/AgentUX
     }
 
     async runScore(args) {
-        console.log('📊 Generating AgentUX Compliance Score...\n');
+        console.log('📊 Generating BiModal Design Compliance Score...\n');
         
         const options = this.parseScoreOptions(args);
         
@@ -346,7 +346,7 @@ Repository: https://github.com/jgoldfoot/AgentUX
         
         const score = this.calculateComprehensiveScore(auditResult, simResult);
         
-        console.log(`\n🎯 Overall AgentUX Score: ${score.overall}%`);
+        console.log(`\n🎯 Overall BiModal Design Score: ${score.overall}%`);
         console.log(`   Compliance: ${score.compliance}%`);
         console.log(`   Agent Usability: ${score.usability}%`);
         console.log(`   Performance: ${score.performance}%\n`);
@@ -360,7 +360,7 @@ Repository: https://github.com/jgoldfoot/AgentUX
     }
 
     async runDoctor(args) {
-        console.log('🩺 Running AgentUX Health Check...\n');
+        console.log('🩺 Running BiModal Design Health Check...\n');
         
         const options = this.parseDoctorOptions(args);
         
@@ -377,7 +377,7 @@ Repository: https://github.com/jgoldfoot/AgentUX
         console.log(`Found ${issues.length} issue(s)\n`);
         
         if (issues.length === 0) {
-            console.log('✅ No issues detected! Your site looks AgentUX compliant.');
+            console.log('✅ No issues detected! Your site looks BiModal Design compliant.');
         } else {
             issues.forEach((issue, index) => {
                 console.log(`${index + 1}. ${issue.type}: ${issue.description}`);
@@ -575,7 +575,7 @@ Repository: https://github.com/jgoldfoot/AgentUX
     }
 
     generateMarkdownOutput(results) {
-        return `# AgentUX Results\n\n${JSON.stringify(results, null, 2)}`;
+        return `# BiModal Design Results\n\n${JSON.stringify(results, null, 2)}`;
     }
 
     generateHTMLOutput(results) {
@@ -583,14 +583,14 @@ Repository: https://github.com/jgoldfoot/AgentUX
 <!DOCTYPE html>
 <html>
 <head>
-    <title>AgentUX Results</title>
+    <title>BiModal Design Results</title>
     <style>
         body { font-family: system-ui, sans-serif; margin: 40px; }
         pre { background: #f5f5f5; padding: 20px; border-radius: 8px; overflow-x: auto; }
     </style>
 </head>
 <body>
-    <h1>AgentUX Results</h1>
+    <h1>BiModal Design Results</h1>
     <pre>${JSON.stringify(results, null, 2)}</pre>
 </body>
 </html>`;
@@ -619,7 +619,7 @@ Repository: https://github.com/jgoldfoot/AgentUX
     }
 
     async initializeProject(options) {
-        const { framework, template, name = 'agentux-project', directory = '.' } = options;
+        const { framework, template, name = 'bimodal-design-project', directory = '.' } = options;
         
         console.log(`Creating ${framework} project with ${template} template...`);
         
@@ -629,7 +629,7 @@ Repository: https://github.com/jgoldfoot/AgentUX
         try {
             await fs.mkdir(projectPath, { recursive: true });
             
-            // Create AgentUX config
+            // Create BiModal Design config
             const config = {
                 framework,
                 template,
@@ -646,14 +646,14 @@ Repository: https://github.com/jgoldfoot/AgentUX
             };
             
             await fs.writeFile(
-                path.join(projectPath, 'agentux.config.json'),
+                path.join(projectPath, 'bimodal-design.config.json'),
                 JSON.stringify(config, null, 2)
             );
             
             // Create basic README
             const readme = `# ${name}
 
-AgentUX-compliant ${framework} project created with ${template} template.
+BiModal Design-compliant ${framework} project created with ${template} template.
 
 ## Getting Started
 
@@ -662,24 +662,24 @@ AgentUX-compliant ${framework} project created with ${template} template.
    npm install
    \`\`\`
 
-2. Run AgentUX validation:
+2. Run BiModal Design validation:
    \`\`\`
-   agentux validate
+   bimodal-design validate
    \`\`\`
 
 3. Test with agent simulation:
    \`\`\`
-   agentux simulate http://localhost:3000
+   bimodal-design simulate http://localhost:3000
    \`\`\`
 
-## AgentUX Commands
+## BiModal Design Commands
 
-- \`agentux validate\` - Validate implementation
-- \`agentux audit <url>\` - Run compliance audit
-- \`agentux simulate <url>\` - Test agent interactions
-- \`agentux doctor <url>\` - Diagnose issues
+- \`bimodal-design validate\` - Validate implementation
+- \`bimodal-design audit <url>\` - Run compliance audit
+- \`bimodal-design simulate <url>\` - Test agent interactions
+- \`bimodal-design doctor <url>\` - Diagnose issues
 
-Documentation: https://agentux.design/docs
+Documentation: https://bimodal-design.design/docs
 `;
             
             await fs.writeFile(path.join(projectPath, 'README.md'), readme);
@@ -689,7 +689,7 @@ Documentation: https://agentux.design/docs
             console.log(`\nNext steps:`);
             console.log(`  cd ${name}`);
             console.log(`  npm install`);
-            console.log(`  agentux validate`);
+            console.log(`  bimodal-design validate`);
             
         } catch (error) {
             throw new Error(`Failed to create project: ${error.message}`);
@@ -698,9 +698,9 @@ Documentation: https://agentux.design/docs
 
     async findConfig() {
         const configFiles = [
-            'agentux.config.json',
-            'agentux.config.js',
-            '.agentuxrc',
+            'bimodal-design.config.json',
+            'bimodal-design.config.js',
+            '.bimodal-designrc',
             'package.json'
         ];
         
@@ -723,7 +723,7 @@ Documentation: https://agentux.design/docs
         } else if (configPath === 'package.json') {
             const content = await fs.readFile(configPath, 'utf8');
             const pkg = JSON.parse(content);
-            return pkg.agentux || {};
+            return pkg.bimodal-design || {};
         }
         
         // Default config
@@ -743,7 +743,7 @@ Documentation: https://agentux.design/docs
         }
         
         if (!config.requirements) {
-            issues.push('No AgentUX requirements configuration found');
+            issues.push('No BiModal Design requirements configuration found');
         }
         
         // Check for required files based on framework
@@ -806,7 +806,7 @@ Documentation: https://agentux.design/docs
         console.log('📊 Benchmark Comparison:');
         console.log(`   Industry Average: 65%`);
         console.log(`   Top 10%: 85%+`);
-        console.log(`   AgentUX Gold: 90%+`);
+        console.log(`   BiModal Design Gold: 90%+`);
         
         if (score.overall >= 90) {
             console.log(`   🏆 Your Score: GOLD (${score.overall}%)`);
@@ -852,12 +852,12 @@ Documentation: https://agentux.design/docs
 
 // Main execution
 async function main() {
-    const cli = new AgentUXCLI();
+    const cli = new BiModal DesignCLI();
     await cli.run();
 }
 
 // Export for testing
-module.exports = AgentUXCLI;
+module.exports = BiModal DesignCLI;
 
 // Run if called directly
 if (require.main === module) {
