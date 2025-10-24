@@ -1,13 +1,13 @@
-# Nuxt SSR AgentUX Implementation Example
+# Nuxt SSR BiModal Design Implementation Example
 
-This example demonstrates how to implement AgentUX patterns in a Nuxt.js
+This example demonstrates how to implement BiModal Design patterns in a Nuxt.js
 application with server-side rendering (SSR) to ensure optimal agent
 accessibility and user experience.
 
 ## Overview
 
 Nuxt.js provides excellent SSR capabilities out of the box, making it an ideal
-framework for AgentUX implementation. This example shows how to structure a
+framework for BiModal Design implementation. This example shows how to structure a
 Vue.js application with agent-first design principles while maintaining
 excellent human UX.
 
@@ -179,8 +179,8 @@ export default defineNuxtRouteMiddleware((to, from) => {
 <template>
   <Html lang="en">
     <Head>
-      <Title>AgentUX Nuxt Example</Title>
-      <Meta name="description" content="AgentUX implementation in Nuxt.js" />
+      <Title>BiModal Design Nuxt Example</Title>
+      <Meta name="description" content="BiModal Design implementation in Nuxt.js" />
     </Head>
     <Body data-agent-framework="nuxt" data-agent-version="3.0">
       <div id="app">
@@ -193,7 +193,7 @@ export default defineNuxtRouteMiddleware((to, from) => {
         </main>
 
         <footer role="contentinfo">
-          <p>&copy; 2025 AgentUX Nuxt Example</p>
+          <p>&copy; 2025 BiModal Design Nuxt Example</p>
         </footer>
       </div>
     </Body>
@@ -250,7 +250,7 @@ body {
         data-agent-action="go-home"
         aria-label="Go to homepage"
       >
-        AgentUX Store
+        BiModal Design Store
       </NuxtLink>
 
       <ul role="list" class="nav-links">
@@ -356,7 +356,7 @@ const { isAgent, agentType } = useAgentDetection();
 <template>
   <div data-agent-page="home" data-agent-intent="browse-products">
     <section role="banner" class="hero">
-      <h1 data-agent-content="page-title">Welcome to AgentUX Store</h1>
+      <h1 data-agent-content="page-title">Welcome to BiModal Design Store</h1>
       <p data-agent-content="page-description">
         Discover products designed for both humans and AI agents
       </p>
@@ -399,7 +399,7 @@ const { isAgent, agentType } = useAgentDetection();
 <script setup>
 // SEO Meta
 useHead({
-  title: 'AgentUX Store - Products for Humans and AI',
+  title: 'BiModal Design Store - Products for Humans and AI',
   meta: [
     {
       name: 'description',
@@ -417,7 +417,7 @@ const structuredData = computed(() =>
   JSON.stringify({
     '@context': 'https://schema.org',
     '@type': 'WebSite',
-    name: 'AgentUX Store',
+    name: 'BiModal Design Store',
     description: 'Products designed for both humans and AI agents',
     url: 'https://example.com',
     potentialAction: {
@@ -739,7 +739,7 @@ defineProps<{
 
 <script setup>
 useHead({
-  title: 'Contact Us - AgentUX Store',
+  title: 'Contact Us - BiModal Design Store',
   meta: [
     { name: 'description', content: 'Get in touch with our support team' },
   ],
@@ -930,7 +930,7 @@ const agentAttributes = await page.evaluate(() => {
 console.log('Agent components found:', agentAttributes);
 ```
 
-## Key AgentUX Implementation Features
+## Key BiModal Design Implementation Features
 
 1. **Server-Side Rendering**: All content is available immediately on page load
 2. **Semantic HTML Structure**: Proper use of landmarks, headings, and ARIA
@@ -962,6 +962,6 @@ npm run preview
 npm run generate
 ```
 
-This Nuxt.js implementation provides a comprehensive example of AgentUX patterns
+This Nuxt.js implementation provides a comprehensive example of BiModal Design patterns
 while maintaining excellent performance and user experience for both human users
 and AI agents.

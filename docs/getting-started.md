@@ -1,8 +1,8 @@
-# Getting Started with AgentUX
+# Getting Started with BiModal Design
 
 ## Quick Start Checklist
 
-Before implementing AgentUX patterns, ensure your application meets **FR-1:
+Before implementing BiModal Design patterns, ensure your application meets **FR-1:
 Initial Payload Accessibility** - the foundational requirement that content
 exists in the server response.
 
@@ -112,5 +112,5 @@ curl -s https://yoursite.com | grep "main content"
 ## Need Help?
 
 - 📖 [Full White Paper](./whitepaper.md)
-- 🐛 [Report Issues](https://github.com/jgoldfoot/AgentUX/issues)
-- 💬 [Discussions](https://github.com/jgoldfoot/AgentUX/discussions)
+- 🐛 [Report Issues](https://github.com/jgoldfoot/BiModal Design/issues)
+- 💬 [Discussions](https://github.com/jgoldfoot/BiModal Design/discussions)

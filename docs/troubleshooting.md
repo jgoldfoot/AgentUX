@@ -1,6 +1,6 @@
-# AgentUX Troubleshooting Guide
+# BiModal Design Troubleshooting Guide
 
-Common issues, solutions, and debugging techniques for AgentUX implementations.
+Common issues, solutions, and debugging techniques for BiModal Design implementations.
 
 ## Table of Contents
 
@@ -36,7 +36,7 @@ curl -s "https://your-site.com/" | grep "application/ld+json"
 
 # Test 4: Agent attributes
 curl -s "https://your-site.com/" | grep "data-agent-"
-# Expected: Should find AgentUX attributes
+# Expected: Should find BiModal Design attributes
 
 # Test 5: Performance check
 curl -w "@curl-format.txt" -o /dev/null -s "https://your-site.com/"
@@ -47,7 +47,7 @@ curl -w "@curl-format.txt" -o /dev/null -s "https://your-site.com/"
 
 ```javascript
 // diagnostic.js - Run this in browser console
-function runAgentUXDiagnostic() {
+function runBiModal DesignDiagnostic() {
   const results = {
     timestamp: new Date().toISOString(),
     url: window.location.href,
@@ -84,7 +84,7 @@ function runAgentUXDiagnostic() {
   if (agentComponents.length > 0 && agentActions.length > 0) {
     results.passed.push('✅ Agent attributes present');
   } else {
-    results.issues.push('❌ Missing AgentUX attributes');
+    results.issues.push('❌ Missing BiModal Design attributes');
   }
 
   // Check 3: Forms accessibility
@@ -118,12 +118,12 @@ function runAgentUXDiagnostic() {
     results.warnings.push('⚠️ No structured data found');
   }
 
-  console.log('AgentUX Diagnostic Results:', results);
+  console.log('BiModal Design Diagnostic Results:', results);
   return results;
 }
 
 // Run diagnostic
-runAgentUXDiagnostic();
+runBiModal DesignDiagnostic();
 ```
 
 ## Agent Detection Issues
@@ -809,12 +809,12 @@ app.get(['/products/', '/products/index.html'], (req, res) => {
 
 ```javascript
 // Add to your page for debugging
-window.debugAgentUX = function () {
+window.debugBiModal Design = function () {
   const agentComponents = document.querySelectorAll('[data-agent-component]');
   const agentActions = document.querySelectorAll('[data-agent-action]');
   const agentContent = document.querySelectorAll('[data-agent-content]');
 
-  console.group('AgentUX Debug Info');
+  console.group('BiModal Design Debug Info');
   console.log('Components:', agentComponents.length);
   console.log('Actions:', agentActions.length);
   console.log('Content labels:', agentContent.length);
@@ -1052,7 +1052,7 @@ document.body.appendChild(fragment);
 
 ### Quick Disable Agent Features
 
-If AgentUX implementation is causing issues in production:
+If BiModal Design implementation is causing issues in production:
 
 ```javascript
 // Emergency disable - Add to head of page
@@ -1068,7 +1068,7 @@ function detectAgent() {
 ### Rollback to Basic Implementation
 
 ```html
-<!-- Minimal AgentUX implementation -->
+<!-- Minimal BiModal Design implementation -->
 <html>
   <head>
     <title>Site Title</title>

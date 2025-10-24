@@ -1,6 +1,6 @@
-# AgentUX API Reference
+# BiModal Design API Reference
 
-Technical specifications and reference documentation for implementing AgentUX
+Technical specifications and reference documentation for implementing BiModal Design
 patterns in web applications.
 
 ## Table of Contents
@@ -18,7 +18,7 @@ patterns in web applications.
 
 ### Core Agent Attributes
 
-All AgentUX attributes use the `data-agent-*` namespace to ensure compatibility
+All BiModal Design attributes use the `data-agent-*` namespace to ensure compatibility
 and avoid conflicts.
 
 #### Page-Level Attributes
@@ -38,7 +38,7 @@ and avoid conflicts.
 | Attribute              | Required | Values                                                       | Description                       |
 | ---------------------- | -------- | ------------------------------------------------------------ | --------------------------------- |
 | `data-agent-framework` | No       | `react`, `vue`, `angular`, `astro`, `next`, `nuxt`, `custom` | Framework used for implementation |
-| `data-agent-version`   | No       | Semantic version string                                      | AgentUX implementation version    |
+| `data-agent-version`   | No       | Semantic version string                                      | BiModal Design implementation version    |
 | `data-agent-context`   | No       | `detected`, `unknown`                                        | Whether agent was detected        |
 | `data-agent-mode`      | No       | `ssr`, `ssg`, `csr`, `hybrid`                                | Rendering strategy used           |
 
@@ -736,11 +736,11 @@ Vary: User-Agent
 
 ```javascript
 /**
- * AgentUX Detection Library
+ * BiModal Design Detection Library
  * Detects and categorizes user agents for optimal experience delivery
  */
 
-class AgentUXDetector {
+class BiModal DesignDetector {
   constructor(config = {}) {
     this.config = {
       enableAnalytics: config.enableAnalytics ?? true,
@@ -1369,7 +1369,7 @@ class AgentUXDetector {
 }
 
 // Usage Examples
-const agentDetector = new AgentUXDetector({
+const agentDetector = new BiModal DesignDetector({
   enableAnalytics: true,
   customPatterns: {
     'custom-bots': [
@@ -1388,12 +1388,12 @@ if (agentInfo.isAgent) {
 
 // Export for use in modules
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = AgentUXDetector;
+  module.exports = BiModal DesignDetector;
 }
 
 // Global access for direct script inclusion
 if (typeof window !== 'undefined') {
-  window.AgentUXDetector = AgentUXDetector;
+  window.BiModal DesignDetector = BiModal DesignDetector;
 }
 ```
 
@@ -1401,11 +1401,11 @@ if (typeof window !== 'undefined') {
 
 ```javascript
 /**
- * AgentUX Enhancement Utilities
+ * BiModal Design Enhancement Utilities
  * Additional utilities for enhancing pages for agents
  */
 
-class AgentUXEnhancer {
+class BiModal DesignEnhancer {
   constructor(detector) {
     this.detector = detector;
     this.enhancements = new Set();
@@ -1684,7 +1684,7 @@ class AgentUXEnhancer {
 }
 
 // Usage
-const enhancer = new AgentUXEnhancer(agentDetector);
+const enhancer = new BiModal DesignEnhancer(agentDetector);
 
 // Enhance specific elements
 enhancer.enhanceForms();
@@ -1907,11 +1907,11 @@ enhancer.startMutationObserver();
 
 ```javascript
 /**
- * AgentUX Server-Side Implementation
+ * BiModal Design Server-Side Implementation
  * Express.js middleware for agent detection and routing
  */
 
-const AgentUXServer = {
+const BiModal DesignServer = {
   // Agent detection patterns
   patterns: {
     search: [
@@ -2112,13 +2112,13 @@ const express = require('express');
 const app = express();
 
 // Apply agent detection middleware
-app.use(AgentUXServer.middleware());
-app.use(AgentUXServer.analytics());
+app.use(BiModal DesignServer.middleware());
+app.use(BiModal DesignServer.analytics());
 
 // Route with agent optimization
 app.get(
   '/',
-  AgentUXServer.agentRoute({
+  BiModal DesignServer.agentRoute({
     renderSSR: async ({ path, agent }) => {
       if (agent.isAgent) {
         return await renderAgentOptimizedHome(agent);
@@ -2139,7 +2139,7 @@ async function renderAgentOptimizedHome(agent) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AgentUX Store - Home</title>
+  <title>BiModal Design Store - Home</title>
   <meta name="description" content="Products designed for both humans and AI agents">
   <meta name="agent-category" content="${agent.category}">
   <meta name="agent-name" content="${agent.name}">
@@ -2154,7 +2154,7 @@ async function renderAgentOptimizedHome(agent) {
   </header>
   
   <main role="main" data-agent-component="main-content">
-    <h1 data-agent-content="page-title">Welcome to AgentUX Store</h1>
+    <h1 data-agent-content="page-title">Welcome to BiModal Design Store</h1>
     <p data-agent-content="page-description">
       Products designed for optimal agent and human experience
     </p>
@@ -2163,20 +2163,20 @@ async function renderAgentOptimizedHome(agent) {
 </html>`;
 }
 
-module.exports = AgentUXServer;
+module.exports = BiModal DesignServer;
 ```
 
 ### Next.js Implementation
 
 ```javascript
-// pages/_app.js - Next.js AgentUX integration
+// pages/_app.js - Next.js BiModal Design integration
 import { useEffect } from 'react';
-import { AgentUXDetector } from '../lib/agentux';
+import { BiModal DesignDetector } from '../lib/agentux';
 
 function MyApp({ Component, pageProps, agentInfo }) {
   useEffect(() => {
     if (agentInfo?.isAgent) {
-      const detector = new AgentUXDetector();
+      const detector = new BiModal DesignDetector();
       detector.enhance();
     }
   }, [agentInfo]);
@@ -2269,11 +2269,11 @@ export default function handler(req, res) {
 
 ```javascript
 /**
- * AgentUX Testing Utilities
+ * BiModal Design Testing Utilities
  * Tools for testing agent compatibility
  */
 
-class AgentUXTester {
+class BiModal DesignTester {
   constructor(options = {}) {
     this.baseURL = options.baseURL || 'http://localhost:3000';
     this.userAgents = options.userAgents || this.getDefaultUserAgents();
@@ -2447,7 +2447,7 @@ class AgentUXTester {
   }
 
   /**
-   * Validate AgentUX implementation
+   * Validate BiModal Design implementation
    */
   async validateImplementation(paths = ['/']) {
     const validation = {
@@ -2519,7 +2519,7 @@ class AgentUXTester {
           case 'No agent-specific attributes found':
             recommendations.push({
               priority: 'medium',
-              issue: 'Missing AgentUX attributes',
+              issue: 'Missing BiModal Design attributes',
               solution:
                 'Add data-agent-* attributes to key elements for better agent understanding',
             });
@@ -2535,7 +2535,7 @@ class AgentUXTester {
             recommendations.push({
               priority: 'low',
               issue,
-              solution: 'Review AgentUX implementation guidelines',
+              solution: 'Review BiModal Design implementation guidelines',
             });
         }
       });
@@ -2545,7 +2545,7 @@ class AgentUXTester {
 }
 
 // Usage example
-const tester = new AgentUXTester({
+const tester = new BiModal DesignTester({
   baseURL: 'https://example.com',
   timeout: 15000,
 });
@@ -2580,7 +2580,7 @@ const agentUserAgents = {
 };
 
 Object.entries(agentUserAgents).forEach(([agentName, userAgent]) => {
-  test.describe(`AgentUX compatibility for ${agentName}`, () => {
+  test.describe(`BiModal Design compatibility for ${agentName}`, () => {
     test.beforeEach(async ({ page }) => {
       await page.setUserAgent(userAgent);
     });
@@ -2663,7 +2663,7 @@ Object.entries(agentUserAgents).forEach(([agentName, userAgent]) => {
 });
 
 // Accessibility-specific tests
-test.describe('AgentUX Accessibility', () => {
+test.describe('BiModal Design Accessibility', () => {
   test('should pass WCAG compliance', async ({ page }) => {
     await page.goto('/');
 
@@ -2699,16 +2699,16 @@ test.describe('AgentUX Accessibility', () => {
 ### React Hook
 
 ```javascript
-// hooks/useAgentUX.js
+// hooks/useBiModal Design.js
 import { useState, useEffect } from 'react';
-import { AgentUXDetector } from '../lib/agentux';
+import { BiModal DesignDetector } from '../lib/agentux';
 
-export function useAgentUX(options = {}) {
+export function useBiModal Design(options = {}) {
   const [agentInfo, setAgentInfo] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const detector = new AgentUXDetector(options);
+    const detector = new BiModal DesignDetector(options);
     const detection = detector.detect();
 
     setAgentInfo(detection);
@@ -2730,7 +2730,7 @@ export function useAgentUX(options = {}) {
 
 // Component usage
 function MyComponent() {
-  const { isAgent, agentCategory, isLoading } = useAgentUX();
+  const { isAgent, agentCategory, isLoading } = useBiModal Design();
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -2750,16 +2750,16 @@ function MyComponent() {
 ### Vue Composable
 
 ```javascript
-// composables/useAgentUX.js
+// composables/useBiModal Design.js
 import { ref, onMounted, readonly } from 'vue';
-import { AgentUXDetector } from '../lib/agentux';
+import { BiModal DesignDetector } from '../lib/agentux';
 
-export function useAgentUX(options = {}) {
+export function useBiModal Design(options = {}) {
   const agentInfo = ref(null);
   const isLoading = ref(true);
 
   const detect = () => {
-    const detector = new AgentUXDetector(options);
+    const detector = new BiModal DesignDetector(options);
     const detection = detector.detect();
 
     agentInfo.value = detection;
@@ -2790,7 +2790,7 @@ export function useAgentUX(options = {}) {
 // services/agent-ux.service.ts
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { AgentUXDetector } from '../lib/agentux';
+import { BiModal DesignDetector } from '../lib/agentux';
 
 export interface AgentInfo {
   isAgent: boolean;
@@ -2802,12 +2802,12 @@ export interface AgentInfo {
 @Injectable({
   providedIn: 'root',
 })
-export class AgentUXService {
+export class BiModal DesignService {
   private agentInfoSubject = new BehaviorSubject<AgentInfo | null>(null);
-  private detector: AgentUXDetector;
+  private detector: BiModal DesignDetector;
 
   constructor() {
-    this.detector = new AgentUXDetector();
+    this.detector = new BiModal DesignDetector();
     this.initializeDetection();
   }
 
@@ -2835,7 +2835,7 @@ export class AgentUXService {
 
 // Component usage
 import { Component, OnInit } from '@angular/core';
-import { AgentUXService } from './services/agent-ux.service';
+import { BiModal DesignService } from './services/agent-ux.service';
 
 @Component({
   selector: 'app-root',
@@ -2851,7 +2851,7 @@ import { AgentUXService } from './services/agent-ux.service';
   `,
 })
 export class AppComponent implements OnInit {
-  constructor(public agentService: AgentUXService) {}
+  constructor(public agentService: BiModal DesignService) {}
 
   ngOnInit() {
     this.agentService.agentInfo$.subscribe((agentInfo) => {
@@ -2864,7 +2864,7 @@ export class AppComponent implements OnInit {
 ## Commit Description
 
 ````
-Add comprehensive AgentUX API reference documentation
+Add comprehensive BiModal Design API reference documentation
 
 - Complete HTML attributes specification with 50+ data-agent-* attributes
 - Structured data schemas for products, articles, organizations, and websites
@@ -2877,12 +2877,12 @@ Add comprehensive AgentUX API reference documentation
 - Agent categorization patterns for search, social, shopping, automation, and CLI
 - Performance optimization techniques and responsive design considerations
 
-Provides complete technical specification for developers implementing AgentUX
+Provides complete technical specification for developers implementing BiModal Design
 Covers all aspects from basic HTML markup to advanced JavaScript detection
 Includes production-ready code examples and testing strategies
-```# AgentUX API Reference
+```# BiModal Design API Reference
 
-Technical specifications and reference documentation for implementing AgentUX patterns in web applications.
+Technical specifications and reference documentation for implementing BiModal Design patterns in web applications.
 
 ## Table of Contents
 
@@ -2899,7 +2899,7 @@ Technical specifications and reference documentation for implementing AgentUX pa
 
 ### Core Agent Attributes
 
-All AgentUX attributes use the `data-agent-*` namespace to ensure compatibility and avoid conflicts.
+All BiModal Design attributes use the `data-agent-*` namespace to ensure compatibility and avoid conflicts.
 
 #### Page-Level Attributes
 
@@ -2918,7 +2918,7 @@ All AgentUX attributes use the `data-agent-*` namespace to ensure compatibility 
 | Attribute              | Required | Values                                                       | Description                       |
 | ---------------------- | -------- | ------------------------------------------------------------ | --------------------------------- |
 | `data-agent-framework` | No       | `react`, `vue`, `angular`, `astro`, `next`, `nuxt`, `custom` | Framework used for implementation |
-| `data-agent-version`   | No       | Semantic version string                                      | AgentUX implementation version    |
+| `data-agent-version`   | No       | Semantic version string                                      | BiModal Design implementation version    |
 | `data-agent-context`   | No       | `detected`, `unknown`                                        | Whether agent was detected        |
 | `data-agent-mode`      | No       | `ssr`, `ssg`, `csr`, `hybrid`                                | Rendering strategy used           |
 
@@ -3616,11 +3616,11 @@ Vary: User-Agent
 
 ```javascript
 /**
- * AgentUX Detection Library
+ * BiModal Design Detection Library
  * Detects and categorizes user agents for optimal experience delivery
  */
 
-class AgentUXDetector {
+class BiModal DesignDetector {
   constructor(config = {}) {
     this.config = {
       enableAnalytics: config.enableAnalytics ?? true,
@@ -4248,7 +4248,7 @@ class AgentUXDetector {
 }
 
 // Usage Examples
-const agentDetector = new AgentUXDetector({
+const agentDetector = new BiModal DesignDetector({
   enableAnalytics: true,
   customPatterns: {
     'custom-bots': [
@@ -4267,12 +4267,12 @@ if (agentInfo.isAgent) {
 
 // Export for use in modules
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = AgentUXDetector;
+  module.exports = BiModal DesignDetector;
 }
 
 // Global access for direct script inclusion
 if (typeof window !== 'undefined') {
-  window.AgentUXDetector = AgentUXDetector;
+  window.BiModal DesignDetector = BiModal DesignDetector;
 }
 ```
 
@@ -4280,11 +4280,11 @@ if (typeof window !== 'undefined') {
 
 ```javascript
 /**
- * AgentUX Enhancement Utilities
+ * BiModal Design Enhancement Utilities
  * Additional utilities for enhancing pages for agents
  */
 
-class AgentUXEnhancer {
+class BiModal DesignEnhancer {
   constructor(detector) {
     this.detector = detector;
     this.enhancements = new Set();
@@ -4563,7 +4563,7 @@ class AgentUXEnhancer {
 }
 
 // Usage
-const enhancer = new AgentUXEnhancer(agentDetector);
+const enhancer = new BiModal DesignEnhancer(agentDetector);
 
 // Enhance specific elements
 enhancer.enhanceForms();
@@ -4786,11 +4786,11 @@ enhancer.startMutationObserver();
 
 ```javascript
 /**
- * AgentUX Server-Side Implementation
+ * BiModal Design Server-Side Implementation
  * Express.js middleware for agent detection and routing
  */
 
-const AgentUXServer = {
+const BiModal DesignServer = {
   // Agent detection patterns
   patterns: {
     search: [
@@ -4991,13 +4991,13 @@ const express = require('express');
 const app = express();
 
 // Apply agent detection middleware
-app.use(AgentUXServer.middleware());
-app.use(AgentUXServer.analytics());
+app.use(BiModal DesignServer.middleware());
+app.use(BiModal DesignServer.analytics());
 
 // Route with agent optimization
 app.get(
   '/',
-  AgentUXServer.agentRoute({
+  BiModal DesignServer.agentRoute({
     renderSSR: async ({ path, agent }) => {
       if (agent.isAgent) {
         return await renderAgentOptimizedHome(agent);
@@ -5018,7 +5018,7 @@ async function renderAgentOptimizedHome(agent) {
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AgentUX Store - Home</title>
+  <title>BiModal Design Store - Home</title>
   <meta name="description" content="Products designed for both humans and AI agents">
   <meta name="agent-category" content="${agent.category}">
   <meta name="agent-name" content="${agent.name}">
@@ -5033,7 +5033,7 @@ async function renderAgentOptimizedHome(agent) {
   </header>
   
   <main role="main" data-agent-component="main-content">
-    <h1 data-agent-content="page-title">Welcome to AgentUX Store</h1>
+    <h1 data-agent-content="page-title">Welcome to BiModal Design Store</h1>
     <p data-agent-content="page-description">
       Products designed for optimal agent and human experience
     </p>
@@ -5042,20 +5042,20 @@ async function renderAgentOptimizedHome(agent) {
 </html>`;
 }
 
-module.exports = AgentUXServer;
+module.exports = BiModal DesignServer;
 ```
 
 ### Next.js Implementation
 
 ```javascript
-// pages/_app.js - Next.js AgentUX integration
+// pages/_app.js - Next.js BiModal Design integration
 import { useEffect } from 'react';
-import { AgentUXDetector } from '../lib/agentux';
+import { BiModal DesignDetector } from '../lib/agentux';
 
 function MyApp({ Component, pageProps, agentInfo }) {
   useEffect(() => {
     if (agentInfo?.isAgent) {
-      const detector = new AgentUXDetector();
+      const detector = new BiModal DesignDetector();
       detector.enhance();
     }
   }, [agentInfo]);
@@ -5148,11 +5148,11 @@ export default function handler(req, res) {
 
 ```javascript
 /**
- * AgentUX Testing Utilities
+ * BiModal Design Testing Utilities
  * Tools for testing agent compatibility
  */
 
-class AgentUXTester {
+class BiModal DesignTester {
   constructor(options = {}) {
     this.baseURL = options.baseURL || 'http://localhost:3000';
     this.userAgents = options.userAgents || this.getDefaultUserAgents();
@@ -5326,7 +5326,7 @@ class AgentUXTester {
   }
 
   /**
-   * Validate AgentUX implementation
+   * Validate BiModal Design implementation
    */
   async validateImplementation(paths = ['/']) {
     const validation = {
@@ -5398,7 +5398,7 @@ class AgentUXTester {
           case 'No agent-specific attributes found':
             recommendations.push({
               priority: 'medium',
-              issue: 'Missing AgentUX attributes',
+              issue: 'Missing BiModal Design attributes',
               solution:
                 'Add data-agent-* attributes to key elements for better agent understanding',
             });
@@ -5414,7 +5414,7 @@ class AgentUXTester {
             recommendations.push({
               priority: 'low',
               issue,
-              solution: 'Review AgentUX implementation guidelines',
+              solution: 'Review BiModal Design implementation guidelines',
             });
         }
       });
@@ -5424,7 +5424,7 @@ class AgentUXTester {
 }
 
 // Usage example
-const tester = new AgentUXTester({
+const tester = new BiModal DesignTester({
   baseURL: 'https://example.com',
   timeout: 15000,
 });
@@ -5459,7 +5459,7 @@ const agentUserAgents = {
 };
 
 Object.entries(agentUserAgents).forEach(([agentName, userAgent]) => {
-  test.describe(`AgentUX compatibility for ${agentName}`, () => {
+  test.describe(`BiModal Design compatibility for ${agentName}`, () => {
     test.beforeEach(async ({ page }) => {
       await page.setUserAgent(userAgent);
     });
@@ -5542,7 +5542,7 @@ Object.entries(agentUserAgents).forEach(([agentName, userAgent]) => {
 });
 
 // Accessibility-specific tests
-test.describe('AgentUX Accessibility', () => {
+test.describe('BiModal Design Accessibility', () => {
   test('should pass WCAG compliance', async ({ page }) => {
     await page.goto('/');
 
@@ -5578,16 +5578,16 @@ test.describe('AgentUX Accessibility', () => {
 ### React Hook
 
 ```javascript
-// hooks/useAgentUX.js
+// hooks/useBiModal Design.js
 import { useState, useEffect } from 'react';
-import { AgentUXDetector } from '../lib/agentux';
+import { BiModal DesignDetector } from '../lib/agentux';
 
-export function useAgentUX(options = {}) {
+export function useBiModal Design(options = {}) {
   const [agentInfo, setAgentInfo] = useState(null);
   const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    const detector = new AgentUXDetector(options);
+    const detector = new BiModal DesignDetector(options);
     const detection = detector.detect();
 
     setAgentInfo(detection);
@@ -5609,7 +5609,7 @@ export function useAgentUX(options = {}) {
 
 // Component usage
 function MyComponent() {
-  const { isAgent, agentCategory, isLoading } = useAgentUX();
+  const { isAgent, agentCategory, isLoading } = useBiModal Design();
 
   if (isLoading) {
     return <div>Loading...</div>;
@@ -5629,16 +5629,16 @@ function MyComponent() {
 ### Vue Composable
 
 ```javascript
-// composables/useAgentUX.js
+// composables/useBiModal Design.js
 import { ref, onMounted, readonly } from 'vue';
-import { AgentUXDetector } from '../lib/agentux';
+import { BiModal DesignDetector } from '../lib/agentux';
 
-export function useAgentUX(options = {}) {
+export function useBiModal Design(options = {}) {
   const agentInfo = ref(null);
   const isLoading = ref(true);
 
   const detect = () => {
-    const detector = new AgentUXDetector(options);
+    const detector = new BiModal DesignDetector(options);
     const detection = detector.detect();
 
     agentInfo.value = detection;
@@ -5669,7 +5669,7 @@ export function useAgentUX(options = {}) {
 // services/agent-ux.service.ts
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { AgentUXDetector } from '../lib/agentux';
+import { BiModal DesignDetector } from '../lib/agentux';
 
 export interface AgentInfo {
   isAgent: boolean;
@@ -5681,12 +5681,12 @@ export interface AgentInfo {
 @Injectable({
   providedIn: 'root',
 })
-export class AgentUXService {
+export class BiModal DesignService {
   private agentInfoSubject = new BehaviorSubject<AgentInfo | null>(null);
-  private detector: AgentUXDetector;
+  private detector: BiModal DesignDetector;
 
   constructor() {
-    this.detector = new AgentUXDetector();
+    this.detector = new BiModal DesignDetector();
     this.initializeDetection();
   }
 
@@ -5714,7 +5714,7 @@ export class AgentUXService {
 
 // Component usage
 import { Component, OnInit } from '@angular/core';
-import { AgentUXService } from './services/agent-ux.service';
+import { BiModal DesignService } from './services/agent-ux.service';
 
 @Component({
   selector: 'app-root',
@@ -5730,7 +5730,7 @@ import { AgentUXService } from './services/agent-ux.service';
   `,
 })
 export class AppComponent implements OnInit {
-  constructor(public agentService: AgentUXService) {}
+  constructor(public agentService: BiModal DesignService) {}
 
   ngOnInit() {
     this.agentService.agentInfo$.subscribe((agentInfo) => {
@@ -5743,7 +5743,7 @@ export class AppComponent implements OnInit {
 ## Commit Description
 
 ````
-Add comprehensive AgentUX API reference documentation
+Add comprehensive BiModal Design API reference documentation
 
 - Complete HTML attributes specification with 50+ data-agent-* attributes
 - Structured data schemas for products, articles, organizations, and websites
@@ -5756,12 +5756,12 @@ Add comprehensive AgentUX API reference documentation
 - Agent categorization patterns for search, social, shopping, automation, and CLI
 - Performance optimization techniques and responsive design considerations
 
-Provides complete technical specification for developers implementing AgentUX
+Provides complete technical specification for developers implementing BiModal Design
 Covers all aspects from basic HTML markup to advanced JavaScript detection
 Includes production-ready code examples and testing strategies
-```# AgentUX API Reference
+```# BiModal Design API Reference
 
-Technical specifications and reference documentation for implementing AgentUX patterns in web applications.
+Technical specifications and reference documentation for implementing BiModal Design patterns in web applications.
 
 ## Table of Contents
 
@@ -5778,7 +5778,7 @@ Technical specifications and reference documentation for implementing AgentUX pa
 
 ### Core Agent Attributes
 
-All AgentUX attributes use the `data-agent-*` namespace to ensure compatibility and avoid conflicts.
+All BiModal Design attributes use the `data-agent-*` namespace to ensure compatibility and avoid conflicts.
 
 #### Page-Level Attributes
 
@@ -5797,7 +5797,7 @@ All AgentUX attributes use the `data-agent-*` namespace to ensure compatibility 
 | Attribute              | Required | Values                                                       | Description                       |
 | ---------------------- | -------- | ------------------------------------------------------------ | --------------------------------- |
 | `data-agent-framework` | No       | `react`, `vue`, `angular`, `astro`, `next`, `nuxt`, `custom` | Framework used for implementation |
-| `data-agent-version`   | No       | Semantic version string                                      | AgentUX implementation version    |
+| `data-agent-version`   | No       | Semantic version string                                      | BiModal Design implementation version    |
 | `data-agent-context`   | No       | `detected`, `unknown`                                        | Whether agent was detected        |
 | `data-agent-mode`      | No       | `ssr`, `ssg`, `csr`, `hybrid`                                | Rendering strategy used           |
 
@@ -6495,11 +6495,11 @@ Vary: User-Agent
 
 ```javascript
 /**
- * AgentUX Detection Library
+ * BiModal Design Detection Library
  * Detects and categorizes user agents for optimal experience delivery
  */
 
-class AgentUXDetector {
+class BiModal DesignDetector {
   constructor(config = {}) {
     this.config = {
       enableAnalytics: config.enableAnalytics ?? true,
@@ -7127,7 +7127,7 @@ class AgentUXDetector {
 }
 
 // Usage Examples
-const agentDetector = new AgentUXDetector({
+const agentDetector = new BiModal DesignDetector({
   enableAnalytics: true,
   customPatterns: {
     'custom-bots': [
@@ -7146,19 +7146,19 @@ if (agentInfo.isAgent) {
 
 // Export for use in modules
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = AgentUXDetector;
+  module.exports = BiModal DesignDetector;
 }
 
 // Global access for direct script inclusion
 if (typeof window !== 'undefined') {
-  window.AgentUXDetector = AgentUXDetector;
+  window.BiModal DesignDetector = BiModal DesignDetector;
 }
 ```
 
 ## Summary
 
 This API reference provides comprehensive technical documentation for
-implementing AgentUX, including:
+implementing BiModal Design, including:
 
 - **Complete HTML attribute specifications** for all agent-specific markup
 - **JavaScript detection API** with full capability assessment
@@ -7168,4 +7168,4 @@ implementing AgentUX, including:
 - **Framework integrations** for React, Vue, and Angular
 
 The documentation is production-ready and provides everything developers need to
-implement AgentUX patterns in their applications.
+implement BiModal Design patterns in their applications.

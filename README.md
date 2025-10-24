@@ -1,4 +1,4 @@
-# **AgentUX**
+# **BiModal Design**
 
 > **A design framework for building dual-mode interfaces that work optimally for both humans and AI agents.**
 
@@ -29,9 +29,9 @@
 
 ## 🧠 Overview
 
-**AgentUX** defines best practices and validation tools for creating **dual-mode interfaces** — designs that remain equally functional for **human users** and **AI agents**.
+**BiModal Design** defines best practices and validation tools for creating **dual-mode interfaces** — designs that remain equally functional for **human users** and **AI agents**.
 
-As agentic technologies proliferate, ensuring mutual interpretability between people and machines becomes essential. AgentUX bridges that gap through **semantic design standards**, **agent-readable metadata**, and **progressive rendering strategies**.
+As agentic technologies proliferate, ensuring mutual interpretability between people and machines becomes essential. BiModal Design bridges that gap through **semantic design standards**, **agent-readable metadata**, and **progressive rendering strategies**.
 
 ---
 
@@ -51,7 +51,7 @@ This invisibility undermines discoverability, automation, and LLM-driven workflo
 
 ## ✅ The Solution
 
-AgentUX establishes **foundational requirements, design principles, and validation tools** to ensure both humans and agents perceive meaningful structure.
+BiModal Design establishes **foundational requirements, design principles, and validation tools** to ensure both humans and agents perceive meaningful structure.
 
 ### 🏗️ Foundational Requirements
 
@@ -68,8 +68,8 @@ AgentUX establishes **foundational requirements, design principles, and validati
 
 ### 🔧 Validation Tools
 
-- **FR-1 Checker** — verify server payload accessibility  
-- **Compliance Auditor** — full AgentUX rule suite  
+- **FR-1 Checker** — verify server payload accessibility
+- **Compliance Auditor** — full BiModal Design rule suite
 - **CI/CD Integration** — continuous validation
 
 ---
@@ -85,7 +85,7 @@ curl -s https://your-site.com | grep -E '<(nav|main|h1|form)'
 ✅ Expect visible semantic HTML.  
 ❌ Empty `<div id="root"></div>` means content is invisible to agents.
 
-### 2. Run AgentUX Validation
+### 2. Run BiModal Design Validation
 ```bash
 cd tools/validators
 node fr1-checker.js https://your-site.com --verbose
@@ -114,8 +114,8 @@ node fr1-checker.js https://your-site.com --verbose
 
 ## 📊 Key Research Findings
 
-| Metric | Conventional Interfaces | AgentUX-Optimized | Improvement |
-|--------|------------------------|-------------------|-------------|
+| Metric | Conventional Interfaces | BiModal Design-Optimized | Improvement |
+|--------|------------------------|--------------------------|-------------|
 | Human Task Success | 72% | — | — |
 | Agent Task Success | 12% | 42–70% | +40–75% |
 | Agent Completion Rate | — | +40–75% | Significant |
@@ -175,8 +175,8 @@ Refer to the [Contributing Guidelines](CONTRIBUTING.md) for review standards and
 ## 🧰 Development Setup
 ```bash
 # Clone the repository
-git clone https://github.com/jgoldfoot/AgentUX.git
-cd AgentUX
+git clone https://github.com/jgoldfoot/BiModalDesign.git
+cd BiModalDesign
 
 # Install dependencies
 cd tools/validators
@@ -214,4 +214,4 @@ Senior Director of Product Design | AI + UX Researcher
 
 ---
 
-**AgentUX** — Designing the future of human-AI collaboration, one interface at a time.
+**BiModal Design** — Designing the future of human-AI collaboration, one interface at a time.

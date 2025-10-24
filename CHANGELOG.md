@@ -19,7 +19,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ## [0.1.0] - 2025-10-23
 
 ### Added
-- Initial public release of AgentUX framework
+- Initial public release of BiModal Design framework
 - Core documentation:
   - README.md with quick start guide
   - White paper v2.1 with comprehensive framework specification
@@ -37,9 +37,9 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Tools
 - FR1 Validator - Test initial payload accessibility
 - FR1 Checker - Advanced compliance checking with batch processing
-- Compliance Auditor - Comprehensive AgentUX assessment across 7 foundational requirements
+- Compliance Auditor - Comprehensive BiModal Design assessment across 7 foundational requirements
 - Agent Simulator - Simulate different AI agent profiles and capabilities
-- AgentUX CLI - Unified command-line interface for all tools
+- BiModal Design CLI - Unified command-line interface for all tools
 
 ### Examples
 - Client-side rendering failure example (CSR)
@@ -80,7 +80,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Version 0.1.0 - Initial Public Release
 
-This is the first public release of AgentUX, a comprehensive framework for building interfaces that work for both humans and AI agents. The framework addresses a critical gap: approximately 80% of AI agents use simple HTTP requests without JavaScript execution, making client-side rendered applications completely invisible to them.
+This is the first public release of BiModal Design, a comprehensive framework for building interfaces that work for both humans and AI agents. The framework addresses a critical gap: approximately 80% of AI agents use simple HTTP requests without JavaScript execution, making client-side rendered applications completely invisible to them.
 
 **Key Highlights:**
 - Complete framework specification based on peer-reviewed research
@@ -136,5 +136,5 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for how to get involved. We're especially
 
 ---
 
-[Unreleased]: https://github.com/jgoldfoot/AgentUX/compare/v0.1.0...HEAD
-[0.1.0]: https://github.com/jgoldfoot/AgentUX/releases/tag/v0.1.0
+[Unreleased]: https://github.com/jgoldfoot/BiModal Design/compare/v0.1.0...HEAD
+[0.1.0]: https://github.com/jgoldfoot/BiModal Design/releases/tag/v0.1.0

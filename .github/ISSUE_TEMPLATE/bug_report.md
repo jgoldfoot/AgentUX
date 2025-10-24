@@ -1,6 +1,6 @@
 ---
 name: Bug report
-about: Report a bug or unexpected behavior in AgentUX
+about: Report a bug or unexpected behavior in BiModal Design
 title: '[BUG] '
 labels: bug
 assignees: ''
@@ -28,7 +28,7 @@ Steps to reproduce the behavior:
 
 ## Environment
 
-- **AgentUX Version**: [e.g., 0.1.0]
+- **BiModal Design Version**: [e.g., 0.1.0]
 - **Node.js Version**: [e.g., 16.14.0]
 - **Operating System**: [e.g., macOS 13.0, Ubuntu 22.04, Windows 11]
 - **Tool Used**: [e.g., fr1-validator, compliance-audit, agent-simulator]
@@ -64,5 +64,5 @@ Paste any error messages or unexpected output here
 ## Checklist
 
 - [ ] I have searched existing issues to avoid duplicates
-- [ ] I have tested with the latest version of AgentUX
+- [ ] I have tested with the latest version of BiModal Design
 - [ ] I have included all requested information above

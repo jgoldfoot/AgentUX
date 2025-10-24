@@ -1,6 +1,6 @@
-# AgentUX Implementation Guide
+# BiModal Design Implementation Guide
 
-A comprehensive guide for implementing AgentUX patterns in your web applications
+A comprehensive guide for implementing BiModal Design patterns in your web applications
 to optimize for both human users and AI agents.
 
 ## Table of Contents
@@ -18,7 +18,7 @@ to optimize for both human users and AI agents.
 
 ### Prerequisites
 
-Before implementing AgentUX, ensure your project meets these requirements:
+Before implementing BiModal Design, ensure your project meets these requirements:
 
 - **Development Environment**: Node.js 16+, modern build tools
 - **Framework Knowledge**: Understanding of your chosen framework (React, Vue,
@@ -31,7 +31,7 @@ Before implementing AgentUX, ensure your project meets these requirements:
 Use this checklist to evaluate your current application:
 
 ```bash
-# Run the AgentUX assessment (fictional CLI - replace with actual assessment)
+# Run the BiModal Design assessment (fictional CLI - replace with actual assessment)
 npx @agentux/assessment
 
 # Manual checks:
@@ -67,7 +67,7 @@ compatibility
 **Human UX:** Excellent
 
 ```javascript
-// Example: Next.js with AgentUX
+// Example: Next.js with BiModal Design
 export async function getServerSideProps(context) {
   const isAgent = detectAgent(context.req.headers['user-agent']);
 
@@ -96,7 +96,7 @@ export async function getServerSideProps(context) {
 UX:** Excellent
 
 ```javascript
-// Example: Astro with AgentUX
+// Example: Astro with BiModal Design
 ---
 // All content is pre-rendered at build time
 const products = await fetchProducts();
@@ -331,7 +331,7 @@ export const AgentProvider = ({ children }) => {
 
 ```javascript
 // Agent compatibility test suite
-describe('AgentUX Compatibility', () => {
+describe('BiModal Design Compatibility', () => {
   const agentUserAgents = [
     'GoogleBot/2.1',
     'curl/7.68.0',
@@ -359,7 +359,7 @@ describe('AgentUX Compatibility', () => {
 #### Step 4.2: Run Compliance Audit
 
 ```bash
-# AgentUX compliance check (use actual validator when available)
+# BiModal Design compliance check (use actual validator when available)
 npx @agentux/validator https://your-app.com/
 
 # Manual validation checklist:
@@ -602,7 +602,7 @@ axe http://localhost:3000
 # Performance testing
 lighthouse http://localhost:3000 --only-categories=performance
 
-# AgentUX-specific validation (when available)
+# BiModal Design-specific validation (when available)
 npx @agentux/validator http://localhost:3000
 ```
 
@@ -838,7 +838,7 @@ const agentMetrics = {
 ### Pre-Implementation
 
 - [ ] Framework selection completed
-- [ ] Team training on AgentUX principles
+- [ ] Team training on BiModal Design principles
 - [ ] Development environment setup
 - [ ] Testing strategy defined
 
@@ -884,14 +884,14 @@ After completing this implementation guide:
 1. **Review Case Studies** - See real-world examples and results
 2. **Check API Reference** - Understand technical specifications
 3. **Use Troubleshooting Guide** - Solve common implementation issues
-4. **Join Community** - Connect with other AgentUX implementers
+4. **Join Community** - Connect with other BiModal Design implementers
 
 ## Support and Resources
 
 - **Documentation**:
-  [AgentUX Framework Documentation](https://github.com/jgoldfoot/AgentUX/docs)
+  [BiModal Design Framework Documentation](https://github.com/jgoldfoot/BiModal Design/docs)
 - **Examples**:
-  [Complete Implementation Examples](https://github.com/jgoldfoot/AgentUX/examples)
-- **Issues**: [GitHub Issues](https://github.com/jgoldfoot/AgentUX/issues)
+  [Complete Implementation Examples](https://github.com/jgoldfoot/BiModal Design/examples)
+- **Issues**: [GitHub Issues](https://github.com/jgoldfoot/BiModal Design/issues)
 - **Discussions**:
-  [Community Forum](https://github.com/jgoldfoot/AgentUX/discussions)
+  [Community Forum](https://github.com/jgoldfoot/BiModal Design/discussions)

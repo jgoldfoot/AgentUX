@@ -1,6 +1,6 @@
-# Contributing to AgentUX
+# Contributing to BiModal Design
 
-Thank you for your interest in contributing to AgentUX! This framework aims to
+Thank you for your interest in contributing to BiModal Design! This framework aims to
 make the web more accessible to both humans and AI agents, and we welcome
 contributions from developers, designers, researchers, and accessibility
 experts.
@@ -36,12 +36,12 @@ behavior to [joel@goldfoot.com](mailto:joel@goldfoot.com).
 1. **Fork the repository** on GitHub
 2. **Clone your fork** locally:
    ```bash
-   git clone https://github.com/YOUR-USERNAME/AgentUX.git
-   cd AgentUX
+   git clone https://github.com/YOUR-USERNAME/BiModal Design.git
+   cd BiModal Design
    ```
 3. **Set up the original repo as upstream**:
    ```bash
-   git remote add upstream https://github.com/jgoldfoot/AgentUX.git
+   git remote add upstream https://github.com/jgoldfoot/BiModal Design.git
    ```
 4. **Install tool dependencies**:
    ```bash
@@ -85,7 +85,7 @@ We welcome many types of contributions:
 
 ### 🧪 **Research & Testing**
 
-- Test AgentUX on real websites
+- Test BiModal Design on real websites
 - Validate framework claims with data
 - Contribute case studies
 - User experience research
@@ -261,6 +261,6 @@ Apache License 2.0, the same license as the project.
 
 Don't hesitate to ask! We're here to help make your contribution successful.
 Whether you're fixing a typo or proposing a major feature, every contribution
-makes AgentUX better for everyone.
+makes BiModal Design better for everyone.
 
-**Welcome to the AgentUX community!** 🎉
+**Welcome to the BiModal Design community!** 🎉

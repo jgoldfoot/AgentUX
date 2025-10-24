@@ -1,12 +1,12 @@
-# Astro SSG AgentUX Implementation Example
+# Astro SSG BiModal Design Implementation Example
 
-This example demonstrates how to implement AgentUX patterns in an Astro
+This example demonstrates how to implement BiModal Design patterns in an Astro
 application using Static Site Generation (SSG) to ensure optimal agent
 accessibility and blazing-fast performance for both humans and AI agents.
 
 ## Overview
 
-Astro's static-first approach makes it ideal for AgentUX implementation. By
+Astro's static-first approach makes it ideal for BiModal Design implementation. By
 generating static HTML at build time, we ensure that all content is immediately
 available to agents without requiring JavaScript execution, while still
 providing interactive features for human users through selective hydration.
@@ -106,7 +106,7 @@ export interface Props {
 
 const {
   title,
-  description = 'AgentUX implementation with Astro SSG',
+  description = 'BiModal Design implementation with Astro SSG',
   agentPage,
   agentIntent
 } = Astro.props
@@ -134,7 +134,7 @@ const {
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "WebSite",
-      "name": "AgentUX Astro Store",
+      "name": "BiModal Design Astro Store",
       "description": description,
       "url": Astro.site?.toString(),
       "potentialAction": {
@@ -159,7 +159,7 @@ const {
     </main>
 
     <footer role="contentinfo" data-agent-component="site-footer">
-      <p>&copy; 2025 AgentUX Astro Example. Built with accessibility in mind.</p>
+      <p>&copy; 2025 BiModal Design Astro Example. Built with accessibility in mind.</p>
       <nav aria-label="Footer navigation">
         <ul role="list">
           <li><a href="/privacy" data-agent-action="view-privacy">Privacy Policy</a></li>
@@ -237,9 +237,9 @@ const currentPath = Astro.url.pathname
       href="/"
       class="logo"
       data-agent-action="go-home"
-      aria-label="AgentUX Store - Go to homepage"
+      aria-label="BiModal Design Store - Go to homepage"
     >
-      <span data-agent-content="site-name">AgentUX Store</span>
+      <span data-agent-content="site-name">BiModal Design Store</span>
     </a>
 
     <ul role="list" class="nav-links">
@@ -418,8 +418,8 @@ const featuredProducts = [
 ]
 
 // Page metadata
-const pageTitle = 'AgentUX Store - Products for Humans and AI'
-const pageDescription = 'Discover our collection of products designed for optimal agent and human experience using AgentUX patterns.'
+const pageTitle = 'BiModal Design Store - Products for Humans and AI'
+const pageDescription = 'Discover our collection of products designed for optimal agent and human experience using BiModal Design patterns.'
 ---
 
 <Layout
@@ -436,7 +436,7 @@ const pageDescription = 'Discover our collection of products designed for optima
           Welcome to the Future of Agent-Human Interaction
         </h1>
         <p data-agent-content="page-description" class="hero-subtitle">
-          Discover products designed with AgentUX principles - optimized for both AI agents and human users
+          Discover products designed with BiModal Design principles - optimized for both AI agents and human users
         </p>
         <div class="hero-actions">
           <a
@@ -470,7 +470,7 @@ const pageDescription = 'Discover our collection of products designed for optima
           Featured Products
         </h2>
         <p data-agent-content="section-description">
-          Our top-rated products that showcase AgentUX design principles
+          Our top-rated products that showcase BiModal Design design principles
         </p>
 
         <div
@@ -499,7 +499,7 @@ const pageDescription = 'Discover our collection of products designed for optima
     >
       <div class="container">
         <h2 id="benefits-heading" data-agent-content="section-title">
-          Why Choose AgentUX Products?
+          Why Choose BiModal Design Products?
         </h2>
 
         <div class="benefits-grid">
@@ -955,8 +955,8 @@ const { product, featured = false } = Astro.props
 ---
 import Layout from '../layouts/Layout.astro'
 
-const pageTitle = 'Contact Us - AgentUX Store'
-const pageDescription = 'Get in touch with our support team for questions about AgentUX products and implementation.'
+const pageTitle = 'Contact Us - BiModal Design Store'
+const pageDescription = 'Get in touch with our support team for questions about BiModal Design products and implementation.'
 ---
 
 <Layout
@@ -970,7 +970,7 @@ const pageDescription = 'Get in touch with our support team for questions about 
       <header class="page-header">
         <h1 data-agent-content="page-title">Contact Our Support Team</h1>
         <p data-agent-content="page-description">
-          Have questions about AgentUX implementation or our products? We're here to help both humans and AI agents find the right solutions.
+          Have questions about BiModal Design implementation or our products? We're here to help both humans and AI agents find the right solutions.
         </p>
       </header>
 
@@ -1133,7 +1133,7 @@ const pageDescription = 'Get in touch with our support team for questions about 
                   rows="6"
                   data-agent-field="customer-message"
                   aria-describedby="message-help"
-                  placeholder="Please provide details about your inquiry, including any specific AgentUX implementation questions..."
+                  placeholder="Please provide details about your inquiry, including any specific BiModal Design implementation questions..."
                 ></textarea>
                 <small id="message-help" data-agent-content="field-help">
                   Include as much detail as possible to help us provide the best assistance
@@ -1153,7 +1153,7 @@ const pageDescription = 'Get in touch with our support team for questions about 
                   data-agent-field="newsletter-subscription"
                 />
                 <label for="newsletter" data-agent-content="checkbox-label">
-                  Subscribe to AgentUX updates and implementation tips
+                  Subscribe to BiModal Design updates and implementation tips
                 </label>
               </div>
 
@@ -1198,12 +1198,12 @@ const pageDescription = 'Get in touch with our support team for questions about 
     <script type="application/ld+json" set:html={JSON.stringify({
       "@context": "https://schema.org",
       "@type": "ContactPage",
-      "name": "Contact AgentUX Support",
+      "name": "Contact BiModal Design Support",
       "description": pageDescription,
       "url": `${Astro.site}/contact`,
       "mainEntity": {
         "@type": "Organization",
-        "name": "AgentUX Store",
+        "name": "BiModal Design Store",
         "email": "support@agentux.example.com",
         "contactPoint": {
           "@type": "ContactPoint",
@@ -1445,7 +1445,7 @@ const pageDescription = 'Get in touch with our support team for questions about 
 ### public/scripts/agent-detection.js
 
 ```javascript
-// AgentUX Agent Detection and Enhancement Script
+// BiModal Design Agent Detection and Enhancement Script
 (function () {
   'use strict';
 
@@ -1541,7 +1541,7 @@ const pageDescription = 'Get in touch with our support team for questions about 
   function logAgentVisit(agentInfo) {
     // In a real implementation, you'd send this to your analytics
     if (window.console && window.console.log) {
-      console.log('AgentUX: Agent detected', agentInfo);
+      console.log('BiModal Design: Agent detected', agentInfo);
     }
 
     // Could send to analytics endpoint
@@ -1558,7 +1558,7 @@ const pageDescription = 'Get in touch with our support team for questions about 
     applyAgentEnhancements(agentInfo);
 
     // Make agent info available globally for other scripts
-    window.AgentUX = {
+    window.BiModal Design = {
       agentInfo,
       isAgent: agentInfo.isAgent,
       enhance: applyAgentEnhancements,
@@ -1621,7 +1621,7 @@ jobs:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.LHCI_GITHUB_APP_TOKEN }}
 ```
 
-## Key AgentUX Implementation Features
+## Key BiModal Design Implementation Features
 
 1. **Static Generation**: Pre-rendered HTML ensures immediate content
    availability
