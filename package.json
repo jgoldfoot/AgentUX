@@ -1,0 +1,15 @@
+{
+  "name": "agentux",
+  "version": "0.1.0",
+  "private": true,
+  "engines": { "node": ">=20.11.0" },
+  "scripts": {
+    "lint": "echo \"Skipping lint until rules are defined\"",
+    "test": "echo \"No tests yet\" && exit 0",
+    "audit": "echo \"Skipping audit for bootstrap\" && exit 0",
+    "examples:validate": "echo \"No examples to validate\" && exit 0"
+  },
+  "devDependencies": {
+    "eslint": "^9.0.0"
+  }
+}
