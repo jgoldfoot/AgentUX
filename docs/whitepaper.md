@@ -17,10 +17,10 @@ represents a fundamental shift in user experience design. This white paper
 introduces BiModal Design—a validated design discipline for creating dual-mode
 interfaces that serve both human users and AI agents with equal effectiveness.
 Building on extensive empirical research from 2024-2025 and real-world
-implementation validation, we present proven principles, implementation
+implementation validation, I present proven principles, implementation
 patterns, and quantified performance metrics.
 
-**Critical Framework Discovery**: Through practical implementation, we
+**Critical Framework Discovery**: Through practical implementation, I
 identified a foundational requirement that determines whether any BiModal Design
 optimization can succeed: **Initial Payload Accessibility (FR-1)**. Most AI
 agents (approximately 80%) make simple HTTP requests without JavaScript
@@ -28,7 +28,7 @@ execution—they only see the initial HTML response from the server. Without
 content in that initial payload, even perfectly structured semantic markup, ARIA
 attributes, and structured data remain completely invisible to agents.
 
-Our analysis of recent studies shows that well-designed BiModal Design interfaces can
+My analysis of recent studies shows that well-designed BiModal Design interfaces can
 improve agent task completion rates by 40-75% while maintaining or enhancing
 human usability—but only when the foundational requirement of initial payload
 accessibility is met first. This paper establishes BiModal Design as a critical
@@ -71,7 +71,7 @@ HTML response from the server, not just in the client-rendered DOM.
 
 ### **Foundational Discovery**
 
-Through real-world implementation, we identified that the BiModal Design framework had
+Through real-world implementation, I identified that the BiModal Design framework had
 a critical blind spot: it extensively covered **WHAT** to put in the DOM
 (semantic structure, ARIA roles, structured data) but never addressed **HOW** to
 ensure that DOM exists for agents. Most AI agents make simple HTTP requests
@@ -271,7 +271,7 @@ Human-computer interaction studies on information architecture Emerging
 observations about AI agent behavior in web environments
 
 4.2 Proposed Validation Methodology To establish empirical evidence for BiModal Design
-effectiveness, we propose a structured research approach: Phase 1: Baseline
+effectiveness, I propose a structured research approach: Phase 1: Baseline
 Studies
 
 Comparative analysis of AI agent performance on standard vs. BiModal Design-compliant
@@ -289,7 +289,7 @@ Phase 3: Longitudinal Research
 Long-term adoption patterns and outcomes Cross-platform compatibility studies
 Performance impact measurements
 
-4.3 Call for Research Collaboration We actively seek researchers and
+4.3 Call for Research Collaboration I actively seek researchers and
 practitioners to contribute empirical validation through:
 
 Academic partnerships for controlled studies Industry case studies from real
@@ -310,7 +310,7 @@ queries. Example C: Government Portal Proposed implementation: A municipal
 services website follows BiModal Design navigation principles, hypothetically improving
 citizen service accessibility for both human users and AI assistants helping
 with form completion. 4.5 Measurement Framework When empirical studies become
-available, we propose evaluating BiModal Design effectiveness using: Quantitative
+available, I propose evaluating BiModal Design effectiveness using: Quantitative
 Metrics:
 
 Agent task completion rates Time to information discovery Error frequency and
@@ -336,7 +336,7 @@ Long-term Vision (18+ months):
 Comprehensive validation across multiple domains Refinement of framework based
 on empirical evidence Integration with existing web standards processes
 
-Note: This section will be updated as empirical evidence becomes available. We
+Note: This section will be updated as empirical evidence becomes available. I
 encourage the community to contribute validation studies and real-world
 implementation data to strengthen the evidence base for BiModal Design principles.
 
@@ -897,7 +897,7 @@ through initial payload management
 
 9.4 Implementation Guidance Detailed implementation guidance, common pitfalls,
 and step-by-step methodology are covered comprehensively in the BiModal Design white
-paper framework sections. 9.5 Call for Additional Real-World Implementations We
+paper framework sections. 9.5 Call for Additional Real-World Implementations I
 seek other organizations willing to:
 
 Document their BiModal Design implementations in production environments Share measured
@@ -1399,15 +1399,11 @@ interaction patterns. He has contributed to accessibility standards, published
 research on agent-interface design, and consulted with Fortune 500 companies on
 AI integration strategies.
 
-**Contact:** [joel@agentux.design](mailto:joel@agentux.design)  
+**Contact:** [joel@agentux.design](mailto:joel@goldfoot.com)  
 **LinkedIn:** [linkedin.com/in/joelgoldfoot](https://linkedin.com/in/joelgoldfoot)  
 **Website:**
-[ai-plus.design](https://ai-plus.design)
+[bimodal.design](https://bimodal.design)
 
 ---
 
----
-
-**Version 2.1 - Updated September 23, 2025**  
-**Major Update: Addition of FR-1 (Initial Payload Accessibility) as foundational
-requirement**
+**Version 2.1 - Updated October 24, 2025**  
